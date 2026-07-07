@@ -121,7 +121,7 @@ function Hero() {
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="font-display text-6xl md:text-8xl lg:text-9xl leading-[0.95] max-w-5xl"
         >
-          Talk your day.<br />Own your time.
+          Managed support.<br />Uninterrupted uptime.
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -129,7 +129,7 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="mt-8 max-w-xl text-base md:text-lg text-white/90 leading-relaxed"
         >
-          Speak freely about your day. Novu turns your thoughts into tasks, helps you focus on what matters, and reflects it back to you.
+          SupportPRO delivers 24/7 technical support, cloud and server management, and white-label MSP services trusted by hosting providers and enterprises worldwide.
         </motion.p>
         <motion.p
           initial={{ opacity: 0 }}
@@ -137,7 +137,7 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.7 }}
           className="mt-6 text-xs md:text-sm text-white/60 max-w-lg"
         >
-          Novu is being discontinued. Thank you to everyone who was part of the journey.
+          Trusted by hosts, MSPs, and enterprise teams across every major cloud.
         </motion.p>
       </motion.div>
     </section>
