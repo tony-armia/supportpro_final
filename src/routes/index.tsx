@@ -405,7 +405,7 @@ function CTA() {
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="font-display text-6xl md:text-8xl leading-[0.95]"
         >
-          Start your day<br /><em>differently.</em>
+          Support that<br /><em>never sleeps.</em>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
@@ -414,7 +414,7 @@ function CTA() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="mt-6 text-white/80 text-sm"
         >
-          Talk your day. Own your time.
+          Managed support. Uninterrupted uptime.
         </motion.p>
       </div>
       <footer className="absolute bottom-0 left-0 right-0 px-6 md:px-10 pb-8 text-white/80 text-xs z-10">
