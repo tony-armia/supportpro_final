@@ -152,10 +152,10 @@ function StickyPhoneSection() {
   const phoneRotate = useTransform(scrollYProgress, [0, 1], [-2, 2]);
 
   const blocks: Array<{ title: string; body: string; align: "left" | "right" }> = [
-    { title: "Just talk.\nWe'll organize.", body: "Say whatever is on your mind. Novu transcribes it, pulls out the tasks, and structures your day in seconds.", align: "left" },
-    { title: "Prioritise what\nactually matters.", body: "You always pick three priorities. No more pretending that everything on your list deserves the same attention.", align: "right" },
-    { title: "Stay out of\nyour own way.", body: "No endless lists. No constant notifications. Just the day you set yourself, structured and clear.", align: "left" },
-    { title: "See your day\nclearly.", body: "At night, reflect on what actually happened and carry the bits worth keeping into tomorrow.", align: "right" },
+    { title: "24/7 expert\nsupport, always on.", body: "Our global engineering teams monitor, respond, and resolve around the clock — so your infrastructure and customers never wait.", align: "left" },
+    { title: "Cloud and server\nmanagement, mastered.", body: "From Linux and Windows administration to AWS, Azure, and Google Cloud, we run production environments with precision and discipline.", align: "right" },
+    { title: "White-label support\nunder your brand.", body: "Extend your team without expanding your headcount. Our engineers deliver seamless helpdesk and MSP support in your voice, your tools, your brand.", align: "left" },
+    { title: "NOC and DevOps\nengineered for scale.", body: "Continuous monitoring, automation, and incident response designed to keep complex infrastructure stable, secure, and ready to grow.", align: "right" },
   ];
 
   return (
