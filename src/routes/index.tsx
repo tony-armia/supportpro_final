@@ -322,7 +322,7 @@ function Testimonials() {
               >
                 <div className="text-[oklch(0.75_0.15_80)] text-sm mb-3 tracking-wider">★★★★★</div>
                 <p className="text-sm text-ink leading-relaxed">&ldquo;{t}&rdquo;</p>
-                <p className="mt-4 text-xs text-muted-foreground">— Early User Feedback</p>
+                <p className="mt-4 text-xs text-muted-foreground">— SupportPRO Client</p>
               </motion.div>
             </InView>
           ))}
