@@ -307,9 +307,9 @@ function Testimonials() {
     <section className="bg-cream pb-32">
       <div className="mx-auto max-w-6xl px-6 text-center">
         <InView>
-          <h3 className="font-display text-5xl md:text-6xl text-ink">From the first users.</h3>
+          <h3 className="font-display text-5xl md:text-6xl text-ink">Trusted by teams worldwide.</h3>
           <p className="mt-4 text-sm text-muted-foreground max-w-md mx-auto">
-            Honest reactions from people using Novu in their actual mornings. Before launch. Before the fanfare.
+            Hosting providers, MSPs, and enterprises rely on SupportPRO to keep their infrastructure and customers running.
           </p>
         </InView>
         <div className="mt-16 grid md:grid-cols-3 gap-5">
