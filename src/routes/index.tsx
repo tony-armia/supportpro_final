@@ -237,9 +237,9 @@ function DetailCards() {
               />
             </div>
             <div className="p-8">
-              <h4 className="font-display text-3xl text-ink">Just open and <em>talk</em></h4>
+              <h4 className="font-display text-3xl text-ink">A true <em>extension</em> of your team</h4>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                Open Novu in the morning and say what's on your mind. It transcribes you, pulls out the tasks, and writes them up so you don't have to.
+                Our engineers embed into your workflow — ticketing systems, escalation paths, communication channels. You get senior expertise on demand, without the overhead of hiring.
               </p>
             </div>
           </div>
@@ -247,9 +247,9 @@ function DetailCards() {
         <InView delay={0.15}>
           <div className="rounded-3xl overflow-hidden bg-white border border-border/50 shadow-sm h-full flex flex-col">
             <div className="p-8">
-              <h4 className="font-display text-3xl text-ink">Structure in <em>seconds</em></h4>
+              <h4 className="font-display text-3xl text-ink">Resolutions in <em>minutes</em></h4>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                Novu reads what you said, finds the real tasks inside it, and lays out your full day in less time than it takes to pour coffee.
+                Tickets are triaged, diagnosed, and resolved by certified engineers with defined SLAs — keeping your servers, applications, and end users online.
               </p>
             </div>
             <div className="flex-1 flex items-end justify-center overflow-hidden">
