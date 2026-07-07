@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { Plus, Minus, Lock } from "lucide-react";
+import { useState, useRef, type ReactNode } from "react";
+import { motion, useScroll, useTransform, AnimatePresence, useInView } from "motion/react";
+import { Plus, Lock } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 import phoneFrame from "@/assets/phone-frame.png";
 import phoneTasks from "@/assets/phone-tasks.png";
@@ -31,77 +32,210 @@ const faqs = [
   { q: "How much does it cost?", a: "Start with a 7-day free trial. After that, choose Monthly or Quarterly. Manage or cancel anytime from your Apple Account settings." },
 ];
 
+/* Word-by-word reveal as element enters view — the signature Novu effect. */
+function RevealText({ children, className = "", as = "p" }: { children: string; className?: string; as?: "h3" | "p" | "h2" }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start 0.85", "start 0.35"],
+  });
+  const words = children.split(" ");
+  const Tag = as as "p";
+  return (
+    <div ref={ref} className={className}>
+      <Tag className="contents">
+        {words.map((w, i) => {
+          const start = i / words.length;
+          const end = start + 1 / words.length;
+          return <Word key={i} progress={scrollYProgress} range={[start, end]}>{w}</Word>;
+        })}
+      </Tag>
+    </div>
+  );
+}
+
+function Word({ progress, range, children }: { progress: any; range: [number, number]; children: string }) {
+  const opacity = useTransform(progress, range, [0.15, 1]);
+  return (
+    <motion.span style={{ opacity }} className="inline-block mr-[0.25em]">
+      {children}
+    </motion.span>
+  );
+}
+
 function Nav() {
+  const { scrollY } = useScroll();
+  const bg = useTransform(scrollY, [0, 200], ["rgba(255,255,255,0.15)", "rgba(20,20,20,0.55)"]);
   return (
     <nav className="fixed top-4 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-10">
-      <a href="#" className="font-display text-2xl text-white">novu</a>
-      <div className="flex items-center gap-1 rounded-full bg-white/15 backdrop-blur-md px-2 py-1.5 text-sm text-white border border-white/10">
+      <motion.a
+        href="#"
+        className="font-display text-2xl text-white"
+        style={{ mixBlendMode: "difference" }}
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        novu
+      </motion.a>
+      <motion.div
+        style={{ backgroundColor: bg }}
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+        className="flex items-center gap-1 rounded-full backdrop-blur-md px-2 py-1.5 text-sm text-white border border-white/10"
+      >
         <a href="#features" className="px-4 py-1.5 rounded-full hover:bg-white/10 transition">Features</a>
         <a href="#faq" className="px-4 py-1.5 rounded-full hover:bg-white/10 transition">FAQ</a>
-      </div>
+      </motion.div>
     </nav>
   );
 }
 
 function Hero() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  const textY = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
   return (
-    <section className="relative h-screen min-h-[720px] w-full overflow-hidden">
-      <img src={heroImg} alt="" className="absolute inset-0 h-full w-full object-cover" width={1600} height={1008} />
+    <section ref={ref} className="relative h-screen min-h-[720px] w-full overflow-hidden">
+      <motion.img
+        src={heroImg}
+        alt=""
+        style={{ y, scale }}
+        className="absolute inset-0 h-full w-full object-cover"
+        width={1600}
+        height={1008}
+      />
       <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/40" />
-      <div className="relative z-10 flex h-full flex-col items-center justify-end pb-24 px-6 text-center text-white">
-        <h1 className="font-display text-6xl md:text-8xl lg:text-9xl leading-[0.95] max-w-5xl">
+      <motion.div
+        style={{ y: textY, opacity }}
+        className="relative z-10 flex h-full flex-col items-center justify-end pb-24 px-6 text-center text-white"
+      >
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          className="font-display text-6xl md:text-8xl lg:text-9xl leading-[0.95] max-w-5xl"
+        >
           Talk your day.<br />Own your time.
-        </h1>
-        <p className="mt-8 max-w-xl text-base md:text-lg text-white/90 leading-relaxed">
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mt-8 max-w-xl text-base md:text-lg text-white/90 leading-relaxed"
+        >
           Speak freely about your day. Novu turns your thoughts into tasks, helps you focus on what matters, and reflects it back to you.
-        </p>
-        <p className="mt-6 text-xs md:text-sm text-white/60 max-w-lg">
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+          className="mt-6 text-xs md:text-sm text-white/60 max-w-lg"
+        >
           Novu is being discontinued. Thank you to everyone who was part of the journey.
-        </p>
+        </motion.p>
+      </motion.div>
+    </section>
+  );
+}
+
+/* Sticky phone that stays pinned while four text blocks scroll past. */
+function StickyPhoneSection() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
+  const phoneY = useTransform(scrollYProgress, [0, 1], [0, -40]);
+  const phoneRotate = useTransform(scrollYProgress, [0, 1], [-2, 2]);
+
+  const blocks: Array<{ title: string; body: string; align: "left" | "right" }> = [
+    { title: "Just talk.\nWe'll organize.", body: "Say whatever is on your mind. Novu transcribes it, pulls out the tasks, and structures your day in seconds.", align: "left" },
+    { title: "Prioritise what\nactually matters.", body: "You always pick three priorities. No more pretending that everything on your list deserves the same attention.", align: "right" },
+    { title: "Stay out of\nyour own way.", body: "No endless lists. No constant notifications. Just the day you set yourself, structured and clear.", align: "left" },
+    { title: "See your day\nclearly.", body: "At night, reflect on what actually happened and carry the bits worth keeping into tomorrow.", align: "right" },
+  ];
+
+  return (
+    <section ref={sectionRef} id="features" className="relative bg-cream rounded-t-[40px] -mt-10 pt-24">
+      <div className="mx-auto max-w-6xl px-6 relative">
+        {/* Sticky phone column */}
+        <div className="hidden md:block absolute inset-0 pointer-events-none">
+          <div className="sticky top-0 h-screen flex items-center justify-center">
+            <motion.img
+              src={phoneFrame}
+              alt=""
+              style={{ y: phoneY, rotate: phoneRotate }}
+              className="max-h-[70vh] w-auto drop-shadow-2xl"
+              width={912}
+              height={1408}
+              loading="lazy"
+            />
+          </div>
+        </div>
+
+        {/* Text blocks stacked, each one full-viewport tall so phone stays pinned */}
+        <div className="relative">
+          {blocks.map((b, i) => (
+            <div
+              key={i}
+              className={`min-h-screen flex items-center ${
+                b.align === "right" ? "justify-end" : "justify-start"
+              }`}
+            >
+              <div className="max-w-sm">
+                <RevealText as="h3" className="font-display text-4xl md:text-5xl leading-[1.05] text-ink block">
+                  {b.title.replace("\n", " ")}
+                </RevealText>
+                <div className="mt-4">
+                  <RevealText className="text-muted-foreground text-[15px] leading-relaxed">
+                    {b.body}
+                  </RevealText>
+                </div>
+              </div>
+            </div>
+          ))}
+          {/* Mobile phone (shown only <md) */}
+          <img src={phoneFrame} alt="" className="md:hidden mx-auto max-h-[60vh] w-auto -mt-32 mb-16" loading="lazy" />
+        </div>
       </div>
     </section>
   );
 }
 
-function FeatureText({ title, body }: { title: string; body: string }) {
+function InView({ children, delay = 0 }: { children: ReactNode; delay?: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.3 });
   return (
-    <div className="max-w-sm">
-      <h3 className="font-display text-4xl md:text-5xl leading-[1.05] text-ink">
-        {title.split("\n").map((l, i) => <span key={i} className="block">{l}</span>)}
-      </h3>
-      <p className="mt-4 text-muted-foreground text-[15px] leading-relaxed">{body}</p>
-    </div>
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
+    >
+      {children}
+    </motion.div>
   );
 }
 
-function Features() {
+function DetailCards() {
   return (
-    <section id="features" className="relative bg-cream rounded-t-[40px] -mt-10 pt-24 pb-32">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          <FeatureText title={"Just talk.\nWe'll organize."} body="Say whatever is on your mind. Novu transcribes it, pulls out the tasks, and structures your day in seconds." />
-          <div className="flex justify-center">
-            <img src={phoneFrame} alt="" className="max-h-[520px] w-auto" width={912} height={1408} loading="lazy" />
-          </div>
-        </div>
-
-        <div className="mt-32 grid md:grid-cols-2 gap-16">
-          <div />
-          <FeatureText title={"Prioritise what\nactually matters."} body="You always pick three priorities. No more pretending that everything on your list deserves the same attention." />
-        </div>
-
-        <div className="mt-32 grid md:grid-cols-2 gap-16">
-          <FeatureText title={"Stay out of\nyour own way."} body="No endless lists. No constant notifications. Just the day you set yourself, structured and clear." />
-        </div>
-
-        <div className="mt-32 grid md:grid-cols-2 gap-16">
-          <div />
-          <FeatureText title={"See your day\nclearly."} body="At night, reflect on what actually happened and carry the bits worth keeping into tomorrow." />
-        </div>
-
-        <div className="mt-32 grid md:grid-cols-2 gap-6">
-          <div className="rounded-3xl overflow-hidden bg-white border border-border/50 shadow-sm">
-            <img src={talkImg} alt="" className="h-72 w-full object-cover" width={1200} height={912} loading="lazy" />
+    <section className="bg-cream pt-32 pb-32">
+      <div className="mx-auto max-w-6xl px-6 grid md:grid-cols-2 gap-6">
+        <InView>
+          <div className="rounded-3xl overflow-hidden bg-white border border-border/50 shadow-sm h-full group">
+            <div className="overflow-hidden">
+              <img
+                src={talkImg}
+                alt=""
+                className="h-72 w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+                width={1200}
+                height={912}
+                loading="lazy"
+              />
+            </div>
             <div className="p-8">
               <h4 className="font-display text-3xl text-ink">Just open and <em>talk</em></h4>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
@@ -109,36 +243,60 @@ function Features() {
               </p>
             </div>
           </div>
-          <div className="rounded-3xl overflow-hidden bg-white border border-border/50 shadow-sm flex flex-col">
+        </InView>
+        <InView delay={0.15}>
+          <div className="rounded-3xl overflow-hidden bg-white border border-border/50 shadow-sm h-full flex flex-col">
             <div className="p-8">
               <h4 className="font-display text-3xl text-ink">Structure in <em>seconds</em></h4>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
                 Novu reads what you said, finds the real tasks inside it, and lays out your full day in less time than it takes to pour coffee.
               </p>
             </div>
-            <div className="flex-1 flex items-end justify-center">
-              <img src={phoneTasks} alt="" className="max-h-80 w-auto" width={912} height={1408} loading="lazy" />
+            <div className="flex-1 flex items-end justify-center overflow-hidden">
+              <motion.img
+                src={phoneTasks}
+                alt=""
+                initial={{ y: 40 }}
+                whileInView={{ y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+                className="max-h-80 w-auto"
+                width={912}
+                height={1408}
+                loading="lazy"
+              />
             </div>
           </div>
-        </div>
+        </InView>
       </div>
     </section>
   );
 }
 
 function Privacy() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const lockRotate = useTransform(scrollYProgress, [0, 1], [-15, 15]);
   return (
-    <section className="bg-cream pb-32">
+    <section ref={ref} className="bg-cream pb-32">
       <div className="mx-auto max-w-6xl px-6">
-        <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-[#0a0a0a] to-[#1a1a1a] p-12 md:p-20 min-h-[420px]">
-          <div className="max-w-md relative z-10">
-            <h3 className="font-display text-5xl md:text-6xl text-white leading-[1.05]">Built for privacy.</h3>
-            <p className="mt-6 text-sm text-white/60 leading-relaxed max-w-sm">
-              Your data remains on your device. We never sell it, never share it, and protect it with industry-standard security. Just anonymous analytics to make the app better.
-            </p>
+        <InView>
+          <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-[#0a0a0a] via-[#151510] to-[#1a1a1a] p-12 md:p-20 min-h-[420px]">
+            <div className="absolute inset-0 opacity-40" style={{ background: "radial-gradient(ellipse at 80% 60%, oklch(0.35 0.15 100 / 0.5), transparent 60%)" }} />
+            <div className="max-w-md relative z-10">
+              <h3 className="font-display text-5xl md:text-6xl text-white leading-[1.05]">Built for privacy.</h3>
+              <p className="mt-6 text-sm text-white/60 leading-relaxed max-w-sm">
+                Your data remains on your device. We never sell it, never share it, and protect it with industry-standard security. Just anonymous analytics to make the app better.
+              </p>
+            </div>
+            <motion.div
+              style={{ rotate: lockRotate }}
+              className="absolute right-4 md:right-16 top-1/2 -translate-y-1/2"
+            >
+              <Lock className="text-white/10" size={260} strokeWidth={1} />
+            </motion.div>
           </div>
-          <Lock className="absolute right-4 md:right-16 top-1/2 -translate-y-1/2 text-white/10" size={260} strokeWidth={1} />
-        </div>
+        </InView>
       </div>
     </section>
   );
@@ -148,17 +306,25 @@ function Testimonials() {
   return (
     <section className="bg-cream pb-32">
       <div className="mx-auto max-w-6xl px-6 text-center">
-        <h3 className="font-display text-5xl md:text-6xl text-ink">From the first users.</h3>
-        <p className="mt-4 text-sm text-muted-foreground max-w-md mx-auto">
-          Honest reactions from people using Novu in their actual mornings. Before launch. Before the fanfare.
-        </p>
+        <InView>
+          <h3 className="font-display text-5xl md:text-6xl text-ink">From the first users.</h3>
+          <p className="mt-4 text-sm text-muted-foreground max-w-md mx-auto">
+            Honest reactions from people using Novu in their actual mornings. Before launch. Before the fanfare.
+          </p>
+        </InView>
         <div className="mt-16 grid md:grid-cols-3 gap-5">
           {testimonials.map((t, i) => (
-            <div key={i} className="rounded-2xl bg-white border border-border/50 p-6 text-left shadow-sm">
-              <div className="text-[oklch(0.75_0.15_80)] text-sm mb-3 tracking-wider">★★★★★</div>
-              <p className="text-sm text-ink leading-relaxed">&ldquo;{t}&rdquo;</p>
-              <p className="mt-4 text-xs text-muted-foreground">— Early User Feedback</p>
-            </div>
+            <InView key={i} delay={(i % 3) * 0.1}>
+              <motion.div
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.3 }}
+                className="rounded-2xl bg-white border border-border/50 p-6 text-left shadow-sm h-full"
+              >
+                <div className="text-[oklch(0.75_0.15_80)] text-sm mb-3 tracking-wider">★★★★★</div>
+                <p className="text-sm text-ink leading-relaxed">&ldquo;{t}&rdquo;</p>
+                <p className="mt-4 text-xs text-muted-foreground">— Early User Feedback</p>
+              </motion.div>
+            </InView>
           ))}
         </div>
       </div>
@@ -171,25 +337,43 @@ function FAQ() {
   return (
     <section id="faq" className="bg-cream pb-32">
       <div className="mx-auto max-w-3xl px-6">
-        <h3 className="font-display text-5xl md:text-6xl text-ink text-center">Got questions?</h3>
+        <InView>
+          <h3 className="font-display text-5xl md:text-6xl text-ink text-center">Got questions?</h3>
+        </InView>
         <div className="mt-12 divide-y divide-border">
-          {faqs.map((f, i) => (
-            <button
-              key={i}
-              onClick={() => setOpen(open === i ? null : i)}
-              className="w-full py-5 text-left flex items-start justify-between gap-6"
-            >
-              <div className="flex-1">
-                <div className="text-[15px] text-ink font-medium">{f.q}</div>
-                {open === i && (
-                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{f.a}</p>
-                )}
+          {faqs.map((f, i) => {
+            const isOpen = open === i;
+            return (
+              <div key={i}>
+                <button
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  className="w-full py-5 text-left flex items-start justify-between gap-6"
+                >
+                  <div className="text-[15px] text-ink font-medium flex-1">{f.q}</div>
+                  <motion.div
+                    animate={{ rotate: isOpen ? 45 : 0 }}
+                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                    className="text-muted-foreground shrink-0 mt-0.5"
+                  >
+                    <Plus size={18} />
+                  </motion.div>
+                </button>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <p className="pb-5 pr-10 text-sm text-muted-foreground leading-relaxed">{f.a}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
-              <div className="mt-0.5 text-muted-foreground shrink-0">
-                {open === i ? <Minus size={18} /> : <Plus size={18} />}
-              </div>
-            </button>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
@@ -197,15 +381,41 @@ function FAQ() {
 }
 
 function CTA() {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], [-80, 80]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1.1, 1]);
   return (
-    <section className="relative min-h-[600px] h-[80vh] overflow-hidden">
-      <img src={ctaImg} alt="" className="absolute inset-0 h-full w-full object-cover" width={1600} height={912} loading="lazy" />
+    <section ref={ref} className="relative min-h-[600px] h-[85vh] overflow-hidden">
+      <motion.img
+        src={ctaImg}
+        alt=""
+        style={{ y, scale }}
+        className="absolute inset-0 h-full w-full object-cover"
+        width={1600}
+        height={912}
+        loading="lazy"
+      />
       <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/70" />
       <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center text-white pt-16">
-        <h2 className="font-display text-6xl md:text-8xl leading-[0.95]">
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          className="font-display text-6xl md:text-8xl leading-[0.95]"
+        >
           Start your day<br /><em>differently.</em>
-        </h2>
-        <p className="mt-6 text-white/80 text-sm">Talk your day. Own your time.</p>
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mt-6 text-white/80 text-sm"
+        >
+          Talk your day. Own your time.
+        </motion.p>
       </div>
       <footer className="absolute bottom-0 left-0 right-0 px-6 md:px-10 pb-8 text-white/80 text-xs z-10">
         <div className="mx-auto max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -233,10 +443,11 @@ function CTA() {
 
 function Index() {
   return (
-    <main className="bg-cream">
+    <main className="bg-cream overflow-x-hidden">
       <Nav />
       <Hero />
-      <Features />
+      <StickyPhoneSection />
+      <DetailCards />
       <Privacy />
       <Testimonials />
       <FAQ />
