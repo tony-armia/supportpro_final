@@ -220,33 +220,41 @@ function StickyServicesSection() {
         </div>
 
         <div className="relative">
-          {blocks.map((b, i) => {
-            const blockRef = useRef<HTMLDivElement>(null);
-            const inView = useInView(blockRef, { amount: 0.5 });
-            if (inView && activeVisual !== b.visual) {
-              queueMicrotask(() => setActiveVisual(b.visual));
-            }
-            return (
-              <div key={i} ref={blockRef}
-                className={`min-h-screen flex items-center ${b.align === "right" ? "justify-end" : "justify-start"}`}>
-                <div className="max-w-sm">
-                  <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-5">{b.label}</p>
-                  <RevealText as="h3" className="font-display text-4xl md:text-5xl leading-[1.05] text-ink block">
-                    {b.title.replace(/\n/g, " ")}
-                  </RevealText>
-                  <div className="mt-4">
-                    <RevealText className="text-muted-foreground text-[15px] leading-relaxed">
-                      {b.body}
-                    </RevealText>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+          {blocks.map((b, i) => (
+            <StickyBlock key={i} block={b} onEnter={setActiveVisual} />
+          ))}
           <img src={dashboardImg} alt="" className="md:hidden mx-auto max-h-[60vh] w-auto -mt-32 mb-16" loading="lazy" />
         </div>
       </div>
     </section>
+  );
+}
+
+function StickyBlock({
+  block: b,
+  onEnter,
+}: {
+  block: { label: string; title: string; body: string; align: "left" | "right"; visual: "dashboard" | "servers" };
+  onEnter: (v: "dashboard" | "servers") => void;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { amount: 0.5 });
+  if (inView) queueMicrotask(() => onEnter(b.visual));
+  return (
+    <div ref={ref}
+      className={`min-h-screen flex items-center ${b.align === "right" ? "justify-end" : "justify-start"}`}>
+      <div className="max-w-sm">
+        <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground mb-5">{b.label}</p>
+        <RevealText as="h3" className="font-display text-4xl md:text-5xl leading-[1.05] text-ink block">
+          {b.title.replace(/\n/g, " ")}
+        </RevealText>
+        <div className="mt-4">
+          <RevealText className="text-muted-foreground text-[15px] leading-relaxed">
+            {b.body}
+          </RevealText>
+        </div>
+      </div>
+    </div>
   );
 }
 
