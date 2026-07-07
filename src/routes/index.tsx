@@ -338,7 +338,7 @@ function FAQ() {
     <section id="faq" className="bg-cream pb-32">
       <div className="mx-auto max-w-3xl px-6">
         <InView>
-          <h3 className="font-display text-5xl md:text-6xl text-ink text-center">Got questions?</h3>
+          <h3 className="font-display text-5xl md:text-6xl text-ink text-center">Frequently asked.</h3>
         </InView>
         <div className="mt-12 divide-y divide-border">
           {faqs.map((f, i) => {
