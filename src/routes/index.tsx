@@ -87,16 +87,6 @@ function Nav() {
       >
         <a href="#features" className="px-4 py-1.5 rounded-full hover:bg-white/10 transition">Services</a>
         <a href="#faq" className="px-4 py-1.5 rounded-full hover:bg-white/10 transition">FAQ</a>
-      </motion.a>
-      <motion.div
-        style={{ backgroundColor: bg }}
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-        className="flex items-center gap-1 rounded-full backdrop-blur-md px-2 py-1.5 text-sm text-white border border-white/10"
-      >
-        <a href="#features" className="px-4 py-1.5 rounded-full hover:bg-white/10 transition">Features</a>
-        <a href="#faq" className="px-4 py-1.5 rounded-full hover:bg-white/10 transition">FAQ</a>
       </motion.div>
     </nav>
   );
