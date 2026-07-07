@@ -419,22 +419,22 @@ function CTA() {
       </div>
       <footer className="absolute bottom-0 left-0 right-0 px-6 md:px-10 pb-8 text-white/80 text-xs z-10">
         <div className="mx-auto max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div><div className="font-display text-2xl text-white">novu</div></div>
+          <div><div className="font-display text-2xl text-white">supportpro</div></div>
           <div>
-            <div className="font-medium text-white mb-2">Product</div>
-            <div className="space-y-1"><div>Features</div><div>FAQ</div></div>
+            <div className="font-medium text-white mb-2">Services</div>
+            <div className="space-y-1"><div>24/7 Support</div><div>Cloud Management</div><div>Server Management</div><div>NOC Services</div></div>
+          </div>
+          <div>
+            <div className="font-medium text-white mb-2">Solutions</div>
+            <div className="space-y-1"><div>White-label Support</div><div>DevOps</div><div>Managed IT</div><div>Hosting Support</div></div>
           </div>
           <div>
             <div className="font-medium text-white mb-2">Company</div>
-            <div className="space-y-1"><div>About</div><div>Press</div></div>
-          </div>
-          <div>
-            <div className="font-medium text-white mb-2">Connect</div>
-            <div className="space-y-1"><div>Instagram</div><div>LinkedIn</div><div>TikTok</div></div>
+            <div className="space-y-1"><div>About</div><div>Contact</div><div>Careers</div></div>
           </div>
         </div>
         <div className="mx-auto max-w-6xl mt-8 pt-6 border-t border-white/20 text-white/50">
-          © 2026 Novu. All rights reserved.
+          © 2026 SupportPRO. All rights reserved.
         </div>
       </footer>
     </section>
