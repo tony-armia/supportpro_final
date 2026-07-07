@@ -284,9 +284,9 @@ function Privacy() {
           <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-[#0a0a0a] via-[#151510] to-[#1a1a1a] p-12 md:p-20 min-h-[420px]">
             <div className="absolute inset-0 opacity-40" style={{ background: "radial-gradient(ellipse at 80% 60%, oklch(0.35 0.15 100 / 0.5), transparent 60%)" }} />
             <div className="max-w-md relative z-10">
-              <h3 className="font-display text-5xl md:text-6xl text-white leading-[1.05]">Built for privacy.</h3>
+              <h3 className="font-display text-5xl md:text-6xl text-white leading-[1.05]">Security at the core.</h3>
               <p className="mt-6 text-sm text-white/60 leading-relaxed max-w-sm">
-                Your data remains on your device. We never sell it, never share it, and protect it with industry-standard security. Just anonymous analytics to make the app better.
+                Every engagement is protected by strict access controls, hardened workflows, audited procedures, and continuous security management — because trust is the foundation of managed services.
               </p>
             </div>
             <motion.div
