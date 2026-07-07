@@ -13,23 +13,23 @@ export const Route = createFileRoute("/")({
 });
 
 const testimonials = [
-  "Finally a planner that fits how my brain actually works. I talk, it listens, and my day makes sense before my coffee is cold.",
-  "I used to open three apps to write one task. Novu is just voice in, plan out. It's ridiculous how much calmer my mornings feel.",
-  "Three priorities a day. That one constraint changed my week more than any productivity system I've tried.",
-  "It doesn't nag or buzz. It just quietly organises what I say and gives me back the only list I needed.",
-  "The evening wrap-up has become my favourite two minutes of the day. Quiet, honest, and somehow always encouraging.",
-  "Every planner has failed me before. Novu is the first one that doesn't expect me to be someone I'm not.",
+  "SupportPRO has become a genuine extension of our engineering team. Their 24/7 response times are the reason our customers stay online.",
+  "We white-labelled their helpdesk two years ago and never looked back. Every ticket is handled with the professionalism our brand demands.",
+  "Their NOC caught an infrastructure issue at 3 a.m. and had it resolved before our on-call engineer even opened the alert.",
+  "Migrating our workloads to AWS with SupportPRO was seamless. Clear communication, zero downtime, measurable cost savings.",
+  "The Linux administration team knows our stack better than most in-house hires we've made. Deep expertise, calm delivery.",
+  "Reliable, security-first, and refreshingly easy to work with. SupportPRO is exactly what enterprise-grade support should feel like.",
 ];
 
 const faqs = [
-  { q: "How is Novu different from other to-do apps?", a: "Most to-do apps give you more lists, more buttons, more rules. Novu runs the opposite way. You talk in the morning, it organises everything you said into real tasks, and then it asks you to choose three priorities for the day." },
-  { q: "How does the voice capture work?", a: "Open Novu in the morning and just talk. No prompts, no structure, no format. Novu transcribes your speech, pulls out the tasks, writes a description from context, and suggests a category." },
-  { q: "Why only three priorities a day?", a: "Choosing three is the most important thing you'll do each morning. Everything else is still there in your day view and your backlog, but only three things get the spotlight." },
-  { q: "What is the evening wrap-up?", a: "A quick voice note that shows what you got done. Unfinished items move to tomorrow automatically. A clean close to today, a fair start to the next." },
-  { q: "What do the weekly insights include?", a: "Every Sunday you get an overview of your week — what you focused on, where your energy went, and how your time was divided." },
-  { q: "What if I don't feel like talking?", a: "You can add tasks the normal way, just like any to-do app. Voice is the fast lane, but it's never the only way in." },
-  { q: "Is my data private?", a: "Yes. Your tasks are stored locally on your device and synced via your personal iCloud. Voice inputs are sent to our secure server only for processing and deleted afterwards." },
-  { q: "How much does it cost?", a: "Start with a 7-day free trial. After that, choose Monthly or Quarterly. Manage or cancel anytime from your Apple Account settings." },
+  { q: "What services does SupportPRO offer?", a: "We provide 24/7 technical support, server and cloud management, NOC monitoring, DevOps, helpdesk, security management, and white-label MSP services across Linux, Windows, AWS, Azure, and Google Cloud environments." },
+  { q: "How does white-label support work?", a: "Our engineers operate under your brand — your logo, your ticketing system, your voice. Your customers experience seamless support while our team handles the technical execution behind the scenes." },
+  { q: "Is SupportPRO truly available 24/7?", a: "Yes. Our global engineering teams operate around the clock, every day of the year. Critical issues are acknowledged within minutes and escalated through defined response tiers." },
+  { q: "Which cloud platforms do you manage?", a: "We are certified across AWS, Microsoft Azure, and Google Cloud, and manage complex hybrid and multi-cloud deployments for hosting providers, SaaS companies, and enterprises." },
+  { q: "What does your NOC service include?", a: "Continuous infrastructure monitoring, proactive incident response, capacity analysis, and detailed reporting — designed to keep production environments stable and predictable." },
+  { q: "Do you support MSPs and hosting providers?", a: "Absolutely. A significant part of our business is dedicated to MSP and hosting support — from Level 1 helpdesk to advanced server and infrastructure engineering under your brand." },
+  { q: "How is our data and infrastructure secured?", a: "Every engagement follows strict access controls, hardened workflows, audited procedures, and modern security tooling. Security management is embedded in every service we deliver." },
+  { q: "How do we get started?", a: "Reach out for a discovery call. We assess your environment, define scope, agree SLAs, and onboard your systems with a structured transition plan — typically live within days." },
 ];
 
 /* Word-by-word reveal as element enters view — the signature Novu effect. */
