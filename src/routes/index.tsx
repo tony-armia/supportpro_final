@@ -557,6 +557,7 @@ function Index() {
       <Nav />
       <Hero />
       <StickyPhoneSection />
+      <Services />
       <SliderSection />
       <Privacy />
       <Testimonials />
@@ -565,3 +566,4 @@ function Index() {
     </main>
   );
 }
+
