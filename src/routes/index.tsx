@@ -323,8 +323,9 @@ function Privacy() {
 }
 
 function Testimonials() {
+  const loop = [...testimonials, ...testimonials];
   return (
-    <section className="bg-cream pb-32">
+    <section className="bg-cream pb-32 overflow-hidden">
       <div className="mx-auto max-w-6xl px-6 text-center">
         <InView>
           <h3 className="font-display text-5xl md:text-6xl text-ink">Trusted by teams worldwide.</h3>
@@ -332,21 +333,26 @@ function Testimonials() {
             Hosting providers, MSPs, and enterprises rely on SupportPRO to keep their infrastructure and customers running.
           </p>
         </InView>
-        <div className="mt-16 grid md:grid-cols-3 gap-5">
-          {testimonials.map((t, i) => (
-            <InView key={i} delay={(i % 3) * 0.1}>
-              <motion.div
-                whileHover={{ y: -4 }}
-                transition={{ duration: 0.3 }}
-                className="rounded-2xl bg-white border border-border/50 p-6 text-left shadow-sm h-full"
-              >
-                <div className="text-[oklch(0.75_0.15_80)] text-sm mb-3 tracking-wider">★★★★★</div>
-                <p className="text-sm text-ink leading-relaxed">&ldquo;{t}&rdquo;</p>
-                <p className="mt-4 text-xs text-muted-foreground">— SupportPRO Client</p>
-              </motion.div>
-            </InView>
+      </div>
+      <div className="mt-16 relative">
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-cream to-transparent z-10" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-cream to-transparent z-10" />
+        <motion.div
+          className="flex gap-5 w-max"
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ duration: 60, ease: "linear", repeat: Infinity }}
+        >
+          {loop.map((t, i) => (
+            <div
+              key={i}
+              className="w-[340px] md:w-[420px] shrink-0 rounded-2xl bg-white border border-border/50 p-6 text-left shadow-sm"
+            >
+              <div className="text-[oklch(0.75_0.15_80)] text-sm mb-3 tracking-wider">★★★★★</div>
+              <p className="text-sm text-ink leading-relaxed">&ldquo;{t}&rdquo;</p>
+              <p className="mt-4 text-xs text-muted-foreground">— SupportPRO Client</p>
+            </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
