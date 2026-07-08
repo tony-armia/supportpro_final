@@ -88,8 +88,9 @@ function Nav() {
         transition={{ duration: 0.6, delay: 0.3 }}
         className="flex items-center gap-1 rounded-full backdrop-blur-md px-2 py-1.5 text-sm text-white border border-white/10"
       >
-        <a href="#features" className="px-4 py-1.5 rounded-full hover:bg-white/10 transition">Services</a>
+        <a href="#services" className="px-4 py-1.5 rounded-full hover:bg-white/10 transition">Services</a>
         <a href="#faq" className="px-4 py-1.5 rounded-full hover:bg-white/10 transition">FAQ</a>
+        <a href="#contact" className="px-4 py-1.5 rounded-full bg-white text-ink hover:bg-white/90 transition">Book a Call</a>
       </motion.div>
     </nav>
   );
@@ -124,7 +125,7 @@ function Hero() {
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="font-display text-6xl md:text-8xl lg:text-9xl leading-[0.95] max-w-5xl"
         >
-          Managed support.<br />Uninterrupted uptime.
+          Enterprise infrastructure<br />support that never sleeps.
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -132,17 +133,85 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="mt-8 max-w-xl text-base md:text-lg text-white/90 leading-relaxed"
         >
-          SupportPRO delivers 24/7 technical support, cloud and server management, and white-label MSP services trusted by hosting providers and enterprises worldwide.
+          SupportPRO delivers 24/7 managed infrastructure, cloud operations, server administration, DevOps, and white-label technical support for hosting providers, SaaS companies, MSPs, and enterprises.
         </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="mt-8 flex flex-wrap items-center justify-center gap-3"
+        >
+          <a href="#contact" className="rounded-full bg-white text-ink px-6 py-3 text-sm font-medium hover:bg-white/90 transition">
+            Book a Consultation
+          </a>
+          <a href="#services" className="rounded-full border border-white/30 backdrop-blur-md bg-white/10 text-white px-6 py-3 text-sm font-medium hover:bg-white/20 transition">
+            Explore Services
+          </a>
+        </motion.div>
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
+          transition={{ duration: 0.8, delay: 0.9 }}
           className="mt-6 text-xs md:text-sm text-white/60 max-w-lg"
         >
           Trusted by hosts, MSPs, and enterprise teams across every major cloud.
         </motion.p>
       </motion.div>
+    </section>
+  );
+}
+
+const serviceGroups: Array<{ heading: string; items: string[] }> = [
+  {
+    heading: "Support",
+    items: ["24/7 Technical Support", "White-label Support", "Helpdesk Services", "Hosting Support", "MSP Support"],
+  },
+  {
+    heading: "Infrastructure",
+    items: ["Server Management", "Linux Administration", "Windows Administration", "Infrastructure Monitoring", "NOC Services"],
+  },
+  {
+    heading: "Cloud & DevOps",
+    items: ["AWS", "Microsoft Azure", "Google Cloud Platform", "DevOps", "Infrastructure Optimization"],
+  },
+  {
+    heading: "Enterprise",
+    items: ["Managed IT Services", "Security Management", "Performance Monitoring", "Incident Response", "Technical Consulting"],
+  },
+];
+
+function Services() {
+  return (
+    <section id="services" className="bg-cream pb-32">
+      <div className="mx-auto max-w-6xl px-6">
+        <InView>
+          <h3 className="font-display text-5xl md:text-6xl text-ink max-w-2xl leading-[1.05]">
+            Every service your infrastructure depends on.
+          </h3>
+          <p className="mt-6 max-w-xl text-[15px] text-muted-foreground leading-relaxed">
+            One partner for the full stack — from Level 1 helpdesk to multi-cloud engineering, security, and around-the-clock incident response.
+          </p>
+        </InView>
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          {serviceGroups.map((g, i) => (
+            <motion.div
+              key={g.heading}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              className="rounded-2xl bg-white border border-border/50 p-6 shadow-sm"
+            >
+              <div className="font-display text-2xl text-ink">{g.heading}</div>
+              <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+                {g.items.map((it) => (
+                  <li key={it} className="leading-relaxed">{it}</li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
@@ -431,18 +500,34 @@ function CTA() {
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="font-display text-6xl md:text-8xl leading-[0.95]"
         >
-          Support that<br /><em>never sleeps.</em>
+          Ready to strengthen<br /><em>your infrastructure?</em>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-6 text-white/80 text-sm"
+          className="mt-6 text-white/80 text-sm md:text-base max-w-xl"
         >
-          Managed support. Uninterrupted uptime.
+          Partner with certified engineers delivering enterprise-grade infrastructure management, cloud operations, DevOps, technical support, and proactive monitoring — 24 hours a day, 365 days a year.
         </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="mt-8 flex flex-wrap items-center justify-center gap-3"
+          id="contact"
+        >
+          <a href="#contact" className="rounded-full bg-white text-ink px-6 py-3 text-sm font-medium hover:bg-white/90 transition">
+            Book a Consultation
+          </a>
+          <a href="#contact" className="rounded-full border border-white/30 backdrop-blur-md bg-white/10 text-white px-6 py-3 text-sm font-medium hover:bg-white/20 transition">
+            Contact Our Team
+          </a>
+        </motion.div>
       </div>
+
       <footer className="absolute bottom-0 left-0 right-0 px-6 md:px-10 pb-8 text-white/80 text-xs z-10">
         <div className="mx-auto max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-6">
           <div><div className="font-display text-2xl text-white">supportpro</div></div>
@@ -473,6 +558,7 @@ function Index() {
       <Nav />
       <Hero />
       <StickyPhoneSection />
+      <Services />
       <SliderSection />
       <Privacy />
       <Testimonials />
@@ -481,3 +567,4 @@ function Index() {
     </main>
   );
 }
+
