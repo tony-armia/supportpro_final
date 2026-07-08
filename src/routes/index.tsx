@@ -7,6 +7,9 @@ import phoneFrame from "@/assets/phone-frame.png";
 import phoneTasks from "@/assets/phone-tasks.png";
 import talkImg from "@/assets/talk.jpg";
 import ctaImg from "@/assets/cta.jpg";
+import sliderEngineer from "@/assets/slider-engineer.jpg";
+import sliderLandscape from "@/assets/slider-landscape.jpg";
+import sliderDatacenter from "@/assets/slider-datacenter.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -220,54 +223,71 @@ function InView({ children, delay = 0 }: { children: ReactNode; delay?: number }
   );
 }
 
-function DetailCards() {
+const sliderCards = [
+  {
+    img: talkImg,
+    title: "Just open a ticket",
+    body: "Reach out any hour of the day and a certified engineer picks it up. We diagnose, act, and keep you informed until the incident is fully resolved.",
+    overlay: "light",
+  },
+  {
+    img: sliderEngineer,
+    title: "Engineers on standby",
+    body: "A dedicated team learns your environment inside out — your stack, your tooling, your escalation paths — and operates as a true extension of your business.",
+    overlay: "light",
+  },
+  {
+    img: sliderLandscape,
+    title: "Calm through every incident",
+    body: "Structured response tiers, clear communication, and disciplined execution turn even the most complex outages into a controlled, measured recovery.",
+    overlay: "light",
+  },
+  {
+    img: sliderDatacenter,
+    title: "Infrastructure in expert hands",
+    body: "From single servers to multi-cloud estates across AWS, Azure, and Google Cloud — engineered, monitored, and maintained with production-grade discipline.",
+    overlay: "light",
+  },
+] as const;
+
+function SliderSection() {
   return (
-    <section className="bg-cream pt-32 pb-32">
-      <div className="mx-auto max-w-6xl px-6 grid md:grid-cols-2 gap-6">
+    <section className="bg-cream pt-32 pb-32 overflow-hidden">
+      <div className="mx-auto max-w-6xl px-6 mb-12">
         <InView>
-          <div className="rounded-3xl overflow-hidden bg-white border border-border/50 shadow-sm h-full group">
-            <div className="overflow-hidden">
-              <img
-                src={talkImg}
-                alt=""
-                className="h-72 w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
-                width={1200}
-                height={912}
-                loading="lazy"
-              />
-            </div>
-            <div className="p-8">
-              <h4 className="font-display text-3xl text-ink">A true <em>extension</em> of your team</h4>
-              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                Our engineers embed into your workflow — ticketing systems, escalation paths, communication channels. You get senior expertise on demand, without the overhead of hiring.
-              </p>
-            </div>
-          </div>
+          <h3 className="font-display text-5xl md:text-6xl text-ink max-w-2xl leading-[1.05]">
+            Built for the moments that matter.
+          </h3>
         </InView>
-        <InView delay={0.15}>
-          <div className="rounded-3xl overflow-hidden bg-white border border-border/50 shadow-sm h-full flex flex-col">
-            <div className="p-8">
-              <h4 className="font-display text-3xl text-ink">Resolutions in <em>minutes</em></h4>
-              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                Tickets are triaged, diagnosed, and resolved by certified engineers with defined SLAs — keeping your servers, applications, and end users online.
-              </p>
+      </div>
+      <div
+        className="flex gap-6 overflow-x-auto snap-x snap-mandatory px-6 md:px-16 pb-6 scrollbar-none"
+        style={{ scrollbarWidth: "none" }}
+      >
+        {sliderCards.map((c, i) => (
+          <motion.article
+            key={i}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8, delay: (i % 3) * 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="snap-start shrink-0 relative rounded-[32px] overflow-hidden shadow-sm border border-border/40 w-[85vw] md:w-[720px] h-[520px] md:h-[600px] group"
+          >
+            <img
+              src={c.img}
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1400ms] group-hover:scale-105"
+              width={1200}
+              height={900}
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/10 to-black/40" />
+            <div className="relative z-10 p-10 md:p-12 max-w-lg text-white">
+              <h4 className="font-display text-4xl md:text-5xl leading-[1.05]">{c.title}</h4>
+              <p className="mt-4 text-[15px] leading-relaxed text-white/85">{c.body}</p>
             </div>
-            <div className="flex-1 flex items-end justify-center overflow-hidden">
-              <motion.img
-                src={phoneTasks}
-                alt=""
-                initial={{ y: 40 }}
-                whileInView={{ y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                className="max-h-80 w-auto"
-                width={912}
-                height={1408}
-                loading="lazy"
-              />
-            </div>
-          </div>
-        </InView>
+          </motion.article>
+        ))}
       </div>
     </section>
   );
@@ -447,7 +467,7 @@ function Index() {
       <Nav />
       <Hero />
       <StickyPhoneSection />
-      <DetailCards />
+      <SliderSection />
       <Privacy />
       <Testimonials />
       <FAQ />
