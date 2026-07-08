@@ -467,7 +467,7 @@ function Index() {
       <Nav />
       <Hero />
       <StickyPhoneSection />
-      <DetailCards />
+      <SliderSection />
       <Privacy />
       <Testimonials />
       <FAQ />
