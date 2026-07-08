@@ -124,7 +124,7 @@ function Hero() {
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="font-display text-6xl md:text-8xl lg:text-9xl leading-[0.95] max-w-5xl"
         >
-          Managed support.<br />Uninterrupted uptime.
+          Enterprise infrastructure<br />support that never sleeps.
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -132,17 +132,85 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="mt-8 max-w-xl text-base md:text-lg text-white/90 leading-relaxed"
         >
-          SupportPRO delivers 24/7 technical support, cloud and server management, and white-label MSP services trusted by hosting providers and enterprises worldwide.
+          SupportPRO delivers 24/7 managed infrastructure, cloud operations, server administration, DevOps, and white-label technical support for hosting providers, SaaS companies, MSPs, and enterprises.
         </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="mt-8 flex flex-wrap items-center justify-center gap-3"
+        >
+          <a href="#contact" className="rounded-full bg-white text-ink px-6 py-3 text-sm font-medium hover:bg-white/90 transition">
+            Book a Consultation
+          </a>
+          <a href="#services" className="rounded-full border border-white/30 backdrop-blur-md bg-white/10 text-white px-6 py-3 text-sm font-medium hover:bg-white/20 transition">
+            Explore Services
+          </a>
+        </motion.div>
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
+          transition={{ duration: 0.8, delay: 0.9 }}
           className="mt-6 text-xs md:text-sm text-white/60 max-w-lg"
         >
           Trusted by hosts, MSPs, and enterprise teams across every major cloud.
         </motion.p>
       </motion.div>
+    </section>
+  );
+}
+
+const serviceGroups: Array<{ heading: string; items: string[] }> = [
+  {
+    heading: "Support",
+    items: ["24/7 Technical Support", "White-label Support", "Helpdesk Services", "Hosting Support", "MSP Support"],
+  },
+  {
+    heading: "Infrastructure",
+    items: ["Server Management", "Linux Administration", "Windows Administration", "Infrastructure Monitoring", "NOC Services"],
+  },
+  {
+    heading: "Cloud & DevOps",
+    items: ["AWS", "Microsoft Azure", "Google Cloud Platform", "DevOps", "Infrastructure Optimization"],
+  },
+  {
+    heading: "Enterprise",
+    items: ["Managed IT Services", "Security Management", "Performance Monitoring", "Incident Response", "Technical Consulting"],
+  },
+];
+
+function Services() {
+  return (
+    <section id="services" className="bg-cream pb-32">
+      <div className="mx-auto max-w-6xl px-6">
+        <InView>
+          <h3 className="font-display text-5xl md:text-6xl text-ink max-w-2xl leading-[1.05]">
+            Every service your infrastructure depends on.
+          </h3>
+          <p className="mt-6 max-w-xl text-[15px] text-muted-foreground leading-relaxed">
+            One partner for the full stack — from Level 1 helpdesk to multi-cloud engineering, security, and around-the-clock incident response.
+          </p>
+        </InView>
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          {serviceGroups.map((g, i) => (
+            <motion.div
+              key={g.heading}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.7, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              className="rounded-2xl bg-white border border-border/50 p-6 shadow-sm"
+            >
+              <div className="font-display text-2xl text-ink">{g.heading}</div>
+              <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+                {g.items.map((it) => (
+                  <li key={it} className="leading-relaxed">{it}</li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
