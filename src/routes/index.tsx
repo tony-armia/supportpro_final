@@ -7,6 +7,9 @@ import phoneFrame from "@/assets/phone-frame.png";
 import phoneTasks from "@/assets/phone-tasks.png";
 import talkImg from "@/assets/talk.jpg";
 import ctaImg from "@/assets/cta.jpg";
+import sliderEngineer from "@/assets/slider-engineer.jpg";
+import sliderLandscape from "@/assets/slider-landscape.jpg";
+import sliderDatacenter from "@/assets/slider-datacenter.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
