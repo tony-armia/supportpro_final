@@ -499,18 +499,34 @@ function CTA() {
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="font-display text-6xl md:text-8xl leading-[0.95]"
         >
-          Support that<br /><em>never sleeps.</em>
+          Ready to strengthen<br /><em>your infrastructure?</em>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-6 text-white/80 text-sm"
+          className="mt-6 text-white/80 text-sm md:text-base max-w-xl"
         >
-          Managed support. Uninterrupted uptime.
+          Partner with certified engineers delivering enterprise-grade infrastructure management, cloud operations, DevOps, technical support, and proactive monitoring — 24 hours a day, 365 days a year.
         </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="mt-8 flex flex-wrap items-center justify-center gap-3"
+          id="contact"
+        >
+          <a href="#contact" className="rounded-full bg-white text-ink px-6 py-3 text-sm font-medium hover:bg-white/90 transition">
+            Book a Consultation
+          </a>
+          <a href="#contact" className="rounded-full border border-white/30 backdrop-blur-md bg-white/10 text-white px-6 py-3 text-sm font-medium hover:bg-white/20 transition">
+            Contact Our Team
+          </a>
+        </motion.div>
       </div>
+
       <footer className="absolute bottom-0 left-0 right-0 px-6 md:px-10 pb-8 text-white/80 text-xs z-10">
         <div className="mx-auto max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-6">
           <div><div className="font-display text-2xl text-white">supportpro</div></div>
