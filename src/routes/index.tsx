@@ -1,10 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useRef, type ReactNode } from "react";
-import { motion, useScroll, useTransform, AnimatePresence, useInView } from "motion/react";
+import { motion, useScroll, useTransform, AnimatePresence, useInView, useMotionValueEvent } from "motion/react";
 import { Plus, Lock } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
-import phoneFrame from "@/assets/phone-frame.png";
-import phoneTasks from "@/assets/phone-tasks.png";
 import talkImg from "@/assets/talk.jpg";
 import ctaImg from "@/assets/cta.jpg";
 import sliderEngineer from "@/assets/slider-engineer.jpg";
