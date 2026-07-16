@@ -454,10 +454,12 @@ function NocScreen() {
 const PHONE_SCREENS = [TicketsScreen, ServersScreen, ChatScreen, NocScreen] as const;
 
 function PhoneFrame({ activeIndex, progress }: { activeIndex: number; progress: any }) {
+  const rotateY = useTransform(progress, [0, 1], [-4, 4]);
+  const rotateX = useTransform(progress, [0, 1], [2, -2]);
   return (
     <div className="relative mx-auto w-[260px] md:w-[290px]" style={{ perspective: 1200 }}>
       <motion.div
-        style={{ rotateY: useTransform(progress, [0, 1], [-4, 4]), rotateX: useTransform(progress, [0, 1], [2, -2]) }}
+        style={{ rotateY, rotateX }}
         className="relative aspect-[9/19] w-full rounded-[44px] bg-gradient-to-b from-neutral-800 to-neutral-950 p-[6px] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.35),0_20px_40px_-15px_rgba(0,0,0,0.25)]"
       >
         <div className="relative h-full w-full overflow-hidden rounded-[38px] bg-white ring-1 ring-black/60">
