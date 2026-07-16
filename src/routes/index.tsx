@@ -285,19 +285,227 @@ function Services() {
   );
 }
 
-/* Sticky phone that stays pinned while four text blocks scroll past. */
+/* Support app screens that render inside the sticky phone frame. */
+function TicketsScreen() {
+  const rows = [
+    { sev: "P1", color: "bg-red-500", title: "Prod DB latency spike", who: "Priya · 2m", eta: "Resolving" },
+    { sev: "P2", color: "bg-amber-500", title: "Nginx 502 on edge-04", who: "Marco · 6m", eta: "Investigating" },
+    { sev: "P3", color: "bg-emerald-500", title: "SSL renewal — api.co", who: "Ana · 11m", eta: "Scheduled" },
+    { sev: "P3", color: "bg-emerald-500", title: "Backup verify passed", who: "Auto · 14m", eta: "Closed" },
+  ];
+  return (
+    <div className="h-full w-full bg-gradient-to-b from-neutral-50 to-neutral-100 p-4 pt-10 font-sans">
+      <div className="flex items-center justify-between">
+        <div>
+          <div className="text-[10px] uppercase tracking-widest text-neutral-400">Live Support</div>
+          <div className="text-[15px] font-semibold text-neutral-900">Active tickets</div>
+        </div>
+        <div className="flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2 py-1">
+          <span className="relative flex h-1.5 w-1.5"><span className="absolute inset-0 animate-ping rounded-full bg-emerald-500 opacity-75" /><span className="relative h-1.5 w-1.5 rounded-full bg-emerald-500" /></span>
+          <span className="text-[9px] font-medium text-emerald-700">24/7 ONLINE</span>
+        </div>
+      </div>
+      <div className="mt-3 space-y-2">
+        {rows.map((r, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, x: 12 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.15 + i * 0.08, duration: 0.5 }}
+            className="flex items-center gap-2.5 rounded-xl bg-white p-2.5 shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-neutral-100"
+          >
+            <div className={`h-8 w-1 rounded-full ${r.color}`} />
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-1.5">
+                <span className="rounded-md bg-neutral-100 px-1 py-px text-[8px] font-bold text-neutral-600">{r.sev}</span>
+                <span className="truncate text-[11px] font-medium text-neutral-900">{r.title}</span>
+              </div>
+              <div className="mt-0.5 text-[9px] text-neutral-500">{r.who} · {r.eta}</div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ServersScreen() {
+  const stats = [
+    { label: "CPU", value: "42%", delta: "-3.1%", tone: "text-emerald-600" },
+    { label: "Memory", value: "68%", delta: "+1.2%", tone: "text-amber-600" },
+    { label: "Uptime", value: "99.99%", delta: "90d", tone: "text-neutral-500" },
+  ];
+  return (
+    <div className="h-full w-full bg-neutral-950 p-4 pt-10 text-white">
+      <div className="text-[10px] uppercase tracking-widest text-white/40">Server Fleet</div>
+      <div className="text-[15px] font-semibold">us-east · 128 nodes</div>
+      <div className="mt-3 grid grid-cols-3 gap-1.5">
+        {stats.map((s) => (
+          <div key={s.label} className="rounded-lg bg-white/5 p-2 ring-1 ring-white/10">
+            <div className="text-[8px] uppercase text-white/40">{s.label}</div>
+            <div className="mt-0.5 text-[13px] font-semibold">{s.value}</div>
+            <div className={`text-[9px] ${s.tone}`}>{s.delta}</div>
+          </div>
+        ))}
+      </div>
+      <div className="mt-3 rounded-lg bg-white/5 p-2.5 ring-1 ring-white/10">
+        <div className="mb-1.5 flex items-center justify-between text-[9px] text-white/50">
+          <span>Requests / min</span><span className="text-emerald-400">▲ healthy</span>
+        </div>
+        <svg viewBox="0 0 200 60" className="h-14 w-full">
+          <defs>
+            <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stopColor="rgb(52 211 153)" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="rgb(52 211 153)" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <motion.path
+            initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.4, ease: "easeInOut" }}
+            d="M0,45 L20,38 L40,42 L60,30 L80,34 L100,22 L120,28 L140,18 L160,24 L180,14 L200,20"
+            fill="none" stroke="rgb(52 211 153)" strokeWidth="1.5"
+          />
+          <path d="M0,45 L20,38 L40,42 L60,30 L80,34 L100,22 L120,28 L140,18 L160,24 L180,14 L200,20 L200,60 L0,60 Z" fill="url(#g)" />
+        </svg>
+      </div>
+      <div className="mt-2 flex items-center gap-2 rounded-lg bg-emerald-500/10 p-2 ring-1 ring-emerald-500/20">
+        <div className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+        <span className="text-[10px] text-emerald-300">All systems operational</span>
+      </div>
+    </div>
+  );
+}
+
+function ChatScreen() {
+  const msgs = [
+    { from: "them", text: "Hi — seeing 502s on the checkout API since 09:12 UTC." },
+    { from: "us", text: "On it. Failover to eu-west-2 in progress." },
+    { from: "us", text: "Root cause: upstream pool exhausted. Scaling nodes now." },
+    { from: "them", text: "Metrics recovering. Thank you 🙏" },
+  ];
+  return (
+    <div className="h-full w-full bg-[#f5f4ef] p-4 pt-10">
+      <div className="flex items-center gap-2 border-b border-neutral-200 pb-2">
+        <div className="grid h-7 w-7 place-items-center rounded-full bg-neutral-900 text-[9px] font-bold text-white">SP</div>
+        <div>
+          <div className="text-[11px] font-semibold text-neutral-900">SupportPRO · Tier 2</div>
+          <div className="text-[9px] text-emerald-600">● typing…</div>
+        </div>
+      </div>
+      <div className="mt-3 space-y-1.5">
+        {msgs.map((m, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.15 }}
+            className={`flex ${m.from === "us" ? "justify-end" : "justify-start"}`}
+          >
+            <div className={`max-w-[80%] rounded-2xl px-2.5 py-1.5 text-[10px] leading-snug ${m.from === "us" ? "bg-neutral-900 text-white" : "bg-white text-neutral-800 ring-1 ring-neutral-200"}`}>
+              {m.text}
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function NocScreen() {
+  const alerts = [
+    { t: "01:14", txt: "Auto-remediated pod restart · api-07", ok: true },
+    { t: "00:47", txt: "Patched CVE-2026-1188 across 42 hosts", ok: true },
+    { t: "00:12", txt: "Scaling group +6 instances (traffic surge)", ok: true },
+  ];
+  return (
+    <div className="h-full w-full bg-gradient-to-br from-[#0b0f14] via-[#0e1319] to-[#0b0f14] p-4 pt-10 text-white">
+      <div className="flex items-center justify-between">
+        <div>
+          <div className="text-[10px] uppercase tracking-widest text-white/40">NOC · Live</div>
+          <div className="text-[15px] font-semibold">Global monitoring</div>
+        </div>
+        <div className="text-right">
+          <div className="text-[9px] text-white/40">Response</div>
+          <div className="text-[11px] font-semibold text-emerald-400">1m 42s avg</div>
+        </div>
+      </div>
+      <div className="mt-3 rounded-lg bg-white/5 p-2.5 ring-1 ring-white/10">
+        <svg viewBox="0 0 200 70" className="h-16 w-full">
+          <motion.path
+            initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.6, ease: "easeInOut" }}
+            d="M0,50 C20,30 30,55 50,40 S80,20 100,35 130,55 150,32 180,45 200,25"
+            fill="none" stroke="rgb(96 165 250)" strokeWidth="1.5"
+          />
+          <motion.circle cx="200" cy="25" r="2.5" fill="rgb(96 165 250)"
+            animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1.6, repeat: Infinity }} />
+        </svg>
+      </div>
+      <div className="mt-2 space-y-1.5">
+        {alerts.map((a, i) => (
+          <motion.div key={i} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.25 + i * 0.1 }}
+            className="flex items-start gap-2 rounded-lg bg-white/[0.03] p-2 ring-1 ring-white/5">
+            <div className={`mt-0.5 h-1.5 w-1.5 rounded-full ${a.ok ? "bg-emerald-400" : "bg-amber-400"}`} />
+            <div className="min-w-0 flex-1">
+              <div className="truncate text-[10px] text-white/90">{a.txt}</div>
+              <div className="text-[8px] text-white/40">{a.t} ago</div>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const PHONE_SCREENS = [TicketsScreen, ServersScreen, ChatScreen, NocScreen] as const;
+
+function PhoneFrame({ activeIndex, progress }: { activeIndex: number; progress: any }) {
+  return (
+    <div className="relative mx-auto w-[260px] md:w-[290px]" style={{ perspective: 1200 }}>
+      <motion.div
+        style={{ rotateY: useTransform(progress, [0, 1], [-4, 4]), rotateX: useTransform(progress, [0, 1], [2, -2]) }}
+        className="relative aspect-[9/19] w-full rounded-[44px] bg-gradient-to-b from-neutral-800 to-neutral-950 p-[6px] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.35),0_20px_40px_-15px_rgba(0,0,0,0.25)]"
+      >
+        <div className="relative h-full w-full overflow-hidden rounded-[38px] bg-white ring-1 ring-black/60">
+          <div className="pointer-events-none absolute left-1/2 top-1.5 z-30 h-5 w-20 -translate-x-1/2 rounded-full bg-neutral-950" />
+          {PHONE_SCREENS.map((Screen, i) => (
+            <motion.div
+              key={i}
+              className="absolute inset-0"
+              animate={{ opacity: activeIndex === i ? 1 : 0, scale: activeIndex === i ? 1 : 1.02 }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <Screen />
+            </motion.div>
+          ))}
+          {/* subtle screen glare */}
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.04] to-white/10" />
+        </div>
+      </motion.div>
+      {/* side buttons */}
+      <div className="absolute -right-[3px] top-[22%] h-14 w-[3px] rounded-r bg-neutral-800" />
+      <div className="absolute -left-[3px] top-[18%] h-8 w-[3px] rounded-l bg-neutral-800" />
+      <div className="absolute -left-[3px] top-[30%] h-14 w-[3px] rounded-l bg-neutral-800" />
+    </div>
+  );
+}
+
+/* Sticky phone that stays pinned while four text blocks scroll past. The phone's
+   screen swaps to a matching support-app view for each block. */
 function StickyPhoneSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
-  const phoneY = useTransform(scrollYProgress, [0, 1], [0, -40]);
-  const phoneRotate = useTransform(scrollYProgress, [0, 1], [-2, 2]);
+  const [active, setActive] = useState(0);
 
   const blocks: Array<{ title: string; body: string; align: "left" | "right" }> = [
-    { title: "24/7 expert\nsupport, always on.", body: "Our global engineering teams monitor, respond, and resolve around the clock — so your infrastructure and customers never wait.", align: "left" },
-    { title: "Cloud and server\nmanagement, mastered.", body: "From Linux and Windows administration to AWS, Azure, and Google Cloud, we run production environments with precision and discipline.", align: "right" },
-    { title: "White-label support\nunder your brand.", body: "Extend your team without expanding your headcount. Our engineers deliver seamless helpdesk and MSP support in your voice, your tools, your brand.", align: "left" },
-    { title: "NOC and DevOps\nengineered for scale.", body: "Continuous monitoring, automation, and incident response designed to keep complex infrastructure stable, secure, and ready to grow.", align: "right" },
+    { title: "24/7 expert support, always on.", body: "Our global engineering teams monitor, respond, and resolve around the clock — so your infrastructure and customers never wait.", align: "left" },
+    { title: "Cloud and server management, mastered.", body: "From Linux and Windows administration to AWS, Azure, and Google Cloud, we run production environments with precision and discipline.", align: "right" },
+    { title: "White-label support under your brand.", body: "Extend your team without expanding your headcount. Our engineers deliver seamless helpdesk and MSP support in your voice, your tools, your brand.", align: "left" },
+    { title: "NOC and DevOps engineered for scale.", body: "Continuous monitoring, automation, and incident response designed to keep complex infrastructure stable, secure, and ready to grow.", align: "right" },
   ];
+
+  // Drive the active screen from scroll progress across the section.
+  useTransform(scrollYProgress, (v) => {
+    const idx = Math.min(blocks.length - 1, Math.max(0, Math.floor(v * blocks.length)));
+    setActive((prev) => (prev === idx ? prev : idx));
+    return v;
+  });
 
   return (
     <section ref={sectionRef} id="features" className="relative bg-cream rounded-t-[40px] -mt-10 pt-24">
@@ -305,15 +513,15 @@ function StickyPhoneSection() {
         {/* Sticky phone column */}
         <div className="hidden md:block absolute inset-0 pointer-events-none">
           <div className="sticky top-0 h-screen flex items-center justify-center">
-            <motion.img
-              src={phoneFrame}
-              alt=""
-              style={{ y: phoneY, rotate: phoneRotate }}
-              className="max-h-[70vh] w-auto drop-shadow-2xl"
-              width={912}
-              height={1408}
-              loading="lazy"
-            />
+            <div className="pointer-events-auto">
+              <PhoneFrame activeIndex={active} progress={scrollYProgress} />
+              {/* progress dots */}
+              <div className="mt-6 flex items-center justify-center gap-1.5">
+                {blocks.map((_, i) => (
+                  <div key={i} className={`h-1 rounded-full transition-all duration-500 ${active === i ? "w-6 bg-ink" : "w-1 bg-ink/25"}`} />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -322,13 +530,15 @@ function StickyPhoneSection() {
           {blocks.map((b, i) => (
             <div
               key={i}
-              className={`min-h-screen flex items-center ${
-                b.align === "right" ? "justify-end" : "justify-start"
-              }`}
+              className={`min-h-screen flex items-center ${b.align === "right" ? "justify-end" : "justify-start"}`}
             >
               <div className="max-w-sm">
+                <div className="mb-4 flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-ink/40">
+                  <span className="tabular-nums">0{i + 1}</span>
+                  <span className="h-px w-8 bg-ink/20" />
+                </div>
                 <RevealText as="h3" className="font-display text-4xl md:text-5xl leading-[1.05] text-ink block">
-                  {b.title.replace("\n", " ")}
+                  {b.title}
                 </RevealText>
                 <div className="mt-4">
                   <RevealText className="text-muted-foreground text-[15px] leading-relaxed">
@@ -339,7 +549,9 @@ function StickyPhoneSection() {
             </div>
           ))}
           {/* Mobile phone (shown only <md) */}
-          <img src={phoneFrame} alt="" className="md:hidden mx-auto max-h-[60vh] w-auto -mt-32 mb-16" loading="lazy" />
+          <div className="md:hidden mx-auto mb-16 -mt-24">
+            <PhoneFrame activeIndex={active} progress={scrollYProgress} />
+          </div>
         </div>
       </div>
     </section>
