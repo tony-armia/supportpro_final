@@ -641,6 +641,7 @@ function Index() {
       <Testimonials />
       <FAQ />
       <CTA />
+      <SiteFooter />
     </main>
   );
 }
