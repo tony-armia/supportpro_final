@@ -180,35 +180,103 @@ const serviceGroups: Array<{ heading: string; items: string[] }> = [
   },
 ];
 
+function ServiceRow({ group, index }: { group: { heading: string; items: string[] }; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.4 });
+  const [hovered, setHovered] = useState(false);
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.9, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onMouseMove={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        setMouse({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+      }}
+      className="group relative border-t border-ink/10 py-10 md:py-14 cursor-default overflow-hidden"
+    >
+      {/* Spotlight follow */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute -inset-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{
+          background: `radial-gradient(400px circle at ${mouse.x}px ${mouse.y}px, oklch(0.35 0.15 100 / 0.10), transparent 60%)`,
+        }}
+      />
+      {/* Sweep underline */}
+      <motion.div
+        aria-hidden
+        className="absolute left-0 right-0 top-0 h-px bg-ink origin-left"
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: hovered ? 1 : 0 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      />
+
+      <div className="relative grid grid-cols-12 gap-6 md:gap-10 items-baseline">
+        <div className="col-span-12 md:col-span-2 flex items-baseline gap-4">
+          <span className="font-display text-sm text-muted-foreground tabular-nums">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+        </div>
+        <motion.h4
+          className="col-span-12 md:col-span-4 font-display text-4xl md:text-5xl lg:text-6xl text-ink leading-[0.95]"
+          animate={{ x: hovered ? 8 : 0 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {group.heading}
+        </motion.h4>
+
+        <div className="col-span-12 md:col-span-6 flex flex-wrap gap-2">
+          {group.items.map((it, j) => (
+            <motion.span
+              key={it}
+              initial={{ opacity: 0, y: 10 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: index * 0.08 + 0.2 + j * 0.05, ease: [0.22, 1, 0.36, 1] }}
+              className="inline-flex items-center rounded-full border border-ink/15 bg-white/60 backdrop-blur-sm px-4 py-2 text-[13px] text-ink/80 hover:border-ink/40 hover:bg-white hover:text-ink transition-colors"
+            >
+              {it}
+            </motion.span>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
 function Services() {
   return (
-    <section id="services" className="bg-cream pb-32">
+    <section id="services" className="bg-cream pt-8 pb-32">
       <div className="mx-auto max-w-6xl px-6">
-        <InView>
-          <h3 className="font-display text-5xl md:text-6xl text-ink max-w-2xl leading-[1.05]">
-            Every service your infrastructure depends on.
-          </h3>
-          <p className="mt-6 max-w-xl text-[15px] text-muted-foreground leading-relaxed">
-            One partner for the full stack — from Level 1 helpdesk to multi-cloud engineering, security, and around-the-clock incident response.
-          </p>
-        </InView>
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-12 gap-6 md:gap-10 mb-16 md:mb-24">
+          <div className="col-span-12 md:col-span-8">
+            <InView>
+              <h3 className="font-display text-5xl md:text-7xl text-ink leading-[1] tracking-tight">
+                Every service<br />your infrastructure<br /><em className="italic font-normal text-ink/70">depends on.</em>
+              </h3>
+            </InView>
+          </div>
+          <div className="col-span-12 md:col-span-4 md:pt-6">
+            <InView delay={0.15}>
+              <p className="text-[15px] text-muted-foreground leading-relaxed max-w-sm">
+                One partner for the full stack — from Level 1 helpdesk to multi-cloud engineering, security, and around-the-clock incident response.
+              </p>
+              <div className="mt-6 flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-ink/50">
+                <span className="h-px w-8 bg-ink/30" />
+                <span>{serviceGroups.length} disciplines · {serviceGroups.reduce((n, g) => n + g.items.length, 0)} services</span>
+              </div>
+            </InView>
+          </div>
+        </div>
+
+        <div className="border-b border-ink/10">
           {serviceGroups.map((g, i) => (
-            <motion.div
-              key={g.heading}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.7, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className="rounded-2xl bg-white border border-border/50 p-6 shadow-sm"
-            >
-              <div className="font-display text-2xl text-ink">{g.heading}</div>
-              <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-                {g.items.map((it) => (
-                  <li key={it} className="leading-relaxed">{it}</li>
-                ))}
-              </ul>
-            </motion.div>
+            <ServiceRow key={g.heading} group={g} index={i} />
           ))}
         </div>
       </div>
@@ -479,76 +547,85 @@ function CTA() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [-80, 80]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1.1, 1]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1.15, 1]);
   return (
-    <section ref={ref} className="relative min-h-[600px] h-[85vh] overflow-hidden">
-      <motion.img
-        src={ctaImg}
-        alt=""
-        style={{ y, scale }}
-        className="absolute inset-0 h-full w-full object-cover"
-        width={1600}
-        height={912}
-        loading="lazy"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/70" />
-      <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center text-white pt-16">
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="font-display text-6xl md:text-8xl leading-[0.95]"
-        >
-          Ready to strengthen<br /><em>your infrastructure?</em>
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-6 text-white/80 text-sm md:text-base max-w-xl"
-        >
-          Partner with certified engineers delivering enterprise-grade infrastructure management, cloud operations, DevOps, technical support, and proactive monitoring — 24 hours a day, 365 days a year.
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-8 flex flex-wrap items-center justify-center gap-3"
-          id="contact"
-        >
-          <a href="#contact" className="rounded-full bg-white text-ink px-6 py-3 text-sm font-medium hover:bg-white/90 transition">
-            Book a Consultation
-          </a>
-          <a href="#contact" className="rounded-full border border-white/30 backdrop-blur-md bg-white/10 text-white px-6 py-3 text-sm font-medium hover:bg-white/20 transition">
-            Contact Our Team
-          </a>
-        </motion.div>
+    <section ref={ref} className="relative overflow-hidden">
+      <div className="relative h-[85vh] min-h-[620px] overflow-hidden">
+        <motion.img
+          src={ctaImg}
+          alt=""
+          style={{ y, scale }}
+          className="absolute inset-0 h-full w-full object-cover"
+          width={1600}
+          height={912}
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/80" />
+        <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center text-white">
+          <motion.h2
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="font-display text-6xl md:text-8xl leading-[0.95]"
+          >
+            Ready to strengthen<br /><em>your infrastructure?</em>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mt-6 text-white/80 text-sm md:text-base max-w-xl"
+          >
+            Partner with certified engineers delivering enterprise-grade infrastructure management, cloud operations, DevOps, technical support, and proactive monitoring — 24 hours a day, 365 days a year.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="mt-8 flex flex-wrap items-center justify-center gap-3"
+            id="contact"
+          >
+            <a href="#contact" className="rounded-full bg-white text-ink px-6 py-3 text-sm font-medium hover:bg-white/90 transition">
+              Book a Consultation
+            </a>
+            <a href="#contact" className="rounded-full border border-white/30 backdrop-blur-md bg-white/10 text-white px-6 py-3 text-sm font-medium hover:bg-white/20 transition">
+              Contact Our Team
+            </a>
+          </motion.div>
+        </div>
       </div>
-
-      <footer className="absolute bottom-0 left-0 right-0 px-6 md:px-10 pb-8 text-white/80 text-xs z-10">
-        <div className="mx-auto max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div><div className="font-display text-2xl text-white">supportpro</div></div>
-          <div>
-            <div className="font-medium text-white mb-2">Services</div>
-            <div className="space-y-1"><div>24/7 Support</div><div>Cloud Management</div><div>Server Management</div><div>NOC Services</div></div>
-          </div>
-          <div>
-            <div className="font-medium text-white mb-2">Solutions</div>
-            <div className="space-y-1"><div>White-label Support</div><div>DevOps</div><div>Managed IT</div><div>Hosting Support</div></div>
-          </div>
-          <div>
-            <div className="font-medium text-white mb-2">Company</div>
-            <div className="space-y-1"><div>About</div><div>Contact</div><div>Careers</div></div>
-          </div>
-        </div>
-        <div className="mx-auto max-w-6xl mt-8 pt-6 border-t border-white/20 text-white/50">
-          © 2026 SupportPRO. All rights reserved.
-        </div>
-      </footer>
     </section>
+  );
+}
+
+function SiteFooter() {
+  return (
+    <footer className="bg-ink text-white/80 px-6 md:px-10 py-16">
+      <div className="mx-auto max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-8 text-xs">
+        <div>
+          <div className="font-display text-3xl text-white">supportpro</div>
+          <p className="mt-3 text-white/50 leading-relaxed max-w-[220px]">Enterprise infrastructure support, 24/7/365.</p>
+        </div>
+        <div>
+          <div className="font-medium text-white mb-3">Services</div>
+          <div className="space-y-2"><div>24/7 Support</div><div>Cloud Management</div><div>Server Management</div><div>NOC Services</div></div>
+        </div>
+        <div>
+          <div className="font-medium text-white mb-3">Solutions</div>
+          <div className="space-y-2"><div>White-label Support</div><div>DevOps</div><div>Managed IT</div><div>Hosting Support</div></div>
+        </div>
+        <div>
+          <div className="font-medium text-white mb-3">Company</div>
+          <div className="space-y-2"><div>About</div><div>Contact</div><div>Careers</div></div>
+        </div>
+      </div>
+      <div className="mx-auto max-w-6xl mt-12 pt-6 border-t border-white/10 text-white/40 text-xs">
+        © 2026 SupportPRO. All rights reserved.
+      </div>
+    </footer>
   );
 }
 
@@ -564,6 +641,7 @@ function Index() {
       <Testimonials />
       <FAQ />
       <CTA />
+      <SiteFooter />
     </main>
   );
 }
