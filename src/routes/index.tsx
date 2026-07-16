@@ -547,76 +547,85 @@ function CTA() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [-80, 80]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1.1, 1]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1.15, 1]);
   return (
-    <section ref={ref} className="relative min-h-[600px] h-[85vh] overflow-hidden">
-      <motion.img
-        src={ctaImg}
-        alt=""
-        style={{ y, scale }}
-        className="absolute inset-0 h-full w-full object-cover"
-        width={1600}
-        height={912}
-        loading="lazy"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/70" />
-      <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center text-white pt-16">
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="font-display text-6xl md:text-8xl leading-[0.95]"
-        >
-          Ready to strengthen<br /><em>your infrastructure?</em>
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-6 text-white/80 text-sm md:text-base max-w-xl"
-        >
-          Partner with certified engineers delivering enterprise-grade infrastructure management, cloud operations, DevOps, technical support, and proactive monitoring — 24 hours a day, 365 days a year.
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-8 flex flex-wrap items-center justify-center gap-3"
-          id="contact"
-        >
-          <a href="#contact" className="rounded-full bg-white text-ink px-6 py-3 text-sm font-medium hover:bg-white/90 transition">
-            Book a Consultation
-          </a>
-          <a href="#contact" className="rounded-full border border-white/30 backdrop-blur-md bg-white/10 text-white px-6 py-3 text-sm font-medium hover:bg-white/20 transition">
-            Contact Our Team
-          </a>
-        </motion.div>
+    <section ref={ref} className="relative overflow-hidden">
+      <div className="relative h-[85vh] min-h-[620px] overflow-hidden">
+        <motion.img
+          src={ctaImg}
+          alt=""
+          style={{ y, scale }}
+          className="absolute inset-0 h-full w-full object-cover"
+          width={1600}
+          height={912}
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/80" />
+        <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center text-white">
+          <motion.h2
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+            className="font-display text-6xl md:text-8xl leading-[0.95]"
+          >
+            Ready to strengthen<br /><em>your infrastructure?</em>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mt-6 text-white/80 text-sm md:text-base max-w-xl"
+          >
+            Partner with certified engineers delivering enterprise-grade infrastructure management, cloud operations, DevOps, technical support, and proactive monitoring — 24 hours a day, 365 days a year.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="mt-8 flex flex-wrap items-center justify-center gap-3"
+            id="contact"
+          >
+            <a href="#contact" className="rounded-full bg-white text-ink px-6 py-3 text-sm font-medium hover:bg-white/90 transition">
+              Book a Consultation
+            </a>
+            <a href="#contact" className="rounded-full border border-white/30 backdrop-blur-md bg-white/10 text-white px-6 py-3 text-sm font-medium hover:bg-white/20 transition">
+              Contact Our Team
+            </a>
+          </motion.div>
+        </div>
       </div>
-
-      <footer className="absolute bottom-0 left-0 right-0 px-6 md:px-10 pb-8 text-white/80 text-xs z-10">
-        <div className="mx-auto max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-6">
-          <div><div className="font-display text-2xl text-white">supportpro</div></div>
-          <div>
-            <div className="font-medium text-white mb-2">Services</div>
-            <div className="space-y-1"><div>24/7 Support</div><div>Cloud Management</div><div>Server Management</div><div>NOC Services</div></div>
-          </div>
-          <div>
-            <div className="font-medium text-white mb-2">Solutions</div>
-            <div className="space-y-1"><div>White-label Support</div><div>DevOps</div><div>Managed IT</div><div>Hosting Support</div></div>
-          </div>
-          <div>
-            <div className="font-medium text-white mb-2">Company</div>
-            <div className="space-y-1"><div>About</div><div>Contact</div><div>Careers</div></div>
-          </div>
-        </div>
-        <div className="mx-auto max-w-6xl mt-8 pt-6 border-t border-white/20 text-white/50">
-          © 2026 SupportPRO. All rights reserved.
-        </div>
-      </footer>
     </section>
+  );
+}
+
+function SiteFooter() {
+  return (
+    <footer className="bg-ink text-white/80 px-6 md:px-10 py-16">
+      <div className="mx-auto max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-8 text-xs">
+        <div>
+          <div className="font-display text-3xl text-white">supportpro</div>
+          <p className="mt-3 text-white/50 leading-relaxed max-w-[220px]">Enterprise infrastructure support, 24/7/365.</p>
+        </div>
+        <div>
+          <div className="font-medium text-white mb-3">Services</div>
+          <div className="space-y-2"><div>24/7 Support</div><div>Cloud Management</div><div>Server Management</div><div>NOC Services</div></div>
+        </div>
+        <div>
+          <div className="font-medium text-white mb-3">Solutions</div>
+          <div className="space-y-2"><div>White-label Support</div><div>DevOps</div><div>Managed IT</div><div>Hosting Support</div></div>
+        </div>
+        <div>
+          <div className="font-medium text-white mb-3">Company</div>
+          <div className="space-y-2"><div>About</div><div>Contact</div><div>Careers</div></div>
+        </div>
+      </div>
+      <div className="mx-auto max-w-6xl mt-12 pt-6 border-t border-white/10 text-white/40 text-xs">
+        © 2026 SupportPRO. All rights reserved.
+      </div>
+    </footer>
   );
 }
 
