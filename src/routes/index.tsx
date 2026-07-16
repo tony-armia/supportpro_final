@@ -114,16 +114,17 @@ function Hero() {
         width={1600}
         height={1008}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/40" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/25 to-black/80" />
+      <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
       <motion.div
         style={{ y: textY, opacity }}
-        className="relative z-10 flex h-full flex-col items-center justify-end pb-24 px-6 text-center text-white"
+        className="relative z-10 flex h-full flex-col items-center justify-end pb-20 md:pb-24 px-6 text-center text-white"
       >
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="font-display text-6xl md:text-8xl lg:text-9xl leading-[0.95] max-w-5xl"
+          className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] max-w-4xl drop-shadow-[0_2px_20px_rgba(0,0,0,0.35)]"
         >
           Enterprise infrastructure<br />support that never sleeps.
         </motion.h1>
