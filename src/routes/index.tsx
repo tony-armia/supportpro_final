@@ -501,10 +501,9 @@ function StickyPhoneSection() {
   ];
 
   // Drive the active screen from scroll progress across the section.
-  useTransform(scrollYProgress, (v) => {
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
     const idx = Math.min(blocks.length - 1, Math.max(0, Math.floor(v * blocks.length)));
     setActive((prev) => (prev === idx ? prev : idx));
-    return v;
   });
 
   return (
