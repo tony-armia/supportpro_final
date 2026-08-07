@@ -453,23 +453,24 @@ function NocScreen() {
 
 const PHONE_SCREENS = [TicketsScreen, ServersScreen, ChatScreen, NocScreen] as const;
 
-function PhoneFrame({ activeIndex, progress }: { activeIndex: number; progress: any }) {
-  const rotateY = useTransform(progress, [0, 1], [-4, 4]);
-  const rotateX = useTransform(progress, [0, 1], [2, -2]);
+function PhoneFrame({ activeIndex }: { activeIndex: number }) {
   return (
-    <div className="relative mx-auto w-[260px] md:w-[290px]" style={{ perspective: 1200 }}>
-      <motion.div
-        style={{ rotateY, rotateX }}
-        className="relative aspect-[9/19] w-full rounded-[44px] bg-gradient-to-b from-neutral-800 to-neutral-950 p-[6px] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.35),0_20px_40px_-15px_rgba(0,0,0,0.25)]"
-      >
+    <div className="relative mx-auto w-[260px] md:w-[290px]">
+      <div className="relative aspect-[9/19] w-full rounded-[44px] bg-gradient-to-b from-neutral-800 to-neutral-950 p-[6px] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.35),0_20px_40px_-15px_rgba(0,0,0,0.25)]">
         <div className="relative h-full w-full overflow-hidden rounded-[38px] bg-white ring-1 ring-black/60">
           <div className="pointer-events-none absolute left-1/2 top-1.5 z-30 h-5 w-20 -translate-x-1/2 rounded-full bg-neutral-950" />
           {PHONE_SCREENS.map((Screen, i) => (
             <motion.div
               key={i}
               className="absolute inset-0"
-              animate={{ opacity: activeIndex === i ? 1 : 0, scale: activeIndex === i ? 1 : 1.02 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              initial={false}
+              animate={{
+                opacity: activeIndex === i ? 1 : 0,
+                y: activeIndex === i ? 0 : 20,
+                scale: activeIndex === i ? 1 : 0.98,
+              }}
+              transition={{ duration: 0.6, ease: [0.42, 0, 0.58, 1] }}
+              style={{ pointerEvents: activeIndex === i ? "auto" : "none" }}
             >
               <Screen />
             </motion.div>
@@ -477,7 +478,7 @@ function PhoneFrame({ activeIndex, progress }: { activeIndex: number; progress: 
           {/* subtle screen glare */}
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.04] to-white/10" />
         </div>
-      </motion.div>
+      </div>
       {/* side buttons */}
       <div className="absolute -right-[3px] top-[22%] h-14 w-[3px] rounded-r bg-neutral-800" />
       <div className="absolute -left-[3px] top-[18%] h-8 w-[3px] rounded-l bg-neutral-800" />
@@ -486,76 +487,112 @@ function PhoneFrame({ activeIndex, progress }: { activeIndex: number; progress: 
   );
 }
 
-/* Sticky phone that stays pinned while four text blocks scroll past. The phone's
-   screen swaps to a matching support-app view for each block. */
+const stickyBlocks = [
+  {
+    title: "24/7 expert support, always on.",
+    body: "Our global engineering teams monitor, respond, and resolve around the clock — so your infrastructure and customers never wait.",
+  },
+  {
+    title: "Cloud and server management, mastered.",
+    body: "From Linux and Windows administration to AWS, Azure, and Google Cloud, we run production environments with precision and discipline.",
+  },
+  {
+    title: "White-label support under your brand.",
+    body: "Extend your team without expanding your headcount. Our engineers deliver seamless helpdesk and MSP support in your voice, your tools, your brand.",
+  },
+  {
+    title: "NOC and DevOps engineered for scale.",
+    body: "Continuous monitoring, automation, and incident response designed to keep complex infrastructure stable, secure, and ready to grow.",
+  },
+] as const;
+
+/* Sticky phone that stays perfectly pinned while the left-hand story crossfades
+   through each feature. After the last feature the section releases normally. */
 function StickyPhoneSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
   const [active, setActive] = useState(0);
 
-  const blocks: Array<{ title: string; body: string; align: "left" | "right" }> = [
-    { title: "24/7 expert support, always on.", body: "Our global engineering teams monitor, respond, and resolve around the clock — so your infrastructure and customers never wait.", align: "left" },
-    { title: "Cloud and server management, mastered.", body: "From Linux and Windows administration to AWS, Azure, and Google Cloud, we run production environments with precision and discipline.", align: "right" },
-    { title: "White-label support under your brand.", body: "Extend your team without expanding your headcount. Our engineers deliver seamless helpdesk and MSP support in your voice, your tools, your brand.", align: "left" },
-    { title: "NOC and DevOps engineered for scale.", body: "Continuous monitoring, automation, and incident response designed to keep complex infrastructure stable, secure, and ready to grow.", align: "right" },
-  ];
-
-  // Drive the active screen from scroll progress across the section.
   useMotionValueEvent(scrollYProgress, "change", (v) => {
-    const idx = Math.min(blocks.length - 1, Math.max(0, Math.floor(v * blocks.length)));
+    const idx = Math.min(stickyBlocks.length - 1, Math.max(0, Math.floor(v * stickyBlocks.length + 0.0001)));
     setActive((prev) => (prev === idx ? prev : idx));
   });
 
+  const ease = [0.42, 0, 0.58, 1] as const;
+  const b = stickyBlocks[active];
+
   return (
-    <section ref={sectionRef} id="features" className="relative bg-cream rounded-t-[40px] -mt-10 pt-24">
-      <div className="mx-auto max-w-6xl px-6 relative">
-        {/* Sticky phone column */}
-        <div className="hidden md:block absolute inset-0 pointer-events-none">
-          <div className="sticky top-0 h-screen flex items-center justify-center">
-            <div className="pointer-events-auto">
-              <PhoneFrame activeIndex={active} progress={scrollYProgress} />
-              {/* progress dots */}
+    <section ref={sectionRef} id="features" className="relative bg-cream rounded-t-[40px] -mt-10">
+      {/* Scroll runway: one viewport per feature */}
+      <div style={{ height: `${stickyBlocks.length * 100}vh` }}>
+        <div className="sticky top-0 h-screen overflow-hidden">
+          <div className="mx-auto flex h-full max-w-6xl items-center px-6">
+            {/* Left column — crossfading story */}
+            <div className="hidden md:block w-[38%] pr-8">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.div
+                  key={active}
+                  initial={{ opacity: 0, y: 28, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -24, scale: 0.98 }}
+                  transition={{ duration: 0.6, ease }}
+                  className="max-w-sm will-change-transform"
+                >
+                  <div className="mb-4 flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-ink/40">
+                    <span className="tabular-nums">0{active + 1}</span>
+                    <span className="h-px w-8 bg-ink/20" />
+                  </div>
+                  <h3 className="font-display text-4xl lg:text-5xl leading-[1.05] text-ink">{b.title}</h3>
+                  <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">{b.body}</p>
+                  <a
+                    href="#contact"
+                    className="mt-8 inline-flex items-center gap-2 text-sm text-ink border-b border-ink/25 pb-1 transition-colors hover:border-ink"
+                  >
+                    Talk to an engineer
+                  </a>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Center — fixed device */}
+            <div className="flex-1 flex flex-col items-center justify-center max-md:scale-[0.72] max-md:-translate-y-14">
+              <PhoneFrame activeIndex={active} />
               <div className="mt-6 flex items-center justify-center gap-1.5">
-                {blocks.map((_, i) => (
-                  <div key={i} className={`h-1 rounded-full transition-all duration-500 ${active === i ? "w-6 bg-ink" : "w-1 bg-ink/25"}`} />
+                {stickyBlocks.map((_, i) => (
+                  <div
+                    key={i}
+                    className={`h-1 rounded-full transition-all duration-500 ${active === i ? "w-6 bg-ink" : "w-1 bg-ink/25"}`}
+                  />
                 ))}
               </div>
             </div>
-          </div>
-        </div>
 
-        {/* Text blocks stacked, each one full-viewport tall so phone stays pinned */}
-        <div className="relative">
-          {blocks.map((b, i) => (
-            <div
-              key={i}
-              className={`min-h-screen flex items-center ${b.align === "right" ? "justify-end" : "justify-start"}`}
-            >
-              <div className="max-w-sm">
-                <div className="mb-4 flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-ink/40">
-                  <span className="tabular-nums">0{i + 1}</span>
-                  <span className="h-px w-8 bg-ink/20" />
-                </div>
-                <RevealText as="h3" className="font-display text-4xl md:text-5xl leading-[1.05] text-ink block">
-                  {b.title}
-                </RevealText>
-                <div className="mt-4">
-                  <RevealText className="text-muted-foreground text-[15px] leading-relaxed">
-                    {b.body}
-                  </RevealText>
-                </div>
-              </div>
-            </div>
-          ))}
-          {/* Mobile phone (shown only <md) */}
-          <div className="md:hidden mx-auto mb-16 -mt-24">
-            <PhoneFrame activeIndex={active} progress={scrollYProgress} />
+            {/* Right — decorative whitespace */}
+            <div className="hidden lg:block w-[22%]" aria-hidden />
+          </div>
+
+          {/* Mobile story (below phone) */}
+          <div className="md:hidden absolute inset-x-0 bottom-10 px-6">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={active}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.55, ease }}
+                className="text-center"
+              >
+                <h3 className="font-display text-3xl leading-[1.08] text-ink">{b.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{b.body}</p>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 function InView({ children, delay = 0 }: { children: ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
