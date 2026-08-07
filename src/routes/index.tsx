@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useRef, type ReactNode } from "react";
 import { motion, useScroll, useTransform, AnimatePresence, useInView, useMotionValueEvent } from "motion/react";
-import { Plus, Lock } from "lucide-react";
+import { Plus, Lock, ShieldCheck, FileCheck2, Activity } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 import talkImg from "@/assets/talk.jpg";
 import ctaImg from "@/assets/cta.jpg";
@@ -679,34 +679,94 @@ function SliderSection() {
   );
 }
 
+const securityPillars = [
+  { icon: Lock, title: "Least-privilege access", body: "Scoped credentials, MFA everywhere, and time-bound access to every environment we touch." },
+  { icon: ShieldCheck, title: "Hardened workflows", body: "Change control, peer review, and documented runbooks behind every action taken on production." },
+  { icon: FileCheck2, title: "Audited procedures", body: "Full activity trails and periodic reviews so every engagement stands up to enterprise scrutiny." },
+  { icon: Activity, title: "Continuous monitoring", body: "Threat detection, patch management, and vulnerability response running around the clock." },
+];
+
 function Privacy() {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const lockRotate = useTransform(scrollYProgress, [0, 1], [-15, 15]);
+  const glowY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+  const lockRotate = useTransform(scrollYProgress, [0, 1], [-10, 10]);
+
   return (
     <section ref={ref} className="bg-cream pb-32">
       <div className="mx-auto max-w-6xl px-6">
         <InView>
-          <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-[#0a0a0a] via-[#151510] to-[#1a1a1a] p-12 md:p-20 min-h-[420px]">
-            <div className="absolute inset-0 opacity-40" style={{ background: "radial-gradient(ellipse at 80% 60%, oklch(0.35 0.15 100 / 0.5), transparent 60%)" }} />
-            <div className="max-w-md relative z-10">
-              <h3 className="font-display text-5xl md:text-6xl text-white leading-[1.05]">Security at the core.</h3>
-              <p className="mt-6 text-sm text-white/60 leading-relaxed max-w-sm">
-                Every engagement is protected by strict access controls, hardened workflows, audited procedures, and continuous security management — because trust is the foundation of managed services.
-              </p>
-            </div>
+          <div className="group/card relative overflow-hidden rounded-[32px] bg-gradient-to-br from-[#0a0a0a] via-[#141410] to-[#1a1a18] p-10 md:p-16">
+            {/* grid texture */}
+            <div
+              className="absolute inset-0 opacity-[0.14]"
+              style={{
+                backgroundImage:
+                  "linear-gradient(to right, rgba(255,255,255,.35) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,.35) 1px, transparent 1px)",
+                backgroundSize: "64px 64px",
+                maskImage: "radial-gradient(ellipse at 30% 0%, black, transparent 75%)",
+                WebkitMaskImage: "radial-gradient(ellipse at 30% 0%, black, transparent 75%)",
+              }}
+            />
             <motion.div
-              style={{ rotate: lockRotate }}
-              className="absolute right-4 md:right-16 top-1/2 -translate-y-1/2"
+              style={{ y: glowY }}
+              className="pointer-events-none absolute -right-24 top-0 h-[520px] w-[520px] rounded-full opacity-60 blur-3xl"
             >
-              <Lock className="text-white/10" size={260} strokeWidth={1} />
+              <div className="h-full w-full" style={{ background: "radial-gradient(circle, oklch(0.45 0.14 100 / 0.55), transparent 65%)" }} />
             </motion.div>
+            <motion.div style={{ rotate: lockRotate }} className="pointer-events-none absolute right-6 md:right-14 top-10 md:top-16">
+              <Lock className="text-white/[0.06]" size={220} strokeWidth={1} />
+            </motion.div>
+
+            <div className="relative z-10">
+              <div className="flex items-center gap-3">
+                <span className="h-1.5 w-1.5 rounded-full bg-[oklch(0.82_0.16_95)]" />
+                <span className="text-[11px] uppercase tracking-[0.22em] text-white/45">Security &amp; compliance</span>
+              </div>
+              <div className="mt-6 grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:items-end">
+                <h3 className="font-display text-5xl md:text-[64px] text-white leading-[1.02]">
+                  Security at the core.
+                </h3>
+                <p className="text-[15px] text-white/55 leading-relaxed max-w-md md:pb-2">
+                  Every engagement is protected by strict access controls, hardened workflows, audited procedures, and continuous security management — because trust is the foundation of managed services.
+                </p>
+              </div>
+
+              <div className="mt-14 grid gap-px overflow-hidden rounded-2xl bg-white/[0.08] sm:grid-cols-2 lg:grid-cols-4">
+                {securityPillars.map((p, i) => (
+                  <motion.div
+                    key={p.title}
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.4 }}
+                    transition={{ duration: 0.6, delay: 0.08 * i, ease: [0.22, 1, 0.36, 1] }}
+                    className="group relative bg-[#0e0e0c] p-6 transition-colors duration-500 hover:bg-[#15150f]"
+                  >
+                    <span className="absolute left-0 top-0 h-px w-0 bg-gradient-to-r from-[oklch(0.82_0.16_95)] to-transparent transition-all duration-700 group-hover:w-full" />
+                    <p.icon size={20} strokeWidth={1.5} className="text-[oklch(0.82_0.16_95)]/80 transition-transform duration-500 group-hover:-translate-y-0.5" />
+                    <h4 className="mt-5 text-[15px] text-white">{p.title}</h4>
+                    <p className="mt-2 text-[13px] leading-relaxed text-white/45">{p.body}</p>
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 text-[12px] uppercase tracking-[0.18em] text-white/35">
+                <span>Signed NDAs</span>
+                <span className="h-3 w-px bg-white/15" />
+                <span>Role-based access</span>
+                <span className="h-3 w-px bg-white/15" />
+                <span>Encrypted channels</span>
+                <span className="h-3 w-px bg-white/15" />
+                <span>24/7 incident response</span>
+              </div>
+            </div>
           </div>
         </InView>
       </div>
     </section>
   );
 }
+
 
 function Testimonials() {
   const loop = [...testimonials, ...testimonials];
