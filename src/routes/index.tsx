@@ -880,7 +880,7 @@ function SiteFooter() {
 
 function Index() {
   return (
-    <main className="bg-cream overflow-x-hidden">
+    <main className="bg-cream overflow-x-clip">
       <Nav />
       <Hero />
       <StickyPhoneSection />
