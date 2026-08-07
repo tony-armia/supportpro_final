@@ -555,7 +555,7 @@ function StickyPhoneSection() {
             </div>
 
             {/* Center — fixed device */}
-            <div className="flex-1 flex flex-col items-center justify-center">
+            <div className="flex-1 flex flex-col items-center justify-center max-md:scale-[0.72] max-md:-translate-y-14">
               <PhoneFrame activeIndex={active} />
               <div className="mt-6 flex items-center justify-center gap-1.5">
                 {stickyBlocks.map((_, i) => (
