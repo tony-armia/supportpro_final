@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useRef, type ReactNode } from "react";
 import { motion, useScroll, useTransform, AnimatePresence, useInView, useMotionValueEvent } from "motion/react";
-import { Plus, Lock } from "lucide-react";
+import { Plus, Lock, ShieldCheck, FileCheck2, Activity } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 import talkImg from "@/assets/talk.jpg";
 import ctaImg from "@/assets/cta.jpg";
