@@ -283,231 +283,41 @@ function Services() {
   );
 }
 
-/* Support app screens that render inside the sticky phone frame. */
-function TicketsScreen() {
-  const rows = [
-    { sev: "P1", color: "bg-red-500", title: "Prod DB latency spike", who: "Priya · 2m", eta: "Resolving" },
-    { sev: "P2", color: "bg-amber-500", title: "Nginx 502 on edge-04", who: "Marco · 6m", eta: "Investigating" },
-    { sev: "P3", color: "bg-emerald-500", title: "SSL renewal — api.co", who: "Ana · 11m", eta: "Scheduled" },
-    { sev: "P3", color: "bg-emerald-500", title: "Backup verify passed", who: "Auto · 14m", eta: "Closed" },
-  ];
-  return (
-    <div className="h-full w-full bg-gradient-to-b from-neutral-50 to-neutral-100 p-4 pt-10 font-sans">
-      <div className="flex items-center justify-between">
-        <div>
-          <div className="text-[10px] uppercase tracking-widest text-neutral-400">Live Support</div>
-          <div className="text-[15px] font-semibold text-neutral-900">Active tickets</div>
-        </div>
-        <div className="flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2 py-1">
-          <span className="relative flex h-1.5 w-1.5"><span className="absolute inset-0 animate-ping rounded-full bg-emerald-500 opacity-75" /><span className="relative h-1.5 w-1.5 rounded-full bg-emerald-500" /></span>
-          <span className="text-[9px] font-medium text-emerald-700">24/7 ONLINE</span>
-        </div>
-      </div>
-      <div className="mt-3 space-y-2">
-        {rows.map((r, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, x: 12 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.15 + i * 0.08, duration: 0.5 }}
-            className="flex items-center gap-2.5 rounded-xl bg-white p-2.5 shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-1 ring-neutral-100"
-          >
-            <div className={`h-8 w-1 rounded-full ${r.color}`} />
-            <div className="min-w-0 flex-1">
-              <div className="flex items-center gap-1.5">
-                <span className="rounded-md bg-neutral-100 px-1 py-px text-[8px] font-bold text-neutral-600">{r.sev}</span>
-                <span className="truncate text-[11px] font-medium text-neutral-900">{r.title}</span>
-              </div>
-              <div className="mt-0.5 text-[9px] text-neutral-500">{r.who} · {r.eta}</div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function ServersScreen() {
-  const stats = [
-    { label: "CPU", value: "42%", delta: "-3.1%", tone: "text-emerald-600" },
-    { label: "Memory", value: "68%", delta: "+1.2%", tone: "text-amber-600" },
-    { label: "Uptime", value: "99.99%", delta: "90d", tone: "text-neutral-500" },
-  ];
-  return (
-    <div className="h-full w-full bg-neutral-950 p-4 pt-10 text-white">
-      <div className="text-[10px] uppercase tracking-widest text-white/40">Server Fleet</div>
-      <div className="text-[15px] font-semibold">us-east · 128 nodes</div>
-      <div className="mt-3 grid grid-cols-3 gap-1.5">
-        {stats.map((s) => (
-          <div key={s.label} className="rounded-lg bg-white/5 p-2 ring-1 ring-white/10">
-            <div className="text-[8px] uppercase text-white/40">{s.label}</div>
-            <div className="mt-0.5 text-[13px] font-semibold">{s.value}</div>
-            <div className={`text-[9px] ${s.tone}`}>{s.delta}</div>
-          </div>
-        ))}
-      </div>
-      <div className="mt-3 rounded-lg bg-white/5 p-2.5 ring-1 ring-white/10">
-        <div className="mb-1.5 flex items-center justify-between text-[9px] text-white/50">
-          <span>Requests / min</span><span className="text-emerald-400">▲ healthy</span>
-        </div>
-        <svg viewBox="0 0 200 60" className="h-14 w-full">
-          <defs>
-            <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0%" stopColor="rgb(52 211 153)" stopOpacity="0.5" />
-              <stop offset="100%" stopColor="rgb(52 211 153)" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          <motion.path
-            initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.4, ease: "easeInOut" }}
-            d="M0,45 L20,38 L40,42 L60,30 L80,34 L100,22 L120,28 L140,18 L160,24 L180,14 L200,20"
-            fill="none" stroke="rgb(52 211 153)" strokeWidth="1.5"
-          />
-          <path d="M0,45 L20,38 L40,42 L60,30 L80,34 L100,22 L120,28 L140,18 L160,24 L180,14 L200,20 L200,60 L0,60 Z" fill="url(#g)" />
-        </svg>
-      </div>
-      <div className="mt-2 flex items-center gap-2 rounded-lg bg-emerald-500/10 p-2 ring-1 ring-emerald-500/20">
-        <div className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-        <span className="text-[10px] text-emerald-300">All systems operational</span>
-      </div>
-    </div>
-  );
-}
-
-function ChatScreen() {
-  const msgs = [
-    { from: "them", text: "Hi — seeing 502s on the checkout API since 09:12 UTC." },
-    { from: "us", text: "On it. Failover to eu-west-2 in progress." },
-    { from: "us", text: "Root cause: upstream pool exhausted. Scaling nodes now." },
-    { from: "them", text: "Metrics recovering. Thank you 🙏" },
-  ];
-  return (
-    <div className="h-full w-full bg-[#f5f4ef] p-4 pt-10">
-      <div className="flex items-center gap-2 border-b border-neutral-200 pb-2">
-        <div className="grid h-7 w-7 place-items-center rounded-full bg-neutral-900 text-[9px] font-bold text-white">SP</div>
-        <div>
-          <div className="text-[11px] font-semibold text-neutral-900">SupportPRO · Tier 2</div>
-          <div className="text-[9px] text-emerald-600">● typing…</div>
-        </div>
-      </div>
-      <div className="mt-3 space-y-1.5">
-        {msgs.map((m, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.15 }}
-            className={`flex ${m.from === "us" ? "justify-end" : "justify-start"}`}
-          >
-            <div className={`max-w-[80%] rounded-2xl px-2.5 py-1.5 text-[10px] leading-snug ${m.from === "us" ? "bg-neutral-900 text-white" : "bg-white text-neutral-800 ring-1 ring-neutral-200"}`}>
-              {m.text}
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function NocScreen() {
-  const alerts = [
-    { t: "01:14", txt: "Auto-remediated pod restart · api-07", ok: true },
-    { t: "00:47", txt: "Patched CVE-2026-1188 across 42 hosts", ok: true },
-    { t: "00:12", txt: "Scaling group +6 instances (traffic surge)", ok: true },
-  ];
-  return (
-    <div className="h-full w-full bg-gradient-to-br from-[#0b0f14] via-[#0e1319] to-[#0b0f14] p-4 pt-10 text-white">
-      <div className="flex items-center justify-between">
-        <div>
-          <div className="text-[10px] uppercase tracking-widest text-white/40">NOC · Live</div>
-          <div className="text-[15px] font-semibold">Global monitoring</div>
-        </div>
-        <div className="text-right">
-          <div className="text-[9px] text-white/40">Response</div>
-          <div className="text-[11px] font-semibold text-emerald-400">1m 42s avg</div>
-        </div>
-      </div>
-      <div className="mt-3 rounded-lg bg-white/5 p-2.5 ring-1 ring-white/10">
-        <svg viewBox="0 0 200 70" className="h-16 w-full">
-          <motion.path
-            initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.6, ease: "easeInOut" }}
-            d="M0,50 C20,30 30,55 50,40 S80,20 100,35 130,55 150,32 180,45 200,25"
-            fill="none" stroke="rgb(96 165 250)" strokeWidth="1.5"
-          />
-          <motion.circle cx="200" cy="25" r="2.5" fill="rgb(96 165 250)"
-            animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1.6, repeat: Infinity }} />
-        </svg>
-      </div>
-      <div className="mt-2 space-y-1.5">
-        {alerts.map((a, i) => (
-          <motion.div key={i} initial={{ opacity: 0, x: -8 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.25 + i * 0.1 }}
-            className="flex items-start gap-2 rounded-lg bg-white/[0.03] p-2 ring-1 ring-white/5">
-            <div className={`mt-0.5 h-1.5 w-1.5 rounded-full ${a.ok ? "bg-emerald-400" : "bg-amber-400"}`} />
-            <div className="min-w-0 flex-1">
-              <div className="truncate text-[10px] text-white/90">{a.txt}</div>
-              <div className="text-[8px] text-white/40">{a.t} ago</div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-const PHONE_SCREENS = [TicketsScreen, ServersScreen, ChatScreen, NocScreen] as const;
-
-function PhoneFrame({ activeIndex }: { activeIndex: number }) {
-  return (
-    <div className="relative mx-auto w-[260px] md:w-[290px]">
-      <div className="relative aspect-[9/19] w-full rounded-[44px] bg-gradient-to-b from-neutral-800 to-neutral-950 p-[6px] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.35),0_20px_40px_-15px_rgba(0,0,0,0.25)]">
-        <div className="relative h-full w-full overflow-hidden rounded-[38px] bg-white ring-1 ring-black/60">
-          <div className="pointer-events-none absolute left-1/2 top-1.5 z-30 h-5 w-20 -translate-x-1/2 rounded-full bg-neutral-950" />
-          {PHONE_SCREENS.map((Screen, i) => (
-            <motion.div
-              key={i}
-              className="absolute inset-0"
-              initial={false}
-              animate={{
-                opacity: activeIndex === i ? 1 : 0,
-                y: activeIndex === i ? 0 : 20,
-                scale: activeIndex === i ? 1 : 0.98,
-              }}
-              transition={{ duration: 0.6, ease: [0.42, 0, 0.58, 1] }}
-              style={{ pointerEvents: activeIndex === i ? "auto" : "none" }}
-            >
-              <Screen />
-            </motion.div>
-          ))}
-          {/* subtle screen glare */}
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.04] to-white/10" />
-        </div>
-      </div>
-      {/* side buttons */}
-      <div className="absolute -right-[3px] top-[22%] h-14 w-[3px] rounded-r bg-neutral-800" />
-      <div className="absolute -left-[3px] top-[18%] h-8 w-[3px] rounded-l bg-neutral-800" />
-      <div className="absolute -left-[3px] top-[30%] h-14 w-[3px] rounded-l bg-neutral-800" />
-    </div>
-  );
-}
-
 const stickyBlocks = [
   {
     title: "24/7 expert support, always on.",
     body: "Our global engineering teams monitor, respond, and resolve around the clock — so your infrastructure and customers never wait.",
+    img: feature1,
+    alt: "Support engineer with a headset monitoring live tickets in a network operations centre",
+    caption: "Live incident response",
   },
   {
     title: "Cloud and server management, mastered.",
     body: "From Linux and Windows administration to AWS, Azure, and Google Cloud, we run production environments with precision and discipline.",
+    img: feature2,
+    alt: "Engineers reviewing racks inside a modern enterprise data centre",
+    caption: "Managed infrastructure",
   },
   {
     title: "White-label support under your brand.",
     body: "Extend your team without expanding your headcount. Our engineers deliver seamless helpdesk and MSP support in your voice, your tools, your brand.",
+    img: feature3,
+    alt: "Two helpdesk engineers collaborating on a customer support case",
+    caption: "Helpdesk under your brand",
   },
   {
     title: "NOC and DevOps engineered for scale.",
     body: "Continuous monitoring, automation, and incident response designed to keep complex infrastructure stable, secure, and ready to grow.",
+    img: feature4,
+    alt: "Network operations command centre with global monitoring dashboards at dawn",
+    caption: "24/7 NOC monitoring",
   },
 ] as const;
 
-/* Sticky phone that stays perfectly pinned while the left-hand story crossfades
-   through each feature. After the last feature the section releases normally. */
+const EASE = [0.22, 0.61, 0.36, 1] as const;
+
+/* Sticky feature showcase: a large centred visual stays pinned while the copy
+   alternates left / right and both crossfade as the active feature changes. */
 function StickyPhoneSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
@@ -518,45 +328,76 @@ function StickyPhoneSection() {
     setActive((prev) => (prev === idx ? prev : idx));
   });
 
-  const ease = [0.42, 0, 0.58, 1] as const;
   const b = stickyBlocks[active];
+  const onLeft = active % 2 === 0;
+
+  const Copy = (
+    <AnimatePresence mode="wait" initial={false}>
+      <motion.div
+        key={active}
+        initial={{ opacity: 0, y: 18, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: -14, scale: 0.98 }}
+        transition={{ duration: 0.6, ease: EASE }}
+        className="max-w-sm will-change-transform"
+      >
+        <div className="mb-4 flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-ink/40">
+          <span className="tabular-nums">0{active + 1}</span>
+          <span className="h-px w-8 bg-ink/20" />
+        </div>
+        <h3 className="font-display text-4xl lg:text-5xl leading-[1.05] text-ink">{b.title}</h3>
+        <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">{b.body}</p>
+        <a
+          href="#contact"
+          className="mt-8 inline-flex items-center gap-2 text-sm text-ink border-b border-ink/25 pb-1 transition-colors hover:border-ink"
+        >
+          Talk to an engineer
+        </a>
+      </motion.div>
+    </AnimatePresence>
+  );
 
   return (
     <section ref={sectionRef} id="features" className="relative bg-cream rounded-t-[40px] -mt-10">
       {/* Scroll runway: one viewport per feature */}
       <div style={{ height: `${stickyBlocks.length * 100}vh` }}>
         <div className="sticky top-0 h-screen overflow-hidden">
-          <div className="mx-auto flex h-full max-w-6xl items-center px-6">
-            {/* Left column — crossfading story */}
-            <div className="hidden md:block w-[38%] pr-8">
-              <AnimatePresence mode="wait" initial={false}>
-                <motion.div
-                  key={active}
-                  initial={{ opacity: 0, y: 28, scale: 0.98 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: -24, scale: 0.98 }}
-                  transition={{ duration: 0.6, ease }}
-                  className="max-w-sm will-change-transform"
-                >
-                  <div className="mb-4 flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-ink/40">
-                    <span className="tabular-nums">0{active + 1}</span>
-                    <span className="h-px w-8 bg-ink/20" />
-                  </div>
-                  <h3 className="font-display text-4xl lg:text-5xl leading-[1.05] text-ink">{b.title}</h3>
-                  <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">{b.body}</p>
-                  <a
-                    href="#contact"
-                    className="mt-8 inline-flex items-center gap-2 text-sm text-ink border-b border-ink/25 pb-1 transition-colors hover:border-ink"
-                  >
-                    Talk to an engineer
-                  </a>
-                </motion.div>
-              </AnimatePresence>
-            </div>
+          <div className="mx-auto flex h-full max-w-6xl items-center gap-8 px-6">
+            {/* Left copy slot */}
+            <div className="hidden md:flex w-[30%] justify-start">{onLeft ? Copy : null}</div>
 
-            {/* Center — fixed device */}
-            <div className="flex-1 flex flex-col items-center justify-center max-md:scale-[0.72] max-md:-translate-y-14">
-              <PhoneFrame activeIndex={active} />
+            {/* Center — sticky, stable visual */}
+            <div className="flex-1 flex flex-col items-center justify-center">
+              <div className="relative w-full max-w-[560px] aspect-[4/3] overflow-hidden rounded-[28px] bg-ink/5 shadow-[0_40px_90px_-30px_rgba(0,0,0,0.35)] ring-1 ring-ink/10">
+                {stickyBlocks.map((s, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute inset-0"
+                    initial={false}
+                    animate={{
+                      opacity: active === i ? 1 : 0,
+                      scale: active === i ? 1 : 0.97,
+                      y: active === i ? 0 : 14,
+                    }}
+                    transition={{ duration: 0.65, ease: EASE, delay: active === i ? 0.08 : 0 }}
+                  >
+                    <img
+                      src={s.img}
+                      alt={s.alt}
+                      width={1280}
+                      height={960}
+                      loading="lazy"
+                      className="h-full w-full object-cover"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/5 to-transparent" />
+                    <div className="absolute bottom-5 left-5 flex items-center gap-2 rounded-full bg-white/85 px-3.5 py-1.5 text-[11px] uppercase tracking-[0.16em] text-ink backdrop-blur-sm">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                      {s.caption}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
               <div className="mt-6 flex items-center justify-center gap-1.5">
                 {stickyBlocks.map((_, i) => (
                   <div
@@ -567,19 +408,21 @@ function StickyPhoneSection() {
               </div>
             </div>
 
-            {/* Right — decorative whitespace */}
-            <div className="hidden lg:block w-[22%]" aria-hidden />
+            {/* Right copy slot */}
+            <div className="hidden md:flex w-[30%] justify-end text-right">
+              {!onLeft ? <div className="[&_.mb-4]:justify-end">{Copy}</div> : null}
+            </div>
           </div>
 
-          {/* Mobile story (below phone) */}
+          {/* Mobile story (below visual) */}
           <div className="md:hidden absolute inset-x-0 bottom-10 px-6">
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={active}
-                initial={{ opacity: 0, y: 24 }}
+                initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.55, ease }}
+                exit={{ opacity: 0, y: -14 }}
+                transition={{ duration: 0.55, ease: EASE }}
                 className="text-center"
               >
                 <h3 className="font-display text-3xl leading-[1.08] text-ink">{b.title}</h3>
@@ -592,6 +435,7 @@ function StickyPhoneSection() {
     </section>
   );
 }
+
 
 
 function InView({ children, delay = 0 }: { children: ReactNode; delay?: number }) {
