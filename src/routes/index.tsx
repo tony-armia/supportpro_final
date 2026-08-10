@@ -8,6 +8,10 @@ import ctaImg from "@/assets/cta.jpg";
 import sliderEngineer from "@/assets/slider-engineer.jpg";
 import sliderLandscape from "@/assets/slider-landscape.jpg";
 import sliderDatacenter from "@/assets/slider-datacenter.jpg";
+import feature1 from "@/assets/feature-1.jpg";
+import feature2 from "@/assets/feature-2.jpg";
+import feature3 from "@/assets/feature-3.jpg";
+import feature4 from "@/assets/feature-4.jpg";
 
 export const Route = createFileRoute("/")({
   component: Index,
