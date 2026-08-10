@@ -366,60 +366,71 @@ function StickyPhoneSection() {
       {/* Scroll runway: one viewport per feature */}
       <div style={{ height: `${stickyBlocks.length * 100}vh` }}>
         <div className="sticky top-0 h-screen overflow-hidden">
-          <div className="mx-auto flex h-full max-w-6xl items-center gap-8 px-6">
-            {/* Left copy slot */}
-            <div className="hidden md:flex w-[30%] justify-start">{onLeft ? Copy : null}</div>
-
-            {/* Center — sticky, stable visual */}
-            <div className="flex-1 flex flex-col items-center justify-center">
-              <div className="relative w-full max-w-[560px] aspect-[4/3] overflow-hidden rounded-[28px] bg-ink/5 shadow-[0_40px_90px_-30px_rgba(0,0,0,0.35)] ring-1 ring-ink/10">
-                {stickyBlocks.map((s, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute inset-0"
-                    initial={false}
-                    animate={{
-                      opacity: active === i ? 1 : 0,
-                      scale: active === i ? 1 : 0.97,
-                      y: active === i ? 0 : 14,
-                    }}
-                    transition={{ duration: 0.65, ease: EASE, delay: active === i ? 0.08 : 0 }}
-                  >
-                    <img
-                      src={s.img}
-                      alt={s.alt}
-                      width={1280}
-                      height={960}
-                      loading="lazy"
-                      className="h-full w-full object-cover"
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/5 to-transparent" />
-                    <div className="absolute bottom-5 left-5 flex items-center gap-2 rounded-full bg-white/85 px-3.5 py-1.5 text-[11px] uppercase tracking-[0.16em] text-ink backdrop-blur-sm">
-                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                      {s.caption}
-                    </div>
-                  </motion.div>
-                ))}
+          <div className="mx-auto flex h-full max-w-[1400px] items-center px-6 lg:px-10">
+            <motion.div
+              layout
+              transition={{ duration: 0.7, ease: EASE }}
+              className={`hidden md:flex w-full items-center gap-10 lg:gap-16 ${onLeft ? "flex-row" : "flex-row-reverse"}`}
+            >
+              {/* Copy */}
+              <div className={`w-[34%] shrink-0 flex ${onLeft ? "justify-start" : "justify-end text-right"}`}>
+                <div className={onLeft ? "" : "[&_.mb-4]:justify-end"}>{Copy}</div>
               </div>
 
-              <div className="mt-6 flex items-center justify-center gap-1.5">
-                {stickyBlocks.map((_, i) => (
-                  <div
-                    key={i}
-                    className={`h-1 rounded-full transition-all duration-500 ${active === i ? "w-6 bg-ink" : "w-1 bg-ink/25"}`}
-                  />
-                ))}
+              {/* Large visual — swaps side, stays vertically pinned */}
+              <div className="flex-1">
+                <motion.div
+                  layout
+                  transition={{ duration: 0.7, ease: EASE }}
+                  className="relative w-full aspect-[16/11] max-h-[76vh] overflow-hidden rounded-[32px] bg-ink/5 shadow-[0_50px_110px_-35px_rgba(0,0,0,0.4)] ring-1 ring-ink/10"
+                >
+                  {stickyBlocks.map((s, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute inset-0"
+                      initial={false}
+                      animate={{
+                        opacity: active === i ? 1 : 0,
+                        scale: active === i ? 1 : 1.04,
+                      }}
+                      transition={{ duration: 0.75, ease: EASE, delay: active === i ? 0.06 : 0 }}
+                    >
+                      <img
+                        src={s.img}
+                        alt={s.alt}
+                        width={1600}
+                        height={1100}
+                        loading="lazy"
+                        className="h-full w-full object-cover"
+                      />
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/5 to-transparent" />
+                      <div className="absolute bottom-6 left-6 flex items-center gap-2 rounded-full bg-white/85 px-3.5 py-1.5 text-[11px] uppercase tracking-[0.16em] text-ink backdrop-blur-sm">
+                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                        {s.caption}
+                      </div>
+                    </motion.div>
+                  ))}
+                </motion.div>
               </div>
-            </div>
-
-            {/* Right copy slot */}
-            <div className="hidden md:flex w-[30%] justify-end text-right">
-              {!onLeft ? <div className="[&_.mb-4]:justify-end">{Copy}</div> : null}
-            </div>
+            </motion.div>
           </div>
 
           {/* Mobile story (below visual) */}
-          <div className="md:hidden absolute inset-x-0 bottom-10 px-6">
+          <div className="md:hidden absolute inset-x-0 top-0 h-full px-6 py-16 flex flex-col justify-center gap-8">
+            <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[24px] bg-ink/5 ring-1 ring-ink/10">
+              {stickyBlocks.map((s, i) => (
+                <motion.img
+                  key={i}
+                  src={s.img}
+                  alt={s.alt}
+                  loading="lazy"
+                  className="absolute inset-0 h-full w-full object-cover"
+                  initial={false}
+                  animate={{ opacity: active === i ? 1 : 0 }}
+                  transition={{ duration: 0.6, ease: EASE }}
+                />
+              ))}
+            </div>
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
                 key={active}
@@ -434,11 +445,22 @@ function StickyPhoneSection() {
               </motion.div>
             </AnimatePresence>
           </div>
+
+          {/* Carousel indicator — centered near bottom of section */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full bg-white/70 px-3 py-2 backdrop-blur-sm ring-1 ring-ink/10">
+            {stickyBlocks.map((_, i) => (
+              <div
+                key={i}
+                className={`h-1 rounded-full transition-all duration-500 ${active === i ? "w-7 bg-ink" : "w-1.5 bg-ink/25"}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
 
 
 
