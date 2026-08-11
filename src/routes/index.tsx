@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useRef, type ReactNode } from "react";
-import { motion, useScroll, useTransform, AnimatePresence, useInView, useMotionValueEvent } from "motion/react";
+import { motion, useScroll, useTransform, AnimatePresence, useInView, useMotionValueEvent, useSpring } from "motion/react";
 import { Plus, Lock, ShieldCheck, FileCheck2, Activity } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 import talkImg from "@/assets/talk.jpg";
@@ -12,7 +12,16 @@ import feature1 from "@/assets/feature-1.jpg";
 import feature2 from "@/assets/feature-2.jpg";
 import feature3 from "@/assets/feature-3.jpg";
 import feature4 from "@/assets/feature-4.jpg";
-import { Credentials, Pillars, Platforms, Stats, Experts, ContactForm } from "@/components/site-sections";
+import logoWhite from "@/assets/SupportPRO-logo (1) 1.svg";
+import logoBlack from "@/assets/SupportPRO-logo black.svg";
+import img247Support from "@/assets/247 expert support, always on..png";
+import imgCloudServer from "@/assets/Cloud and server management, mastered..png";
+import imgWhiteLabel from "@/assets/Gemini_Generated_Image_5fco595fco595fco.png";
+import imgNocDevops from "@/assets/NOC and DevOps engineered for scale..png";
+import imgJustOpenTicket from "@/assets/Just open a ticket.png";
+import imgCalmIncident from "@/assets/Calm through every incident.png";
+import imgInfraExpert from "@/assets/Infrastructure in expert hands.png";
+import { Credentials, Platforms, Stats, Experts, ContactForm } from "@/components/site-sections";
 
 
 export const Route = createFileRoute("/")({
@@ -73,18 +82,34 @@ function Word({ progress, range, children }: { progress: any; range: [number, nu
 
 function Nav() {
   const { scrollY } = useScroll();
+  const [isScrolledPastHero, setIsScrolledPastHero] = useState(false);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setIsScrolledPastHero(latest > 550);
+  });
+
   const bg = useTransform(scrollY, [0, 200], ["rgba(255,255,255,0.15)", "rgba(20,20,20,0.55)"]);
   return (
     <nav className="fixed top-4 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-10">
       <motion.a
         href="#"
-        className="font-display text-2xl text-white"
-        style={{ mixBlendMode: "difference" }}
+        className="flex items-center gap-2"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
-        supportpro
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={isScrolledPastHero ? "black-logo" : "white-logo"}
+            src={isScrolledPastHero ? logoBlack : logoWhite}
+            alt="SupportPRO Logo"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className="h-9 md:h-10 w-auto object-contain"
+          />
+        </AnimatePresence>
       </motion.a>
       <motion.div
         style={{ backgroundColor: bg }}
@@ -170,15 +195,15 @@ function Hero() {
 const serviceGroups: Array<{ heading: string; items: string[] }> = [
   {
     heading: "Support",
-    items: ["24/7 Technical Support", "White-label Support", "Helpdesk Services", "Hosting Support", "MSP Support"],
+    items: ["24/7 Technical Support", "White-label Support", "Helpdesk Services", "End-user Tech Support", "Hosting Support", "MSP Support"],
   },
   {
     heading: "Infrastructure",
-    items: ["Server Management", "Linux Administration", "Windows Administration", "Infrastructure Monitoring", "NOC Services"],
+    items: ["Server Management", "Linux Administration", "Windows Administration", "Infrastructure Monitoring", "Data Centre Operations", "NOC Services"],
   },
   {
     heading: "Cloud & DevOps",
-    items: ["AWS", "Microsoft Azure", "Google Cloud Platform", "DevOps", "Infrastructure Optimization"],
+    items: ["Cloud Infrastructure Management", "AWS", "Microsoft Azure", "Google Cloud Platform", "DevOps", "Infrastructure Optimization"],
   },
   {
     heading: "Enterprise",
@@ -288,31 +313,31 @@ function Services() {
 
 const stickyBlocks = [
   {
-    title: "24/7 expert support, always on.",
-    body: "Our global engineering teams monitor, respond, and resolve around the clock — so your infrastructure and customers never wait.",
-    img: feature1,
-    alt: "Support engineer with a headset monitoring live tickets in a network operations centre",
+    title: "24/7 customer support — always on.",
+    body: "Our engineers are at your service 24 hours a day, seven days a week, 365 days a year. We listen to every server problem, address every query, and stay with it until you are completely satisfied.",
+    img: img247Support,
+    alt: "Support engineer monitoring live tickets and analytics dashboards in a bright modern office",
     caption: "Live incident response",
   },
   {
-    title: "Cloud and server management, mastered.",
-    body: "From Linux and Windows administration to AWS, Azure, and Google Cloud, we run production environments with precision and discipline.",
-    img: feature2,
-    alt: "Engineers reviewing racks inside a modern enterprise data centre",
-    caption: "Managed infrastructure",
+    title: "Transparent technical support.",
+    body: "White-labelled support means your clients never know somebody outside your company handles their queries. As far as they are concerned, every response comes from your organisation. Our techs become your techs.",
+    img: imgWhiteLabel,
+    alt: "Two professionals collaborating on a laptop with analytics monitors in the background",
+    caption: "Helpdesk under your brand",
   },
   {
-    title: "White-label support under your brand.",
-    body: "Extend your team without expanding your headcount. Our engineers deliver seamless helpdesk and MSP support in your voice, your tools, your brand.",
-    img: feature3,
-    alt: "Two helpdesk engineers collaborating on a customer support case",
-    caption: "Helpdesk under your brand",
+    title: "Proactive server management.",
+    body: "We look after the most fragile part of your operation — your infrastructure. Rather than waiting for something to break, we take preventive measures to keep environments secure, patched, and stable.",
+    img: imgCloudServer,
+    alt: "Engineer with tablet managing server racks in a modern data centre facility",
+    caption: "Managed infrastructure",
   },
   {
     title: "NOC and DevOps engineered for scale.",
     body: "Continuous monitoring, automation, and incident response designed to keep complex infrastructure stable, secure, and ready to grow.",
-    img: feature4,
-    alt: "Network operations command centre with global monitoring dashboards at dawn",
+    img: imgNocDevops,
+    alt: "Engineers at multi-monitor NOC workstations with cloud architecture and DevOps dashboards",
     caption: "24/7 NOC monitoring",
   },
 ] as const;
@@ -361,7 +386,7 @@ function StickyPhoneSection() {
   );
 
   return (
-    <section ref={sectionRef} id="features" className="relative bg-cream rounded-t-[40px] -mt-10">
+    <section ref={sectionRef} id="features" className="relative bg-cream rounded-t-[40px] -mt-10 pb-20 md:pb-32">
       {/* Scroll runway: one viewport per feature */}
       <div style={{ height: `${stickyBlocks.length * 100}vh` }}>
         <div className="sticky top-0 h-screen overflow-hidden">
@@ -477,7 +502,7 @@ function InView({ children, delay = 0 }: { children: ReactNode; delay?: number }
 
 const sliderCards = [
   {
-    img: talkImg,
+    img: imgJustOpenTicket,
     title: "Just open a ticket",
     body: "Reach out any hour of the day and a certified engineer picks it up. We diagnose, act, and keep you informed until the incident is fully resolved.",
     overlay: "light",
@@ -489,13 +514,13 @@ const sliderCards = [
     overlay: "light",
   },
   {
-    img: sliderLandscape,
+    img: imgCalmIncident,
     title: "Calm through every incident",
     body: "Structured response tiers, clear communication, and disciplined execution turn even the most complex outages into a controlled, measured recovery.",
     overlay: "light",
   },
   {
-    img: sliderDatacenter,
+    img: imgInfraExpert,
     title: "Infrastructure in expert hands",
     body: "From single servers to multi-cloud estates across AWS, Azure, and Google Cloud — engineered, monitored, and maintained with production-grade discipline.",
     overlay: "light",
@@ -503,43 +528,50 @@ const sliderCards = [
 ] as const;
 
 function SliderSection() {
+  const targetRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: targetRef, offset: ["start start", "end end"] });
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 120, damping: 25, mass: 1 });
+  const x = useTransform(smoothProgress, [0, 1], ["calc(0% + 0vw)", "calc(-100% + 100vw)"]);
+
   return (
-    <section className="bg-cream pt-32 pb-32 overflow-hidden">
-      <div className="mx-auto max-w-6xl px-6 mb-12">
-        <InView>
-          <h3 className="font-display text-5xl md:text-6xl text-ink max-w-2xl leading-[1.05]">
-            Built for the moments that matter.
-          </h3>
-        </InView>
-      </div>
-      <div
-        className="flex gap-6 overflow-x-auto snap-x snap-mandatory px-6 md:px-16 pb-6 scrollbar-none"
-        style={{ scrollbarWidth: "none" }}
-      >
-        {sliderCards.map((c, i) => (
-          <motion.article
-            key={i}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.8, delay: (i % 3) * 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="snap-start shrink-0 relative rounded-[32px] overflow-hidden shadow-sm border border-border/40 w-[85vw] md:w-[720px] h-[520px] md:h-[600px] group"
-          >
-            <img
-              src={c.img}
-              alt=""
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1400ms] group-hover:scale-105"
-              width={1200}
-              height={900}
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/10 to-black/40" />
-            <div className="relative z-10 p-10 md:p-12 max-w-lg text-white">
-              <h4 className="font-display text-4xl md:text-5xl leading-[1.05]">{c.title}</h4>
-              <p className="mt-4 text-[15px] leading-relaxed text-white/85">{c.body}</p>
-            </div>
-          </motion.article>
-        ))}
+    <section ref={targetRef} className="relative h-[300vh] bg-cream pb-32 md:pb-48">
+      <div className="sticky top-0 h-screen flex flex-col pt-16 md:pt-20">
+        <div className="mx-auto w-full max-w-[1400px] px-6 lg:px-10 mb-6 md:mb-8">
+          <InView>
+            <h3 className="font-display text-5xl md:text-6xl text-ink max-w-2xl leading-[1.05]">
+              Built for the moments that matter.
+            </h3>
+          </InView>
+        </div>
+        <motion.div
+          style={{ x }}
+          className="flex gap-6 w-max pl-[max(1.5rem,calc((100vw-1400px)/2+1.5rem))] lg:pl-[max(2.5rem,calc((100vw-1400px)/2+2.5rem))] pr-6 lg:pr-10"
+        >
+          {sliderCards.map((c, i) => (
+            <motion.article
+              key={i}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.8, delay: (i % 3) * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="shrink-0 relative rounded-[32px] overflow-hidden shadow-sm border border-border/40 w-[85vw] md:w-auto h-[65vh] md:h-[70vh] max-h-[600px] aspect-square md:aspect-[6/5] group"
+            >
+              <img
+                src={c.img}
+                alt=""
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-[1400ms] group-hover:scale-105"
+                width={1200}
+                height={900}
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              <div className="relative z-10 h-full p-10 md:p-12 max-w-lg text-white flex flex-col justify-end">
+                <h4 className="font-display text-4xl md:text-5xl leading-[1.05]">{c.title}</h4>
+                <p className="mt-4 text-[15px] leading-relaxed text-white/85">{c.body}</p>
+              </div>
+            </motion.article>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
@@ -559,7 +591,7 @@ function Privacy() {
   const lockRotate = useTransform(scrollYProgress, [0, 1], [-10, 10]);
 
   return (
-    <section ref={ref} className="bg-cream pb-32">
+    <section ref={ref} className="bg-cream pt-24 md:pt-32 pb-32">
       <div className="mx-auto max-w-6xl px-6">
         <InView>
           <div className="group/card relative overflow-hidden rounded-[32px] bg-gradient-to-br from-[#0a0a0a] via-[#141410] to-[#1a1a18] p-10 md:p-16">
@@ -779,7 +811,9 @@ function SiteFooter() {
     <footer className="bg-ink text-white/80 px-6 md:px-10 py-16">
       <div className="mx-auto max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-8 text-xs">
         <div>
-          <div className="font-display text-3xl text-white">supportpro</div>
+          <a href="#" className="inline-block">
+            <img src={logoWhite} alt="SupportPRO Logo" className="h-10 md:h-12 w-auto object-contain" />
+          </a>
           <p className="mt-3 text-white/50 leading-relaxed max-w-[220px]">Enterprise infrastructure support, 24/7/365.</p>
         </div>
         <div>
@@ -808,12 +842,11 @@ function Index() {
       <Nav />
       <Hero />
       <Credentials />
-      <Pillars />
       <StickyPhoneSection />
       <Services />
-      <Platforms />
       <SliderSection />
       <Privacy />
+      <Platforms />
       <Experts />
       <Stats />
       <Testimonials />
