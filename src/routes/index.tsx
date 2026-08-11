@@ -12,6 +12,8 @@ import feature1 from "@/assets/feature-1.jpg";
 import feature2 from "@/assets/feature-2.jpg";
 import feature3 from "@/assets/feature-3.jpg";
 import feature4 from "@/assets/feature-4.jpg";
+import { Credentials, Pillars, Platforms, Stats, Experts, ContactForm } from "@/components/site-sections";
+
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -805,15 +807,22 @@ function Index() {
     <main className="bg-cream overflow-x-clip">
       <Nav />
       <Hero />
+      <Credentials />
+      <Pillars />
       <StickyPhoneSection />
       <Services />
+      <Platforms />
       <SliderSection />
       <Privacy />
+      <Experts />
+      <Stats />
       <Testimonials />
       <FAQ />
+      <ContactForm />
       <CTA />
       <SiteFooter />
     </main>
+
   );
 }
 
