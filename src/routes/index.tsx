@@ -95,7 +95,7 @@ function Nav() {
       >
         <a href="#services" className="px-4 py-1.5 rounded-full hover:bg-white/10 transition">Services</a>
         <a href="#faq" className="px-4 py-1.5 rounded-full hover:bg-white/10 transition">FAQ</a>
-        <a href="#contact" className="px-4 py-1.5 rounded-full bg-white text-ink hover:bg-white/90 transition">Book a Call</a>
+        <a href="#contact-form" className="px-4 py-1.5 rounded-full bg-white text-ink hover:bg-white/90 transition">Book a Call</a>
       </motion.div>
     </nav>
   );
@@ -147,7 +147,7 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="mt-8 flex flex-wrap items-center justify-center gap-3"
         >
-          <a href="#contact" className="rounded-full bg-white text-ink px-6 py-3 text-sm font-medium hover:bg-white/90 transition">
+          <a href="#contact-form" className="rounded-full bg-white text-ink px-6 py-3 text-sm font-medium hover:bg-white/90 transition">
             Book a Consultation
           </a>
           <a href="#services" className="rounded-full border border-white/30 backdrop-blur-md bg-white/10 text-white px-6 py-3 text-sm font-medium hover:bg-white/20 transition">
@@ -351,7 +351,7 @@ function StickyPhoneSection() {
         <h3 className="font-display text-4xl lg:text-5xl leading-[1.05] text-ink">{b.title}</h3>
         <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">{b.body}</p>
         <a
-          href="#contact"
+          href="#contact-form"
           className="mt-8 inline-flex items-center gap-2 text-sm text-ink border-b border-ink/25 pb-1 transition-colors hover:border-ink"
         >
           Talk to an engineer
@@ -761,10 +761,10 @@ function CTA() {
             className="mt-8 flex flex-wrap items-center justify-center gap-3"
             id="contact"
           >
-            <a href="#contact" className="rounded-full bg-white text-ink px-6 py-3 text-sm font-medium hover:bg-white/90 transition">
+            <a href="#contact-form" className="rounded-full bg-white text-ink px-6 py-3 text-sm font-medium hover:bg-white/90 transition">
               Book a Consultation
             </a>
-            <a href="#contact" className="rounded-full border border-white/30 backdrop-blur-md bg-white/10 text-white px-6 py-3 text-sm font-medium hover:bg-white/20 transition">
+            <a href="#contact-form" className="rounded-full border border-white/30 backdrop-blur-md bg-white/10 text-white px-6 py-3 text-sm font-medium hover:bg-white/20 transition">
               Contact Our Team
             </a>
           </motion.div>
