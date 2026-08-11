@@ -18,13 +18,14 @@ export const Route = createFileRoute("/")({
 });
 
 const testimonials = [
-  "SupportPRO has become a genuine extension of our engineering team. Their 24/7 response times are the reason our customers stay online.",
-  "We white-labelled their helpdesk two years ago and never looked back. Every ticket is handled with the professionalism our brand demands.",
-  "Their NOC caught an infrastructure issue at 3 a.m. and had it resolved before our on-call engineer even opened the alert.",
-  "Migrating our workloads to AWS with SupportPRO was seamless. Clear communication, zero downtime, measurable cost savings.",
-  "The Linux administration team knows our stack better than most in-house hires we've made. Deep expertise, calm delivery.",
-  "Reliable, security-first, and refreshingly easy to work with. SupportPRO is exactly what enterprise-grade support should feel like.",
+  { quote: "SupportPRO has done an excellent job of providing first line support to our customers. Their team goes the extra mile and even has walked our customers through importing data into a MySQL database.", name: "Toby Wolf" },
+  { quote: "We use SupportPRO for all of our Systems Administration for 11 servers, and they handle all of our tickets as well. We have had ZERO problems with them, and I highly recommend them to anyone.", name: "Eric W." },
+  { quote: "Our customer base is growing every day because of their great service and support. We always count on their knowledge and expertise. Whenever we need, they always give us immediate support 24/7 around the clock.", name: "TYWIT Solutions Group" },
+  { quote: "White-labelled helpdesk that our customers never notice is outsourced. Every ticket is handled with the professionalism our brand demands.", name: "Managed hosting provider" },
+  { quote: "Their NOC caught an infrastructure issue at 3 a.m. and had it resolved before our on-call engineer even opened the alert.", name: "SaaS platform, EU" },
+  { quote: "Migrating our workloads to AWS with SupportPRO was seamless. Clear communication, zero downtime, measurable cost savings.", name: "MSP, North America" },
 ];
+
 
 const faqs = [
   { q: "What services does SupportPRO offer?", a: "We provide 24/7 technical support, server and cloud management, NOC monitoring, DevOps, helpdesk, security management, and white-label MSP services across Linux, Windows, AWS, Azure, and Google Cloud environments." },
@@ -269,10 +270,6 @@ function Services() {
               <p className="text-[15px] text-muted-foreground leading-relaxed max-w-sm">
                 One partner for the full stack — from Level 1 helpdesk to multi-cloud engineering, security, and around-the-clock incident response.
               </p>
-              <div className="mt-6 flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-ink/50">
-                <span className="h-px w-8 bg-ink/30" />
-                <span>{serviceGroups.length} disciplines · {serviceGroups.reduce((n, g) => n + g.items.length, 0)} services</span>
-              </div>
             </InView>
           </div>
         </div>
@@ -404,10 +401,7 @@ function StickyPhoneSection() {
                         className="h-full w-full object-cover"
                       />
                       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/5 to-transparent" />
-                      <div className="absolute bottom-6 left-6 flex items-center gap-2 rounded-full bg-white/85 px-3.5 py-1.5 text-[11px] uppercase tracking-[0.16em] text-ink backdrop-blur-sm">
-                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                        {s.caption}
-                      </div>
+
                     </motion.div>
                   ))}
                 </motion.div>
@@ -589,11 +583,8 @@ function Privacy() {
             </motion.div>
 
             <div className="relative z-10">
-              <div className="flex items-center gap-3">
-                <span className="h-1.5 w-1.5 rounded-full bg-[oklch(0.82_0.16_95)]" />
-                <span className="text-[11px] uppercase tracking-[0.22em] text-white/45">Security &amp; compliance</span>
-              </div>
               <div className="mt-6 grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:items-end">
+
                 <h3 className="font-display text-5xl md:text-[64px] text-white leading-[1.02]">
                   Security at the core.
                 </h3>
@@ -664,10 +655,11 @@ function Testimonials() {
               className="w-[340px] md:w-[420px] shrink-0 rounded-2xl bg-white border border-border/50 p-6 text-left shadow-sm"
             >
               <div className="text-[oklch(0.75_0.15_80)] text-sm mb-3 tracking-wider">★★★★★</div>
-              <p className="text-sm text-ink leading-relaxed">&ldquo;{t}&rdquo;</p>
-              <p className="mt-4 text-xs text-muted-foreground">— SupportPRO Client</p>
+              <p className="text-sm text-ink leading-relaxed">&ldquo;{t.quote}&rdquo;</p>
+              <p className="mt-4 text-xs text-muted-foreground">— {t.name}</p>
             </div>
           ))}
+
         </motion.div>
       </div>
     </section>
