@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useRef, type ReactNode } from "react";
-import { motion, useScroll, useTransform, AnimatePresence, useInView, useMotionValueEvent, useSpring } from "motion/react";
-import { Plus, Lock, ShieldCheck, FileCheck2, Activity } from "lucide-react";
+import { motion, useScroll, useTransform, AnimatePresence, useInView, useMotionValueEvent, useSpring, useMotionValue, useMotionTemplate } from "motion/react";
+import { Plus, Lock, ShieldCheck, FileCheck2, Activity, ChevronDown, ArrowRight, Minus, BookOpen } from "lucide-react";
+import { HoverOrangeSpan } from "@/components/hover-orange-span";
 import heroImg from "@/assets/hero.jpg";
 import talkImg from "@/assets/talk.jpg";
 import ctaImg from "@/assets/cta.jpg";
@@ -21,7 +22,7 @@ import imgNocDevops from "@/assets/NOC and DevOps engineered for scale..png";
 import imgJustOpenTicket from "@/assets/Just open a ticket.png";
 import imgCalmIncident from "@/assets/Calm through every incident.png";
 import imgInfraExpert from "@/assets/Infrastructure in expert hands.png";
-import { Credentials, Platforms, Stats, Experts, ContactForm } from "@/components/site-sections";
+import { Credentials, Platforms, Experts, ContactForm } from "@/components/site-sections";
 
 
 export const Route = createFileRoute("/")({
@@ -90,7 +91,7 @@ function Nav() {
 
   const bg = useTransform(scrollY, [0, 200], ["rgba(255,255,255,0.15)", "rgba(20,20,20,0.55)"]);
   return (
-    <nav className="fixed top-4 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-10">
+    <nav className="fixed top-4 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-[100px]">
       <motion.a
         href="#"
         className="flex items-center gap-2"
@@ -156,7 +157,7 @@ function Hero() {
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] max-w-4xl drop-shadow-[0_2px_20px_rgba(0,0,0,0.35)]"
         >
-          Enterprise infrastructure<br />support that never sleeps.
+          Enterprise infrastructure<br />support that <HoverOrangeSpan>never sleeps.</HoverOrangeSpan>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -288,7 +289,7 @@ function Services() {
           <div className="col-span-12 md:col-span-8">
             <InView>
               <h3 className="font-display text-5xl md:text-7xl text-ink leading-[1] tracking-tight">
-                Every service<br />your infrastructure<br /><em className="italic font-normal text-ink/70">depends on.</em>
+                Every service<br />your infrastructure<br /><em className="italic font-normal text-ink/70"><HoverOrangeSpan>depends on.</HoverOrangeSpan></em>
               </h3>
             </InView>
           </div>
@@ -586,15 +587,41 @@ const securityPillars = [
 
 function Privacy() {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const glowY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
-  const lockRotate = useTransform(scrollYProgress, [0, 1], [-10, 10]);
+
+  // Mouse tracking for dynamic spotlight glow
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Smooth the mouse movement
+  const springX = useSpring(mouseX, { stiffness: 70, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 70, damping: 20 });
+
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    const { currentTarget, clientX, clientY } = e;
+    const { left, top } = currentTarget.getBoundingClientRect();
+
+    // Set raw mouse coordinates relative to the card
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
+
+  // Create a radial gradient string that follows the mouse
+  const spotlightBackground = useMotionTemplate`radial-gradient(1000px circle at ${springX}px ${springY}px, oklch(0.5 0.15 95 / 0.4), transparent 60%)`;
 
   return (
     <section ref={ref} className="bg-cream pt-24 md:pt-32 pb-32">
       <div className="mx-auto max-w-6xl px-6">
         <InView>
-          <div className="group/card relative overflow-hidden rounded-[32px] bg-gradient-to-br from-[#0a0a0a] via-[#141410] to-[#1a1a18] p-10 md:p-16">
+          <div
+            onMouseMove={handleMouseMove}
+            className="group/card relative overflow-hidden rounded-[32px] bg-gradient-to-br from-[#0a0a0a] via-[#141410] to-[#1a1a18] p-10 md:p-16"
+          >
+            {/* Mouse Spotlight */}
+            <motion.div
+              style={{ background: spotlightBackground }}
+              className="pointer-events-none absolute inset-0 z-0 opacity-0 transition-opacity duration-700 group-hover/card:opacity-100"
+            />
+
             {/* grid texture */}
             <div
               className="absolute inset-0 opacity-[0.14]"
@@ -606,23 +633,42 @@ function Privacy() {
                 WebkitMaskImage: "radial-gradient(ellipse at 30% 0%, black, transparent 75%)",
               }}
             />
+            {/* Animated ambient glows */}
             <motion.div
-              style={{ y: glowY }}
-              className="pointer-events-none absolute -right-24 top-0 h-[520px] w-[520px] rounded-full opacity-60 blur-3xl"
-            >
-              <div className="h-full w-full" style={{ background: "radial-gradient(circle, oklch(0.45 0.14 100 / 0.55), transparent 65%)" }} />
-            </motion.div>
-            <motion.div style={{ rotate: lockRotate }} className="pointer-events-none absolute right-6 md:right-14 top-10 md:top-16">
-              <Lock className="text-white/[0.06]" size={220} strokeWidth={1} />
-            </motion.div>
-
+              animate={{
+                x: [0, 40, -20, 0],
+                y: [0, -40, 20, 0],
+                scale: [1, 1.15, 0.9, 1],
+              }}
+              transition={{
+                duration: 18,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="pointer-events-none absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full opacity-40 blur-[100px]"
+              style={{ background: "radial-gradient(circle, oklch(0.45 0.14 100), transparent 70%)" }}
+            />
+            <motion.div
+              animate={{
+                x: [0, -50, 30, 0],
+                y: [0, 50, -30, 0],
+                scale: [1, 1.2, 0.85, 1],
+              }}
+              transition={{
+                duration: 22,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="pointer-events-none absolute left-10 -bottom-20 h-[500px] w-[500px] rounded-full opacity-30 blur-[100px]"
+              style={{ background: "radial-gradient(circle, oklch(0.35 0.2 90), transparent 70%)" }}
+            />
             <div className="relative z-10">
-              <div className="mt-6 grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:items-end">
+              <div className="mt-6 grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:items-start">
 
                 <h3 className="font-display text-5xl md:text-[64px] text-white leading-[1.02]">
                   Security at the core.
                 </h3>
-                <p className="text-[15px] text-white/55 leading-relaxed max-w-md md:pb-2">
+                <p className="text-[15px] text-white/55 leading-relaxed max-w-md mt-2">
                   Every engagement is protected by strict access controls, hardened workflows, audited procedures, and continuous security management — because trust is the foundation of managed services.
                 </p>
               </div>
@@ -645,7 +691,7 @@ function Privacy() {
                 ))}
               </div>
 
-              <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 text-[12px] uppercase tracking-[0.18em] text-white/35">
+              <div className="mt-10 flex flex-wrap justify-center items-center gap-x-8 gap-y-3 text-[12px] uppercase tracking-[0.18em] text-white/35">
                 <span>Signed NDAs</span>
                 <span className="h-3 w-px bg-white/15" />
                 <span>Role-based access</span>
@@ -663,85 +709,212 @@ function Privacy() {
 }
 
 
-function Testimonials() {
-  const loop = [...testimonials, ...testimonials];
+function TestimonialCard({
+  quote,
+  name,
+  index,
+  total,
+  progress,
+}: {
+  quote: string;
+  name: string;
+  index: number;
+  total: number;
+  progress: any;
+}) {
+  // Each card fans out from center. Middle card stays straight, outer cards rotate.
+  const mid = (total - 1) / 2;
+  const offset = index - mid;
+
+  // At progress=0: stacked.
+  // At progress=0.5: fanned out.
+  // At progress=1: straight horizontal row.
+  const finalRotate = offset * 14;       // degrees each card fans out
+  const finalX = offset * 120;           // px horizontal spread
+  const finalY = Math.abs(offset) * 18;  // slight arc
+
+  const rotate = useTransform(progress, [0, 0.5, 1], [0, finalRotate, 0]);
+  const x = useTransform(progress, [0, 0.5, 1], [0, finalX, offset * 270]);
+  const y = useTransform(progress, [0, 0.5, 1], [0, finalY, 0]);
+  const scale = useTransform(progress, [0, 0.5, 1], [0.92, index === Math.floor(mid) ? 1 : 0.93, 1]);
+  const opacity = useTransform(progress, [0, 0.15], [0, 1]);
+
+  // Determine z-index: center card on top
+  const zIndex = total - Math.abs(index - Math.floor(mid));
+
   return (
-    <section className="bg-cream pb-32 overflow-hidden">
-      <div className="mx-auto max-w-6xl px-6 text-center">
-        <InView>
-          <h3 className="font-display text-5xl md:text-6xl text-ink">Trusted by teams worldwide.</h3>
+    <motion.div
+      style={{ rotate, x, y, scale, opacity, zIndex }}
+      className="absolute w-[200px] md:w-[260px] h-[300px] md:h-[340px] origin-bottom bg-[#f2ede8] rounded-2xl p-6 pt-8 pb-10 flex flex-col gap-6 select-none border border-ink/5"
+    >
+      {/* Quote text */}
+      <p className="text-[13px] leading-relaxed text-ink/80 font-medium">
+        &ldquo;{quote}&rdquo;
+      </p>
+      {/* Name */}
+      <div className="mt-auto">
+        <div className="flex items-center gap-2">
+          <div className="w-7 h-7 rounded-full bg-ink/10 flex items-center justify-center text-[10px] font-bold text-ink/60 shrink-0">
+            {name.charAt(0)}
+          </div>
+          <div>
+            <p className="text-[11px] font-semibold text-ink leading-tight">{name}</p>
+            <p className="text-[10px] text-ink/50 mt-0.5">SupportPRO Client</p>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+function Testimonials() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Scroll progress over the entire sticky section
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  // Fast, tight spring: smooths out mouse wheel steps without feeling laggy
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 300,
+    damping: 80,
+    restDelta: 0.01,
+  });
+
+  const cards = testimonials.slice(0, 5);
+  // Derived transforms — must be called at top level, never inline in JSX
+  const hintOpacity = useTransform(smoothProgress, [0, 0.2], [1, 0]);
+
+  return (
+    <section
+      id="testimonials"
+      ref={containerRef}
+      className="relative bg-cream"
+      style={{ height: "140vh" }}
+    >
+      {/* Sticky viewport */}
+      <div className="sticky top-0 h-screen flex flex-col items-center justify-center overflow-hidden">
+        {/* Heading — stays fixed while cards animate */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center mb-8 md:mb-12 px-6 select-none"
+        >
+          <h3 className="font-display text-5xl md:text-6xl text-ink">Trusted by <HoverOrangeSpan>teams worldwide.</HoverOrangeSpan></h3>
           <p className="mt-4 text-sm text-muted-foreground max-w-md mx-auto">
             Hosting providers, MSPs, and enterprises rely on SupportPRO to keep their infrastructure and customers running.
           </p>
-        </InView>
-      </div>
-      <div className="mt-16 relative">
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-cream to-transparent z-10" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-cream to-transparent z-10" />
-        <motion.div
-          className="flex gap-5 w-max"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 60, ease: "linear", repeat: Infinity }}
-        >
-          {loop.map((t, i) => (
-            <div
-              key={i}
-              className="w-[340px] md:w-[420px] shrink-0 rounded-2xl bg-white border border-border/50 p-6 text-left shadow-sm"
-            >
-              <div className="text-[oklch(0.75_0.15_80)] text-sm mb-3 tracking-wider">★★★★★</div>
-              <p className="text-sm text-ink leading-relaxed">&ldquo;{t.quote}&rdquo;</p>
-              <p className="mt-4 text-xs text-muted-foreground">— {t.name}</p>
-            </div>
-          ))}
-
         </motion.div>
+
+        {/* Fan deck */}
+        <div className="relative flex items-end justify-center" style={{ height: 420 }}>
+          {cards.map((t, i) => (
+            <TestimonialCard
+              key={i}
+              quote={t.quote}
+              name={t.name}
+              index={i}
+              total={cards.length}
+              progress={smoothProgress}
+            />
+          ))}
+        </div>
+
+        {/* Scroll hint */}
+        <motion.p
+          style={{ opacity: hintOpacity }}
+          className="absolute bottom-10 text-[12px] text-ink/40 tracking-wide"
+        >
+
+        </motion.p>
       </div>
     </section>
   );
 }
 
+
+
 function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="faq" className="bg-cream pb-32">
-      <div className="mx-auto max-w-3xl px-6">
-        <InView>
-          <h3 className="font-display text-5xl md:text-6xl text-ink text-center">Frequently asked.</h3>
-        </InView>
-        <div className="mt-12 divide-y divide-border">
-          {faqs.map((f, i) => {
-            const isOpen = open === i;
-            return (
-              <div key={i}>
-                <button
-                  onClick={() => setOpen(isOpen ? null : i)}
-                  className="w-full py-5 text-left flex items-start justify-between gap-6"
-                >
-                  <div className="text-[15px] text-ink font-medium flex-1">{f.q}</div>
-                  <motion.div
-                    animate={{ rotate: isOpen ? 45 : 0 }}
-                    transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                    className="text-muted-foreground shrink-0 mt-0.5"
-                  >
-                    <Plus size={18} />
-                  </motion.div>
+    <section id="faq" className="bg-cream py-32">
+      <div className="mx-auto max-w-[1200px] px-6 lg:px-[80px]">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-16 lg:gap-24 items-start">
+          
+          {/* Left Column: Title & CTA */}
+          <div className="relative h-full flex flex-col">
+            <div className="sticky top-32">
+              <h3 className="font-display text-5xl md:text-[64px] text-ink leading-[1.05] tracking-tight mb-8">
+                Frequently<br/><HoverOrangeSpan>asked questions</HoverOrangeSpan><span className="text-[#FF6C2C]">.</span>
+              </h3>
+              
+              <div className="w-10 h-[2px] bg-[#FF6C2C] mb-8" />
+              
+              <p className="text-[15px] text-muted-foreground leading-relaxed mb-12 max-w-[320px]">
+                Get quick answers to the most common questions about our support services, processes, and infrastructure.
+              </p>
+
+              {/* CTA Card */}
+              <div className="bg-white/60 border border-ink/5 rounded-2xl p-6 flex flex-col items-start w-full max-w-[360px]">
+                <div className="flex items-start gap-5 mb-2">
+                  <div className="w-12 h-12 rounded-xl bg-[#FF6C2C]/10 flex items-center justify-center text-[#FF6C2C] shrink-0">
+                    <BookOpen size={22} strokeWidth={1.5} />
+                  </div>
+                  <div className="mt-1">
+                    <h4 className="font-display text-lg text-ink mb-1.5">Still have questions?</h4>
+                    <p className="text-[13px] text-muted-foreground leading-relaxed">
+                      Can't find the answers you're looking for? Our documentation has everything you need.
+                    </p>
+                  </div>
+                </div>
+                <button className="text-[13px] font-bold text-[#FF6C2C] flex items-center gap-2 hover:gap-3 transition-all ml-[68px] mt-2">
+                  View Documentation
+                  <ArrowRight size={14} strokeWidth={2} />
                 </button>
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <p className="pb-5 pr-10 text-sm text-muted-foreground leading-relaxed">{f.a}</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
               </div>
-            );
-          })}
+            </div>
+          </div>
+
+          {/* Right Column: FAQs */}
+          <div className="flex flex-col gap-4 lg:mt-0">
+            {faqs.map((f, i) => {
+              const isOpen = open === i;
+              return (
+                <div 
+                  key={i} 
+                  className={`relative transition-all duration-300 bg-white rounded-2xl shadow-sm border border-ink/5 overflow-hidden border-l-[6px] ${isOpen ? 'border-l-[#FF6C2C]' : 'border-l-transparent hover:border-l-ink/10'}`}
+                >
+                  <button
+                    onClick={() => setOpen(isOpen ? null : i)}
+                    className="w-full p-6 lg:p-8 text-left flex items-center justify-between gap-6 group"
+                  >
+                    <div className={`text-[15px] font-medium flex-1 pr-4 transition-colors ${isOpen ? 'text-ink' : 'text-ink/80 group-hover:text-ink'}`}>{f.q}</div>
+                    <div className={`shrink-0 transition-colors ${isOpen ? 'text-[#FF6C2C]' : 'text-muted-foreground group-hover:text-ink/60'}`}>
+                      {isOpen ? <Minus size={20} strokeWidth={1.5} /> : <Plus size={20} strokeWidth={1.5} />}
+                    </div>
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <p className="px-6 lg:px-8 pb-6 lg:pb-8 pt-0 text-[14px] text-muted-foreground leading-relaxed">{f.a}</p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+          </div>
+
         </div>
       </div>
     </section>
@@ -848,7 +1021,6 @@ function Index() {
       <Privacy />
       <Platforms />
       <Experts />
-      <Stats />
       <Testimonials />
       <FAQ />
       <ContactForm />

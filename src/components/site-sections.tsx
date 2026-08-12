@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { motion, useInView } from "motion/react";
-import { MessageCircle, Clock, ShieldCheck as ShieldIcon, ArrowRight } from "lucide-react";
+import { MessageCircle, Clock, ShieldCheck as ShieldIcon, ShieldCheck, ArrowRight, Calendar, Headset, Zap, Award, User, Mail, Building2, MapPin, MessageSquare } from "lucide-react";
+import { HoverOrangeSpan } from "@/components/hover-orange-span";
 import pillarsHeroImg from "@/assets/NOC and DevOps engineered for scale..png";
 
 
@@ -188,7 +189,7 @@ export function Pillars() {
                 <span className="text-[11px] tracking-[0.2em] uppercase font-medium" style={{ color: "oklch(0.65 0.16 50)" }}>Experts you can rely on</span>
               </div>
               <h2 className="font-display text-5xl md:text-6xl leading-[1.03] text-ink">
-                The outsourced technical support experts<span style={{ color: "oklch(0.65 0.16 50)" }}>.</span>
+                The outsourced <HoverOrangeSpan>technical support experts</HoverOrangeSpan><span style={{ color: "oklch(0.65 0.16 50)" }}>.</span>
               </h2>
             </Reveal>
             <Reveal delay={0.15}>
@@ -254,49 +255,106 @@ export function Pillars() {
   );
 }
 
-/* ---------- Supported platforms marquee ---------- */
+/* ---------- Supported platforms grid ---------- */
 
-const platforms = [
-  "Amazon Web Services",
-  "Google Cloud",
-  "Microsoft Azure",
-  "DigitalOcean",
-  "Red Hat",
-  "Windows Server",
-  "OpenStack",
-  "VMware",
-  "cPanel",
-  "Plesk",
-  "DirectAdmin",
-  "OpenVZ",
+const platformCards = [
+  { 
+    name: "Red Hat", 
+    logo: <svg viewBox="0 0 24 24" className="w-8 h-8 fill-[#cc0000]"><path d="M1 18c0 2.5 4 4 11 4s11-1.5 11-4-3-3-6-3H7c-3 0-6 1-6 3z" /><path d="M5 16l2-11 10-1 2 12z" /></svg>
+  },
+  { 
+    name: "Windows Server", 
+    logo: <svg viewBox="0 0 24 24" className="w-7 h-7 fill-[#00a4ef]"><path d="M2 3.5l8-1v9.5h-8zM11 2l11-1.5v11h-11zM2 13h8v9.5l-8-1zM11 13h11v11.5l-11-1.5z"/></svg> 
+  },
+  { 
+    name: "OpenStack", 
+    logo: <svg viewBox="0 0 24 24" className="w-7 h-7 fill-[#ED1944]"><path d="M2 2h20v20H2zM6 6h12v3H6zM6 11h12v2H6zM6 15h12v3H6z" /></svg> 
+  },
+  { 
+    name: "VMware", 
+    logo: <span className="font-bold text-[#607078] text-[22px] tracking-tighter">vm</span> 
+  },
+  { 
+    name: "cPanel", 
+    logo: <span className="font-bold text-[#FF6C2C] text-[22px] tracking-tighter">cP</span> 
+  },
+  { 
+    name: "Plesk", 
+    logo: <div className="flex flex-col items-start pt-1"><span className="font-medium text-ink text-xl leading-none tracking-tight">plesk</span><div className="w-3 h-0.5 bg-[#00B4E0] mt-0.5" /></div> 
+  },
+  { 
+    name: "DirectAdmin", 
+    logo: <svg viewBox="0 0 24 24" className="w-7 h-7 fill-[#0066CC]"><path d="M4 6l6 6-6 6h4l6-6-6-6H4zm8 0l6 6-6 6h4l6-6-6-6h-4z"/></svg> 
+  },
+  { 
+    name: "OpenVZ", 
+    logo: <svg viewBox="0 0 24 24" className="w-8 h-8 fill-none stroke-[#1E8A37] stroke-[2.5]"><circle cx="12" cy="12" r="8" /><path d="M12 4v16M4 12h16M7 7l10 10M7 17L17 7" /></svg> 
+  },
+  { 
+    name: "Amazon Web Services", 
+    logo: <span className="font-bold text-[#232F3E] text-[17px] leading-none">aws<span className="text-[#FF9900]">.</span></span> 
+  },
+  { 
+    name: "Google Cloud", 
+    logo: <svg viewBox="0 0 24 24" className="w-8 h-8"><path fill="#EA4335" d="M12 4a6 6 0 00-5.8 4.6A5 5 0 007 18h10a6 6 0 00-5-14z"/><path fill="#4285F4" d="M17 18h3a4 4 0 000-8h-1.2A6 6 0 0012 4v2a4 4 0 013.9 4.6l.3 1.4h1.8a2 2 0 010 4z"/></svg> 
+  },
 ];
 
-export function Platforms() {
+const MarqueeRow = ({ items, reverse = false }: { items: typeof platformCards, reverse?: boolean }) => {
   return (
-    <section className="bg-cream pb-28 overflow-hidden">
-      <div className="mx-auto max-w-6xl px-6 text-center">
+    <div className="flex w-full overflow-hidden mb-6 md:mb-8 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+      <motion.div
+        className="flex gap-6 w-max pr-6"
+        animate={{ x: reverse ? ["-50%", "0%"] : ["0%", "-50%"] }}
+        transition={{ duration: 40, ease: "linear", repeat: Infinity }}
+      >
+        {[...items, ...items, ...items, ...items, ...items, ...items].map((p, i) => (
+          <div 
+            key={i} 
+            style={{ borderWidth: "0.5px", borderColor: "rgba(255, 108, 44, 0.3)" }}
+            className="w-[266px] h-[304px] relative group flex flex-col items-center justify-center rounded-[32px] bg-white hover:bg-[#FF6C2C]/[0.02] hover:border-[#FF6C2C]/60 hover:shadow-[0_8px_30px_-6px_rgba(255,108,44,0.12)] hover:scale-[1.02] transition-all duration-500 ease-out"
+          >
+            <div className="flex items-center justify-center transform group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-500 mb-6">
+              <div className="scale-[1.7]">
+                {p.logo}
+              </div>
+            </div>
+            
+            <div className="absolute bottom-8 left-0 w-full flex justify-center items-center gap-1.5 opacity-60 group-hover:opacity-100 transition-opacity duration-500">
+              <span className="text-[14px] font-medium text-ink transition-colors">
+                {p.name}
+              </span>
+              <ArrowRight size={14} className="text-[#FF6C2C] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 ease-out" />
+            </div>
+          </div>
+        ))}
+      </motion.div>
+    </div>
+  );
+};
+
+export function Platforms() {
+  const row1 = platformCards.slice(0, 5);
+  const row2 = platformCards.slice(5, 10);
+
+  return (
+    <section className="bg-cream pb-28 md:pb-36 overflow-hidden">
+      <div className="mx-auto max-w-[1100px] px-6 text-center mb-16">
         <Reveal>
-          <h2 className="font-display text-4xl md:text-5xl text-ink">Supported platforms.</h2>
-          <p className="mx-auto mt-4 max-w-md text-sm text-muted-foreground">
+          <h2 className="font-display text-4xl md:text-[52px] text-ink">
+            Supported <HoverOrangeSpan>platforms.</HoverOrangeSpan>
+          </h2>
+          <p className="mx-auto mt-5 max-w-[420px] text-[15px] leading-relaxed text-muted-foreground/80">
             Covering every major technology platform to bring you excellent outsourced support.
           </p>
         </Reveal>
       </div>
-      <div className="relative mt-14 max-w-7xl mx-auto">
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-cream to-transparent md:w-32" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-cream to-transparent md:w-32" />
-        <div className="flex overflow-hidden relative -mx-6 px-6 md:mx-0 md:px-0 pb-6 pt-1">
-          <div className="flex w-max animate-marquee flex-nowrap items-center gap-3 md:gap-4">
-            {[...platforms, ...platforms, ...platforms].map((p, i) => (
-              <div
-                key={i}
-                className="inline-flex shrink-0 items-center rounded-full border border-ink/15 bg-white/60 backdrop-blur-sm px-5 py-2.5 text-[14px] font-medium text-ink/80 hover:border-ink/40 hover:bg-white hover:text-ink transition-colors cursor-pointer"
-              >
-                {p}
-              </div>
-            ))}
-          </div>
-        </div>
+
+      <div className="relative w-full max-w-[1400px] mx-auto">
+        <Reveal delay={0.1}>
+          <MarqueeRow items={row1} />
+          <MarqueeRow items={row2} reverse />
+        </Reveal>
       </div>
     </section>
   );
@@ -332,79 +390,110 @@ function Counter({ to, decimals = 0 }: { to: number; decimals?: number }) {
 }
 
 const stats = [
-  { to: 965422, label: "Helpdesk tickets handled" },
-  { to: 456343, label: "Live chats attended" },
-  { to: 5.1, decimals: 1, label: "Average resolution hours" },
-  { to: 15, label: "Average response minutes" },
-];
-
-export function Stats() {
-  return (
-    <section className="bg-cream pb-28">
-      <div className="mx-auto max-w-6xl px-6">
-        <Reveal>
-          <p className="text-center text-[13px] text-muted-foreground">
-            Our numbers — measured from January 2015 to today.
-          </p>
-        </Reveal>
-        <div className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-3xl bg-ink/10 md:grid-cols-4">
-          {stats.map((s, i) => (
-            <motion.div
-              key={s.label}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{ duration: 0.6, delay: i * 0.08, ease: EASE }}
-              className="bg-cream px-6 py-10 text-center transition-colors duration-500 hover:bg-white"
-            >
-              <div className="font-display text-4xl md:text-5xl text-ink">
-                <Counter to={s.to} decimals={s.decimals ?? 0} />
-              </div>
-              <p className="mt-3 text-[13px] text-muted-foreground">{s.label}</p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------- Why we call ourselves the experts ---------- */
-
-const expertise = [
-  "Cloud infrastructure management",
-  "Linux administration",
-  "Windows administration",
-  "Data centre and NOC operations",
-  "End user tech support",
+  { to: 965422, label: "Helpdesk tickets handled", Icon: Calendar },
+  { to: 456343, label: "Live chats attended", Icon: Headset },
+  { to: 5.1, decimals: 1, label: "Average resolution hours", Icon: Clock },
+  { to: 15, label: "Average response minutes", Icon: Zap },
 ];
 
 export function Experts() {
   return (
-    <section className="bg-cream pb-32">
-      <div className="mx-auto max-w-6xl px-6">
-        <Reveal>
-          <h2 className="font-display text-5xl md:text-6xl leading-[1.03] text-ink max-w-2xl">
-            Why we call ourselves<br /><em className="font-normal italic text-ink/70">the experts.</em>
-          </h2>
-        </Reveal>
+    <section className="bg-cream pb-32 pt-20">
+      <div className="mx-auto max-w-[1150px] px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-16 lg:gap-20 items-start">
+          
+          {/* Left Side: Why we are the experts */}
+          <div>
+            <Reveal>
+              <h2 className="font-display text-5xl md:text-[56px] leading-[1.03] text-ink max-w-[400px]">
+                Why we call ourselves<br /><em className="font-normal italic text-ink/70">the experts</em><span className="text-[#FF6C2C]">.</span>
+              </h2>
+            </Reveal>
 
-        <div className="mt-14 grid grid-cols-12 gap-10">
-          <div className="col-span-12 md:col-span-8">
             <Reveal delay={0.1}>
-              <h3 className="font-display text-2xl text-ink">The SupportPRO difference</h3>
-              <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
+              <div className="mt-14 flex items-center gap-4">
+                <div className="h-6 w-0.5 rounded-full bg-[#FF6C2C]" />
+                <h3 className="font-display text-2xl text-ink">The SupportPRO difference</h3>
+              </div>
+              <p className="mt-6 text-[15px] leading-relaxed text-muted-foreground max-w-[480px]">
                 Since our inception 23 years ago we have been learning and pioneering in outsourced technical support. We
                 measure the metrics and key process indicators behind every engagement, and evaluate ourselves constantly so
                 the service stays consistent time after time. Every ticket is treated with the utmost importance.
               </p>
-              <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
+              <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground max-w-[480px]">
                 We have developed a stringent quality assurance process on par with any industry standard. We love solving
                 problems, and that is what drives our engineers day and night. Our commitment to quality and process has
                 earned us ISO 9001:2015 certification.
               </p>
+              
+              {/* ISO Badge */}
+              <div className="mt-10 flex items-center gap-4">
+                <div className="w-14 h-14 rounded-full border border-[#FF6C2C]/30 bg-[#FF6C2C]/5 flex items-center justify-center text-[#FF6C2C]">
+                  <Award size={24} strokeWidth={1.5} />
+                </div>
+                <div>
+                  <div className="text-[13px] font-bold text-ink">ISO 9001:2015 Certified</div>
+                  <div className="text-[13px] text-muted-foreground mt-0.5">Quality processes. Measurable results.</div>
+                </div>
+              </div>
             </Reveal>
           </div>
+
+          {/* Right Side: Our Numbers */}
+          <div className="relative">
+            {/* Dot Pattern Background */}
+            <div 
+              className="absolute -right-8 lg:-right-16 top-10 w-32 lg:w-48 h-[80%] opacity-[0.35] pointer-events-none"
+              style={{
+                backgroundImage: `radial-gradient(#FF6C2C 1px, transparent 1px)`,
+                backgroundSize: `14px 14px`
+              }}
+            />
+
+            <Reveal delay={0.2} className="relative z-10">
+              <div className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#FF6C2C] mb-2">
+                OUR NUMBERS
+              </div>
+              <div className="text-[14px] text-muted-foreground mb-12">
+                Measured from January 2015 to today.
+              </div>
+
+              {/* Stats Grid */}
+              <div className="grid grid-cols-2">
+                {stats.map((s, i) => (
+                  <div 
+                    key={i} 
+                    className={`pb-12 pt-8 pr-6 flex flex-col items-start
+                      ${i === 0 ? 'border-b border-r border-ink/10' : ''}
+                      ${i === 1 ? 'border-b border-ink/10 pl-8 lg:pl-12' : ''}
+                      ${i === 2 ? 'border-r border-ink/10 pt-12' : ''}
+                      ${i === 3 ? 'pl-8 lg:pl-12 pt-12' : ''}
+                    `}
+                  >
+                    <div className="w-14 h-14 rounded-full bg-[#FF6C2C]/10 flex items-center justify-center text-ink mb-6">
+                      <s.Icon size={24} strokeWidth={1.5} />
+                    </div>
+                    <div className="font-display text-4xl lg:text-[46px] text-ink mb-4 tracking-tight">
+                      <Counter to={s.to} decimals={s.decimals ?? 0} />
+                    </div>
+                    <div className="w-8 h-[2px] bg-[#FF6C2C] mb-4" />
+                    <div className="text-[13px] text-muted-foreground font-medium leading-relaxed max-w-[140px]">
+                      {s.label}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Footer text */}
+              <div className="mt-10 flex items-center gap-3">
+                <div className="w-0.5 h-4 bg-[#FF6C2C]" />
+                <div className="text-[13px] text-muted-foreground font-medium">
+                  Built on experience. Proven by numbers.
+                </div>
+              </div>
+            </Reveal>
+          </div>
+          
         </div>
       </div>
     </section>
@@ -415,70 +504,137 @@ export function Experts() {
 
 export function ContactForm() {
   const [sent, setSent] = useState(false);
+  const [message, setMessage] = useState("");
+
   return (
     <section id="contact-form" className="bg-cream pb-32">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="grid grid-cols-12 gap-10 rounded-[32px] border border-ink/10 bg-white/70 p-8 backdrop-blur-sm md:p-14">
-          <div className="col-span-12 md:col-span-5">
-            <Reveal>
-              <h2 className="font-display text-4xl md:text-5xl leading-[1.05] text-ink">Drop us a message.</h2>
-              <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
-                Tell us about your infrastructure and support requirements. A senior engineer will get back to you with a
-                scoped proposal, SLA options, and pricing.
-              </p>
-              <div className="mt-8 space-y-1 text-[14px] text-ink/70">
-                <p>Headquarters — Chicago, IL, United States</p>
-                <p>Delivery centres — 3 ODCs in South India</p>
-                <p>Support desk — available 24/7/365</p>
-              </div>
-            </Reveal>
-          </div>
+      <div className="mx-auto max-w-[1200px] px-6 lg:px-[80px]">
+        <div className="rounded-[36px] border border-ink/5 bg-white/80 p-8 md:p-12 lg:p-14 backdrop-blur-md">
+          <div className="grid grid-cols-12 gap-10 lg:gap-14 items-center">
+            
+            {/* Left Column: Info */}
+            <div className="col-span-12 lg:col-span-5 flex flex-col justify-between pr-0 lg:pr-10 lg:border-r lg:border-ink/5">
+              <Reveal>
+                <h2 className="font-display text-4xl md:text-5xl lg:text-[56px] leading-[1.08] text-ink tracking-tight">
+                  Drop us a <br />
+                  <span className="italic font-serif">message</span>
+                  <span className="text-[#FF6C2C]">.</span>
+                </h2>
+                
+                <div className="w-10 h-[2.5px] bg-[#FF6C2C] my-6" />
+                
+                <p className="text-[14px] leading-relaxed text-muted-foreground max-w-sm mb-10">
+                  Tell us about your infrastructure and support requirements. A senior engineer will get back to you with a scoped proposal, SLA options, and pricing.
+                </p>
 
-          <div className="col-span-12 md:col-span-6 md:col-start-7">
-            <Reveal delay={0.12}>
-              <form
-                className="space-y-4"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setSent(true);
-                }}
-              >
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <input
-                    required
-                    placeholder="Full name"
-                    className="w-full rounded-xl border border-ink/15 bg-white px-4 py-3 text-[14px] text-ink outline-none transition-colors placeholder:text-ink/40 focus:border-ink/50"
-                  />
-                  <input
-                    required
-                    type="email"
-                    placeholder="Work email"
-                    className="w-full rounded-xl border border-ink/15 bg-white px-4 py-3 text-[14px] text-ink outline-none transition-colors placeholder:text-ink/40 focus:border-ink/50"
-                  />
+                <div className="space-y-6 pt-6 border-t border-ink/5">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-[#FF6C2C]/10 text-[#FF6C2C] flex items-center justify-center shrink-0">
+                      <MapPin size={18} strokeWidth={1.5} />
+                    </div>
+                    <div>
+                      <h4 className="text-[14px] font-semibold text-ink leading-tight">Headquarters</h4>
+                      <p className="text-[13px] text-muted-foreground mt-0.5">Chicago, IL, United States</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-[#FF6C2C]/10 text-[#FF6C2C] flex items-center justify-center shrink-0">
+                      <Building2 size={18} strokeWidth={1.5} />
+                    </div>
+                    <div>
+                      <h4 className="text-[14px] font-semibold text-ink leading-tight">Delivery centres</h4>
+                      <p className="text-[13px] text-muted-foreground mt-0.5">3 ODCs in South India</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-[#FF6C2C]/10 text-[#FF6C2C] flex items-center justify-center shrink-0">
+                      <Clock size={18} strokeWidth={1.5} />
+                    </div>
+                    <div>
+                      <h4 className="text-[14px] font-semibold text-ink leading-tight">Support desk</h4>
+                      <p className="text-[13px] text-muted-foreground mt-0.5">Available 24/7/365</p>
+                    </div>
+                  </div>
                 </div>
-                <input
-                  placeholder="Company"
-                  className="w-full rounded-xl border border-ink/15 bg-white px-4 py-3 text-[14px] text-ink outline-none transition-colors placeholder:text-ink/40 focus:border-ink/50"
-                />
-                <textarea
-                  required
-                  rows={5}
-                  placeholder="What do you need support with?"
-                  className="w-full resize-none rounded-xl border border-ink/15 bg-white px-4 py-3 text-[14px] text-ink outline-none transition-colors placeholder:text-ink/40 focus:border-ink/50"
-                />
-                <button
-                  type="submit"
-                  className="rounded-full bg-ink px-7 py-3 text-sm font-medium text-white transition-transform duration-300 hover:-translate-y-0.5"
+              </Reveal>
+            </div>
+
+            {/* Right Column: Form */}
+            <div className="col-span-12 lg:col-span-7">
+              <Reveal delay={0.12}>
+                <form
+                  className="space-y-4"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    setSent(true);
+                  }}
                 >
-                  {sent ? "Message received" : "Send message"}
-                </button>
-                {sent && (
-                  <p className="text-[13px] text-muted-foreground">
-                    Thank you — our team will respond shortly.
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <div className="relative">
+                      <User size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30" />
+                      <input
+                        required
+                        placeholder="Full name"
+                        className="w-full rounded-2xl border border-ink/10 bg-[#FAFAFA] pl-11 pr-4 py-3.5 text-[14px] text-ink outline-none transition-all placeholder:text-ink/35 focus:border-[#FF6C2C]/50 focus:bg-white focus:ring-2 focus:ring-[#FF6C2C]/10"
+                      />
+                    </div>
+                    <div className="relative">
+                      <Mail size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30" />
+                      <input
+                        required
+                        type="email"
+                        placeholder="Work email"
+                        className="w-full rounded-2xl border border-ink/10 bg-[#FAFAFA] pl-11 pr-4 py-3.5 text-[14px] text-ink outline-none transition-all placeholder:text-ink/35 focus:border-[#FF6C2C]/50 focus:bg-white focus:ring-2 focus:ring-[#FF6C2C]/10"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="relative">
+                    <Building2 size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30" />
+                    <input
+                      placeholder="Company"
+                      className="w-full rounded-2xl border border-ink/10 bg-[#FAFAFA] pl-11 pr-4 py-3.5 text-[14px] text-ink outline-none transition-all placeholder:text-ink/35 focus:border-[#FF6C2C]/50 focus:bg-white focus:ring-2 focus:ring-[#FF6C2C]/10"
+                    />
+                  </div>
+
+                  <div className="relative">
+                    <MessageSquare size={18} className="absolute left-4 top-4 text-ink/30" />
+                    <textarea
+                      required
+                      rows={5}
+                      maxLength={500}
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
+                      placeholder="What do you need support with?"
+                      className="w-full resize-none rounded-2xl border border-ink/10 bg-[#FAFAFA] pl-11 pr-4 pt-3.5 pb-8 text-[14px] text-ink outline-none transition-all placeholder:text-ink/35 focus:border-[#FF6C2C]/50 focus:bg-white focus:ring-2 focus:ring-[#FF6C2C]/10"
+                    />
+                    <span className="absolute right-4 bottom-3 text-[11px] text-ink/30 font-mono select-none">
+                      {message.length} / 500
+                    </span>
+                  </div>
+
+                  <div className="flex items-center gap-2 text-[13px] text-muted-foreground pt-1 pb-2">
+                    <ShieldCheck size={16} className="text-[#FF6C2C] shrink-0" />
+                    <span>Your information is secure and will never be shared.</span>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full rounded-full bg-[#FF6C2C] hover:bg-[#FF6C2C]/90 text-white py-4 px-6 text-[15px] font-medium flex items-center justify-center gap-2 transition-colors"
+                  >
+                    {sent ? "Message received" : "Send message"}
+                    <ArrowRight size={18} />
+                  </button>
+
+                  <p className="text-center text-[12px] text-muted-foreground/70 pt-2">
+                    We typically respond within a few hours.
                   </p>
-                )}
-              </form>
-            </Reveal>
+                </form>
+              </Reveal>
+            </div>
+
           </div>
         </div>
       </div>
