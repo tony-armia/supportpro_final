@@ -858,41 +858,42 @@ function FAQ() {
                 Get quick answers to the most common questions about our support services, processes, and infrastructure.
               </p>
 
-              {/* CTA Card */}
-              <div className="bg-white/60 border border-ink/5 rounded-2xl p-6 flex flex-col items-start w-full max-w-[360px]">
-                <div className="flex items-start gap-5 mb-2">
-                  <div className="w-12 h-12 rounded-xl bg-[#FF6C2C]/10 flex items-center justify-center text-[#FF6C2C] shrink-0">
-                    <BookOpen size={22} strokeWidth={1.5} />
+              {/* Documentation link */}
+              <div className="w-full max-w-[420px] rounded-md border border-ink/15 px-6 py-8">
+                <div className="flex items-start gap-6">
+                  <div className="w-14 h-14 rounded-full bg-[#FF6C2C]/10 flex items-center justify-center text-[#FF6C2C] shrink-0">
+                    <BookOpen size={25} strokeWidth={1.5} />
                   </div>
-                  <div className="mt-1">
-                    <h4 className="font-display text-lg text-ink mb-1.5">Still have questions?</h4>
-                    <p className="text-[13px] text-muted-foreground leading-relaxed">
+                  <div className="pt-1">
+                    <h4 className="font-display text-2xl text-ink leading-none mb-3">Still have questions?</h4>
+                    <p className="text-[15px] text-muted-foreground leading-relaxed">
                       Can't find the answers you're looking for? Our documentation has everything you need.
                     </p>
+                    <button className="text-[15px] font-bold text-[#FF6C2C] flex items-center gap-3 hover:gap-4 transition-all mt-6">
+                      View Documentation
+                      <ArrowRight size={17} strokeWidth={1.75} />
+                    </button>
                   </div>
                 </div>
-                <button className="text-[13px] font-bold text-[#FF6C2C] flex items-center gap-2 hover:gap-3 transition-all ml-[68px] mt-2">
-                  View Documentation
-                  <ArrowRight size={14} strokeWidth={2} />
-                </button>
               </div>
             </div>
           </div>
 
           {/* Right Column: FAQs */}
-          <div className="flex flex-col gap-4 lg:mt-0">
+          <div className="border-y border-ink/15 lg:mt-0">
             {faqs.map((f, i) => {
               const isOpen = open === i;
               return (
                 <div 
                   key={i} 
-                  className={`relative transition-all duration-300 bg-white rounded-2xl shadow-sm border border-ink/5 overflow-hidden border-l-[6px] ${isOpen ? 'border-l-[#FF6C2C]' : 'border-l-transparent hover:border-l-ink/10'}`}
+                  className={`relative overflow-hidden border-b border-ink/15 last:border-b-0 transition-colors duration-300 ${isOpen ? 'bg-[#FF6C2C]/[0.035]' : 'hover:bg-ink/[0.025]'}`}
                 >
                   <button
                     onClick={() => setOpen(isOpen ? null : i)}
-                    className="w-full p-6 lg:p-8 text-left flex items-center justify-between gap-6 group"
+                    aria-expanded={isOpen}
+                    className="w-full py-6 lg:py-7 text-left flex items-center justify-between gap-6 group"
                   >
-                    <div className={`text-[15px] font-medium flex-1 pr-4 transition-colors ${isOpen ? 'text-ink' : 'text-ink/80 group-hover:text-ink'}`}>{f.q}</div>
+                    <div className={`text-[16px] font-medium flex-1 pr-4 transition-colors ${isOpen ? 'text-ink' : 'text-ink/80 group-hover:text-ink'}`}>{f.q}</div>
                     <div className={`shrink-0 transition-colors ${isOpen ? 'text-[#FF6C2C]' : 'text-muted-foreground group-hover:text-ink/60'}`}>
                       {isOpen ? <Minus size={20} strokeWidth={1.5} /> : <Plus size={20} strokeWidth={1.5} />}
                     </div>
@@ -906,7 +907,7 @@ function FAQ() {
                         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                         className="overflow-hidden"
                       >
-                        <p className="px-6 lg:px-8 pb-6 lg:pb-8 pt-0 text-[14px] text-muted-foreground leading-relaxed">{f.a}</p>
+                        <p className="max-w-[620px] pb-6 lg:pb-7 pr-12 text-[14px] text-muted-foreground leading-relaxed">{f.a}</p>
                       </motion.div>
                     )}
                   </AnimatePresence>

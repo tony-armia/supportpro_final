@@ -258,77 +258,80 @@ export function Pillars() {
 /* ---------- Supported platforms grid ---------- */
 
 const platformCards = [
-  { 
-    name: "Red Hat", 
+  {
+    name: "Red Hat",
     logo: <svg viewBox="0 0 24 24" className="w-8 h-8 fill-[#cc0000]"><path d="M1 18c0 2.5 4 4 11 4s11-1.5 11-4-3-3-6-3H7c-3 0-6 1-6 3z" /><path d="M5 16l2-11 10-1 2 12z" /></svg>
   },
-  { 
-    name: "Windows Server", 
-    logo: <svg viewBox="0 0 24 24" className="w-7 h-7 fill-[#00a4ef]"><path d="M2 3.5l8-1v9.5h-8zM11 2l11-1.5v11h-11zM2 13h8v9.5l-8-1zM11 13h11v11.5l-11-1.5z"/></svg> 
+  {
+    name: "Windows Server",
+    logo: <svg viewBox="0 0 24 24" className="w-7 h-7 fill-[#00a4ef]"><path d="M2 3.5l8-1v9.5h-8zM11 2l11-1.5v11h-11zM2 13h8v9.5l-8-1zM11 13h11v11.5l-11-1.5z" /></svg>
   },
-  { 
-    name: "OpenStack", 
-    logo: <svg viewBox="0 0 24 24" className="w-7 h-7 fill-[#ED1944]"><path d="M2 2h20v20H2zM6 6h12v3H6zM6 11h12v2H6zM6 15h12v3H6z" /></svg> 
+  {
+    name: "OpenStack",
+    logo: <svg viewBox="0 0 24 24" className="w-7 h-7 fill-[#ED1944]"><path d="M2 2h20v20H2zM6 6h12v3H6zM6 11h12v2H6zM6 15h12v3H6z" /></svg>
   },
-  { 
-    name: "VMware", 
-    logo: <span className="font-bold text-[#607078] text-[22px] tracking-tighter">vm</span> 
+  {
+    name: "VMware",
+    logo: <span className="font-bold text-[#607078] text-[22px] tracking-tighter">vm</span>
   },
-  { 
-    name: "cPanel", 
-    logo: <span className="font-bold text-[#FF6C2C] text-[22px] tracking-tighter">cP</span> 
+  {
+    name: "cPanel",
+    logo: <span className="font-bold text-[#FF6C2C] text-[22px] tracking-tighter">cP</span>
   },
-  { 
-    name: "Plesk", 
-    logo: <div className="flex flex-col items-start pt-1"><span className="font-medium text-ink text-xl leading-none tracking-tight">plesk</span><div className="w-3 h-0.5 bg-[#00B4E0] mt-0.5" /></div> 
+  {
+    name: "Plesk",
+    logo: <div className="flex flex-col items-start pt-1"><span className="font-medium text-ink text-xl leading-none tracking-tight">plesk</span><div className="w-3 h-0.5 bg-[#00B4E0] mt-0.5" /></div>
   },
-  { 
-    name: "DirectAdmin", 
-    logo: <svg viewBox="0 0 24 24" className="w-7 h-7 fill-[#0066CC]"><path d="M4 6l6 6-6 6h4l6-6-6-6H4zm8 0l6 6-6 6h4l6-6-6-6h-4z"/></svg> 
+  {
+    name: "DirectAdmin",
+    logo: <svg viewBox="0 0 24 24" className="w-7 h-7 fill-[#0066CC]"><path d="M4 6l6 6-6 6h4l6-6-6-6H4zm8 0l6 6-6 6h4l6-6-6-6h-4z" /></svg>
   },
-  { 
-    name: "OpenVZ", 
-    logo: <svg viewBox="0 0 24 24" className="w-8 h-8 fill-none stroke-[#1E8A37] stroke-[2.5]"><circle cx="12" cy="12" r="8" /><path d="M12 4v16M4 12h16M7 7l10 10M7 17L17 7" /></svg> 
+  {
+    name: "OpenVZ",
+    logo: <svg viewBox="0 0 24 24" className="w-8 h-8 fill-none stroke-[#1E8A37] stroke-[2.5]"><circle cx="12" cy="12" r="8" /><path d="M12 4v16M4 12h16M7 7l10 10M7 17L17 7" /></svg>
   },
-  { 
-    name: "Amazon Web Services", 
-    logo: <span className="font-bold text-[#232F3E] text-[17px] leading-none">aws<span className="text-[#FF9900]">.</span></span> 
+  {
+    name: "Amazon Web Services",
+    logo: <span className="font-bold text-[#232F3E] text-[17px] leading-none">aws<span className="text-[#FF9900]">.</span></span>
   },
-  { 
-    name: "Google Cloud", 
-    logo: <svg viewBox="0 0 24 24" className="w-8 h-8"><path fill="#EA4335" d="M12 4a6 6 0 00-5.8 4.6A5 5 0 007 18h10a6 6 0 00-5-14z"/><path fill="#4285F4" d="M17 18h3a4 4 0 000-8h-1.2A6 6 0 0012 4v2a4 4 0 013.9 4.6l.3 1.4h1.8a2 2 0 010 4z"/></svg> 
+  {
+    name: "Google Cloud",
+    logo: <svg viewBox="0 0 24 24" className="w-8 h-8"><path fill="#EA4335" d="M12 4a6 6 0 00-5.8 4.6A5 5 0 007 18h10a6 6 0 00-5-14z" /><path fill="#4285F4" d="M17 18h3a4 4 0 000-8h-1.2A6 6 0 0012 4v2a4 4 0 013.9 4.6l.3 1.4h1.8a2 2 0 010 4z" /></svg>
   },
 ];
 
-const MarqueeRow = ({ items, reverse = false }: { items: typeof platformCards, reverse?: boolean }) => {
+const MarqueeRow = ({ items, reverse = false }: { items: typeof platformCards; reverse?: boolean }) => {
+  // Duplicate exactly once — CSS translates -50% which equals exactly 1 set, seamless loop
+  const loopItems = [...items, ...items];
   return (
-    <div className="flex w-full overflow-hidden mb-6 md:mb-8 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-      <motion.div
-        className="flex gap-6 w-max pr-6"
-        animate={{ x: reverse ? ["-50%", "0%"] : ["0%", "-50%"] }}
-        transition={{ duration: 40, ease: "linear", repeat: Infinity }}
-      >
-        {[...items, ...items, ...items, ...items, ...items, ...items].map((p, i) => (
-          <div 
-            key={i} 
-            style={{ borderWidth: "0.5px", borderColor: "rgba(255, 108, 44, 0.3)" }}
-            className="w-[266px] h-[304px] relative group flex flex-col items-center justify-center rounded-[32px] bg-white hover:bg-[#FF6C2C]/[0.02] hover:border-[#FF6C2C]/60 hover:shadow-[0_8px_30px_-6px_rgba(255,108,44,0.12)] hover:scale-[1.02] transition-all duration-500 ease-out"
+    <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
+      <div className={`flex gap-4 w-max ${reverse ? "animate-marquee-reverse" : "animate-marquee"}`}>
+        {loopItems.map((p, i) => (
+          <div
+            key={i}
+            style={{ borderWidth: "0.5px", borderColor: "rgba(255, 108, 44, 0.28)" }}
+            className="w-[252px] h-[288px] flex-shrink-0 relative group flex flex-col items-center justify-center rounded-lg bg-white transition-all duration-400 hover:border-[#FF6C2C]/70 hover:shadow-[0_4px_24px_-4px_rgba(255,108,44,0.15)] hover:bg-[#FF6C2C]/[0.015]"
           >
-            <div className="flex items-center justify-center transform group-hover:scale-105 group-hover:-translate-y-2 transition-all duration-500 mb-6">
-              <div className="scale-[1.7]">
+            {/* Logo */}
+            <div className="flex items-center justify-center mb-6 transition-transform duration-400 group-hover:-translate-y-1.5">
+              <div className="scale-[1.6]">
                 {p.logo}
               </div>
             </div>
-            
-            <div className="absolute bottom-8 left-0 w-full flex justify-center items-center gap-1.5 opacity-60 group-hover:opacity-100 transition-opacity duration-500">
-              <span className="text-[14px] font-medium text-ink transition-colors">
+
+            {/* Name + Arrow */}
+            <div className="absolute bottom-7 left-0 w-full flex justify-center items-center gap-1.5">
+              <span className="text-[13px] font-medium text-ink/60 group-hover:text-ink/90 transition-colors duration-300">
                 {p.name}
               </span>
-              <ArrowRight size={14} className="text-[#FF6C2C] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 ease-out" />
+              <ArrowRight
+                size={13}
+                className="text-[#FF6C2C] opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
+              />
             </div>
           </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 };
@@ -338,8 +341,8 @@ export function Platforms() {
   const row2 = platformCards.slice(5, 10);
 
   return (
-    <section className="bg-cream pb-28 md:pb-36 overflow-hidden">
-      <div className="mx-auto max-w-[1100px] px-6 text-center mb-16">
+    <section className="bg-cream pb-24 md:pb-32 overflow-hidden">
+      <div className="mx-auto max-w-[1100px] px-6 text-center mb-14">
         <Reveal>
           <h2 className="font-display text-4xl md:text-[52px] text-ink">
             Supported <HoverOrangeSpan>platforms.</HoverOrangeSpan>
@@ -350,15 +353,14 @@ export function Platforms() {
         </Reveal>
       </div>
 
-      <div className="relative w-full max-w-[1400px] mx-auto">
-        <Reveal delay={0.1}>
-          <MarqueeRow items={row1} />
-          <MarqueeRow items={row2} reverse />
-        </Reveal>
+      <div className="relative w-full space-y-3">
+        <MarqueeRow items={row1} />
+        <MarqueeRow items={row2} reverse />
       </div>
     </section>
   );
 }
+
 
 /* ---------- Numbers ---------- */
 
@@ -399,9 +401,9 @@ const stats = [
 export function Experts() {
   return (
     <section className="bg-cream pb-32 pt-20">
-      <div className="mx-auto max-w-[1150px] px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-16 lg:gap-20 items-start">
-          
+      <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
+        <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-24">
+
           {/* Left Side: Why we are the experts */}
           <div>
             <Reveal>
@@ -425,7 +427,7 @@ export function Experts() {
                 problems, and that is what drives our engineers day and night. Our commitment to quality and process has
                 earned us ISO 9001:2015 certification.
               </p>
-              
+
               {/* ISO Badge */}
               <div className="mt-10 flex items-center gap-4">
                 <div className="w-14 h-14 rounded-full border border-[#FF6C2C]/30 bg-[#FF6C2C]/5 flex items-center justify-center text-[#FF6C2C]">
@@ -442,7 +444,7 @@ export function Experts() {
           {/* Right Side: Our Numbers */}
           <div className="relative">
             {/* Dot Pattern Background */}
-            <div 
+            <div
               className="absolute -right-8 lg:-right-16 top-10 w-32 lg:w-48 h-[80%] opacity-[0.35] pointer-events-none"
               style={{
                 backgroundImage: `radial-gradient(#FF6C2C 1px, transparent 1px)`,
@@ -461,13 +463,13 @@ export function Experts() {
               {/* Stats Grid */}
               <div className="grid grid-cols-2">
                 {stats.map((s, i) => (
-                  <div 
-                    key={i} 
-                    className={`pb-12 pt-8 pr-6 flex flex-col items-start
-                      ${i === 0 ? 'border-b border-r border-ink/10' : ''}
-                      ${i === 1 ? 'border-b border-ink/10 pl-8 lg:pl-12' : ''}
-                      ${i === 2 ? 'border-r border-ink/10 pt-12' : ''}
-                      ${i === 3 ? 'pl-8 lg:pl-12 pt-12' : ''}
+                  <div
+                    key={i}
+                    className={`pl-6 lg:pl-8 flex flex-col items-start
+                      ${i === 0 ? 'border-b border-r border-ink/10 pb-8 lg:pb-10' : ''}
+                      ${i === 1 ? 'border-b border-ink/10 pb-8 lg:pb-10' : ''}
+                      ${i === 2 ? 'border-r border-ink/10 pt-8 lg:pt-10' : ''}
+                      ${i === 3 ? 'pt-8 lg:pt-10' : ''}
                     `}
                   >
                     <div className="w-14 h-14 rounded-full bg-[#FF6C2C]/10 flex items-center justify-center text-ink mb-6">
@@ -477,7 +479,7 @@ export function Experts() {
                       <Counter to={s.to} decimals={s.decimals ?? 0} />
                     </div>
                     <div className="w-8 h-[2px] bg-[#FF6C2C] mb-4" />
-                    <div className="text-[13px] text-muted-foreground font-medium leading-relaxed max-w-[140px]">
+                    <div className="whitespace-nowrap text-[12px] lg:text-[13px] text-muted-foreground font-medium leading-relaxed">
                       {s.label}
                     </div>
                   </div>
@@ -493,7 +495,7 @@ export function Experts() {
               </div>
             </Reveal>
           </div>
-          
+
         </div>
       </div>
     </section>
@@ -511,7 +513,7 @@ export function ContactForm() {
       <div className="mx-auto max-w-[1200px] px-6 lg:px-[80px]">
         <div className="rounded-[36px] border border-ink/5 bg-white/80 p-8 md:p-12 lg:p-14 backdrop-blur-md">
           <div className="grid grid-cols-12 gap-10 lg:gap-14 items-center">
-            
+
             {/* Left Column: Info */}
             <div className="col-span-12 lg:col-span-5 flex flex-col justify-between pr-0 lg:pr-10 lg:border-r lg:border-ink/5">
               <Reveal>
@@ -520,9 +522,9 @@ export function ContactForm() {
                   <span className="italic font-serif">message</span>
                   <span className="text-[#FF6C2C]">.</span>
                 </h2>
-                
+
                 <div className="w-10 h-[2.5px] bg-[#FF6C2C] my-6" />
-                
+
                 <p className="text-[14px] leading-relaxed text-muted-foreground max-w-sm mb-10">
                   Tell us about your infrastructure and support requirements. A senior engineer will get back to you with a scoped proposal, SLA options, and pricing.
                 </p>
