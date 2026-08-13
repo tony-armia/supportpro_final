@@ -18,16 +18,16 @@ import {
 } from "lucide-react";
 import { HoverOrangeSpan } from "@/components/hover-orange-span";
 import pillarsHeroImg from "@/assets/NOC and DevOps engineered for scale..png";
-import redHatLogo from "@/assets/logos/image 67.png";
-import windowsServerLogo from "@/assets/logos/image 68.png";
-import openStackLogo from "@/assets/logos/image 69.png";
-import vmwareLogo from "@/assets/logos/image 70.png";
-import cPanelLogo from "@/assets/logos/image 71.png";
-import pleskLogo from "@/assets/logos/image 72.png";
-import directAdminLogo from "@/assets/logos/image 73.png";
-import openVzLogo from "@/assets/logos/image 74.png";
-import awsLogo from "@/assets/logos/image 75.png";
-import googleCloudLogo from "@/assets/logos/image 76.png";
+import awsLogo from "@/assets/logos/image 67.png";
+import googleCloudLogo from "@/assets/logos/image 68.png";
+import azureLogo from "@/assets/logos/image 69.png";
+import digitalOceanLogo from "@/assets/logos/image 70.png";
+import redHatLogo from "@/assets/logos/image 71.png";
+import windowsServerLogo from "@/assets/logos/image 72.png";
+import openStackLogo from "@/assets/logos/image 73.png";
+import vmwareLogo from "@/assets/logos/image 74.png";
+import cPanelLogo from "@/assets/logos/image 75.png";
+import pleskLogo from "@/assets/logos/image 76.png";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -395,16 +395,16 @@ export function Pillars() {
 /* ---------- Supported platforms grid ---------- */
 
 const platformCards = [
+  { name: "Amazon Web Services", logo: awsLogo },
+  { name: "Google Cloud", logo: googleCloudLogo },
+  { name: "Microsoft Azure", logo: azureLogo },
+  { name: "DigitalOcean", logo: digitalOceanLogo },
   { name: "Red Hat", logo: redHatLogo },
   { name: "Windows Server", logo: windowsServerLogo },
   { name: "OpenStack", logo: openStackLogo },
   { name: "VMware", logo: vmwareLogo },
   { name: "cPanel", logo: cPanelLogo },
   { name: "Plesk", logo: pleskLogo },
-  { name: "DirectAdmin", logo: directAdminLogo },
-  { name: "OpenVZ", logo: openVzLogo },
-  { name: "Amazon Web Services", logo: awsLogo },
-  { name: "Google Cloud", logo: googleCloudLogo },
 ];
 
 const MarqueeRow = ({

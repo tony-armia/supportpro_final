@@ -194,7 +194,7 @@ function Nav() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="h-9 md:h-10 w-auto object-contain"
+            className="h-12 md:h-14 w-auto object-contain"
           />
         </AnimatePresence>
       </motion.a>
@@ -1199,7 +1199,7 @@ function SiteFooter() {
             <img
               src={logoWhite}
               alt="SupportPRO Logo"
-              className="h-10 md:h-12 w-auto object-contain"
+              className="h-12 md:h-14 w-auto object-contain"
             />
           </a>
           <p className="mt-3 text-white/50 leading-relaxed max-w-[220px]">
