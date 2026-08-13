@@ -205,15 +205,21 @@ function Nav() {
         transition={{ duration: 0.6, delay: 0.3 }}
         className="flex items-center gap-1 rounded-full backdrop-blur-md px-2 py-1.5 text-sm text-white border border-white/10"
       >
-        <a href="#services" className="px-4 py-1.5 rounded-full hover:bg-white/10 transition">
+        <a
+          href="#services"
+          className="cursor-morph px-4 py-1.5 rounded-full hover:bg-white/10 transition"
+        >
           Services
         </a>
-        <a href="#faq" className="px-4 py-1.5 rounded-full hover:bg-white/10 transition">
+        <a
+          href="#faq"
+          className="cursor-morph px-4 py-1.5 rounded-full hover:bg-white/10 transition"
+        >
           FAQ
         </a>
         <a
           href="#contact-form"
-          className="px-4 py-1.5 rounded-full bg-white text-ink hover:bg-white/90 transition"
+          className="cursor-morph px-4 py-1.5 rounded-full bg-white text-ink hover:bg-white/90 transition"
         >
           Book a Call
         </a>
@@ -260,7 +266,7 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-8 max-w-xl text-base md:text-lg text-white/90 leading-relaxed"
+          className="mt-8 max-w-xl text-base md:text-md font-light text-white/90 leading-relaxed"
         >
           SupportPRO delivers 24/7 managed infrastructure, cloud operations, server administration,
           DevOps, and white-label technical support for hosting providers, SaaS companies, MSPs, and
@@ -274,13 +280,13 @@ function Hero() {
         >
           <a
             href="#contact-form"
-            className="rounded-full bg-white text-ink px-6 py-3 text-sm font-medium hover:bg-white/90 transition"
+            className="cursor-morph rounded-full bg-white text-ink px-6 py-3 text-sm font-reglar hover:bg-white/90 transition"
           >
             Book a Consultation
           </a>
           <a
             href="#services"
-            className="rounded-full border border-white/30 backdrop-blur-md bg-white/10 text-white px-6 py-3 text-sm font-medium hover:bg-white/20 transition"
+            className="cursor-morph rounded-full border border-white/30 backdrop-blur-md bg-white/10 text-white px-6 py-3 text-sm font-medium hover:bg-white/20 transition"
           >
             Explore Services
           </a>
@@ -1167,13 +1173,13 @@ function CTA() {
           >
             <a
               href="#contact-form"
-              className="rounded-full bg-white text-ink px-6 py-3 text-sm font-medium hover:bg-white/90 transition"
+              className="cursor-morph rounded-full bg-white text-ink px-6 py-3 text-sm font-medium hover:bg-white/90 transition"
             >
               Book a Consultation
             </a>
             <a
               href="#contact-form"
-              className="rounded-full border border-white/30 backdrop-blur-md bg-white/10 text-white px-6 py-3 text-sm font-medium hover:bg-white/20 transition"
+              className="cursor-morph rounded-full border border-white/30 backdrop-blur-md bg-white/10 text-white px-6 py-3 text-sm font-medium hover:bg-white/20 transition"
             >
               Contact Our Team
             </a>
@@ -1243,9 +1249,9 @@ function Index() {
       <StickyPhoneSection />
       <Services />
       <SliderSection />
+      <Experts />
       <Privacy />
       <Platforms />
-      <Experts />
       <Testimonials />
       <FAQ />
       <ContactForm />

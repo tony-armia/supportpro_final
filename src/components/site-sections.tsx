@@ -18,6 +18,16 @@ import {
 } from "lucide-react";
 import { HoverOrangeSpan } from "@/components/hover-orange-span";
 import pillarsHeroImg from "@/assets/NOC and DevOps engineered for scale..png";
+import redHatLogo from "@/assets/logos/image 67.png";
+import windowsServerLogo from "@/assets/logos/image 68.png";
+import openStackLogo from "@/assets/logos/image 69.png";
+import vmwareLogo from "@/assets/logos/image 70.png";
+import cPanelLogo from "@/assets/logos/image 71.png";
+import pleskLogo from "@/assets/logos/image 72.png";
+import directAdminLogo from "@/assets/logos/image 73.png";
+import openVzLogo from "@/assets/logos/image 74.png";
+import awsLogo from "@/assets/logos/image 75.png";
+import googleCloudLogo from "@/assets/logos/image 76.png";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -385,85 +395,16 @@ export function Pillars() {
 /* ---------- Supported platforms grid ---------- */
 
 const platformCards = [
-  {
-    name: "Red Hat",
-    logo: (
-      <svg viewBox="0 0 24 24" className="w-8 h-8 fill-[#cc0000]">
-        <path d="M1 18c0 2.5 4 4 11 4s11-1.5 11-4-3-3-6-3H7c-3 0-6 1-6 3z" />
-        <path d="M5 16l2-11 10-1 2 12z" />
-      </svg>
-    ),
-  },
-  {
-    name: "Windows Server",
-    logo: (
-      <svg viewBox="0 0 24 24" className="w-7 h-7 fill-[#00a4ef]">
-        <path d="M2 3.5l8-1v9.5h-8zM11 2l11-1.5v11h-11zM2 13h8v9.5l-8-1zM11 13h11v11.5l-11-1.5z" />
-      </svg>
-    ),
-  },
-  {
-    name: "OpenStack",
-    logo: (
-      <svg viewBox="0 0 24 24" className="w-7 h-7 fill-[#ED1944]">
-        <path d="M2 2h20v20H2zM6 6h12v3H6zM6 11h12v2H6zM6 15h12v3H6z" />
-      </svg>
-    ),
-  },
-  {
-    name: "VMware",
-    logo: <span className="font-bold text-[#607078] text-[22px] tracking-tighter">vm</span>,
-  },
-  {
-    name: "cPanel",
-    logo: <span className="font-bold text-[#FF6C2C] text-[22px] tracking-tighter">cP</span>,
-  },
-  {
-    name: "Plesk",
-    logo: (
-      <div className="flex flex-col items-start pt-1">
-        <span className="font-medium text-ink text-xl leading-none tracking-tight">plesk</span>
-        <div className="w-3 h-0.5 bg-[#00B4E0] mt-0.5" />
-      </div>
-    ),
-  },
-  {
-    name: "DirectAdmin",
-    logo: (
-      <svg viewBox="0 0 24 24" className="w-7 h-7 fill-[#0066CC]">
-        <path d="M4 6l6 6-6 6h4l6-6-6-6H4zm8 0l6 6-6 6h4l6-6-6-6h-4z" />
-      </svg>
-    ),
-  },
-  {
-    name: "OpenVZ",
-    logo: (
-      <svg viewBox="0 0 24 24" className="w-8 h-8 fill-none stroke-[#1E8A37] stroke-[2.5]">
-        <circle cx="12" cy="12" r="8" />
-        <path d="M12 4v16M4 12h16M7 7l10 10M7 17L17 7" />
-      </svg>
-    ),
-  },
-  {
-    name: "Amazon Web Services",
-    logo: (
-      <span className="font-bold text-[#232F3E] text-[17px] leading-none">
-        aws<span className="text-[#FF9900]">.</span>
-      </span>
-    ),
-  },
-  {
-    name: "Google Cloud",
-    logo: (
-      <svg viewBox="0 0 24 24" className="w-8 h-8">
-        <path fill="#EA4335" d="M12 4a6 6 0 00-5.8 4.6A5 5 0 007 18h10a6 6 0 00-5-14z" />
-        <path
-          fill="#4285F4"
-          d="M17 18h3a4 4 0 000-8h-1.2A6 6 0 0012 4v2a4 4 0 013.9 4.6l.3 1.4h1.8a2 2 0 010 4z"
-        />
-      </svg>
-    ),
-  },
+  { name: "Red Hat", logo: redHatLogo },
+  { name: "Windows Server", logo: windowsServerLogo },
+  { name: "OpenStack", logo: openStackLogo },
+  { name: "VMware", logo: vmwareLogo },
+  { name: "cPanel", logo: cPanelLogo },
+  { name: "Plesk", logo: pleskLogo },
+  { name: "DirectAdmin", logo: directAdminLogo },
+  { name: "OpenVZ", logo: openVzLogo },
+  { name: "Amazon Web Services", logo: awsLogo },
+  { name: "Google Cloud", logo: googleCloudLogo },
 ];
 
 const MarqueeRow = ({
@@ -484,11 +425,16 @@ const MarqueeRow = ({
           <div
             key={i}
             style={{ borderWidth: "0.5px", borderColor: "rgba(255, 108, 44, 0.28)" }}
-            className="w-[252px] h-[288px] flex-shrink-0 relative group flex flex-col items-center justify-center rounded-lg bg-white transition-all duration-400 hover:border-[#FF6C2C]/70 hover:shadow-[0_4px_24px_-4px_rgba(255,108,44,0.15)] hover:bg-[#FF6C2C]/[0.015]"
+            className="w-[252px] h-[288px] flex-shrink-0 relative isolate overflow-hidden group flex flex-col items-center justify-center rounded-lg bg-white transition-colors duration-400 hover:border-[#FF6C2C]/70 hover:bg-[#FF6C2C]/[0.015]"
           >
             {/* Logo */}
-            <div className="flex items-center justify-center mb-6 transition-transform duration-400 group-hover:-translate-y-1.5">
-              <div className="scale-[1.6]">{p.logo}</div>
+            <div className="mb-6 flex h-[72px] w-[156px] items-center justify-center transition-transform duration-400 group-hover:-translate-y-1.5">
+              <img
+                src={p.logo}
+                alt=""
+                className="max-h-full max-w-full object-contain"
+                loading="lazy"
+              />
             </div>
 
             {/* Name + Arrow */}
@@ -645,10 +591,10 @@ export function Experts() {
                 {stats.map((s, i) => (
                   <div
                     key={i}
-                    className={`pl-6 lg:pl-8 flex flex-col items-start
-                      ${i === 0 ? "border-b border-r border-ink/10 pb-8 lg:pb-10" : ""}
-                      ${i === 1 ? "border-b border-ink/10 pb-8 lg:pb-10" : ""}
-                      ${i === 2 ? "border-r border-ink/10 pt-8 lg:pt-10" : ""}
+                    className={`group/metric pl-6 lg:pl-8 flex flex-col items-start transition-colors duration-500
+                      ${i === 0 ? "border-b border-r border-ink/10 pb-8 lg:pb-10 hover:border-[#FF6C2C]/70" : ""}
+                      ${i === 1 ? "border-b border-ink/10 pb-8 lg:pb-10 hover:border-[#FF6C2C]/70" : ""}
+                      ${i === 2 ? "border-r border-ink/10 pt-8 lg:pt-10 hover:border-[#FF6C2C]/70" : ""}
                       ${i === 3 ? "pt-8 lg:pt-10" : ""}
                     `}
                   >
@@ -658,7 +604,7 @@ export function Experts() {
                     <div className="font-display text-4xl lg:text-[46px] text-ink mb-4 tracking-tight">
                       <Counter to={s.to} decimals={s.decimals ?? 0} />
                     </div>
-                    <div className="w-8 h-[2px] bg-[#FF6C2C] mb-4" />
+                    <div className="w-8 h-[2px] bg-[#FF6C2C] mb-4 transition-all duration-500 group-hover/metric:w-12" />
                     <div className="whitespace-nowrap text-[12px] lg:text-[13px] text-muted-foreground font-medium leading-relaxed">
                       {s.label}
                     </div>

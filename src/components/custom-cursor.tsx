@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "motion/react";
 
-const TARGET_SELECTOR = "button, input, textarea, select, .service-pill";
+const TARGET_SELECTOR =
+  "button, input, textarea, select, a.rounded-full, a[class*='button'], .service-pill";
 
 type TargetBounds = {
   width: number;
@@ -38,10 +39,6 @@ export function CustomCursor() {
   useEffect(() => {
     if (!enabled) return;
 
-    const movePointer = (event: PointerEvent) => {
-      pointerX.set(event.clientX);
-      pointerY.set(event.clientY);
-    };
     const updateTarget = (event: PointerEvent) => {
       const eventTarget = event.target as HTMLElement | null;
       if (eventTarget?.closest("#faq")) {
@@ -59,8 +56,8 @@ export function CustomCursor() {
       const borderRadius = getComputedStyle(element).borderTopLeftRadius;
       setTargetBounds((previous) => {
         const next = {
-          width: rect.width + 8,
-          height: rect.height + 8,
+          width: rect.width + 10,
+          height: rect.height + 10,
           x: rect.left + rect.width / 2,
           y: rect.top + rect.height / 2,
           borderRadius,
@@ -74,16 +71,17 @@ export function CustomCursor() {
           : next;
       });
     };
+    const movePointer = (event: PointerEvent) => {
+      pointerX.set(event.clientX);
+      pointerY.set(event.clientY);
+      updateTarget(event);
+    };
     const clearTarget = () => setTargetBounds(null);
 
     window.addEventListener("pointermove", movePointer, { passive: true });
-    document.addEventListener("pointerover", updateTarget);
-    document.addEventListener("pointerout", clearTarget);
     window.addEventListener("blur", clearTarget);
     return () => {
       window.removeEventListener("pointermove", movePointer);
-      document.removeEventListener("pointerover", updateTarget);
-      document.removeEventListener("pointerout", clearTarget);
       window.removeEventListener("blur", clearTarget);
     };
   }, [enabled, pointerX, pointerY]);
@@ -102,9 +100,9 @@ export function CustomCursor() {
       aria-hidden="true"
     >
       <motion.div
-        className="fixed left-0 top-0 border-[1.5px] border-[#FF8101]"
+        className="fixed left-0 top-0 border-2 border-[#FF8101]"
         style={{ x, y, width, height, borderRadius, translateX: "-50%", translateY: "-50%" }}
-        animate={{ width, height, opacity: 0.62 }}
+        animate={{ width, height, opacity: 0.78 }}
         transition={{ type: "spring", stiffness: 260, damping: 28, mass: 0.35 }}
       />
       <motion.div
