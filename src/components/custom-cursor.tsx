@@ -1,173 +1,118 @@
 import { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring, AnimatePresence } from "motion/react";
-import { Zap, MessageSquare, HelpCircle, Mail, ArrowUpRight } from "lucide-react";
+import { motion, useMotionValue, useSpring } from "motion/react";
+
+const TARGET_SELECTOR = "button, input, textarea, select, .service-pill";
+
+type TargetBounds = {
+  width: number;
+  height: number;
+  x: number;
+  y: number;
+  borderRadius: string;
+} | null;
 
 export function CustomCursor() {
-  const [cursorState, setCursorState] = useState<{
-    variant: "default" | "button" | "services" | "testimonials" | "faq" | "contact";
-    text?: string;
-    icon?: any;
-    visible: boolean;
-  }>({
-    variant: "default",
-    visible: false,
-  });
-
-  const cursorX = useMotionValue(-100);
-  const cursorY = useMotionValue(-100);
-
-  // Smooth springs for fluid, zero-lag cursor follower
-  const springX = useSpring(cursorX, { stiffness: 900, damping: 45, restDelta: 0.001 });
-  const springY = useSpring(cursorY, { stiffness: 900, damping: 45, restDelta: 0.001 });
+  const [enabled, setEnabled] = useState(false);
+  const [targetBounds, setTargetBounds] = useState<TargetBounds>(null);
+  const pointerX = useMotionValue(-100);
+  const pointerY = useMotionValue(-100);
+  const circleX = useSpring(pointerX, { stiffness: 180, damping: 24, restDelta: 0.01 });
+  const circleY = useSpring(pointerY, { stiffness: 180, damping: 24, restDelta: 0.01 });
+  const dotX = useSpring(pointerX, { stiffness: 420, damping: 34, restDelta: 0.01 });
+  const dotY = useSpring(pointerY, { stiffness: 420, damping: 34, restDelta: 0.01 });
 
   useEffect(() => {
-    // Only activate cursor on devices with fine pointer (mouse/trackpad)
-    if (window.matchMedia("(pointer: coarse)").matches) return;
+    const finePointer = window.matchMedia("(pointer: fine)");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const updateEnabled = () => setEnabled(finePointer.matches && !reducedMotion.matches);
 
-    const updateMousePosition = (e: MouseEvent) => {
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
-      if (!cursorState.visible) {
-        setCursorState((prev) => ({ ...prev, visible: true }));
-      }
-    };
-
-    const handleMouseLeave = () => {
-      setCursorState((prev) => ({ ...prev, visible: false }));
-    };
-
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement | null;
-      if (!target) return;
-
-      const clickable = target.closest("a, button, [role='button'], input, textarea, select");
-      const customTypeEl = target.closest("[data-cursor-type]") as HTMLElement | null;
-      const section = target.closest("section") as HTMLElement | null;
-
-      if (customTypeEl) {
-        const type = customTypeEl.getAttribute("data-cursor-type");
-        const text = customTypeEl.getAttribute("data-cursor-text") || undefined;
-        if (type === "services") {
-          setCursorState({ variant: "services", text: text || "Services", icon: Zap, visible: true });
-          return;
-        }
-        if (type === "testimonials") {
-          setCursorState({ variant: "testimonials", text: text || "Client Words", icon: MessageSquare, visible: true });
-          return;
-        }
-        if (type === "faq") {
-          setCursorState({ variant: "faq", text: text || "FAQ", icon: HelpCircle, visible: true });
-          return;
-        }
-        if (type === "contact") {
-          setCursorState({ variant: "contact", text: text || "Connect", icon: Mail, visible: true });
-          return;
-        }
-      }
-
-      if (clickable) {
-        setCursorState({ variant: "button", visible: true });
-        return;
-      }
-
-      // Check section context
-      if (section) {
-        const id = section.id;
-        if (id === "services") {
-          setCursorState({ variant: "services", text: "Services", icon: Zap, visible: true });
-          return;
-        }
-        if (id === "testimonials" || section.className.includes("Testimonials")) {
-          setCursorState({ variant: "testimonials", text: "Client Words", icon: MessageSquare, visible: true });
-          return;
-        }
-        if (id === "faq") {
-          setCursorState({ variant: "faq", text: "FAQ", icon: HelpCircle, visible: true });
-          return;
-        }
-        if (id === "contact-form") {
-          setCursorState({ variant: "contact", text: "Connect", icon: Mail, visible: true });
-          return;
-        }
-      }
-
-      setCursorState({ variant: "default", visible: true });
-    };
-
-    window.addEventListener("mousemove", updateMousePosition);
-    document.addEventListener("mouseleave", handleMouseLeave);
-    document.addEventListener("mouseover", handleMouseOver);
-
+    updateEnabled();
+    finePointer.addEventListener("change", updateEnabled);
+    reducedMotion.addEventListener("change", updateEnabled);
     return () => {
-      window.removeEventListener("mousemove", updateMousePosition);
-      document.removeEventListener("mouseleave", handleMouseLeave);
-      document.removeEventListener("mouseover", handleMouseOver);
+      finePointer.removeEventListener("change", updateEnabled);
+      reducedMotion.removeEventListener("change", updateEnabled);
     };
   }, []);
 
-  if (!cursorState.visible) return null;
+  useEffect(() => {
+    if (!enabled) return;
 
-  const Icon = cursorState.icon;
+    const movePointer = (event: PointerEvent) => {
+      pointerX.set(event.clientX);
+      pointerY.set(event.clientY);
+    };
+    const updateTarget = (event: PointerEvent) => {
+      const eventTarget = event.target as HTMLElement | null;
+      if (eventTarget?.closest("#faq")) {
+        setTargetBounds(null);
+        return;
+      }
+
+      const element = eventTarget?.closest<HTMLElement>(TARGET_SELECTOR);
+      if (!element) {
+        setTargetBounds(null);
+        return;
+      }
+
+      const rect = element.getBoundingClientRect();
+      const borderRadius = getComputedStyle(element).borderTopLeftRadius;
+      setTargetBounds((previous) => {
+        const next = {
+          width: rect.width + 8,
+          height: rect.height + 8,
+          x: rect.left + rect.width / 2,
+          y: rect.top + rect.height / 2,
+          borderRadius,
+        };
+        return previous?.width === next.width &&
+          previous.height === next.height &&
+          previous.x === next.x &&
+          previous.y === next.y &&
+          previous.borderRadius === next.borderRadius
+          ? previous
+          : next;
+      });
+    };
+    const clearTarget = () => setTargetBounds(null);
+
+    window.addEventListener("pointermove", movePointer, { passive: true });
+    document.addEventListener("pointerover", updateTarget);
+    document.addEventListener("pointerout", clearTarget);
+    window.addEventListener("blur", clearTarget);
+    return () => {
+      window.removeEventListener("pointermove", movePointer);
+      document.removeEventListener("pointerover", updateTarget);
+      document.removeEventListener("pointerout", clearTarget);
+      window.removeEventListener("blur", clearTarget);
+    };
+  }, [enabled, pointerX, pointerY]);
+
+  if (!enabled) return null;
+
+  const width = targetBounds?.width ?? 28;
+  const height = targetBounds?.height ?? 28;
+  const x = targetBounds?.x ?? circleX;
+  const y = targetBounds?.y ?? circleY;
+  const borderRadius = targetBounds?.borderRadius ?? "9999px";
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[9999] overflow-hidden select-none">
+    <div
+      className="pointer-events-none fixed inset-0 z-[9999] hidden select-none md:block"
+      aria-hidden="true"
+    >
       <motion.div
-        style={{
-          x: springX,
-          y: springY,
-        }}
-        className="fixed top-0 left-0 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center pointer-events-none"
-      >
-        <AnimatePresence mode="wait">
-          {cursorState.variant === "default" && (
-            <motion.div
-              key="default"
-              initial={{ scale: 0.5, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.5, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="relative flex items-center justify-center"
-            >
-              {/* Outer soft aura */}
-              <div className="h-7 w-7 rounded-full border border-[#FF6C2C]/40 bg-[#FF6C2C]/10" />
-              {/* Core dot */}
-              <div className="absolute h-2.5 w-2.5 rounded-full bg-[#FF6C2C]" />
-            </motion.div>
-          )}
-
-          {cursorState.variant === "button" && (
-            <motion.div
-              key="button"
-              initial={{ scale: 0.6, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.6, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="flex items-center justify-center"
-            >
-              <div className="h-9 w-9 rounded-full border border-[#FF6C2C] bg-[#FF6C2C]/20 backdrop-blur-xs flex items-center justify-center text-[#FF6C2C]">
-                <ArrowUpRight size={15} strokeWidth={2.5} />
-              </div>
-            </motion.div>
-          )}
-
-          {(cursorState.variant === "services" ||
-            cursorState.variant === "testimonials" ||
-            cursorState.variant === "faq" ||
-            cursorState.variant === "contact") && (
-            <motion.div
-              key={cursorState.variant}
-              initial={{ scale: 0.7, opacity: 0, y: 8 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.7, opacity: 0, y: -8 }}
-              transition={{ type: "spring", stiffness: 500, damping: 30 }}
-              className="flex items-center gap-2 rounded-full bg-ink/90 text-white px-3.5 py-1.5 shadow-xl border border-white/10 backdrop-blur-md text-[12px] font-medium tracking-wide"
-            >
-              {Icon && <Icon size={13} className="text-[#FF6C2C]" />}
-              <span>{cursorState.text}</span>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
+        className="fixed left-0 top-0 border-[1.5px] border-[#FF8101]"
+        style={{ x, y, width, height, borderRadius, translateX: "-50%", translateY: "-50%" }}
+        animate={{ width, height, opacity: 0.62 }}
+        transition={{ type: "spring", stiffness: 260, damping: 28, mass: 0.35 }}
+      />
+      <motion.div
+        className="fixed left-0 top-0 h-1.5 w-1.5 rounded-full bg-[#FF8101]"
+        style={{ x: dotX, y: dotY, translateX: "-50%", translateY: "-50%" }}
+        animate={{ opacity: targetBounds ? 0 : 1 }}
+        transition={{ duration: 0.12 }}
+      />
     </div>
   );
 }

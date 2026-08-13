@@ -1,7 +1,27 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useRef, type ReactNode } from "react";
-import { motion, useScroll, useTransform, AnimatePresence, useInView, useMotionValueEvent, useSpring, useMotionValue, useMotionTemplate } from "motion/react";
-import { Plus, Lock, ShieldCheck, FileCheck2, Activity, ChevronDown, ArrowRight, Minus, BookOpen } from "lucide-react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  AnimatePresence,
+  useInView,
+  useMotionValueEvent,
+  useSpring,
+  useMotionValue,
+  useMotionTemplate,
+} from "motion/react";
+import {
+  Plus,
+  Lock,
+  ShieldCheck,
+  FileCheck2,
+  Activity,
+  ChevronDown,
+  ArrowRight,
+  Minus,
+  BookOpen,
+} from "lucide-react";
 import { HoverOrangeSpan } from "@/components/hover-orange-span";
 import heroImg from "@/assets/hero.jpg";
 import talkImg from "@/assets/talk.jpg";
@@ -24,34 +44,88 @@ import imgCalmIncident from "@/assets/Calm through every incident.png";
 import imgInfraExpert from "@/assets/Infrastructure in expert hands.png";
 import { Credentials, Platforms, Experts, ContactForm } from "@/components/site-sections";
 
-
 export const Route = createFileRoute("/")({
   component: Index,
 });
 
 const testimonials = [
-  { quote: "SupportPRO has done an excellent job of providing first line support to our customers. Their team goes the extra mile and even has walked our customers through importing data into a MySQL database.", name: "Toby Wolf" },
-  { quote: "We use SupportPRO for all of our Systems Administration for 11 servers, and they handle all of our tickets as well. We have had ZERO problems with them, and I highly recommend them to anyone.", name: "Eric W." },
-  { quote: "Our customer base is growing every day because of their great service and support. We always count on their knowledge and expertise. Whenever we need, they always give us immediate support 24/7 around the clock.", name: "TYWIT Solutions Group" },
-  { quote: "White-labelled helpdesk that our customers never notice is outsourced. Every ticket is handled with the professionalism our brand demands.", name: "Managed hosting provider" },
-  { quote: "Their NOC caught an infrastructure issue at 3 a.m. and had it resolved before our on-call engineer even opened the alert.", name: "SaaS platform, EU" },
-  { quote: "Migrating our workloads to AWS with SupportPRO was seamless. Clear communication, zero downtime, measurable cost savings.", name: "MSP, North America" },
+  {
+    quote:
+      "SupportPRO has done an excellent job of providing first line support to our customers. Their team goes the extra mile and even has walked our customers through importing data into a MySQL database.",
+    name: "Toby Wolf",
+  },
+  {
+    quote:
+      "We use SupportPRO for all of our Systems Administration for 11 servers, and they handle all of our tickets as well. We have had ZERO problems with them, and I highly recommend them to anyone.",
+    name: "Eric W.",
+  },
+  {
+    quote:
+      "Our customer base is growing every day because of their great service and support. We always count on their knowledge and expertise. Whenever we need, they always give us immediate support 24/7 around the clock.",
+    name: "TYWIT Solutions Group",
+  },
+  {
+    quote:
+      "White-labelled helpdesk that our customers never notice is outsourced. Every ticket is handled with the professionalism our brand demands.",
+    name: "Managed hosting provider",
+  },
+  {
+    quote:
+      "Their NOC caught an infrastructure issue at 3 a.m. and had it resolved before our on-call engineer even opened the alert.",
+    name: "SaaS platform, EU",
+  },
+  {
+    quote:
+      "Migrating our workloads to AWS with SupportPRO was seamless. Clear communication, zero downtime, measurable cost savings.",
+    name: "MSP, North America",
+  },
 ];
 
-
 const faqs = [
-  { q: "What services does SupportPRO offer?", a: "We provide 24/7 technical support, server and cloud management, NOC monitoring, DevOps, helpdesk, security management, and white-label MSP services across Linux, Windows, AWS, Azure, and Google Cloud environments." },
-  { q: "How does white-label support work?", a: "Our engineers operate under your brand — your logo, your ticketing system, your voice. Your customers experience seamless support while our team handles the technical execution behind the scenes." },
-  { q: "Is SupportPRO truly available 24/7?", a: "Yes. Our global engineering teams operate around the clock, every day of the year. Critical issues are acknowledged within minutes and escalated through defined response tiers." },
-  { q: "Which cloud platforms do you manage?", a: "We are certified across AWS, Microsoft Azure, and Google Cloud, and manage complex hybrid and multi-cloud deployments for hosting providers, SaaS companies, and enterprises." },
-  { q: "What does your NOC service include?", a: "Continuous infrastructure monitoring, proactive incident response, capacity analysis, and detailed reporting — designed to keep production environments stable and predictable." },
-  { q: "Do you support MSPs and hosting providers?", a: "Absolutely. A significant part of our business is dedicated to MSP and hosting support — from Level 1 helpdesk to advanced server and infrastructure engineering under your brand." },
-  { q: "How is our data and infrastructure secured?", a: "Every engagement follows strict access controls, hardened workflows, audited procedures, and modern security tooling. Security management is embedded in every service we deliver." },
-  { q: "How do we get started?", a: "Reach out for a discovery call. We assess your environment, define scope, agree SLAs, and onboard your systems with a structured transition plan — typically live within days." },
+  {
+    q: "What services does SupportPRO offer?",
+    a: "We provide 24/7 technical support, server and cloud management, NOC monitoring, DevOps, helpdesk, security management, and white-label MSP services across Linux, Windows, AWS, Azure, and Google Cloud environments.",
+  },
+  {
+    q: "How does white-label support work?",
+    a: "Our engineers operate under your brand — your logo, your ticketing system, your voice. Your customers experience seamless support while our team handles the technical execution behind the scenes.",
+  },
+  {
+    q: "Is SupportPRO truly available 24/7?",
+    a: "Yes. Our global engineering teams operate around the clock, every day of the year. Critical issues are acknowledged within minutes and escalated through defined response tiers.",
+  },
+  {
+    q: "Which cloud platforms do you manage?",
+    a: "We are certified across AWS, Microsoft Azure, and Google Cloud, and manage complex hybrid and multi-cloud deployments for hosting providers, SaaS companies, and enterprises.",
+  },
+  {
+    q: "What does your NOC service include?",
+    a: "Continuous infrastructure monitoring, proactive incident response, capacity analysis, and detailed reporting — designed to keep production environments stable and predictable.",
+  },
+  {
+    q: "Do you support MSPs and hosting providers?",
+    a: "Absolutely. A significant part of our business is dedicated to MSP and hosting support — from Level 1 helpdesk to advanced server and infrastructure engineering under your brand.",
+  },
+  {
+    q: "How is our data and infrastructure secured?",
+    a: "Every engagement follows strict access controls, hardened workflows, audited procedures, and modern security tooling. Security management is embedded in every service we deliver.",
+  },
+  {
+    q: "How do we get started?",
+    a: "Reach out for a discovery call. We assess your environment, define scope, agree SLAs, and onboard your systems with a structured transition plan — typically live within days.",
+  },
 ];
 
 /* Word-by-word reveal as element enters view — the signature Novu effect. */
-function RevealText({ children, className = "", as = "p" }: { children: string; className?: string; as?: "h3" | "p" | "h2" }) {
+function RevealText({
+  children,
+  className = "",
+  as = "p",
+}: {
+  children: string;
+  className?: string;
+  as?: "h3" | "p" | "h2";
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -65,14 +139,26 @@ function RevealText({ children, className = "", as = "p" }: { children: string; 
         {words.map((w, i) => {
           const start = i / words.length;
           const end = start + 1 / words.length;
-          return <Word key={i} progress={scrollYProgress} range={[start, end]}>{w}</Word>;
+          return (
+            <Word key={i} progress={scrollYProgress} range={[start, end]}>
+              {w}
+            </Word>
+          );
         })}
       </Tag>
     </div>
   );
 }
 
-function Word({ progress, range, children }: { progress: any; range: [number, number]; children: string }) {
+function Word({
+  progress,
+  range,
+  children,
+}: {
+  progress: any;
+  range: [number, number];
+  children: string;
+}) {
   const opacity = useTransform(progress, range, [0.15, 1]);
   return (
     <motion.span style={{ opacity }} className="inline-block mr-[0.25em]">
@@ -119,9 +205,18 @@ function Nav() {
         transition={{ duration: 0.6, delay: 0.3 }}
         className="flex items-center gap-1 rounded-full backdrop-blur-md px-2 py-1.5 text-sm text-white border border-white/10"
       >
-        <a href="#services" className="px-4 py-1.5 rounded-full hover:bg-white/10 transition">Services</a>
-        <a href="#faq" className="px-4 py-1.5 rounded-full hover:bg-white/10 transition">FAQ</a>
-        <a href="#contact-form" className="px-4 py-1.5 rounded-full bg-white text-ink hover:bg-white/90 transition">Book a Call</a>
+        <a href="#services" className="px-4 py-1.5 rounded-full hover:bg-white/10 transition">
+          Services
+        </a>
+        <a href="#faq" className="px-4 py-1.5 rounded-full hover:bg-white/10 transition">
+          FAQ
+        </a>
+        <a
+          href="#contact-form"
+          className="px-4 py-1.5 rounded-full bg-white text-ink hover:bg-white/90 transition"
+        >
+          Book a Call
+        </a>
       </motion.div>
     </nav>
   );
@@ -157,7 +252,9 @@ function Hero() {
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] max-w-4xl drop-shadow-[0_2px_20px_rgba(0,0,0,0.35)]"
         >
-          Enterprise infrastructure<br />support that <HoverOrangeSpan>never sleeps.</HoverOrangeSpan>
+          Enterprise infrastructure
+          <br />
+          support that <HoverOrangeSpan>never sleeps.</HoverOrangeSpan>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -165,7 +262,9 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="mt-8 max-w-xl text-base md:text-lg text-white/90 leading-relaxed"
         >
-          SupportPRO delivers 24/7 managed infrastructure, cloud operations, server administration, DevOps, and white-label technical support for hosting providers, SaaS companies, MSPs, and enterprises.
+          SupportPRO delivers 24/7 managed infrastructure, cloud operations, server administration,
+          DevOps, and white-label technical support for hosting providers, SaaS companies, MSPs, and
+          enterprises.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -173,10 +272,16 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="mt-8 flex flex-wrap items-center justify-center gap-3"
         >
-          <a href="#contact-form" className="rounded-full bg-white text-ink px-6 py-3 text-sm font-medium hover:bg-white/90 transition">
+          <a
+            href="#contact-form"
+            className="rounded-full bg-white text-ink px-6 py-3 text-sm font-medium hover:bg-white/90 transition"
+          >
             Book a Consultation
           </a>
-          <a href="#services" className="rounded-full border border-white/30 backdrop-blur-md bg-white/10 text-white px-6 py-3 text-sm font-medium hover:bg-white/20 transition">
+          <a
+            href="#services"
+            className="rounded-full border border-white/30 backdrop-blur-md bg-white/10 text-white px-6 py-3 text-sm font-medium hover:bg-white/20 transition"
+          >
             Explore Services
           </a>
         </motion.div>
@@ -196,23 +301,56 @@ function Hero() {
 const serviceGroups: Array<{ heading: string; items: string[] }> = [
   {
     heading: "Support",
-    items: ["24/7 Technical Support", "White-label Support", "Helpdesk Services", "End-user Tech Support", "Hosting Support", "MSP Support"],
+    items: [
+      "24/7 Technical Support",
+      "White-label Support",
+      "Helpdesk Services",
+      "End-user Tech Support",
+      "Hosting Support",
+      "MSP Support",
+    ],
   },
   {
     heading: "Infrastructure",
-    items: ["Server Management", "Linux Administration", "Windows Administration", "Infrastructure Monitoring", "Data Centre Operations", "NOC Services"],
+    items: [
+      "Server Management",
+      "Linux Administration",
+      "Windows Administration",
+      "Infrastructure Monitoring",
+      "Data Centre Operations",
+      "NOC Services",
+    ],
   },
   {
     heading: "Cloud & DevOps",
-    items: ["Cloud Infrastructure Management", "AWS", "Microsoft Azure", "Google Cloud Platform", "DevOps", "Infrastructure Optimization"],
+    items: [
+      "Cloud Infrastructure Management",
+      "AWS",
+      "Microsoft Azure",
+      "Google Cloud Platform",
+      "DevOps",
+      "Infrastructure Optimization",
+    ],
   },
   {
     heading: "Enterprise",
-    items: ["Managed IT Services", "Security Management", "Performance Monitoring", "Incident Response", "Technical Consulting"],
+    items: [
+      "Managed IT Services",
+      "Security Management",
+      "Performance Monitoring",
+      "Incident Response",
+      "Technical Consulting",
+    ],
   },
 ];
 
-function ServiceRow({ group, index }: { group: { heading: string; items: string[] }; index: number }) {
+function ServiceRow({
+  group,
+  index,
+}: {
+  group: { heading: string; items: string[] };
+  index: number;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.4 });
   const [hovered, setHovered] = useState(false);
@@ -269,8 +407,12 @@ function ServiceRow({ group, index }: { group: { heading: string; items: string[
               key={it}
               initial={{ opacity: 0, y: 10 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.08 + 0.2 + j * 0.05, ease: [0.22, 1, 0.36, 1] }}
-              className="inline-flex items-center rounded-full border border-ink/15 bg-white/60 backdrop-blur-sm px-4 py-2 text-[13px] text-ink/80 hover:border-ink/40 hover:bg-white hover:text-ink transition-colors"
+              transition={{
+                duration: 0.5,
+                delay: index * 0.08 + 0.2 + j * 0.05,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="service-pill inline-flex items-center rounded-full border border-ink/15 bg-white/60 backdrop-blur-sm px-4 py-2 text-[13px] text-ink/80 hover:border-ink/40 hover:bg-white hover:text-ink transition-colors"
             >
               {it}
             </motion.span>
@@ -289,14 +431,21 @@ function Services() {
           <div className="col-span-12 md:col-span-8">
             <InView>
               <h3 className="font-display text-5xl md:text-7xl text-ink leading-[1] tracking-tight">
-                Every service<br />your infrastructure<br /><em className="italic font-normal text-ink/70"><HoverOrangeSpan>depends on.</HoverOrangeSpan></em>
+                Every service
+                <br />
+                your infrastructure
+                <br />
+                <em className="italic font-normal text-ink/70">
+                  <HoverOrangeSpan>depends on.</HoverOrangeSpan>
+                </em>
               </h3>
             </InView>
           </div>
           <div className="col-span-12 md:col-span-4 md:pt-6">
             <InView delay={0.15}>
               <p className="text-[15px] text-muted-foreground leading-relaxed max-w-sm">
-                One partner for the full stack — from Level 1 helpdesk to multi-cloud engineering, security, and around-the-clock incident response.
+                One partner for the full stack — from Level 1 helpdesk to multi-cloud engineering,
+                security, and around-the-clock incident response.
               </p>
             </InView>
           </div>
@@ -353,7 +502,10 @@ function StickyPhoneSection() {
   const [active, setActive] = useState(0);
 
   useMotionValueEvent(scrollYProgress, "change", (v) => {
-    const idx = Math.min(stickyBlocks.length - 1, Math.max(0, Math.floor(v * stickyBlocks.length + 0.0001)));
+    const idx = Math.min(
+      stickyBlocks.length - 1,
+      Math.max(0, Math.floor(v * stickyBlocks.length + 0.0001)),
+    );
     setActive((prev) => (prev === idx ? prev : idx));
   });
 
@@ -387,7 +539,11 @@ function StickyPhoneSection() {
   );
 
   return (
-    <section ref={sectionRef} id="features" className="relative bg-cream rounded-t-[40px] -mt-10 pb-20 md:pb-32">
+    <section
+      ref={sectionRef}
+      id="features"
+      className="relative bg-cream rounded-t-[40px] -mt-10 pb-20 md:pb-32"
+    >
       {/* Scroll runway: one viewport per feature */}
       <div style={{ height: `${stickyBlocks.length * 100}vh` }}>
         <div className="sticky top-0 h-screen overflow-hidden">
@@ -398,7 +554,9 @@ function StickyPhoneSection() {
               className={`hidden md:flex w-full items-center gap-10 lg:gap-16 ${onLeft ? "flex-row" : "flex-row-reverse"}`}
             >
               {/* Copy */}
-              <div className={`w-[34%] shrink-0 flex ${onLeft ? "justify-start" : "justify-end text-right"}`}>
+              <div
+                className={`w-[34%] shrink-0 flex ${onLeft ? "justify-start" : "justify-end text-right"}`}
+              >
                 <div className={onLeft ? "" : "[&_.mb-4]:justify-end"}>{Copy}</div>
               </div>
 
@@ -429,7 +587,6 @@ function StickyPhoneSection() {
                         className="h-full w-full object-cover"
                       />
                       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-black/5 to-transparent" />
-
                     </motion.div>
                   ))}
                 </motion.div>
@@ -482,9 +639,6 @@ function StickyPhoneSection() {
     </section>
   );
 }
-
-
-
 
 function InView({ children, delay = 0 }: { children: ReactNode; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -579,10 +733,26 @@ function SliderSection() {
 }
 
 const securityPillars = [
-  { icon: Lock, title: "Least-privilege access", body: "Scoped credentials, MFA everywhere, and time-bound access to every environment we touch." },
-  { icon: ShieldCheck, title: "Hardened workflows", body: "Change control, peer review, and documented runbooks behind every action taken on production." },
-  { icon: FileCheck2, title: "Audited procedures", body: "Full activity trails and periodic reviews so every engagement stands up to enterprise scrutiny." },
-  { icon: Activity, title: "Continuous monitoring", body: "Threat detection, patch management, and vulnerability response running around the clock." },
+  {
+    icon: Lock,
+    title: "Least-privilege access",
+    body: "Scoped credentials, MFA everywhere, and time-bound access to every environment we touch.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Hardened workflows",
+    body: "Change control, peer review, and documented runbooks behind every action taken on production.",
+  },
+  {
+    icon: FileCheck2,
+    title: "Audited procedures",
+    body: "Full activity trails and periodic reviews so every engagement stands up to enterprise scrutiny.",
+  },
+  {
+    icon: Activity,
+    title: "Continuous monitoring",
+    body: "Threat detection, patch management, and vulnerability response running around the clock.",
+  },
 ];
 
 function Privacy() {
@@ -646,7 +816,9 @@ function Privacy() {
                 ease: "easeInOut",
               }}
               className="pointer-events-none absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full opacity-40 blur-[100px]"
-              style={{ background: "radial-gradient(circle, oklch(0.45 0.14 100), transparent 70%)" }}
+              style={{
+                background: "radial-gradient(circle, oklch(0.45 0.14 100), transparent 70%)",
+              }}
             />
             <motion.div
               animate={{
@@ -664,12 +836,13 @@ function Privacy() {
             />
             <div className="relative z-10">
               <div className="mt-6 grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:items-start">
-
                 <h3 className="font-display text-5xl md:text-[64px] text-white leading-[1.02]">
                   Security at the core.
                 </h3>
                 <p className="text-[15px] text-white/55 leading-relaxed max-w-md mt-2">
-                  Every engagement is protected by strict access controls, hardened workflows, audited procedures, and continuous security management — because trust is the foundation of managed services.
+                  Every engagement is protected by strict access controls, hardened workflows,
+                  audited procedures, and continuous security management — because trust is the
+                  foundation of managed services.
                 </p>
               </div>
 
@@ -684,7 +857,11 @@ function Privacy() {
                     className="group relative bg-[#0e0e0c] p-6 transition-colors duration-500 hover:bg-[#15150f]"
                   >
                     <span className="absolute left-0 top-0 h-px w-0 bg-gradient-to-r from-[oklch(0.82_0.16_95)] to-transparent transition-all duration-700 group-hover:w-full" />
-                    <p.icon size={20} strokeWidth={1.5} className="text-[oklch(0.82_0.16_95)]/80 transition-transform duration-500 group-hover:-translate-y-0.5" />
+                    <p.icon
+                      size={20}
+                      strokeWidth={1.5}
+                      className="text-[oklch(0.82_0.16_95)]/80 transition-transform duration-500 group-hover:-translate-y-0.5"
+                    />
                     <h4 className="mt-5 text-[15px] text-white">{p.title}</h4>
                     <p className="mt-2 text-[13px] leading-relaxed text-white/45">{p.body}</p>
                   </motion.div>
@@ -708,7 +885,6 @@ function Privacy() {
   );
 }
 
-
 function TestimonialCard({
   quote,
   name,
@@ -729,14 +905,18 @@ function TestimonialCard({
   // At progress=0: stacked.
   // At progress=0.5: fanned out.
   // At progress=1: straight horizontal row.
-  const finalRotate = offset * 14;       // degrees each card fans out
-  const finalX = offset * 120;           // px horizontal spread
-  const finalY = Math.abs(offset) * 18;  // slight arc
+  const finalRotate = offset * 14; // degrees each card fans out
+  const finalX = offset * 120; // px horizontal spread
+  const finalY = Math.abs(offset) * 18; // slight arc
 
   const rotate = useTransform(progress, [0, 0.5, 1], [0, finalRotate, 0]);
   const x = useTransform(progress, [0, 0.5, 1], [0, finalX, offset * 270]);
   const y = useTransform(progress, [0, 0.5, 1], [0, finalY, 0]);
-  const scale = useTransform(progress, [0, 0.5, 1], [0.92, index === Math.floor(mid) ? 1 : 0.93, 1]);
+  const scale = useTransform(
+    progress,
+    [0, 0.5, 1],
+    [0.92, index === Math.floor(mid) ? 1 : 0.93, 1],
+  );
   const opacity = useTransform(progress, [0, 0.15], [0, 1]);
 
   // Determine z-index: center card on top
@@ -748,9 +928,7 @@ function TestimonialCard({
       className="absolute w-[200px] md:w-[260px] h-[300px] md:h-[340px] origin-bottom bg-[#f2ede8] rounded-2xl p-6 pt-8 pb-10 flex flex-col gap-6 select-none border border-ink/5"
     >
       {/* Quote text */}
-      <p className="text-[13px] leading-relaxed text-ink/80 font-medium">
-        &ldquo;{quote}&rdquo;
-      </p>
+      <p className="text-[13px] leading-relaxed text-ink/80 font-medium">&ldquo;{quote}&rdquo;</p>
       {/* Name */}
       <div className="mt-auto">
         <div className="flex items-center gap-2">
@@ -804,9 +982,12 @@ function Testimonials() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-8 md:mb-12 px-6 select-none"
         >
-          <h3 className="font-display text-5xl md:text-6xl text-ink">Trusted by <HoverOrangeSpan>teams worldwide.</HoverOrangeSpan></h3>
+          <h3 className="font-display text-5xl md:text-6xl text-ink">
+            Trusted by <HoverOrangeSpan>teams worldwide.</HoverOrangeSpan>
+          </h3>
           <p className="mt-4 text-sm text-muted-foreground max-w-md mx-auto">
-            Hosting providers, MSPs, and enterprises rely on SupportPRO to keep their infrastructure and customers running.
+            Hosting providers, MSPs, and enterprises rely on SupportPRO to keep their infrastructure
+            and customers running.
           </p>
         </motion.div>
 
@@ -828,15 +1009,11 @@ function Testimonials() {
         <motion.p
           style={{ opacity: hintOpacity }}
           className="absolute bottom-10 text-[12px] text-ink/40 tracking-wide"
-        >
-
-        </motion.p>
+        ></motion.p>
       </div>
     </section>
   );
 }
-
-
 
 function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
@@ -844,18 +1021,21 @@ function FAQ() {
     <section id="faq" className="bg-cream py-32">
       <div className="mx-auto max-w-[1200px] px-6 lg:px-[80px]">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-16 lg:gap-24 items-start">
-          
           {/* Left Column: Title & CTA */}
           <div className="relative h-full flex flex-col">
             <div className="sticky top-32">
               <h3 className="font-display text-5xl md:text-[64px] text-ink leading-[1.05] tracking-tight mb-8">
-                Frequently<br/><HoverOrangeSpan>asked questions</HoverOrangeSpan><span className="text-[#FF6C2C]">.</span>
+                Frequently
+                <br />
+                <HoverOrangeSpan>asked questions</HoverOrangeSpan>
+                <span className="text-[#FF6C2C]">.</span>
               </h3>
-              
+
               <div className="w-10 h-[2px] bg-[#FF6C2C] mb-8" />
-              
+
               <p className="text-[15px] text-muted-foreground leading-relaxed mb-12 max-w-[320px]">
-                Get quick answers to the most common questions about our support services, processes, and infrastructure.
+                Get quick answers to the most common questions about our support services,
+                processes, and infrastructure.
               </p>
 
               {/* Documentation link */}
@@ -865,9 +1045,12 @@ function FAQ() {
                     <BookOpen size={25} strokeWidth={1.5} />
                   </div>
                   <div className="pt-1">
-                    <h4 className="font-display text-2xl text-ink leading-none mb-3">Still have questions?</h4>
+                    <h4 className="font-display text-2xl text-ink leading-none mb-3">
+                      Still have questions?
+                    </h4>
                     <p className="text-[15px] text-muted-foreground leading-relaxed">
-                      Can't find the answers you're looking for? Our documentation has everything you need.
+                      Can't find the answers you're looking for? Our documentation has everything
+                      you need.
                     </p>
                     <button className="text-[15px] font-bold text-[#FF6C2C] flex items-center gap-3 hover:gap-4 transition-all mt-6">
                       View Documentation
@@ -884,18 +1067,28 @@ function FAQ() {
             {faqs.map((f, i) => {
               const isOpen = open === i;
               return (
-                <div 
-                  key={i} 
-                  className={`relative overflow-hidden border-b border-ink/15 last:border-b-0 transition-colors duration-300 ${isOpen ? 'bg-[#FF6C2C]/[0.035]' : 'hover:bg-ink/[0.025]'}`}
+                <div
+                  key={i}
+                  className={`relative overflow-hidden border-b border-ink/15 last:border-b-0 transition-colors duration-300 ${isOpen ? "bg-[#FF6C2C]/[0.035]" : "hover:bg-ink/[0.025]"}`}
                 >
                   <button
                     onClick={() => setOpen(isOpen ? null : i)}
                     aria-expanded={isOpen}
                     className="w-full py-6 lg:py-7 text-left flex items-center justify-between gap-6 group"
                   >
-                    <div className={`text-[16px] font-medium flex-1 pr-4 transition-colors ${isOpen ? 'text-ink' : 'text-ink/80 group-hover:text-ink'}`}>{f.q}</div>
-                    <div className={`shrink-0 transition-colors ${isOpen ? 'text-[#FF6C2C]' : 'text-muted-foreground group-hover:text-ink/60'}`}>
-                      {isOpen ? <Minus size={20} strokeWidth={1.5} /> : <Plus size={20} strokeWidth={1.5} />}
+                    <div
+                      className={`text-[16px] font-medium flex-1 pr-4 transition-colors ${isOpen ? "text-ink" : "text-ink/80 group-hover:text-ink"}`}
+                    >
+                      {f.q}
+                    </div>
+                    <div
+                      className={`shrink-0 transition-colors ${isOpen ? "text-[#FF6C2C]" : "text-muted-foreground group-hover:text-ink/60"}`}
+                    >
+                      {isOpen ? (
+                        <Minus size={20} strokeWidth={1.5} />
+                      ) : (
+                        <Plus size={20} strokeWidth={1.5} />
+                      )}
                     </div>
                   </button>
                   <AnimatePresence initial={false}>
@@ -907,7 +1100,9 @@ function FAQ() {
                         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                         className="overflow-hidden"
                       >
-                        <p className="max-w-[620px] pb-6 lg:pb-7 pr-12 text-[14px] text-muted-foreground leading-relaxed">{f.a}</p>
+                        <p className="max-w-[620px] pb-6 lg:pb-7 pr-12 text-[14px] text-muted-foreground leading-relaxed">
+                          {f.a}
+                        </p>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -915,7 +1110,6 @@ function FAQ() {
               );
             })}
           </div>
-
         </div>
       </div>
     </section>
@@ -948,7 +1142,9 @@ function CTA() {
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             className="font-display text-6xl md:text-8xl leading-[0.95]"
           >
-            Ready to strengthen<br /><em>your infrastructure?</em>
+            Ready to strengthen
+            <br />
+            <em>your infrastructure?</em>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}
@@ -957,7 +1153,9 @@ function CTA() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="mt-6 text-white/80 text-sm md:text-base max-w-xl"
           >
-            Partner with certified engineers delivering enterprise-grade infrastructure management, cloud operations, DevOps, technical support, and proactive monitoring — 24 hours a day, 365 days a year.
+            Partner with certified engineers delivering enterprise-grade infrastructure management,
+            cloud operations, DevOps, technical support, and proactive monitoring — 24 hours a day,
+            365 days a year.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -967,10 +1165,16 @@ function CTA() {
             className="mt-8 flex flex-wrap items-center justify-center gap-3"
             id="contact"
           >
-            <a href="#contact-form" className="rounded-full bg-white text-ink px-6 py-3 text-sm font-medium hover:bg-white/90 transition">
+            <a
+              href="#contact-form"
+              className="rounded-full bg-white text-ink px-6 py-3 text-sm font-medium hover:bg-white/90 transition"
+            >
               Book a Consultation
             </a>
-            <a href="#contact-form" className="rounded-full border border-white/30 backdrop-blur-md bg-white/10 text-white px-6 py-3 text-sm font-medium hover:bg-white/20 transition">
+            <a
+              href="#contact-form"
+              className="rounded-full border border-white/30 backdrop-blur-md bg-white/10 text-white px-6 py-3 text-sm font-medium hover:bg-white/20 transition"
+            >
               Contact Our Team
             </a>
           </motion.div>
@@ -986,21 +1190,41 @@ function SiteFooter() {
       <div className="mx-auto max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-8 text-xs">
         <div>
           <a href="#" className="inline-block">
-            <img src={logoWhite} alt="SupportPRO Logo" className="h-10 md:h-12 w-auto object-contain" />
+            <img
+              src={logoWhite}
+              alt="SupportPRO Logo"
+              className="h-10 md:h-12 w-auto object-contain"
+            />
           </a>
-          <p className="mt-3 text-white/50 leading-relaxed max-w-[220px]">Enterprise infrastructure support, 24/7/365.</p>
+          <p className="mt-3 text-white/50 leading-relaxed max-w-[220px]">
+            Enterprise infrastructure support, 24/7/365.
+          </p>
         </div>
         <div>
           <div className="font-medium text-white mb-3">Services</div>
-          <div className="space-y-2"><div>24/7 Support</div><div>Cloud Management</div><div>Server Management</div><div>NOC Services</div></div>
+          <div className="space-y-2">
+            <div>24/7 Support</div>
+            <div>Cloud Management</div>
+            <div>Server Management</div>
+            <div>NOC Services</div>
+          </div>
         </div>
         <div>
           <div className="font-medium text-white mb-3">Solutions</div>
-          <div className="space-y-2"><div>White-label Support</div><div>DevOps</div><div>Managed IT</div><div>Hosting Support</div></div>
+          <div className="space-y-2">
+            <div>White-label Support</div>
+            <div>DevOps</div>
+            <div>Managed IT</div>
+            <div>Hosting Support</div>
+          </div>
         </div>
         <div>
           <div className="font-medium text-white mb-3">Company</div>
-          <div className="space-y-2"><div>About</div><div>Contact</div><div>Careers</div></div>
+          <div className="space-y-2">
+            <div>About</div>
+            <div>Contact</div>
+            <div>Careers</div>
+          </div>
         </div>
       </div>
       <div className="mx-auto max-w-6xl mt-12 pt-6 border-t border-white/10 text-white/40 text-xs">
@@ -1028,7 +1252,5 @@ function Index() {
       <CTA />
       <SiteFooter />
     </main>
-
   );
 }
-
