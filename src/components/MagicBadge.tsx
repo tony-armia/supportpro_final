@@ -325,13 +325,7 @@ export const GlobalBadgeSpotlight: React.FC<GlobalSpotlightProps> = ({
       height: ${spotlightRadius * 2}px;
       border-radius: 50%;
       pointer-events: none;
-      background: radial-gradient(circle,
-        rgba(${glowColor}, 0.1) 0%,
-        rgba(${glowColor}, 0.05) 20%,
-        rgba(${glowColor}, 0.02) 40%,
-        rgba(${glowColor}, 0.01) 60%,
-        transparent 70%
-      );
+      background: transparent; /* Removed the radial-gradient mesh background */
       z-index: 200;
       opacity: 0;
       transform: translate(-50%, -50%);

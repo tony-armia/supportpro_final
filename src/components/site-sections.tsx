@@ -422,7 +422,7 @@ const MarqueeRow = ({
   // Duplicate exactly once — CSS translates -50% which equals exactly 1 set, seamless loop
   const loopItems = [...items, ...items];
   return (
-    <div className="relative w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
+    <div className="relative w-full overflow-hidden py-4 [mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_12%,black_88%,transparent)]">
       <div
         className={`flex gap-4 w-max ${reverse ? "animate-marquee-reverse" : "animate-marquee"}`}
       >
@@ -431,8 +431,7 @@ const MarqueeRow = ({
             key={i}
             enableMagnetism={false}
             enableTilt={true}
-            style={{ borderWidth: "1px", borderColor: "rgba(255, 108, 44, 0.28)" }}
-            className="w-[252px] h-[288px] flex-shrink-0 relative isolate overflow-hidden group flex flex-col items-center justify-center rounded-2xl bg-white transition-colors duration-400 hover:border-[#FF6C2C]/70 hover:bg-[#FF6C2C]/[0.015] cursor-pointer"
+            className="w-[252px] h-[288px] flex-shrink-0 relative isolate overflow-hidden group flex flex-col items-center justify-center rounded-2xl bg-white border border-ink/10 transition-colors duration-400 hover:border-[#FF6C2C]/70 cursor-pointer"
           >
             {/* Logo */}
             <div className="mb-6 flex h-[72px] w-[156px] items-center justify-center transition-transform duration-400 group-hover:-translate-y-1.5">
