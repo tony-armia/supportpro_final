@@ -177,7 +177,7 @@ function Nav() {
 
   const bg = useTransform(scrollY, [0, 200], ["rgba(255,255,255,0.15)", "rgba(20,20,20,0.55)"]);
   return (
-    <nav className="fixed top-4 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-[100px]">
+    <nav className="fixed top-4 left-0 right-0 z-50 mx-auto flex max-w-[1152px] items-center justify-between px-5 md:px-6 lg:px-8">
       <motion.a
         href="#"
         className="flex items-center gap-2"
@@ -250,13 +250,13 @@ function Hero() {
       <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
       <motion.div
         style={{ y: textY, opacity }}
-        className="relative z-10 flex h-full flex-col items-center justify-end pb-20 md:pb-24 px-6 text-center text-white"
+        className="relative z-10 mx-auto flex h-full max-w-[1152px] flex-col items-center justify-end pb-20 px-5 text-center text-white md:px-6 lg:px-8 lg:pb-24"
       >
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.95] max-w-4xl drop-shadow-[0_2px_20px_rgba(0,0,0,0.35)]"
+          className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[76px] leading-[0.95] max-w-4xl drop-shadow-[0_2px_20px_rgba(0,0,0,0.35)]"
         >
           Enterprise infrastructure
           <br />
@@ -266,7 +266,7 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-8 max-w-xl text-base md:text-md font-light text-white/90 leading-relaxed"
+          className="mt-6 max-w-xl text-[14px] md:text-[15px] font-light text-white/90 leading-relaxed"
         >
           SupportPRO delivers 24/7 managed infrastructure, cloud operations, server administration,
           DevOps, and white-label technical support for hosting providers, SaaS companies, MSPs, and
@@ -276,17 +276,17 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-8 flex flex-wrap items-center justify-center gap-3"
+          className="mt-6 flex flex-wrap items-center justify-center gap-3"
         >
           <a
             href="#contact-form"
-            className="cursor-morph rounded-full bg-white text-ink px-6 py-3 text-sm font-reglar hover:bg-white/90 transition"
+            className="cursor-morph rounded-full bg-white text-ink px-5 py-2.5 text-[13px] font-reglar hover:bg-white/90 transition"
           >
             Book a Consultation
           </a>
           <a
             href="#services"
-            className="cursor-morph rounded-full border border-white/30 backdrop-blur-md bg-white/10 text-white px-6 py-3 text-sm font-medium hover:bg-white/20 transition"
+            className="cursor-morph rounded-full border border-white/30 backdrop-blur-md bg-white/10 text-white px-5 py-2.5 text-[13px] font-medium hover:bg-white/20 transition"
           >
             Explore Services
           </a>
@@ -374,7 +374,7 @@ function ServiceRow({
         const rect = e.currentTarget.getBoundingClientRect();
         setMouse({ x: e.clientX - rect.left, y: e.clientY - rect.top });
       }}
-      className="group relative border-t border-ink/10 py-10 md:py-14 cursor-default overflow-hidden"
+      className="group relative border-t border-ink/10 py-8 lg:py-12 cursor-default overflow-hidden"
     >
       {/* Spotlight follow */}
       <motion.div
@@ -431,12 +431,12 @@ function ServiceRow({
 
 function Services() {
   return (
-    <section id="services" className="bg-cream pt-8 pb-32">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="grid grid-cols-12 gap-6 md:gap-10 mb-16 md:mb-24">
+    <section id="services" className="bg-cream py-16 lg:py-24">
+      <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
+        <div className="grid grid-cols-12 gap-6 md:gap-10 mb-12 md:mb-16">
           <div className="col-span-12 md:col-span-8">
             <InView>
-              <h3 className="font-display text-5xl md:text-7xl text-ink leading-[1] tracking-tight">
+              <h3 className="font-display text-4xl md:text-6xl text-ink leading-[1] tracking-tight">
                 Every service
                 <br />
                 your infrastructure
@@ -449,7 +449,7 @@ function Services() {
           </div>
           <div className="col-span-12 md:col-span-4 md:pt-6">
             <InView delay={0.15}>
-              <p className="text-[15px] text-muted-foreground leading-relaxed max-w-sm">
+              <p className="text-[14px] text-muted-foreground leading-relaxed max-w-sm">
                 One partner for the full stack — from Level 1 helpdesk to multi-cloud engineering,
                 security, and around-the-clock incident response.
               </p>
@@ -528,7 +528,7 @@ function StickyPhoneSection() {
         transition={{ duration: 0.6, ease: EASE }}
         className="max-w-sm will-change-transform"
       >
-        <div className="mb-4 flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-ink/40">
+        <div className="mb-4 flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-ink/40">
           <span className="tabular-nums">0{active + 1}</span>
           <span className="h-px w-8 bg-ink/20" />
         </div>
@@ -548,12 +548,12 @@ function StickyPhoneSection() {
     <section
       ref={sectionRef}
       id="features"
-      className="relative bg-cream rounded-t-[40px] -mt-10 pb-20 md:pb-32"
+      className="relative bg-cream rounded-t-[40px] -mt-10 pb-16 lg:pb-24"
     >
       {/* Scroll runway: one viewport per feature */}
       <div style={{ height: `${stickyBlocks.length * 100}vh` }}>
         <div className="sticky top-0 h-screen overflow-hidden">
-          <div className="mx-auto flex h-full max-w-[1400px] items-center px-6 lg:px-10">
+          <div className="mx-auto flex h-full max-w-[1152px] items-center px-5 md:px-6 lg:px-8">
             <motion.div
               layout
               transition={{ duration: 0.7, ease: EASE }}
@@ -571,7 +571,7 @@ function StickyPhoneSection() {
                 <motion.div
                   layout
                   transition={{ duration: 0.7, ease: EASE }}
-                  className="relative w-full aspect-[16/11] max-h-[76vh] overflow-hidden rounded-[32px] bg-ink/5 shadow-[0_50px_110px_-35px_rgba(0,0,0,0.4)] ring-1 ring-ink/10"
+                  className="relative w-full aspect-[16/11] max-h-[76vh] overflow-hidden rounded-[32px] bg-ink/5 ring-1 ring-ink/10"
                 >
                   {stickyBlocks.map((s, i) => (
                     <motion.div
@@ -695,9 +695,9 @@ function SliderSection() {
   const x = useTransform(smoothProgress, [0, 1], ["calc(0% + 0vw)", "calc(-100% + 100vw)"]);
 
   return (
-    <section ref={targetRef} className="relative h-[300vh] bg-cream pb-32 md:pb-48">
-      <div className="sticky top-0 h-screen flex flex-col pt-16 md:pt-20">
-        <div className="mx-auto w-full max-w-[1400px] px-6 lg:px-10 mb-6 md:mb-8">
+    <section ref={targetRef} className="relative h-[300vh] bg-cream pb-16 lg:pb-24">
+      <div className="sticky top-0 h-screen flex flex-col pt-16 lg:pt-24">
+        <div className="mx-auto w-full max-w-[1152px] px-5 md:px-6 lg:px-8 mb-12 lg:mb-16">
           <InView>
             <h3 className="font-display text-5xl md:text-6xl text-ink max-w-2xl leading-[1.05]">
               Built for the moments that matter.
@@ -726,9 +726,9 @@ function SliderSection() {
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              <div className="relative z-10 h-full p-10 md:p-12 max-w-lg text-white flex flex-col justify-end">
-                <h4 className="font-display text-4xl md:text-5xl leading-[1.05]">{c.title}</h4>
-                <p className="mt-4 text-[15px] leading-relaxed text-white/85">{c.body}</p>
+              <div className="relative z-10 h-full p-8 lg:p-12 max-w-lg text-white flex flex-col justify-end">
+                <h4 className="font-display text-3xl lg:text-5xl leading-[1.05]">{c.title}</h4>
+                <p className="mt-4 text-[14px] leading-relaxed text-white/85">{c.body}</p>
               </div>
             </motion.article>
           ))}
@@ -785,12 +785,12 @@ function Privacy() {
   const spotlightBackground = useMotionTemplate`radial-gradient(1000px circle at ${springX}px ${springY}px, oklch(0.5 0.15 95 / 0.4), transparent 60%)`;
 
   return (
-    <section ref={ref} className="bg-cream pt-24 md:pt-32 pb-32">
-      <div className="mx-auto max-w-6xl px-6">
+    <section ref={ref} className="bg-cream py-16 lg:py-24">
+      <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
         <InView>
           <div
             onMouseMove={handleMouseMove}
-            className="group/card relative overflow-hidden rounded-[32px] bg-gradient-to-br from-[#0a0a0a] via-[#141410] to-[#1a1a18] p-10 md:p-16"
+            className="group/card relative overflow-hidden rounded-[32px] bg-gradient-to-br from-[#0a0a0a] via-[#141410] to-[#1a1a18] p-8 lg:p-16"
           >
             {/* Mouse Spotlight */}
             <motion.div
@@ -986,9 +986,9 @@ function Testimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-8 md:mb-12 px-6 select-none"
+          className="text-center mb-8 md:mb-12 px-5 md:px-6 lg:px-8 select-none"
         >
-          <h3 className="font-display text-5xl md:text-6xl text-ink">
+          <h3 className="font-display text-4xl md:text-5xl text-ink">
             Trusted by <HoverOrangeSpan>teams worldwide.</HoverOrangeSpan>
           </h3>
           <p className="mt-4 text-sm text-muted-foreground max-w-md mx-auto">
@@ -1024,12 +1024,12 @@ function Testimonials() {
 function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="faq" className="bg-cream py-32">
-      <div className="mx-auto max-w-[1200px] px-6 lg:px-[80px]">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-16 lg:gap-24 items-start">
+    <section id="faq" className="bg-cream py-16 lg:py-24">
+      <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-16 items-start">
           {/* Left Column: Title & CTA */}
           <div className="relative h-full flex flex-col">
-            <div className="sticky top-32">
+            <div className="sticky top-24">
               <h3 className="font-display text-5xl md:text-[64px] text-ink leading-[1.05] tracking-tight mb-8">
                 Frequently
                 <br />
@@ -1080,7 +1080,7 @@ function FAQ() {
                   <button
                     onClick={() => setOpen(isOpen ? null : i)}
                     aria-expanded={isOpen}
-                    className="w-full py-6 lg:py-7 text-left flex items-center justify-between gap-6 group"
+                    className="w-full py-5 lg:py-6 text-left flex items-center justify-between gap-6 group"
                   >
                     <div
                       className={`text-[16px] font-medium flex-1 pr-4 transition-colors ${isOpen ? "text-ink" : "text-ink/80 group-hover:text-ink"}`}
@@ -1106,7 +1106,7 @@ function FAQ() {
                         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                         className="overflow-hidden"
                       >
-                        <p className="max-w-[620px] pb-6 lg:pb-7 pr-12 text-[14px] text-muted-foreground leading-relaxed">
+                        <p className="max-w-[620px] pb-5 lg:pb-6 pr-12 text-[14px] text-muted-foreground leading-relaxed">
                           {f.a}
                         </p>
                       </motion.div>
@@ -1140,7 +1140,7 @@ function CTA() {
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/80" />
-        <div className="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center text-white">
+        <div className="relative z-10 mx-auto flex h-full max-w-[1152px] flex-col items-center justify-center px-5 md:px-6 lg:px-8 text-center text-white">
           <motion.h2
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -1192,8 +1192,8 @@ function CTA() {
 
 function SiteFooter() {
   return (
-    <footer className="bg-ink text-white/80 px-6 md:px-10 py-16">
-      <div className="mx-auto max-w-6xl grid grid-cols-2 md:grid-cols-4 gap-8 text-xs">
+    <footer className="bg-ink text-white/80 px-5 md:px-6 lg:px-8 py-16 lg:py-24">
+      <div className="mx-auto max-w-[1152px] grid grid-cols-2 md:grid-cols-4 gap-8 text-xs">
         <div>
           <a href="#" className="inline-block">
             <img
@@ -1233,7 +1233,7 @@ function SiteFooter() {
           </div>
         </div>
       </div>
-      <div className="mx-auto max-w-6xl mt-12 pt-6 border-t border-white/10 text-white/40 text-xs">
+      <div className="mx-auto max-w-[1152px] mt-12 pt-6 border-t border-white/10 text-white/40 text-xs">
         © 2026 SupportPRO. All rights reserved.
       </div>
     </footer>

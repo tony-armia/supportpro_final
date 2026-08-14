@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { motion, useInView } from "motion/react";
+import ParticleBadge, { GlobalBadgeSpotlight } from "./MagicBadge";
 import {
   MessageCircle,
   Clock,
@@ -243,12 +244,15 @@ const credentials = [
 ];
 
 export function Credentials() {
+  const gridRef = useRef<HTMLDivElement>(null);
+
   return (
-    <section className="bg-cream pt-20 pb-16 md:pb-20">
-      <div className="mx-auto max-w-6xl px-6">
+    <section className="bg-cream py-16 lg:py-24 relative overflow-hidden">
+      <GlobalBadgeSpotlight gridRef={gridRef} />
+      <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8 relative z-10" ref={gridRef}>
         {/* Location tag */}
         <Reveal>
-          <div className="flex items-center justify-center gap-2 mb-10">
+          <div className="flex items-center justify-center gap-2 mb-12">
             {/* <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="shrink-0" style={{ color: "oklch(0.65 0.16 50)" }}>
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/>
               <circle cx="12" cy="9" r="2.5" fill="white"/>
@@ -266,15 +270,16 @@ export function Credentials() {
           <div className="flex overflow-hidden relative -mx-6 px-6 md:mx-0 md:px-0 pb-4 pt-1">
             <div className="flex w-max animate-marquee flex-nowrap items-center gap-3">
               {[...credentials, ...credentials, ...credentials].map((c, i) => (
-                <div
+                <ParticleBadge
                   key={i}
-                  className="flex shrink-0 items-center gap-2 rounded-full border border-ink/10 bg-white px-3.5 py-2 hover:border-ink/20 transition-all duration-300 cursor-pointer"
+                  enableMagnetism={false}
+                  className="flex shrink-0 items-center gap-2.5 border border-ink/10 px-5 py-3 cursor-pointer bg-white rounded-full"
                 >
                   <span className="flex items-center shrink-0">{c.icon}</span>
-                  <span className="text-[12px] font-medium text-ink/70 whitespace-nowrap">
+                  <span className="text-[13px] font-medium text-ink/80 whitespace-nowrap">
                     {c.name}
                   </span>
-                </div>
+                </ParticleBadge>
               ))}
             </div>
           </div>
@@ -306,29 +311,29 @@ const pillars = [
 
 export function Pillars() {
   return (
-    <section className="bg-cream pt-16 pb-28 overflow-hidden">
-      <div className="mx-auto max-w-6xl px-6">
+    <section className="bg-cream py-16 lg:py-24 overflow-hidden">
+      <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
         {/* Top split: heading left + large image right */}
-        <div className="grid grid-cols-12 gap-6 md:gap-10 items-stretch mb-14 md:mb-20">
+        <div className="grid grid-cols-12 gap-6 md:gap-8 lg:gap-10 items-stretch mb-12 md:mb-16">
           {/* Left: eyebrow + heading + description */}
           <div className="col-span-12 md:col-span-5 flex flex-col justify-center">
             <Reveal>
-              <div className="flex items-center gap-3 mb-5">
+              <div className="flex items-center gap-3 mb-4">
                 <span className="block h-px w-8" style={{ background: "oklch(0.65 0.16 50)" }} />
                 <span
-                  className="text-[11px] tracking-[0.2em] uppercase font-medium"
+                  className="text-[10px] tracking-[0.2em] uppercase font-medium"
                   style={{ color: "oklch(0.65 0.16 50)" }}
                 >
-                  Experts you can rely on
+                  Our Standards
                 </span>
               </div>
-              <h2 className="font-display text-5xl md:text-6xl leading-[1.03] text-ink">
+              <h2 className="font-display text-3xl md:text-4xl lg:text-[48px] text-ink leading-[1.05]">
                 The outsourced <HoverOrangeSpan>technical support experts</HoverOrangeSpan>
                 <span style={{ color: "oklch(0.65 0.16 50)" }}>.</span>
               </h2>
             </Reveal>
             <Reveal delay={0.15}>
-              <p className="mt-6 text-[15px] leading-relaxed text-muted-foreground max-w-sm">
+              <p className="mt-5 text-[14px] leading-relaxed text-muted-foreground max-w-sm">
                 We provide 24/7 transparent technical support for web hosting companies, data
                 centres, server management companies, and MSPs — quietly, under your brand, at
                 enterprise standards.
@@ -353,7 +358,7 @@ export function Pillars() {
         </div>
 
         {/* Pillar cards */}
-        <div className="grid gap-5 md:grid-cols-3">
+        <div className="grid gap-5 lg:gap-6 md:grid-cols-3">
           {pillars.map((p, i) => (
             <motion.div
               key={p.title}
@@ -361,7 +366,7 @@ export function Pillars() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, delay: i * 0.12, ease: EASE }}
-              className="group relative flex flex-col rounded-2xl border border-ink/8 bg-white p-7 hover:-translate-y-1 transition-all duration-500"
+              className="group relative flex flex-col rounded-2xl border border-ink/8 bg-white p-5 lg:p-6 hover:-translate-y-1 transition-all duration-500"
             >
               {/* Number + icon row */}
               <div className="flex items-center justify-between mb-6">
@@ -422,10 +427,12 @@ const MarqueeRow = ({
         className={`flex gap-4 w-max ${reverse ? "animate-marquee-reverse" : "animate-marquee"}`}
       >
         {loopItems.map((p, i) => (
-          <div
+          <ParticleBadge
             key={i}
-            style={{ borderWidth: "0.5px", borderColor: "rgba(255, 108, 44, 0.28)" }}
-            className="w-[252px] h-[288px] flex-shrink-0 relative isolate overflow-hidden group flex flex-col items-center justify-center rounded-lg bg-white transition-colors duration-400 hover:border-[#FF6C2C]/70 hover:bg-[#FF6C2C]/[0.015]"
+            enableMagnetism={false}
+            enableTilt={true}
+            style={{ borderWidth: "1px", borderColor: "rgba(255, 108, 44, 0.28)" }}
+            className="w-[252px] h-[288px] flex-shrink-0 relative isolate overflow-hidden group flex flex-col items-center justify-center rounded-2xl bg-white transition-colors duration-400 hover:border-[#FF6C2C]/70 hover:bg-[#FF6C2C]/[0.015] cursor-pointer"
           >
             {/* Logo */}
             <div className="mb-6 flex h-[72px] w-[156px] items-center justify-center transition-transform duration-400 group-hover:-translate-y-1.5">
@@ -447,7 +454,7 @@ const MarqueeRow = ({
                 className="text-[#FF6C2C] opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
               />
             </div>
-          </div>
+          </ParticleBadge>
         ))}
       </div>
     </div>
@@ -457,21 +464,23 @@ const MarqueeRow = ({
 export function Platforms() {
   const row1 = platformCards.slice(0, 5);
   const row2 = platformCards.slice(5, 10);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="bg-cream pb-24 md:pb-32 overflow-hidden">
-      <div className="mx-auto max-w-[1100px] px-6 text-center mb-14">
+    <section className="bg-cream pb-16 lg:pb-24 overflow-hidden relative">
+      <GlobalBadgeSpotlight gridRef={gridRef} spotlightRadius={400} />
+      <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8 text-center mb-12 relative z-10">
         <Reveal>
-          <h2 className="font-display text-4xl md:text-[52px] text-ink">
+          <h2 className="font-display text-3xl md:text-[44px] text-ink">
             Supported <HoverOrangeSpan>platforms.</HoverOrangeSpan>
           </h2>
-          <p className="mx-auto mt-5 max-w-[420px] text-[15px] leading-relaxed text-muted-foreground/80">
+          <p className="mx-auto mt-5 max-w-[420px] text-[14px] leading-relaxed text-muted-foreground/80">
             Covering every major technology platform to bring you excellent outsourced support.
           </p>
         </Reveal>
       </div>
 
-      <div className="relative w-full space-y-3">
+      <div className="relative w-full space-y-3 z-10" ref={gridRef}>
         <MarqueeRow items={row1} />
         <MarqueeRow items={row2} reverse />
       </div>
@@ -520,9 +529,9 @@ const stats = [
 
 export function Experts() {
   return (
-    <section className="bg-cream pb-32 pt-20">
-      <div className="mx-auto max-w-[1200px] px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-24">
+    <section className="bg-cream py-16 lg:py-24">
+      <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
+        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
           {/* Left Side: Why we are the experts */}
           <div>
             <Reveal>
@@ -534,18 +543,19 @@ export function Experts() {
               </h2>
             </Reveal>
 
-            <Reveal delay={0.1}>
-              <div className="mt-14 flex items-center gap-4">
-                <div className="h-6 w-0.5 rounded-full bg-[#FF6C2C]" />
-                <h3 className="font-display text-2xl text-ink">The SupportPRO difference</h3>
-              </div>
-              <p className="mt-6 text-[15px] leading-relaxed text-muted-foreground max-w-[480px]">
+            <Reveal delay={0.2}>
+              <h4 className="mt-6 font-display text-3xl md:text-4xl lg:text-[48px] leading-[1.05] text-ink">
+                Technical excellence.
+                <br />
+                Process discipline.
+              </h4>
+              <p className="mt-4 text-[14px] leading-relaxed text-muted-foreground max-w-[420px]">
                 Since our inception 23 years ago we have been learning and pioneering in outsourced
                 technical support. We measure the metrics and key process indicators behind every
                 engagement, and evaluate ourselves constantly so the service stays consistent time
                 after time. Every ticket is treated with the utmost importance.
               </p>
-              <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground max-w-[480px]">
+              <p className="mt-4 text-[14px] leading-relaxed text-muted-foreground max-w-[420px]">
                 We have developed a stringent quality assurance process on par with any industry
                 standard. We love solving problems, and that is what drives our engineers day and
                 night. Our commitment to quality and process has earned us ISO 9001:2015
@@ -553,7 +563,7 @@ export function Experts() {
               </p>
 
               {/* ISO Badge */}
-              <div className="mt-10 flex items-center gap-4">
+              <div className="mt-8 flex items-center gap-4">
                 <div className="w-14 h-14 rounded-full border border-[#FF6C2C]/30 bg-[#FF6C2C]/5 flex items-center justify-center text-[#FF6C2C]">
                   <Award size={24} strokeWidth={1.5} />
                 </div>
@@ -582,7 +592,7 @@ export function Experts() {
               <div className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#FF6C2C] mb-2">
                 OUR NUMBERS
               </div>
-              <div className="text-[14px] text-muted-foreground mb-12">
+              <div className="text-[14px] text-muted-foreground mb-8">
                 Measured from January 2015 to today.
               </div>
 
@@ -613,7 +623,7 @@ export function Experts() {
               </div>
 
               {/* Footer text */}
-              <div className="mt-10 flex items-center gap-3">
+              <div className="mt-8 flex items-center gap-3">
                 <div className="w-0.5 h-4 bg-[#FF6C2C]" />
                 <div className="text-[13px] text-muted-foreground font-medium">
                   Built on experience. Proven by numbers.
@@ -634,22 +644,20 @@ export function ContactForm() {
   const [message, setMessage] = useState("");
 
   return (
-    <section id="contact-form" className="bg-cream pb-32">
-      <div className="mx-auto max-w-[1200px] px-6 lg:px-[80px]">
-        <div className="rounded-[36px] border border-ink/5 bg-white/80 p-8 md:p-12 lg:p-14 backdrop-blur-md">
-          <div className="grid grid-cols-12 gap-10 lg:gap-14 items-center">
+    <section id="contact-form" className="bg-cream pb-16 md:pb-24 lg:pb-28">
+      <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
+        <div className="rounded-[36px] border border-ink/5 bg-white/80 p-5 md:p-8 lg:p-10 backdrop-blur-md">
+          <div className="grid grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Column: Info */}
             <div className="col-span-12 lg:col-span-5 flex flex-col justify-between pr-0 lg:pr-10 lg:border-r lg:border-ink/5">
               <Reveal>
-                <h2 className="font-display text-4xl md:text-5xl lg:text-[56px] leading-[1.08] text-ink tracking-tight">
+                <h2 className="font-display text-3xl md:text-[44px] leading-[1.05] text-ink mb-4">
                   Drop us a <br />
                   <span className="italic font-serif">message</span>
                   <span className="text-[#FF6C2C]">.</span>
                 </h2>
-
                 <div className="w-10 h-[2.5px] bg-[#FF6C2C] my-6" />
-
-                <p className="text-[14px] leading-relaxed text-muted-foreground max-w-sm mb-10">
+                <p className="text-[13px] leading-relaxed text-muted-foreground max-w-sm mb-8">
                   Tell us about your infrastructure and support requirements. A senior engineer will
                   get back to you with a scoped proposal, SLA options, and pricing.
                 </p>
@@ -700,53 +708,61 @@ export function ContactForm() {
 
             {/* Right Column: Form */}
             <div className="col-span-12 lg:col-span-7">
-              <Reveal delay={0.12}>
+              <Reveal delay={0.1}>
                 <form
-                  className="space-y-4"
                   onSubmit={(e) => {
                     e.preventDefault();
                     setSent(true);
                   }}
+                  className="flex flex-col gap-5 lg:gap-6"
                 >
-                  <div className="grid gap-4 sm:grid-cols-2">
+                  {/* Two inputs row */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
                     <div className="relative">
                       <User
-                        size={18}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30"
+                        className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30 transition-colors group-focus-within:text-[#FF6C2C]"
+                        size={16}
+                        strokeWidth={1.5}
                       />
                       <input
                         required
                         placeholder="Full name"
-                        className="w-full rounded-2xl border border-ink/10 bg-[#FAFAFA] pl-11 pr-4 py-3.5 text-[14px] text-ink outline-none transition-all placeholder:text-ink/35 focus:border-[#FF6C2C]/50 focus:bg-white focus:ring-2 focus:ring-[#FF6C2C]/10"
+                        className="w-full rounded-2xl border border-ink/10 bg-[#FAFAFA] pl-11 pr-4 py-3 text-[13px] text-ink outline-none transition-all placeholder:text-ink/35 focus:border-[#FF6C2C]/50 focus:bg-white focus:ring-2 focus:ring-[#FF6C2C]/10"
                       />
                     </div>
                     <div className="relative">
                       <Mail
-                        size={18}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30"
+                        className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30 transition-colors group-focus-within:text-[#FF6C2C]"
+                        size={16}
+                        strokeWidth={1.5}
                       />
                       <input
                         required
                         type="email"
                         placeholder="Work email"
-                        className="w-full rounded-2xl border border-ink/10 bg-[#FAFAFA] pl-11 pr-4 py-3.5 text-[14px] text-ink outline-none transition-all placeholder:text-ink/35 focus:border-[#FF6C2C]/50 focus:bg-white focus:ring-2 focus:ring-[#FF6C2C]/10"
+                        className="w-full rounded-2xl border border-ink/10 bg-[#FAFAFA] pl-11 pr-4 py-3 text-[13px] text-ink outline-none transition-all placeholder:text-ink/35 focus:border-[#FF6C2C]/50 focus:bg-white focus:ring-2 focus:ring-[#FF6C2C]/10"
                       />
                     </div>
                   </div>
 
                   <div className="relative">
                     <Building2
-                      size={18}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30"
+                      size={16}
+                      strokeWidth={1.5}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30 transition-colors group-focus-within:text-[#FF6C2C]"
                     />
                     <input
                       placeholder="Company"
-                      className="w-full rounded-2xl border border-ink/10 bg-[#FAFAFA] pl-11 pr-4 py-3.5 text-[14px] text-ink outline-none transition-all placeholder:text-ink/35 focus:border-[#FF6C2C]/50 focus:bg-white focus:ring-2 focus:ring-[#FF6C2C]/10"
+                      className="w-full rounded-2xl border border-ink/10 bg-[#FAFAFA] pl-11 pr-4 py-3 text-[13px] text-ink outline-none transition-all placeholder:text-ink/35 focus:border-[#FF6C2C]/50 focus:bg-white focus:ring-2 focus:ring-[#FF6C2C]/10"
                     />
                   </div>
 
-                  <div className="relative">
-                    <MessageSquare size={18} className="absolute left-4 top-4 text-ink/30" />
+                  <div className="relative flex-1">
+                    <MessageSquare
+                      className="absolute left-4 top-4 text-ink/30 transition-colors group-focus-within:text-[#FF6C2C]"
+                      size={16}
+                      strokeWidth={1.5}
+                    />
                     <textarea
                       required
                       rows={5}
@@ -754,27 +770,27 @@ export function ContactForm() {
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="What do you need support with?"
-                      className="w-full resize-none rounded-2xl border border-ink/10 bg-[#FAFAFA] pl-11 pr-4 pt-3.5 pb-8 text-[14px] text-ink outline-none transition-all placeholder:text-ink/35 focus:border-[#FF6C2C]/50 focus:bg-white focus:ring-2 focus:ring-[#FF6C2C]/10"
+                      className="w-full resize-none rounded-2xl border border-ink/10 bg-[#FAFAFA] pl-11 pr-4 pt-3 pb-8 text-[13px] text-ink outline-none transition-all placeholder:text-ink/35 focus:border-[#FF6C2C]/50 focus:bg-white focus:ring-2 focus:ring-[#FF6C2C]/10"
                     />
                     <span className="absolute right-4 bottom-3 text-[11px] text-ink/30 font-mono select-none">
                       {message.length} / 500
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-2 text-[13px] text-muted-foreground pt-1 pb-2">
+                  <div className="flex items-center gap-2 text-[13px] text-muted-foreground pt-1 pb-1">
                     <ShieldCheck size={16} className="text-[#FF6C2C] shrink-0" />
                     <span>Your information is secure and will never be shared.</span>
                   </div>
 
                   <button
                     type="submit"
-                    className="w-full rounded-full bg-[#FF6C2C] hover:bg-[#FF6C2C]/90 text-white py-4 px-6 text-[15px] font-medium flex items-center justify-center gap-2 transition-colors"
+                    className="cursor-morph w-full rounded-full bg-[#FF6C2C] text-white py-3.5 px-6 text-[14px] font-medium transition-all hover:bg-[#FF6C2C]/90 flex items-center justify-center gap-2 focus:ring-2 focus:ring-[#FF6C2C]/50"
                   >
                     {sent ? "Message received" : "Send message"}
                     <ArrowRight size={18} />
                   </button>
 
-                  <p className="text-center text-[12px] text-muted-foreground/70 pt-2">
+                  <p className="text-center text-[12px] text-muted-foreground/70 pt-1">
                     We typically respond within a few hours.
                   </p>
                 </form>
