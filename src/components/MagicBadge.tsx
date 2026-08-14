@@ -333,13 +333,18 @@ export const GlobalBadgeSpotlight: React.FC<GlobalSpotlightProps> = ({
     document.body.appendChild(spotlight);
     spotlightRef.current = spotlight;
 
-    const handleMouseMove = (e: MouseEvent) => {
+    let rafId: number | null = null;
+    let latestMouseX = 0;
+    let latestMouseY = 0;
+
+    const processMouseMove = () => {
+      rafId = null;
       if (!spotlightRef.current || !gridRef.current) return;
 
       const section = gridRef.current;
       const rect = section?.getBoundingClientRect();
       const mouseInside =
-        rect && e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom;
+        rect && latestMouseX >= rect.left && latestMouseX <= rect.right && latestMouseY >= rect.top && latestMouseY <= rect.bottom;
 
       isInsideSection.current = mouseInside || false;
       const badges = gridRef.current.querySelectorAll('.magic-badge') as NodeListOf<HTMLElement>;
@@ -364,7 +369,7 @@ export const GlobalBadgeSpotlight: React.FC<GlobalSpotlightProps> = ({
         const centerX = badgeRect.left + badgeRect.width / 2;
         const centerY = badgeRect.top + badgeRect.height / 2;
         const distance =
-          Math.hypot(e.clientX - centerX, e.clientY - centerY) - Math.max(badgeRect.width, badgeRect.height) / 2;
+          Math.hypot(latestMouseX - centerX, latestMouseY - centerY) - Math.max(badgeRect.width, badgeRect.height) / 2;
         const effectiveDistance = Math.max(0, distance);
 
         minDistance = Math.min(minDistance, effectiveDistance);
@@ -376,14 +381,12 @@ export const GlobalBadgeSpotlight: React.FC<GlobalSpotlightProps> = ({
           glowIntensity = (fadeDistance - effectiveDistance) / (fadeDistance - proximity);
         }
 
-        updateCardGlowProperties(badge, e.clientX, e.clientY, glowIntensity, spotlightRadius);
+        updateCardGlowProperties(badge, latestMouseX, latestMouseY, glowIntensity, spotlightRadius);
       });
 
-      gsap.to(spotlightRef.current, {
-        left: e.clientX,
-        top: e.clientY,
-        duration: 0.1,
-        ease: 'power2.out'
+      gsap.set(spotlightRef.current, {
+        left: latestMouseX,
+        top: latestMouseY,
       });
 
       const targetOpacity =
@@ -398,6 +401,14 @@ export const GlobalBadgeSpotlight: React.FC<GlobalSpotlightProps> = ({
         duration: targetOpacity > 0 ? 0.2 : 0.5,
         ease: 'power2.out'
       });
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      latestMouseX = e.clientX;
+      latestMouseY = e.clientY;
+      if (rafId === null) {
+        rafId = requestAnimationFrame(processMouseMove);
+      }
     };
 
     const handleMouseLeave = () => {
@@ -420,6 +431,7 @@ export const GlobalBadgeSpotlight: React.FC<GlobalSpotlightProps> = ({
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseleave', handleMouseLeave);
+      if (rafId !== null) cancelAnimationFrame(rafId);
       spotlightRef.current?.parentNode?.removeChild(spotlightRef.current);
     };
   }, [gridRef, disableAnimations, enabled, spotlightRadius, glowColor]);

@@ -242,9 +242,11 @@ function Hero() {
         src={heroImg}
         alt=""
         style={{ y, scale }}
-        className="absolute inset-0 h-full w-full object-cover"
+        className="absolute inset-0 h-full w-full object-cover parallax-img"
         width={1600}
         height={1008}
+        fetchPriority="high"
+        decoding="sync"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/25 to-black/80" />
       <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
@@ -360,7 +362,10 @@ function ServiceRow({
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.4 });
   const [hovered, setHovered] = useState(false);
+  const mouseX = useRef(0);
+  const mouseY = useRef(0);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const rafId = useRef<number | null>(null);
 
   return (
     <motion.div
@@ -372,7 +377,14 @@ function ServiceRow({
       onMouseLeave={() => setHovered(false)}
       onMouseMove={(e) => {
         const rect = e.currentTarget.getBoundingClientRect();
-        setMouse({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+        mouseX.current = e.clientX - rect.left;
+        mouseY.current = e.clientY - rect.top;
+        if (rafId.current === null) {
+          rafId.current = requestAnimationFrame(() => {
+            setMouse({ x: mouseX.current, y: mouseY.current });
+            rafId.current = null;
+          });
+        }
       }}
       className="group relative border-t border-ink/10 py-8 lg:py-12 cursor-default overflow-hidden"
     >
@@ -691,12 +703,12 @@ const sliderCards = [
 function SliderSection() {
   const targetRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: targetRef, offset: ["start start", "end end"] });
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 120, damping: 25, mass: 1 });
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 30, mass: 0.5 });
   const x = useTransform(smoothProgress, [0, 1], ["calc(0% + 0vw)", "calc(-100% + 100vw)"]);
 
   return (
     <section ref={targetRef} className="relative h-[300vh] bg-cream pb-16 lg:pb-24">
-      <div className="sticky top-0 h-screen flex flex-col pt-16 lg:pt-24">
+      <div className="sticky top-0 h-screen flex flex-col pt-16 lg:pt-24 slider-track">
         <div className="mx-auto w-full max-w-[1152px] px-5 md:px-6 lg:px-8 mb-12 lg:mb-16">
           <InView>
             <h3 className="font-display text-5xl md:text-6xl text-ink max-w-2xl leading-[1.05]">
@@ -716,6 +728,7 @@ function SliderSection() {
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.8, delay: (i % 3) * 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="shrink-0 relative rounded-[32px] overflow-hidden shadow-sm border border-border/40 w-[85vw] md:w-auto h-[65vh] md:h-[70vh] max-h-[600px] aspect-square md:aspect-[6/5] group"
+              style={{ willChange: "transform" }}
             >
               <img
                 src={c.img}
@@ -724,6 +737,7 @@ function SliderSection() {
                 width={1200}
                 height={900}
                 loading="lazy"
+                decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               <div className="relative z-10 h-full p-8 lg:p-12 max-w-lg text-white flex flex-col justify-end">
@@ -809,35 +823,15 @@ function Privacy() {
                 WebkitMaskImage: "radial-gradient(ellipse at 30% 0%, black, transparent 75%)",
               }}
             />
-            {/* Animated ambient glows */}
-            <motion.div
-              animate={{
-                x: [0, 40, -20, 0],
-                y: [0, -40, 20, 0],
-                scale: [1, 1.15, 0.9, 1],
-              }}
-              transition={{
-                duration: 18,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="pointer-events-none absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full opacity-40 blur-[100px]"
+            {/* Animated ambient glows — moved to CSS animations for GPU compositing */}
+            <div
+              className="blob-a pointer-events-none absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full opacity-40 blur-[100px]"
               style={{
                 background: "radial-gradient(circle, oklch(0.45 0.14 100), transparent 70%)",
               }}
             />
-            <motion.div
-              animate={{
-                x: [0, -50, 30, 0],
-                y: [0, 50, -30, 0],
-                scale: [1, 1.2, 0.85, 1],
-              }}
-              transition={{
-                duration: 22,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="pointer-events-none absolute left-10 -bottom-20 h-[500px] w-[500px] rounded-full opacity-30 blur-[100px]"
+            <div
+              className="blob-b pointer-events-none absolute left-10 -bottom-20 h-[500px] w-[500px] rounded-full opacity-30 blur-[100px]"
               style={{ background: "radial-gradient(circle, oklch(0.35 0.2 90), transparent 70%)" }}
             />
             <div className="relative z-10">
@@ -930,7 +924,7 @@ function TestimonialCard({
 
   return (
     <motion.div
-      style={{ rotate, x, y, scale, opacity, zIndex }}
+      style={{ rotate, x, y, scale, opacity, zIndex, willChange: "transform" }}
       className="absolute w-[200px] md:w-[260px] h-[300px] md:h-[340px] origin-bottom bg-[#f2ede8] rounded-2xl p-6 pt-8 pb-10 flex flex-col gap-6 select-none border border-ink/5"
     >
       {/* Quote text */}
@@ -962,9 +956,9 @@ function Testimonials() {
 
   // Fast, tight spring: smooths out mouse wheel steps without feeling laggy
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 300,
-    damping: 80,
-    restDelta: 0.01,
+    stiffness: 200,
+    damping: 60,
+    restDelta: 0.001,
   });
 
   const cards = testimonials.slice(0, 5);

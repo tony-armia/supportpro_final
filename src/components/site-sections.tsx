@@ -430,7 +430,10 @@ const MarqueeRow = ({
           <ParticleBadge
             key={i}
             enableMagnetism={false}
-            enableTilt={true}
+            enableTilt={false}
+            enableStars={true}
+            clickEffect={true}
+            particleCount={5}
             className="w-[252px] h-[288px] flex-shrink-0 relative isolate overflow-hidden group flex flex-col items-center justify-center rounded-2xl bg-white border border-ink/10 transition-colors duration-400 hover:border-[#FF6C2C]/70 cursor-pointer"
           >
             {/* Logo */}
