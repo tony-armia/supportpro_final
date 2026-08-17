@@ -434,7 +434,7 @@ const MarqueeRow = ({
             enableStars={true}
             clickEffect={true}
             particleCount={5}
-            className="w-[252px] h-[288px] flex-shrink-0 relative isolate overflow-hidden group flex flex-col items-center justify-center rounded-2xl bg-white dark:bg-[rgba(255,255,255,0.02)] border border-ink/10 dark:border-[#333] transition-colors duration-400 hover:border-[#FF6C2C]/70 dark:hover:border-[#FF8101]/50 cursor-pointer"
+            className="w-[252px] h-[288px] flex-shrink-0 relative isolate overflow-hidden group flex flex-col items-center justify-center rounded-2xl bg-white dark:bg-[rgba(255,255,255,0.02)] border border-ink/10 dark:border-[#333] transition-colors duration-400 hover:border-[#FF8101]/70 dark:hover:border-[#FF8101]/50 cursor-pointer"
           >
             {/* Logo */}
             <div className="mb-6 flex h-[72px] w-[156px] items-center justify-center transition-transform duration-400 group-hover:-translate-y-1.5 dark:opacity-80">
@@ -453,7 +453,7 @@ const MarqueeRow = ({
               </span>
               <ArrowRight
                 size={13}
-                className="text-[#FF6C2C] opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
+                className="text-[#FF8101] opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
               />
             </div>
           </ParticleBadge>
@@ -541,7 +541,7 @@ export function Experts() {
                 Why we call ourselves
                 <br />
                 <em className="font-normal italic text-ink/70 dark:text-white/70">the experts</em>
-                <span className="text-[#FF6C2C]">.</span>
+                <span className="text-[#FF8101]">.</span>
               </h2>
             </Reveal>
 
@@ -566,7 +566,7 @@ export function Experts() {
 
               {/* ISO Badge */}
               <div className="mt-8 flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full border border-[#FF6C2C]/30 bg-[#FF6C2C]/5 flex items-center justify-center text-[#FF6C2C]">
+                <div className="w-14 h-14 rounded-full border border-[#FF8101]/30 bg-[#FF8101]/5 flex items-center justify-center text-[#FF8101]">
                   <Award size={24} strokeWidth={1.5} />
                 </div>
                 <div>
@@ -585,13 +585,13 @@ export function Experts() {
             <div
               className="absolute -right-8 lg:-right-16 top-10 w-32 lg:w-48 h-[80%] opacity-[0.35] pointer-events-none"
               style={{
-                backgroundImage: `radial-gradient(#FF6C2C 1px, transparent 1px)`,
+                backgroundImage: `radial-gradient(#FF8101 1px, transparent 1px)`,
                 backgroundSize: `14px 14px`,
               }}
             />
 
             <Reveal delay={0.2} className="relative z-10">
-              <div className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#FF6C2C] mb-2">
+              <div className="text-[11px] font-bold tracking-[0.15em] uppercase text-[#FF8101] mb-2">
                 OUR NUMBERS
               </div>
               <div className="text-[14px] text-muted-foreground mb-8">
@@ -604,19 +604,19 @@ export function Experts() {
                   <div
                     key={i}
                     className={`group/metric pl-6 lg:pl-8 flex flex-col items-start transition-colors duration-500
-                      ${i === 0 ? "border-b border-r border-ink/10 pb-8 lg:pb-10 hover:border-[#FF6C2C]/70" : ""}
-                      ${i === 1 ? "border-b border-ink/10 pb-8 lg:pb-10 hover:border-[#FF6C2C]/70" : ""}
-                      ${i === 2 ? "border-r border-ink/10 pt-8 lg:pt-10 hover:border-[#FF6C2C]/70" : ""}
+                      ${i === 0 ? "border-b border-r border-ink/10 pb-8 lg:pb-10 hover:border-[#FF8101]/70" : ""}
+                      ${i === 1 ? "border-b border-ink/10 pb-8 lg:pb-10 hover:border-[#FF8101]/70" : ""}
+                      ${i === 2 ? "border-r border-ink/10 pt-8 lg:pt-10 hover:border-[#FF8101]/70" : ""}
                       ${i === 3 ? "pt-8 lg:pt-10" : ""}
                     `}
                   >
-                    <div className="w-14 h-14 rounded-full bg-[#FF6C2C]/10 flex items-center justify-center text-ink mb-6">
+                    <div className="w-14 h-14 rounded-full bg-[#FF8101]/10 flex items-center justify-center text-ink mb-6">
                       <s.Icon size={24} strokeWidth={1.5} />
                     </div>
                     <div className="font-display text-4xl lg:text-[46px] text-ink dark:text-white mb-4 tracking-tight">
                       <Counter to={s.to} decimals={s.decimals ?? 0} />
                     </div>
-                    <div className="w-8 h-[2px] bg-[#FF6C2C] mb-4 transition-all duration-500 group-hover/metric:w-12" />
+                    <div className="w-8 h-[2px] bg-[#FF8101] mb-4 transition-all duration-500 group-hover/metric:w-12" />
                     <div className="whitespace-nowrap text-[12px] lg:text-[13px] text-muted-foreground font-medium leading-relaxed">
                       {s.label}
                     </div>
@@ -626,7 +626,7 @@ export function Experts() {
 
               {/* Footer text */}
               <div className="mt-8 flex items-center gap-3">
-                <div className="w-0.5 h-4 bg-[#FF6C2C]" />
+                <div className="w-0.5 h-4 bg-[#FF8101]" />
                 <div className="text-[13px] text-muted-foreground font-medium">
                   Built on experience. Proven by numbers.
                 </div>
@@ -656,9 +656,9 @@ export function ContactForm() {
                 <h2 className="font-display text-3xl md:text-[44px] leading-[1.05] text-ink dark:text-white mb-4">
                   Drop us a <br />
                   <span className="italic font-serif">message</span>
-                  <span className="text-[#FF6C2C]">.</span>
+                  <span className="text-[#FF8101]">.</span>
                 </h2>
-                <div className="w-10 h-[2.5px] bg-[#FF6C2C] my-6" />
+                <div className="w-10 h-[2.5px] bg-[#FF8101] my-6" />
                 <p className="text-[13px] leading-relaxed text-muted-foreground max-w-sm mb-8">
                   Tell us about your infrastructure and support requirements. A senior engineer will
                   get back to you with a scoped proposal, SLA options, and pricing.
@@ -666,7 +666,7 @@ export function ContactForm() {
 
                 <div className="space-y-6 pt-6 border-t border-ink/5">
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-[#FF6C2C]/10 text-[#FF6C2C] flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-[#FF8101]/10 text-[#FF8101] flex items-center justify-center shrink-0">
                       <MapPin size={18} strokeWidth={1.5} />
                     </div>
                     <div>
@@ -680,7 +680,7 @@ export function ContactForm() {
                   </div>
 
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-[#FF6C2C]/10 text-[#FF6C2C] flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-[#FF8101]/10 text-[#FF8101] flex items-center justify-center shrink-0">
                       <Building2 size={18} strokeWidth={1.5} />
                     </div>
                     <div>
@@ -694,7 +694,7 @@ export function ContactForm() {
                   </div>
 
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full bg-[#FF6C2C]/10 text-[#FF6C2C] flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-[#FF8101]/10 text-[#FF8101] flex items-center justify-center shrink-0">
                       <Clock size={18} strokeWidth={1.5} />
                     </div>
                     <div>
@@ -722,19 +722,19 @@ export function ContactForm() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
                     <div className="relative">
                       <User
-                        className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30 dark:text-white/30 transition-colors group-focus-within:text-[#FF6C2C]"
+                        className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30 dark:text-white/30 transition-colors group-focus-within:text-[#FF8101]"
                         size={16}
                         strokeWidth={1.5}
                       />
                       <input
                         required
                         placeholder="Full name"
-                        className="w-full rounded-2xl border border-ink/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF6C2C]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF6C2C]/10"
+                        className="w-full rounded-2xl border border-ink/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF8101]/10"
                       />
                     </div>
                     <div className="relative">
                       <Mail
-                        className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30 transition-colors group-focus-within:text-[#FF6C2C]"
+                        className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30 transition-colors group-focus-within:text-[#FF8101]"
                         size={16}
                         strokeWidth={1.5}
                       />
@@ -742,7 +742,7 @@ export function ContactForm() {
                         required
                         type="email"
                         placeholder="Work email"
-                        className="w-full rounded-2xl border border-ink/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF6C2C]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF6C2C]/10"
+                        className="w-full rounded-2xl border border-ink/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF8101]/10"
                       />
                     </div>
                   </div>
@@ -751,17 +751,17 @@ export function ContactForm() {
                     <Building2
                       size={16}
                       strokeWidth={1.5}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30 transition-colors group-focus-within:text-[#FF6C2C]"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30 transition-colors group-focus-within:text-[#FF8101]"
                     />
                     <input
                       placeholder="Company"
-                      className="w-full rounded-2xl border border-ink/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF6C2C]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF6C2C]/10"
+                      className="w-full rounded-2xl border border-ink/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF8101]/10"
                     />
                   </div>
 
                   <div className="relative flex-1">
                     <MessageSquare
-                      className="absolute left-4 top-4 text-ink/30 transition-colors group-focus-within:text-[#FF6C2C]"
+                      className="absolute left-4 top-4 text-ink/30 transition-colors group-focus-within:text-[#FF8101]"
                       size={16}
                       strokeWidth={1.5}
                     />
@@ -772,7 +772,7 @@ export function ContactForm() {
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="What do you need support with?"
-                      className="w-full resize-none rounded-2xl border border-ink/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 pt-3 pb-8 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF6C2C]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF6C2C]/10"
+                      className="w-full resize-none rounded-2xl border border-ink/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 pt-3 pb-8 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF8101]/10"
                     />
                     <span className="absolute right-4 bottom-3 text-[11px] text-ink/30 dark:text-white/30 font-mono select-none">
                       {message.length} / 500
@@ -780,13 +780,13 @@ export function ContactForm() {
                   </div>
 
                   <div className="flex items-center gap-2 text-[13px] text-muted-foreground pt-1 pb-1">
-                    <ShieldCheck size={16} className="text-[#FF6C2C] shrink-0" />
+                    <ShieldCheck size={16} className="text-[#FF8101] shrink-0" />
                     <span>Your information is secure and will never be shared.</span>
                   </div>
 
                   <button
                     type="submit"
-                    className="cursor-morph w-full rounded-full bg-[#FF6C2C] text-white py-3.5 px-6 text-[14px] font-medium transition-all hover:bg-[#FF6C2C]/90 flex items-center justify-center gap-2 focus:ring-2 focus:ring-[#FF6C2C]/50"
+                    className="cursor-morph w-full rounded-full bg-[#FF8101] text-white py-3.5 px-6 text-[14px] font-medium transition-all hover:bg-[#FF8101]/90 flex items-center justify-center gap-2 focus:ring-2 focus:ring-[#FF8101]/50"
                   >
                     {sent ? "Message received" : "Send message"}
                     <ArrowRight size={18} />

@@ -179,7 +179,7 @@ function Word({
 function Nav() {
   const { scrollY } = useScroll();
   const [isScrolledPastHero, setIsScrolledPastHero] = useState(false);
-  const { theme } = useTheme();
+  const { theme, setTheme } = useTheme();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolledPastHero(latest > 550);
@@ -188,6 +188,7 @@ function Nav() {
   const bg = useTransform(scrollY, [0, 200], ["rgba(255,255,255,0.15)", "rgba(20,20,20,0.55)"]);
   return (
     <nav className="fixed top-4 left-0 right-0 z-50 mx-auto flex max-w-[1152px] items-center justify-between px-5 md:px-6 lg:px-8">
+      {/* Logo — switches white ↔ black based on theme + scroll */}
       <motion.a
         href="#"
         className="flex items-center gap-2"
@@ -229,10 +230,52 @@ function Nav() {
         </a>
         <a
           href="#contact-form"
-          className="cursor-morph px-4 py-1.5 rounded-full bg-[#FF8101] text-[#0B0B0B] font-medium hover:brightness-110 transition-all duration-200"
+          className="cursor-morph px-4 py-1.5 rounded-full bg-[#FF8101] text-white font-medium hover:brightness-110 transition-all duration-200"
         >
           Book a Call
         </a>
+
+        {/* Divider */}
+        <span className="mx-1 h-4 w-px bg-white/20" />
+
+        {/* Theme toggle inside pill */}
+        <button
+          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+          aria-label="Toggle dark mode"
+          className="relative flex h-8 w-8 items-center justify-center rounded-full hover:bg-white/15 transition-all duration-200 text-white shrink-0"
+        >
+          <AnimatePresence mode="wait" initial={false}>
+            {theme === "dark" ? (
+              <motion.svg
+                key="sun"
+                initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
+                animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
+                transition={{ duration: 0.25, ease: "easeInOut" }}
+                xmlns="http://www.w3.org/2000/svg"
+                width="15" height="15" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" strokeWidth="2"
+                strokeLinecap="round" strokeLinejoin="round"
+              >
+                <circle cx="12" cy="12" r="4" />
+                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+              </motion.svg>
+            ) : (
+              <motion.svg
+                key="moon"
+                initial={{ opacity: 0, rotate: 90, scale: 0.5 }}
+                animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                exit={{ opacity: 0, rotate: -90, scale: 0.5 }}
+                transition={{ duration: 0.25, ease: "easeInOut" }}
+                xmlns="http://www.w3.org/2000/svg"
+                width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </motion.svg>
+            )}
+          </AnimatePresence>
+        </button>
       </motion.div>
     </nav>
   );
@@ -262,13 +305,13 @@ function Hero() {
       <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
       <motion.div
         style={{ y: textY, opacity }}
-        className="relative z-10 mx-auto flex h-full max-w-[1152px] flex-col items-center justify-end dark:justify-center dark:pt-16 pb-20 px-5 text-center text-white md:px-6 lg:px-8 lg:pb-24"
+        className="relative z-10 mx-auto flex h-full max-w-[1152px] flex-col items-center justify-center pt-16 pb-20 px-5 text-center text-white md:px-6 lg:px-8 lg:pb-24"
       >
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[76px] dark:text-[53px] dark:sm:text-[66px] dark:md:text-[80px] dark:lg:text-[84px] leading-[0.95] max-w-4xl drop-shadow-[0_2px_20px_rgba(0,0,0,0.35)] dark:drop-shadow-none"
+          className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[80px] leading-[0.95] max-w-4xl drop-shadow-[0_2px_20px_rgba(0,0,0,0.35)]"
         >
           Enterprise infrastructure
           <br />
@@ -292,7 +335,7 @@ function Hero() {
         >
           <a
             href="#contact-form"
-            className="cursor-morph rounded-full bg-[#FF8101] text-[#0B0B0B] px-5 py-2.5 text-[13px] font-medium hover:brightness-110 transition-all duration-200"
+            className="cursor-morph rounded-full bg-[#FF8101] text-white px-5 py-2.5 text-[13px] font-medium hover:brightness-110 transition-all duration-200"
           >
             Book a Consultation
           </a>
@@ -1049,10 +1092,10 @@ function FAQ() {
                 Frequently
                 <br />
                 <HoverOrangeSpan>asked questions</HoverOrangeSpan>
-                <span className="text-[#FF6C2C]">.</span>
+                <span className="text-[#FF8101]">.</span>
               </h3>
 
-              <div className="w-10 h-[2px] bg-[#FF6C2C] mb-8" />
+              <div className="w-10 h-[2px] bg-[#FF8101] mb-8" />
 
               <p className="text-[15px] text-muted-foreground dark:text-white/60 leading-relaxed mb-12 max-w-[320px]">
                 Get quick answers to the most common questions about our support services,
@@ -1062,7 +1105,7 @@ function FAQ() {
               {/* Documentation link */}
               <div className="w-full max-w-[420px] rounded-md border border-ink/15 dark:border-white/15 px-6 py-8">
                 <div className="flex items-start gap-6">
-                  <div className="w-14 h-14 rounded-full bg-[#FF6C2C]/10 flex items-center justify-center text-[#FF6C2C] shrink-0">
+                  <div className="w-14 h-14 rounded-full bg-[#FF8101]/10 flex items-center justify-center text-[#FF8101] shrink-0">
                     <BookOpen size={25} strokeWidth={1.5} />
                   </div>
                   <div className="pt-1">
@@ -1073,7 +1116,7 @@ function FAQ() {
                       Can't find the answers you're looking for? Our documentation has everything
                       you need.
                     </p>
-                    <button className="text-[15px] font-bold text-[#FF6C2C] flex items-center gap-3 hover:gap-4 transition-all mt-6">
+                    <button className="text-[15px] font-bold text-[#FF8101] flex items-center gap-3 hover:gap-4 transition-all mt-6">
                       View Documentation
                       <ArrowRight size={17} strokeWidth={1.75} />
                     </button>
@@ -1090,7 +1133,7 @@ function FAQ() {
               return (
                 <div
                   key={i}
-                  className={`relative overflow-hidden border-b border-ink/15 dark:border-white/15 last:border-b-0 transition-colors duration-300 ${isOpen ? "bg-[#FF6C2C]/[0.035]" : "hover:bg-ink/[3%] dark:hover:bg-white/[3%]"}`}
+                  className={`relative overflow-hidden border-b border-ink/15 dark:border-white/15 last:border-b-0 transition-colors duration-300 ${isOpen ? "bg-[#FF8101]/[0.035]" : "hover:bg-ink/[3%] dark:hover:bg-white/[3%]"}`}
                 >
                   <button
                     onClick={() => setOpen(isOpen ? null : i)}
@@ -1103,7 +1146,7 @@ function FAQ() {
                       {f.q}
                     </div>
                     <div
-                      className={`shrink-0 transition-colors ${isOpen ? "text-[#FF6C2C]" : "text-muted-foreground group-hover:text-ink/60"}`}
+                      className={`shrink-0 transition-colors ${isOpen ? "text-[#FF8101]" : "text-muted-foreground group-hover:text-ink/60"}`}
                     >
                       {isOpen ? (
                         <Minus size={20} strokeWidth={1.5} />
@@ -1188,7 +1231,7 @@ function CTA() {
           >
             <a
               href="#contact-form"
-              className="cursor-morph rounded-full bg-[#FF8101] text-[#0B0B0B] px-6 py-3 text-sm font-medium hover:brightness-110 transition-all duration-200"
+              className="cursor-morph rounded-full bg-[#FF8101] text-white px-6 py-3 text-sm font-medium hover:brightness-110 transition-all duration-200"
             >
               Book a Consultation
             </a>
@@ -1260,7 +1303,7 @@ function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="fixed bottom-6 right-6 z-[99] flex h-12 w-12 items-center justify-center rounded-full bg-white text-ink shadow-[0_2px_10px_rgba(0,0,0,0.1)] transition-transform hover:scale-110 dark:bg-[#FF8101] dark:text-[#0B0B0B]"
+      className="fixed bottom-6 right-6 z-[99] flex h-12 w-12 items-center justify-center rounded-full bg-white text-ink shadow-[0_2px_10px_rgba(0,0,0,0.1)] transition-transform hover:scale-110 dark:bg-[#FF8101] dark:text-white"
     >
       {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
     </button>

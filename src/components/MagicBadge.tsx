@@ -4,7 +4,7 @@ import './MagicBadge.css';
 
 const DEFAULT_PARTICLE_COUNT = 6;
 const DEFAULT_SPOTLIGHT_RADIUS = 250;
-const DEFAULT_GLOW_COLOR = '255, 108, 44'; // #FF6C2C
+const DEFAULT_GLOW_COLOR = '255, 129, 1'; // #FF8101
 const MOBILE_BREAKPOINT = 768;
 
 const createParticleElement = (x: number, y: number, color = DEFAULT_GLOW_COLOR) => {
