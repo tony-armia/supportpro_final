@@ -3,7 +3,7 @@
 @source "../src";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+
 
 @theme inline {
   --font-display: "Instrument Serif", ui-serif, Georgia, serif;

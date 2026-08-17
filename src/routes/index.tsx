@@ -56,31 +56,37 @@ const testimonials = [
     quote:
       "SupportPRO has done an excellent job of providing first line support to our customers. Their team goes the extra mile and even has walked our customers through importing data into a MySQL database.",
     name: "Toby Wolf",
+    image: "/avatars/toby.jpg",
   },
   {
     quote:
       "We use SupportPRO for all of our Systems Administration for 11 servers, and they handle all of our tickets as well. We have had ZERO problems with them, and I highly recommend them to anyone.",
     name: "Eric W.",
+    image: "/avatars/eric.jpg",
   },
   {
     quote:
       "Our customer base is growing every day because of their great service and support. We always count on their knowledge and expertise. Whenever we need, they always give us immediate support 24/7 around the clock.",
     name: "TYWIT Solutions Group",
+    image: "/avatars/tywit.jpg",
   },
   {
     quote:
       "White-labelled helpdesk that our customers never notice is outsourced. Every ticket is handled with the professionalism our brand demands.",
     name: "Managed hosting provider",
+    image: "/avatars/managed.jpg",
   },
   {
     quote:
       "Their NOC caught an infrastructure issue at 3 a.m. and had it resolved before our on-call engineer even opened the alert.",
     name: "SaaS platform, EU",
+    image: "/avatars/saas.jpg",
   },
   {
     quote:
       "Migrating our workloads to AWS with SupportPRO was seamless. Clear communication, zero downtime, measurable cost savings.",
     name: "MSP, North America",
+    image: "/avatars/msp.jpg",
   },
 ];
 
@@ -223,7 +229,7 @@ function Nav() {
         </a>
         <a
           href="#contact-form"
-          className="cursor-morph px-4 py-1.5 rounded-full bg-white text-ink hover:bg-white/90 dark:bg-[#FF8101] dark:text-[#0B0B0B] dark:hover:brightness-110 dark:font-medium transition-all duration-200"
+          className="cursor-morph px-4 py-1.5 rounded-full bg-[#FF8101] text-[#0B0B0B] font-medium hover:brightness-110 transition-all duration-200"
         >
           Book a Call
         </a>
@@ -286,13 +292,13 @@ function Hero() {
         >
           <a
             href="#contact-form"
-            className="cursor-morph rounded-full bg-white text-ink px-5 py-2.5 text-[13px] font-reglar hover:bg-white/90 transition"
+            className="cursor-morph rounded-full bg-[#FF8101] text-[#0B0B0B] px-5 py-2.5 text-[13px] font-medium hover:brightness-110 transition-all duration-200"
           >
             Book a Consultation
           </a>
           <a
             href="#services"
-            className="cursor-morph rounded-full border border-white/30 dark:border-white/25 backdrop-blur-md bg-white/10 dark:bg-white/[0.08] text-white px-5 py-2.5 text-[13px] font-medium hover:bg-white/20 dark:hover:bg-white/[0.14] dark:hover:border-white/40 transition-all duration-200"
+            className="cursor-morph rounded-full border border-white/30 dark:border-white/25 backdrop-blur-md bg-white/10 dark:bg-white/[8%] text-white px-5 py-2.5 text-[13px] font-medium hover:bg-white/20 dark:hover:bg-white/[14%] dark:hover:border-white/40 transition-all duration-200"
           >
             Explore Services
           </a>
@@ -403,7 +409,7 @@ function ServiceRow({
       {/* Sweep underline */}
       <motion.div
         aria-hidden
-        className="absolute left-0 right-0 top-0 h-px bg-ink origin-left"
+        className="absolute left-0 right-0 top-0 h-px bg-[#FF8101] origin-left z-20"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: hovered ? 1 : 0 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
@@ -434,7 +440,7 @@ function ServiceRow({
                 delay: index * 0.08 + 0.2 + j * 0.05,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="service-pill inline-flex items-center rounded-full border border-ink/15 dark:border-white/10 bg-white/60 dark:bg-white/5 backdrop-blur-sm px-4 py-2 text-[13px] text-ink/80 dark:text-white/80 hover:border-ink/40 dark:hover:border-[#FF8101]/35 hover:bg-white hover:text-ink dark:hover:text-white transition-colors"
+              className="service-pill inline-flex items-center rounded-full border border-ink/15 dark:border-[#333] bg-white/60 dark:bg-[#1C1C1C] backdrop-blur-sm px-4 py-2 text-[13px] text-ink/80 dark:text-white/80 hover:border-ink/40 dark:hover:border-[#FF8101]/35 hover:bg-white dark:hover:bg-[#2A2A2A] hover:text-ink dark:hover:text-[#FF8101] transition-colors"
             >
               {it}
             </motion.span>
@@ -850,7 +856,7 @@ function Privacy() {
                 </p>
               </div>
 
-              <div className="mt-14 grid gap-px overflow-hidden rounded-2xl bg-white/[0.08] sm:grid-cols-2 lg:grid-cols-4">
+              <div className="mt-14 grid gap-px overflow-hidden rounded-2xl bg-white/[8%] sm:grid-cols-2 lg:grid-cols-4">
                 {securityPillars.map((p, i) => (
                   <motion.div
                     key={p.title}
@@ -892,12 +898,14 @@ function Privacy() {
 function TestimonialCard({
   quote,
   name,
+  image,
   index,
   total,
   progress,
 }: {
   quote: string;
   name: string;
+  image?: string;
   index: number;
   total: number;
   progress: any;
@@ -935,10 +943,18 @@ function TestimonialCard({
       <p className="text-[13px] leading-relaxed text-ink/80 dark:text-white/80 font-medium">&ldquo;{quote}&rdquo;</p>
       {/* Name */}
       <div className="mt-auto">
-        <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-full bg-ink/10 dark:bg-white/10 flex items-center justify-center text-[10px] font-bold text-ink/60 dark:text-white/60 shrink-0">
-            {name.charAt(0)}
-          </div>
+        <div className="flex items-center gap-3">
+          {image ? (
+            <img
+              src={image}
+              alt={name}
+              className="flex h-8 w-8 items-center justify-center rounded-full object-cover"
+            />
+          ) : (
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-ink/5 dark:bg-white/10 text-[11px] font-medium text-ink/60 dark:text-white/60">
+              {name.charAt(0)}
+            </div>
+          )}
           <div>
             <p className="text-[11px] font-semibold text-ink dark:text-white leading-tight">{name}</p>
             <p className="text-[10px] text-ink/50 dark:text-white/50 mt-0.5">SupportPRO Client</p>
@@ -1002,6 +1018,7 @@ function Testimonials() {
               key={i}
               quote={t.quote}
               name={t.name}
+              image={t.image}
               index={i}
               total={cards.length}
               progress={smoothProgress}
@@ -1073,7 +1090,7 @@ function FAQ() {
               return (
                 <div
                   key={i}
-                  className={`relative overflow-hidden border-b border-ink/15 dark:border-white/15 last:border-b-0 transition-colors duration-300 ${isOpen ? "bg-[#FF6C2C]/[0.035]" : "hover:bg-ink/[0.025] dark:hover:bg-white/[0.025]"}`}
+                  className={`relative overflow-hidden border-b border-ink/15 dark:border-white/15 last:border-b-0 transition-colors duration-300 ${isOpen ? "bg-[#FF6C2C]/[0.035]" : "hover:bg-ink/[3%] dark:hover:bg-white/[3%]"}`}
                 >
                   <button
                     onClick={() => setOpen(isOpen ? null : i)}
@@ -1171,13 +1188,13 @@ function CTA() {
           >
             <a
               href="#contact-form"
-              className="cursor-morph rounded-full bg-white text-ink dark:bg-[#FF8101] dark:text-[#0B0B0B] dark:hover:brightness-110 px-6 py-3 text-sm font-medium hover:bg-white/90 transition-all duration-200"
+              className="cursor-morph rounded-full bg-[#FF8101] text-[#0B0B0B] px-6 py-3 text-sm font-medium hover:brightness-110 transition-all duration-200"
             >
               Book a Consultation
             </a>
             <a
               href="#contact-form"
-              className="cursor-morph rounded-full border border-white/30 dark:border-white/25 backdrop-blur-md bg-white/10 dark:bg-white/[0.08] text-white px-6 py-3 text-sm font-medium hover:bg-white/20 dark:hover:bg-white/[0.14] dark:hover:border-white/40 transition-all duration-200"
+              className="cursor-morph rounded-full border border-white/30 dark:border-white/25 backdrop-blur-md bg-white/10 dark:bg-white/[8%] text-white px-6 py-3 text-sm font-medium hover:bg-white/20 dark:hover:bg-white/[14%] dark:hover:border-white/40 transition-all duration-200"
             >
               Contact Our Team
             </a>

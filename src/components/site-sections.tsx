@@ -273,7 +273,7 @@ export function Credentials() {
                 <ParticleBadge
                   key={i}
                   enableMagnetism={false}
-                  className="flex shrink-0 items-center gap-2.5 border border-ink/10 dark:border-white/10 px-5 py-3 cursor-pointer bg-white dark:bg-white/[0.035] rounded-full shadow-[0_2px_10px_rgba(0,0,0,0.03)] dark:shadow-none hover:border-ink/20 dark:hover:border-[#FF8101]/40 transition-all duration-200 hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_4px_20px_rgba(255,129,1,0.1)] group"
+                  className="flex shrink-0 items-center gap-2.5 border border-ink/10 dark:border-[#333] px-5 py-3 cursor-pointer bg-white dark:bg-[#1C1C1C] rounded-full shadow-[0_2px_10px_rgba(0,0,0,0.03)] dark:shadow-none hover:border-ink/20 dark:hover:border-[#FF8101]/40 transition-all duration-200 hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_4px_20px_rgba(255,129,1,0.1)] group"
                 >
                   <span className="flex items-center shrink-0">{c.icon}</span>
                   <span className="text-[13px] font-medium text-ink/80 dark:text-white/60 group-hover:text-ink/90 dark:group-hover:text-white transition-colors duration-300 whitespace-nowrap">
@@ -366,7 +366,7 @@ export function Pillars() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, delay: i * 0.12, ease: EASE }}
-              className="group relative flex flex-col rounded-2xl border border-ink/8 dark:border-white/10 bg-white dark:bg-white/5 p-5 lg:p-6 hover:-translate-y-1 transition-all duration-500"
+              className="group relative flex flex-col rounded-2xl border border-ink/8 dark:border-white/10 bg-white dark:bg-[#1C1C1C] p-5 lg:p-6 hover:-translate-y-1 transition-all duration-500"
             >
               {/* Number + icon row */}
               <div className="flex items-center justify-between mb-6">
@@ -434,7 +434,7 @@ const MarqueeRow = ({
             enableStars={true}
             clickEffect={true}
             particleCount={5}
-            className="w-[252px] h-[288px] flex-shrink-0 relative isolate overflow-hidden group flex flex-col items-center justify-center rounded-2xl bg-white dark:bg-[rgba(255,255,255,0.02)] border border-ink/10 dark:border-white/10 transition-colors duration-400 hover:border-[#FF6C2C]/70 dark:hover:border-[#FF8101]/50 cursor-pointer"
+            className="w-[252px] h-[288px] flex-shrink-0 relative isolate overflow-hidden group flex flex-col items-center justify-center rounded-2xl bg-white dark:bg-[rgba(255,255,255,0.02)] border border-ink/10 dark:border-[#333] transition-colors duration-400 hover:border-[#FF6C2C]/70 dark:hover:border-[#FF8101]/50 cursor-pointer"
           >
             {/* Logo */}
             <div className="mb-6 flex h-[72px] w-[156px] items-center justify-center transition-transform duration-400 group-hover:-translate-y-1.5 dark:opacity-80">
