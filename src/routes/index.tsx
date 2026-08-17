@@ -1303,7 +1303,7 @@ function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="fixed bottom-6 right-6 z-[99] flex h-12 w-12 items-center justify-center rounded-full bg-white text-ink shadow-[0_2px_10px_rgba(0,0,0,0.1)] transition-transform hover:scale-110 dark:bg-[#FF8101] dark:text-white"
+      className="fixed bottom-6 right-6 z-[99] flex h-12 w-12 items-center justify-center opacity-0 rounded-full bg-white text-ink shadow-[0_2px_10px_rgba(0,0,0,0.1)] transition-transform hover:scale-110 dark:bg-[#FF8101] dark:text-white"
     >
       {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
     </button>
@@ -1314,21 +1314,21 @@ function Index() {
   return (
     <ThemeProvider>
       <main className="bg-cream dark:bg-[var(--sp-bg)] overflow-x-clip transition-colors duration-300">
-      <Nav />
-      <Hero />
-      <Credentials />
-      <StickyPhoneSection />
-      <Services />
-      <SliderSection />
-      <Experts />
-      <Privacy />
-      <Platforms />
-      <Testimonials />
-      <FAQ />
-      <ContactForm />
-      <CTA />
-      <SiteFooter />
-    </main>
+        <Nav />
+        <Hero />
+        <Credentials />
+        <StickyPhoneSection />
+        <Services />
+        <SliderSection />
+        <Experts />
+        <Privacy />
+        <Platforms />
+        <Testimonials />
+        <FAQ />
+        <ContactForm />
+        <CTA />
+        <SiteFooter />
+      </main>
       <ThemeToggle />
     </ThemeProvider>
   );

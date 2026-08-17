@@ -626,10 +626,10 @@ export function Experts() {
 
               {/* Footer text */}
               <div className="mt-8 flex items-center gap-3">
-                <div className="w-0.5 h-4 bg-[#FF8101]" />
-                <div className="text-[13px] text-muted-foreground font-medium">
+                {/* <div className="w-0.5 h-4 bg-[#FF8101]" /> */}
+                {/* <div className="text-[13px] text-muted-foreground font-medium">
                   Built on experience. Proven by numbers.
-                </div>
+                </div> */}
               </div>
             </Reveal>
           </div>
