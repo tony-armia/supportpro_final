@@ -21,7 +21,10 @@ import {
   ArrowRight,
   Minus,
   BookOpen,
+  Sun,
+  Moon,
 } from "lucide-react";
+import { ThemeProvider, useTheme } from "@/context/ThemeContext";
 import { HoverOrangeSpan } from "@/components/hover-orange-span";
 import heroImg from "@/assets/hero.jpg";
 import talkImg from "@/assets/talk.jpg";
@@ -170,6 +173,7 @@ function Word({
 function Nav() {
   const { scrollY } = useScroll();
   const [isScrolledPastHero, setIsScrolledPastHero] = useState(false);
+  const { theme } = useTheme();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolledPastHero(latest > 550);
@@ -187,8 +191,8 @@ function Nav() {
       >
         <AnimatePresence mode="wait">
           <motion.img
-            key={isScrolledPastHero ? "black-logo" : "white-logo"}
-            src={isScrolledPastHero ? logoBlack : logoWhite}
+            key={theme === "light" && isScrolledPastHero ? "black-logo" : "white-logo"}
+            src={theme === "light" && isScrolledPastHero ? logoBlack : logoWhite}
             alt="SupportPRO Logo"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -219,7 +223,7 @@ function Nav() {
         </a>
         <a
           href="#contact-form"
-          className="cursor-morph px-4 py-1.5 rounded-full bg-white text-ink hover:bg-white/90 transition"
+          className="cursor-morph px-4 py-1.5 rounded-full bg-white text-ink hover:bg-white/90 dark:bg-[#FF8101] dark:text-[#0B0B0B] dark:hover:brightness-110 dark:font-medium transition-all duration-200"
         >
           Book a Call
         </a>
@@ -252,13 +256,13 @@ function Hero() {
       <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
       <motion.div
         style={{ y: textY, opacity }}
-        className="relative z-10 mx-auto flex h-full max-w-[1152px] flex-col items-center justify-end pb-20 px-5 text-center text-white md:px-6 lg:px-8 lg:pb-24"
+        className="relative z-10 mx-auto flex h-full max-w-[1152px] flex-col items-center justify-end dark:justify-center dark:pt-16 pb-20 px-5 text-center text-white md:px-6 lg:px-8 lg:pb-24"
       >
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[76px] leading-[0.95] max-w-4xl drop-shadow-[0_2px_20px_rgba(0,0,0,0.35)]"
+          className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[76px] dark:text-[53px] dark:sm:text-[66px] dark:md:text-[80px] dark:lg:text-[84px] leading-[0.95] max-w-4xl drop-shadow-[0_2px_20px_rgba(0,0,0,0.35)] dark:drop-shadow-none"
         >
           Enterprise infrastructure
           <br />
@@ -268,7 +272,7 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-6 max-w-xl text-[14px] md:text-[15px] font-light text-white/90 leading-relaxed"
+          className="mt-6 max-w-xl text-[14px] md:text-[15px] font-light text-white/90 dark:text-white/75 leading-relaxed"
         >
           SupportPRO delivers 24/7 managed infrastructure, cloud operations, server administration,
           DevOps, and white-label technical support for hosting providers, SaaS companies, MSPs, and
@@ -288,7 +292,7 @@ function Hero() {
           </a>
           <a
             href="#services"
-            className="cursor-morph rounded-full border border-white/30 backdrop-blur-md bg-white/10 text-white px-5 py-2.5 text-[13px] font-medium hover:bg-white/20 transition"
+            className="cursor-morph rounded-full border border-white/30 dark:border-white/25 backdrop-blur-md bg-white/10 dark:bg-white/[0.08] text-white px-5 py-2.5 text-[13px] font-medium hover:bg-white/20 dark:hover:bg-white/[0.14] dark:hover:border-white/40 transition-all duration-200"
           >
             Explore Services
           </a>
@@ -386,7 +390,7 @@ function ServiceRow({
           });
         }
       }}
-      className="group relative border-t border-ink/10 py-8 lg:py-12 cursor-default overflow-hidden"
+      className="group relative border-t border-ink/10 dark:border-white/10 py-8 lg:py-12 cursor-default overflow-hidden"
     >
       {/* Spotlight follow */}
       <motion.div
@@ -430,7 +434,7 @@ function ServiceRow({
                 delay: index * 0.08 + 0.2 + j * 0.05,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className="service-pill inline-flex items-center rounded-full border border-ink/15 bg-white/60 backdrop-blur-sm px-4 py-2 text-[13px] text-ink/80 hover:border-ink/40 hover:bg-white hover:text-ink transition-colors"
+              className="service-pill inline-flex items-center rounded-full border border-ink/15 dark:border-white/10 bg-white/60 dark:bg-white/5 backdrop-blur-sm px-4 py-2 text-[13px] text-ink/80 dark:text-white/80 hover:border-ink/40 dark:hover:border-[#FF8101]/35 hover:bg-white hover:text-ink dark:hover:text-white transition-colors"
             >
               {it}
             </motion.span>
@@ -443,7 +447,7 @@ function ServiceRow({
 
 function Services() {
   return (
-    <section id="services" className="bg-cream py-16 lg:py-24">
+    <section id="services" className="bg-cream dark:bg-[var(--sp-surface)] py-16 lg:py-24">
       <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
         <div className="grid grid-cols-12 gap-6 md:gap-10 mb-12 md:mb-16">
           <div className="col-span-12 md:col-span-8">
@@ -453,7 +457,7 @@ function Services() {
                 <br />
                 your infrastructure
                 <br />
-                <em className="italic font-normal text-ink/70">
+                <em className="italic font-normal text-ink/70 dark:text-[var(--sp-text-secondary)]">
                   <HoverOrangeSpan>depends on.</HoverOrangeSpan>
                 </em>
               </h3>
@@ -461,7 +465,7 @@ function Services() {
           </div>
           <div className="col-span-12 md:col-span-4 md:pt-6">
             <InView delay={0.15}>
-              <p className="text-[14px] text-muted-foreground leading-relaxed max-w-sm">
+              <p className="text-[14px] text-muted-foreground dark:text-[var(--sp-text-muted)] leading-relaxed max-w-sm">
                 One partner for the full stack — from Level 1 helpdesk to multi-cloud engineering,
                 security, and around-the-clock incident response.
               </p>
@@ -469,7 +473,7 @@ function Services() {
           </div>
         </div>
 
-        <div className="border-b border-ink/10">
+        <div className="border-b border-ink/10 dark:border-white/10">
           {serviceGroups.map((g, i) => (
             <ServiceRow key={g.heading} group={g} index={i} />
           ))}
@@ -540,15 +544,15 @@ function StickyPhoneSection() {
         transition={{ duration: 0.6, ease: EASE }}
         className="max-w-sm will-change-transform"
       >
-        <div className="mb-4 flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-ink/40">
+        <div className="mb-4 flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-ink/40 dark:text-white/40">
           <span className="tabular-nums">0{active + 1}</span>
-          <span className="h-px w-8 bg-ink/20" />
+          <span className="h-px w-8 bg-ink/20 dark:bg-white/20" />
         </div>
-        <h3 className="font-display text-4xl lg:text-5xl leading-[1.05] text-ink">{b.title}</h3>
-        <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">{b.body}</p>
+        <h3 className="font-display text-4xl lg:text-5xl leading-[1.05] text-ink dark:text-white">{b.title}</h3>
+        <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground dark:text-white/70">{b.body}</p>
         <a
           href="#contact-form"
-          className="mt-8 inline-flex items-center gap-2 text-sm text-ink border-b border-ink/25 pb-1 transition-colors hover:border-ink"
+          className="mt-8 inline-flex items-center gap-2 text-sm text-ink dark:text-white/90 border-b border-ink/25 dark:border-white/25 pb-1 transition-colors hover:border-ink dark:hover:border-white dark:hover:text-white"
         >
           Talk to an engineer
         </a>
@@ -560,7 +564,7 @@ function StickyPhoneSection() {
     <section
       ref={sectionRef}
       id="features"
-      className="relative bg-cream rounded-t-[40px] -mt-10 pb-16 lg:pb-24"
+      className="relative bg-cream dark:bg-[var(--sp-bg)] rounded-t-[40px] -mt-10 pb-16 lg:pb-24"
     >
       {/* Scroll runway: one viewport per feature */}
       <div style={{ height: `${stickyBlocks.length * 100}vh` }}>
@@ -637,14 +641,14 @@ function StickyPhoneSection() {
                 transition={{ duration: 0.55, ease: EASE }}
                 className="text-center"
               >
-                <h3 className="font-display text-3xl leading-[1.08] text-ink">{b.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{b.body}</p>
+                <h3 className="font-display text-3xl leading-[1.08] text-ink dark:text-white">{b.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground dark:text-white/70">{b.body}</p>
               </motion.div>
             </AnimatePresence>
           </div>
 
           {/* Carousel indicator — centered near bottom of section */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full bg-white/70 px-3 py-2 backdrop-blur-sm ring-1 ring-ink/10">
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full bg-white/70 dark:bg-black/60 px-3 py-2 backdrop-blur-sm ring-1 ring-ink/10 dark:ring-white/10">
             {stickyBlocks.map((_, i) => (
               <div
                 key={i}
@@ -707,11 +711,11 @@ function SliderSection() {
   const x = useTransform(smoothProgress, [0, 1], ["calc(0% + 0vw)", "calc(-100% + 100vw)"]);
 
   return (
-    <section ref={targetRef} className="relative h-[300vh] bg-cream pb-16 lg:pb-24">
+    <section ref={targetRef} className="relative h-[300vh] bg-cream dark:bg-[var(--sp-surface)] pb-16 lg:pb-24">
       <div className="sticky top-0 h-screen flex flex-col pt-16 lg:pt-24 slider-track">
         <div className="mx-auto w-full max-w-[1152px] px-5 md:px-6 lg:px-8 mb-12 lg:mb-16">
           <InView>
-            <h3 className="font-display text-5xl md:text-6xl text-ink max-w-2xl leading-[1.05]">
+            <h3 className="font-display text-5xl md:text-6xl text-ink dark:text-white max-w-2xl leading-[1.05]">
               Built for the moments that matter.
             </h3>
           </InView>
@@ -799,7 +803,7 @@ function Privacy() {
   const spotlightBackground = useMotionTemplate`radial-gradient(1000px circle at ${springX}px ${springY}px, oklch(0.5 0.15 95 / 0.4), transparent 60%)`;
 
   return (
-    <section ref={ref} className="bg-cream py-16 lg:py-24">
+    <section ref={ref} className="bg-cream dark:bg-[var(--sp-surface)] py-16 lg:py-24">
       <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
         <InView>
           <div
@@ -925,19 +929,19 @@ function TestimonialCard({
   return (
     <motion.div
       style={{ rotate, x, y, scale, opacity, zIndex, willChange: "transform" }}
-      className="absolute w-[200px] md:w-[260px] h-[300px] md:h-[340px] origin-bottom bg-[#f2ede8] rounded-2xl p-6 pt-8 pb-10 flex flex-col gap-6 select-none border border-ink/5"
+      className="absolute w-[200px] md:w-[260px] h-[300px] md:h-[340px] origin-bottom bg-[#f2ede8] dark:bg-[#151515] rounded-2xl p-6 pt-8 pb-10 flex flex-col gap-6 select-none border border-ink/5 dark:border-white/10"
     >
       {/* Quote text */}
-      <p className="text-[13px] leading-relaxed text-ink/80 font-medium">&ldquo;{quote}&rdquo;</p>
+      <p className="text-[13px] leading-relaxed text-ink/80 dark:text-white/80 font-medium">&ldquo;{quote}&rdquo;</p>
       {/* Name */}
       <div className="mt-auto">
         <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-full bg-ink/10 flex items-center justify-center text-[10px] font-bold text-ink/60 shrink-0">
+          <div className="w-7 h-7 rounded-full bg-ink/10 dark:bg-white/10 flex items-center justify-center text-[10px] font-bold text-ink/60 dark:text-white/60 shrink-0">
             {name.charAt(0)}
           </div>
           <div>
-            <p className="text-[11px] font-semibold text-ink leading-tight">{name}</p>
-            <p className="text-[10px] text-ink/50 mt-0.5">SupportPRO Client</p>
+            <p className="text-[11px] font-semibold text-ink dark:text-white leading-tight">{name}</p>
+            <p className="text-[10px] text-ink/50 dark:text-white/50 mt-0.5">SupportPRO Client</p>
           </div>
         </div>
       </div>
@@ -969,7 +973,7 @@ function Testimonials() {
     <section
       id="testimonials"
       ref={containerRef}
-      className="relative bg-cream"
+      className="relative bg-cream dark:bg-[var(--sp-bg)]"
       style={{ height: "140vh" }}
     >
       {/* Sticky viewport */}
@@ -982,10 +986,10 @@ function Testimonials() {
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-8 md:mb-12 px-5 md:px-6 lg:px-8 select-none"
         >
-          <h3 className="font-display text-4xl md:text-5xl text-ink">
+          <h3 className="font-display text-4xl md:text-5xl text-ink dark:text-white">
             Trusted by <HoverOrangeSpan>teams worldwide.</HoverOrangeSpan>
           </h3>
-          <p className="mt-4 text-sm text-muted-foreground max-w-md mx-auto">
+          <p className="mt-4 text-sm text-muted-foreground dark:text-white/60 max-w-md mx-auto">
             Hosting providers, MSPs, and enterprises rely on SupportPRO to keep their infrastructure
             and customers running.
           </p>
@@ -1018,13 +1022,13 @@ function Testimonials() {
 function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="faq" className="bg-cream py-16 lg:py-24">
+    <section id="faq" className="bg-cream dark:bg-[var(--sp-surface)] py-16 lg:py-24">
       <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-16 items-start">
           {/* Left Column: Title & CTA */}
           <div className="relative h-full flex flex-col">
             <div className="sticky top-24">
-              <h3 className="font-display text-5xl md:text-[64px] text-ink leading-[1.05] tracking-tight mb-8">
+              <h3 className="font-display text-5xl md:text-[64px] text-ink dark:text-white leading-[1.05] tracking-tight mb-8">
                 Frequently
                 <br />
                 <HoverOrangeSpan>asked questions</HoverOrangeSpan>
@@ -1033,22 +1037,22 @@ function FAQ() {
 
               <div className="w-10 h-[2px] bg-[#FF6C2C] mb-8" />
 
-              <p className="text-[15px] text-muted-foreground leading-relaxed mb-12 max-w-[320px]">
+              <p className="text-[15px] text-muted-foreground dark:text-white/60 leading-relaxed mb-12 max-w-[320px]">
                 Get quick answers to the most common questions about our support services,
                 processes, and infrastructure.
               </p>
 
               {/* Documentation link */}
-              <div className="w-full max-w-[420px] rounded-md border border-ink/15 px-6 py-8">
+              <div className="w-full max-w-[420px] rounded-md border border-ink/15 dark:border-white/15 px-6 py-8">
                 <div className="flex items-start gap-6">
                   <div className="w-14 h-14 rounded-full bg-[#FF6C2C]/10 flex items-center justify-center text-[#FF6C2C] shrink-0">
                     <BookOpen size={25} strokeWidth={1.5} />
                   </div>
                   <div className="pt-1">
-                    <h4 className="font-display text-2xl text-ink leading-none mb-3">
+                    <h4 className="font-display text-2xl text-ink dark:text-white leading-none mb-3">
                       Still have questions?
                     </h4>
-                    <p className="text-[15px] text-muted-foreground leading-relaxed">
+                    <p className="text-[15px] text-muted-foreground dark:text-white/60 leading-relaxed">
                       Can't find the answers you're looking for? Our documentation has everything
                       you need.
                     </p>
@@ -1063,13 +1067,13 @@ function FAQ() {
           </div>
 
           {/* Right Column: FAQs */}
-          <div className="border-y border-ink/15 lg:mt-0">
+          <div className="border-y border-ink/15 dark:border-white/15 lg:mt-0">
             {faqs.map((f, i) => {
               const isOpen = open === i;
               return (
                 <div
                   key={i}
-                  className={`relative overflow-hidden border-b border-ink/15 last:border-b-0 transition-colors duration-300 ${isOpen ? "bg-[#FF6C2C]/[0.035]" : "hover:bg-ink/[0.025]"}`}
+                  className={`relative overflow-hidden border-b border-ink/15 dark:border-white/15 last:border-b-0 transition-colors duration-300 ${isOpen ? "bg-[#FF6C2C]/[0.035]" : "hover:bg-ink/[0.025] dark:hover:bg-white/[0.025]"}`}
                 >
                   <button
                     onClick={() => setOpen(isOpen ? null : i)}
@@ -1077,7 +1081,7 @@ function FAQ() {
                     className="w-full py-5 lg:py-6 text-left flex items-center justify-between gap-6 group"
                   >
                     <div
-                      className={`text-[16px] font-medium flex-1 pr-4 transition-colors ${isOpen ? "text-ink" : "text-ink/80 group-hover:text-ink"}`}
+                      className={`text-[16px] font-medium flex-1 pr-4 transition-colors ${isOpen ? "text-ink dark:text-white" : "text-ink/80 dark:text-white/80 group-hover:text-ink dark:group-hover:text-white"}`}
                     >
                       {f.q}
                     </div>
@@ -1167,13 +1171,13 @@ function CTA() {
           >
             <a
               href="#contact-form"
-              className="cursor-morph rounded-full bg-white text-ink px-6 py-3 text-sm font-medium hover:bg-white/90 transition"
+              className="cursor-morph rounded-full bg-white text-ink dark:bg-[#FF8101] dark:text-[#0B0B0B] dark:hover:brightness-110 px-6 py-3 text-sm font-medium hover:bg-white/90 transition-all duration-200"
             >
               Book a Consultation
             </a>
             <a
               href="#contact-form"
-              className="cursor-morph rounded-full border border-white/30 backdrop-blur-md bg-white/10 text-white px-6 py-3 text-sm font-medium hover:bg-white/20 transition"
+              className="cursor-morph rounded-full border border-white/30 dark:border-white/25 backdrop-blur-md bg-white/10 dark:bg-white/[0.08] text-white px-6 py-3 text-sm font-medium hover:bg-white/20 dark:hover:bg-white/[0.14] dark:hover:border-white/40 transition-all duration-200"
             >
               Contact Our Team
             </a>
@@ -1186,7 +1190,7 @@ function CTA() {
 
 function SiteFooter() {
   return (
-    <footer className="bg-ink text-white/80 px-5 md:px-6 lg:px-8 py-16 lg:py-24">
+    <footer className="bg-ink dark:bg-[#080808] text-white/80 px-5 md:px-6 lg:px-8 py-16 lg:py-24">
       <div className="mx-auto max-w-[1152px] grid grid-cols-2 md:grid-cols-4 gap-8 text-xs">
         <div>
           <a href="#" className="inline-block">
@@ -1196,7 +1200,7 @@ function SiteFooter() {
               className="h-12 md:h-14 w-auto object-contain"
             />
           </a>
-          <p className="mt-3 text-white/50 leading-relaxed max-w-[220px]">
+          <p className="mt-3 text-white/50 dark:text-[#777773] leading-relaxed max-w-[220px]">
             Enterprise infrastructure support, 24/7/365.
           </p>
         </div>
@@ -1227,16 +1231,29 @@ function SiteFooter() {
           </div>
         </div>
       </div>
-      <div className="mx-auto max-w-[1152px] mt-12 pt-6 border-t border-white/10 text-white/40 text-xs">
+      <div className="mx-auto max-w-[1152px] mt-12 pt-6 border-t border-white/10 dark:border-white/5 text-white/40 dark:text-white/30 text-xs">
         © 2026 SupportPRO. All rights reserved.
       </div>
     </footer>
   );
 }
 
+function ThemeToggle() {
+  const { theme, setTheme } = useTheme();
+  return (
+    <button
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      className="fixed bottom-6 right-6 z-[99] flex h-12 w-12 items-center justify-center rounded-full bg-white text-ink shadow-[0_2px_10px_rgba(0,0,0,0.1)] transition-transform hover:scale-110 dark:bg-[#FF8101] dark:text-[#0B0B0B]"
+    >
+      {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+    </button>
+  );
+}
+
 function Index() {
   return (
-    <main className="bg-cream overflow-x-clip">
+    <ThemeProvider>
+      <main className="bg-cream dark:bg-[var(--sp-bg)] overflow-x-clip transition-colors duration-300">
       <Nav />
       <Hero />
       <Credentials />
@@ -1252,5 +1269,7 @@ function Index() {
       <CTA />
       <SiteFooter />
     </main>
+      <ThemeToggle />
+    </ThemeProvider>
   );
 }

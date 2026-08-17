@@ -247,7 +247,7 @@ export function Credentials() {
   const gridRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="bg-cream py-16 lg:py-24 relative overflow-hidden">
+    <section className="bg-cream dark:bg-[var(--sp-surface)] py-16 lg:py-24 relative overflow-hidden">
       <GlobalBadgeSpotlight gridRef={gridRef} />
       <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8 relative z-10" ref={gridRef}>
         {/* Location tag */}
@@ -257,10 +257,10 @@ export function Credentials() {
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/>
               <circle cx="12" cy="9" r="2.5" fill="white"/>
             </svg> */}
-            <p className="text-center text-[13px] text-muted-foreground">
+            <p className="text-center text-[13px] text-muted-foreground dark:text-[var(--sp-text-muted)]">
               In business since 2003 — headquartered in{" "}
-              <span className="text-ink font-medium">Chicago, IL</span>, with three offshore
-              delivery centres in <span className="text-ink font-medium">South India</span>.
+              <span className="text-ink dark:text-[var(--sp-text-primary)] font-medium">Chicago, IL</span>, with three offshore
+              delivery centres in <span className="text-ink dark:text-[var(--sp-text-primary)] font-medium">South India</span>.
             </p>
           </div>
         </Reveal>
@@ -273,10 +273,10 @@ export function Credentials() {
                 <ParticleBadge
                   key={i}
                   enableMagnetism={false}
-                  className="flex shrink-0 items-center gap-2.5 border border-ink/10 px-5 py-3 cursor-pointer bg-white rounded-full"
+                  className="flex shrink-0 items-center gap-2.5 border border-ink/10 dark:border-white/10 px-5 py-3 cursor-pointer bg-white dark:bg-white/[0.035] rounded-full shadow-[0_2px_10px_rgba(0,0,0,0.03)] dark:shadow-none hover:border-ink/20 dark:hover:border-[#FF8101]/40 transition-all duration-200 hover:shadow-[0_4px_20px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_4px_20px_rgba(255,129,1,0.1)] group"
                 >
                   <span className="flex items-center shrink-0">{c.icon}</span>
-                  <span className="text-[13px] font-medium text-ink/80 whitespace-nowrap">
+                  <span className="text-[13px] font-medium text-ink/80 dark:text-white/60 group-hover:text-ink/90 dark:group-hover:text-white transition-colors duration-300 whitespace-nowrap">
                     {c.name}
                   </span>
                 </ParticleBadge>
@@ -311,7 +311,7 @@ const pillars = [
 
 export function Pillars() {
   return (
-    <section className="bg-cream py-16 lg:py-24 overflow-hidden">
+    <section className="bg-cream dark:bg-[var(--sp-bg)] py-16 lg:py-24 overflow-hidden">
       <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
         {/* Top split: heading left + large image right */}
         <div className="grid grid-cols-12 gap-6 md:gap-8 lg:gap-10 items-stretch mb-12 md:mb-16">
@@ -327,13 +327,13 @@ export function Pillars() {
                   Our Standards
                 </span>
               </div>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-[48px] text-ink leading-[1.05]">
+              <h2 className="font-display text-3xl md:text-4xl lg:text-[48px] text-ink dark:text-white leading-[1.05]">
                 The outsourced <HoverOrangeSpan>technical support experts</HoverOrangeSpan>
                 <span style={{ color: "oklch(0.65 0.16 50)" }}>.</span>
               </h2>
             </Reveal>
             <Reveal delay={0.15}>
-              <p className="mt-5 text-[14px] leading-relaxed text-muted-foreground max-w-sm">
+              <p className="mt-5 text-[14px] leading-relaxed text-muted-foreground dark:text-[rgba(245,245,242,0.6)] max-w-sm">
                 We provide 24/7 transparent technical support for web hosting companies, data
                 centres, server management companies, and MSPs — quietly, under your brand, at
                 enterprise standards.
@@ -366,15 +366,15 @@ export function Pillars() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.7, delay: i * 0.12, ease: EASE }}
-              className="group relative flex flex-col rounded-2xl border border-ink/8 bg-white p-5 lg:p-6 hover:-translate-y-1 transition-all duration-500"
+              className="group relative flex flex-col rounded-2xl border border-ink/8 dark:border-white/10 bg-white dark:bg-white/5 p-5 lg:p-6 hover:-translate-y-1 transition-all duration-500"
             >
               {/* Number + icon row */}
               <div className="flex items-center justify-between mb-6">
-                <span className="font-display text-sm tabular-nums text-muted-foreground/60">
+                <span className="font-display text-sm tabular-nums text-muted-foreground/60 dark:text-white/30">
                   0{i + 1}
                 </span>
                 <div
-                  className="flex items-center justify-center w-10 h-10 rounded-full"
+                  className="flex items-center justify-center w-10 h-10 rounded-full dark:bg-[#FF8101]/10 dark:text-[#FF8101]"
                   style={{ background: "oklch(0.96 0.04 60)", color: "oklch(0.62 0.18 50)" }}
                 >
                   <p.Icon size={18} strokeWidth={1.5} />
@@ -383,12 +383,12 @@ export function Pillars() {
 
               {/* Animated underline divider */}
               <div
-                className="mb-5 h-px w-8 transition-all duration-500 group-hover:w-full"
+                className="mb-5 h-px w-8 transition-all duration-500 group-hover:w-full dark:bg-[#FF8101]"
                 style={{ background: "oklch(0.65 0.16 50)" }}
               />
 
-              <h3 className="font-display text-2xl leading-snug text-ink mb-3">{p.title}</h3>
-              <p className="text-[14px] leading-relaxed text-muted-foreground flex-1">{p.body}</p>
+              <h3 className="font-display text-2xl leading-snug text-ink dark:text-white mb-3">{p.title}</h3>
+              <p className="text-[14px] leading-relaxed text-muted-foreground dark:text-white/60 flex-1">{p.body}</p>
             </motion.div>
           ))}
         </div>
@@ -434,10 +434,10 @@ const MarqueeRow = ({
             enableStars={true}
             clickEffect={true}
             particleCount={5}
-            className="w-[252px] h-[288px] flex-shrink-0 relative isolate overflow-hidden group flex flex-col items-center justify-center rounded-2xl bg-white border border-ink/10 transition-colors duration-400 hover:border-[#FF6C2C]/70 cursor-pointer"
+            className="w-[252px] h-[288px] flex-shrink-0 relative isolate overflow-hidden group flex flex-col items-center justify-center rounded-2xl bg-white dark:bg-[rgba(255,255,255,0.02)] border border-ink/10 dark:border-white/10 transition-colors duration-400 hover:border-[#FF6C2C]/70 dark:hover:border-[#FF8101]/50 cursor-pointer"
           >
             {/* Logo */}
-            <div className="mb-6 flex h-[72px] w-[156px] items-center justify-center transition-transform duration-400 group-hover:-translate-y-1.5">
+            <div className="mb-6 flex h-[72px] w-[156px] items-center justify-center transition-transform duration-400 group-hover:-translate-y-1.5 dark:opacity-80">
               <img
                 src={p.logo}
                 alt=""
@@ -469,14 +469,14 @@ export function Platforms() {
   const gridRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="bg-cream pb-16 lg:pb-24 overflow-hidden relative">
+    <section className="bg-cream dark:bg-[var(--sp-bg)] pb-16 lg:pb-24 overflow-hidden relative">
       <GlobalBadgeSpotlight gridRef={gridRef} spotlightRadius={400} />
       <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8 text-center mb-12 relative z-10">
         <Reveal>
-          <h2 className="font-display text-3xl md:text-[44px] text-ink">
+          <h2 className="font-display text-3xl md:text-[44px] text-ink dark:text-[var(--sp-text-primary)]">
             Supported <HoverOrangeSpan>platforms.</HoverOrangeSpan>
           </h2>
-          <p className="mx-auto mt-5 max-w-[420px] text-[14px] leading-relaxed text-muted-foreground/80">
+          <p className="mx-auto mt-5 max-w-[420px] text-[14px] leading-relaxed text-muted-foreground/80 dark:text-[rgba(167,167,163,0.80)]">
             Covering every major technology platform to bring you excellent outsourced support.
           </p>
         </Reveal>
@@ -531,22 +531,22 @@ const stats = [
 
 export function Experts() {
   return (
-    <section className="bg-cream py-16 lg:py-24">
+    <section className="bg-cream dark:bg-[var(--sp-surface)] py-16 lg:py-24">
       <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
           {/* Left Side: Why we are the experts */}
           <div>
             <Reveal>
-              <h2 className="font-display text-5xl md:text-[56px] leading-[1.03] text-ink max-w-[400px]">
+              <h2 className="font-display text-5xl md:text-[56px] leading-[1.03] text-ink dark:text-white max-w-[400px]">
                 Why we call ourselves
                 <br />
-                <em className="font-normal italic text-ink/70">the experts</em>
+                <em className="font-normal italic text-ink/70 dark:text-white/70">the experts</em>
                 <span className="text-[#FF6C2C]">.</span>
               </h2>
             </Reveal>
 
             <Reveal delay={0.2}>
-              <h4 className="mt-6 font-display text-3xl md:text-4xl lg:text-[48px] leading-[1.05] text-ink">
+              <h4 className="mt-6 font-display text-3xl md:text-4xl lg:text-[48px] leading-[1.05] text-ink dark:text-white">
                 Technical excellence.
                 <br />
                 Process discipline.
@@ -570,8 +570,8 @@ export function Experts() {
                   <Award size={24} strokeWidth={1.5} />
                 </div>
                 <div>
-                  <div className="text-[13px] font-bold text-ink">ISO 9001:2015 Certified</div>
-                  <div className="text-[13px] text-muted-foreground mt-0.5">
+                  <div className="text-[13px] font-bold text-ink dark:text-white">ISO 9001:2015 Certified</div>
+                  <div className="text-[13px] text-muted-foreground dark:text-white/60 mt-0.5">
                     Quality processes. Measurable results.
                   </div>
                 </div>
@@ -613,7 +613,7 @@ export function Experts() {
                     <div className="w-14 h-14 rounded-full bg-[#FF6C2C]/10 flex items-center justify-center text-ink mb-6">
                       <s.Icon size={24} strokeWidth={1.5} />
                     </div>
-                    <div className="font-display text-4xl lg:text-[46px] text-ink mb-4 tracking-tight">
+                    <div className="font-display text-4xl lg:text-[46px] text-ink dark:text-white mb-4 tracking-tight">
                       <Counter to={s.to} decimals={s.decimals ?? 0} />
                     </div>
                     <div className="w-8 h-[2px] bg-[#FF6C2C] mb-4 transition-all duration-500 group-hover/metric:w-12" />
@@ -646,14 +646,14 @@ export function ContactForm() {
   const [message, setMessage] = useState("");
 
   return (
-    <section id="contact-form" className="bg-cream pb-16 md:pb-24 lg:pb-28">
+    <section id="contact-form" className="bg-cream dark:bg-[var(--sp-bg)] pb-16 md:pb-24 lg:pb-28">
       <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
-        <div className="rounded-[36px] border border-ink/5 bg-white/80 p-5 md:p-8 lg:p-10 backdrop-blur-md">
+        <div className="rounded-[36px] border border-ink/5 dark:border-white/10 bg-white/80 dark:bg-[#151515] p-5 md:p-8 lg:p-10 backdrop-blur-md">
           <div className="grid grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Column: Info */}
             <div className="col-span-12 lg:col-span-5 flex flex-col justify-between pr-0 lg:pr-10 lg:border-r lg:border-ink/5">
               <Reveal>
-                <h2 className="font-display text-3xl md:text-[44px] leading-[1.05] text-ink mb-4">
+                <h2 className="font-display text-3xl md:text-[44px] leading-[1.05] text-ink dark:text-white mb-4">
                   Drop us a <br />
                   <span className="italic font-serif">message</span>
                   <span className="text-[#FF6C2C]">.</span>
@@ -670,7 +670,7 @@ export function ContactForm() {
                       <MapPin size={18} strokeWidth={1.5} />
                     </div>
                     <div>
-                      <h4 className="text-[14px] font-semibold text-ink leading-tight">
+                      <h4 className="text-[14px] font-semibold text-ink dark:text-white leading-tight">
                         Headquarters
                       </h4>
                       <p className="text-[13px] text-muted-foreground mt-0.5">
@@ -722,14 +722,14 @@ export function ContactForm() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
                     <div className="relative">
                       <User
-                        className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30 transition-colors group-focus-within:text-[#FF6C2C]"
+                        className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30 dark:text-white/30 transition-colors group-focus-within:text-[#FF6C2C]"
                         size={16}
                         strokeWidth={1.5}
                       />
                       <input
                         required
                         placeholder="Full name"
-                        className="w-full rounded-2xl border border-ink/10 bg-[#FAFAFA] pl-11 pr-4 py-3 text-[13px] text-ink outline-none transition-all placeholder:text-ink/35 focus:border-[#FF6C2C]/50 focus:bg-white focus:ring-2 focus:ring-[#FF6C2C]/10"
+                        className="w-full rounded-2xl border border-ink/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF6C2C]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF6C2C]/10"
                       />
                     </div>
                     <div className="relative">
@@ -742,7 +742,7 @@ export function ContactForm() {
                         required
                         type="email"
                         placeholder="Work email"
-                        className="w-full rounded-2xl border border-ink/10 bg-[#FAFAFA] pl-11 pr-4 py-3 text-[13px] text-ink outline-none transition-all placeholder:text-ink/35 focus:border-[#FF6C2C]/50 focus:bg-white focus:ring-2 focus:ring-[#FF6C2C]/10"
+                        className="w-full rounded-2xl border border-ink/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF6C2C]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF6C2C]/10"
                       />
                     </div>
                   </div>
@@ -755,7 +755,7 @@ export function ContactForm() {
                     />
                     <input
                       placeholder="Company"
-                      className="w-full rounded-2xl border border-ink/10 bg-[#FAFAFA] pl-11 pr-4 py-3 text-[13px] text-ink outline-none transition-all placeholder:text-ink/35 focus:border-[#FF6C2C]/50 focus:bg-white focus:ring-2 focus:ring-[#FF6C2C]/10"
+                      className="w-full rounded-2xl border border-ink/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF6C2C]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF6C2C]/10"
                     />
                   </div>
 
@@ -772,9 +772,9 @@ export function ContactForm() {
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="What do you need support with?"
-                      className="w-full resize-none rounded-2xl border border-ink/10 bg-[#FAFAFA] pl-11 pr-4 pt-3 pb-8 text-[13px] text-ink outline-none transition-all placeholder:text-ink/35 focus:border-[#FF6C2C]/50 focus:bg-white focus:ring-2 focus:ring-[#FF6C2C]/10"
+                      className="w-full resize-none rounded-2xl border border-ink/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 pt-3 pb-8 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF6C2C]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF6C2C]/10"
                     />
-                    <span className="absolute right-4 bottom-3 text-[11px] text-ink/30 font-mono select-none">
+                    <span className="absolute right-4 bottom-3 text-[11px] text-ink/30 dark:text-white/30 font-mono select-none">
                       {message.length} / 500
                     </span>
                   </div>
