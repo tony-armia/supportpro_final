@@ -1,0 +1,13 @@
+.ferrofluid-container {
+  position: absolute;
+  inset: -10%; /* extend slightly beyond hero image */
+  width: 120%;
+  height: 120%;
+  overflow: visible;
+  pointer-events: none; /* Make sure it doesn't block interaction */
+}
+
+.ferrofluid-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
