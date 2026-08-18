@@ -313,7 +313,7 @@ function Hero() {
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-[80px] leading-[0.95] max-w-4xl drop-shadow-[0_2px_20px_rgba(0,0,0,0.35)]"
         >
-          Enterprise infrastructure
+          Enterpriseeeeee infrastructure
           <br />
           support that <HoverOrangeSpan>never sleeps.</HoverOrangeSpan>
         </motion.h1>
