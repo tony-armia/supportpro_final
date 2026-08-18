@@ -191,7 +191,7 @@ function Nav() {
       {/* Logo — switches white ↔ black based on theme + scroll */}
       <motion.a
         href="#"
-        className="flex items-center gap-2"
+        className="flex items-center gap-2 min-w-0"
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
@@ -205,7 +205,7 @@ function Nav() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="h-12 md:h-14 w-auto object-contain"
+            className="h-9 sm:h-12 md:h-14 w-auto object-contain"
           />
         </AnimatePresence>
       </motion.a>
@@ -214,17 +214,17 @@ function Nav() {
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
-        className="flex items-center gap-1 rounded-full backdrop-blur-md px-2 py-1.5 text-sm text-white border border-white/10"
+        className="flex items-center gap-1 rounded-full backdrop-blur-md px-2 py-1.5 text-sm text-white border border-white/10 shrink-0"
       >
         <a
           href="#services"
-          className="cursor-morph px-4 py-1.5 rounded-full hover:bg-white/10 transition"
+          className="cursor-morph px-4 py-1.5 rounded-full hover:bg-white/10 transition hidden sm:block"
         >
           Services
         </a>
         <a
           href="#faq"
-          className="cursor-morph px-4 py-1.5 rounded-full hover:bg-white/10 transition"
+          className="cursor-morph px-4 py-1.5 rounded-full hover:bg-white/10 transition hidden sm:block"
         >
           FAQ
         </a>
@@ -236,7 +236,7 @@ function Nav() {
         </a>
 
         {/* Divider */}
-        <span className="mx-1 h-4 w-px bg-white/20" />
+        <span className="mx-1 h-4 w-px bg-white/20 hidden sm:block" />
 
         {/* Theme toggle inside pill */}
         <button
@@ -290,7 +290,7 @@ function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <section ref={ref} className="relative h-screen min-h-[720px] w-full overflow-hidden">
+    <section ref={ref} className="relative h-screen min-h-[600px] sm:min-h-[720px] w-full overflow-hidden">
       <motion.img
         src={heroImg}
         alt=""
@@ -311,7 +311,7 @@ function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[80px] leading-[0.95] max-w-4xl drop-shadow-[0_2px_20px_rgba(0,0,0,0.35)]"
+          className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-[80px] leading-[0.95] max-w-4xl drop-shadow-[0_2px_20px_rgba(0,0,0,0.35)]"
         >
           Enterprise infrastructure
           <br />
@@ -458,14 +458,14 @@ function ServiceRow({
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       />
 
-      <div className="relative grid grid-cols-12 gap-6 md:gap-10 items-baseline">
-        <div className="col-span-12 md:col-span-2 flex items-baseline gap-4">
+      <div className="relative grid grid-cols-12 gap-4 md:gap-10 items-baseline">
+        <div className="hidden md:flex md:col-span-2 items-baseline gap-4">
           <span className="font-display text-sm text-muted-foreground tabular-nums">
             {String(index + 1).padStart(2, "0")}
           </span>
         </div>
         <motion.h4
-          className="col-span-12 md:col-span-4 font-display text-4xl md:text-5xl lg:text-6xl text-ink leading-[0.95]"
+          className="col-span-12 md:col-span-4 font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-ink leading-[0.95]"
           animate={{ x: hovered ? 8 : 0 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
@@ -501,7 +501,7 @@ function Services() {
         <div className="grid grid-cols-12 gap-6 md:gap-10 mb-12 md:mb-16">
           <div className="col-span-12 md:col-span-8">
             <InView>
-              <h3 className="font-display text-4xl md:text-6xl text-ink leading-[1] tracking-tight">
+              <h3 className="font-display text-3xl sm:text-4xl md:text-6xl text-ink leading-[1] tracking-tight">
                 Every service
                 <br />
                 your infrastructure
@@ -764,7 +764,7 @@ function SliderSection() {
       <div className="sticky top-0 h-screen flex flex-col pt-16 lg:pt-24 slider-track">
         <div className="mx-auto w-full max-w-[1152px] px-5 md:px-6 lg:px-8 mb-12 lg:mb-16">
           <InView>
-            <h3 className="font-display text-5xl md:text-6xl text-ink dark:text-white max-w-2xl leading-[1.05]">
+            <h3 className="font-display text-4xl sm:text-5xl md:text-6xl text-ink dark:text-white max-w-2xl leading-[1.05]">
               Built for the moments that matter.
             </h3>
           </InView>
@@ -794,7 +794,7 @@ function SliderSection() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               <div className="relative z-10 h-full p-8 lg:p-12 max-w-lg text-white flex flex-col justify-end">
-                <h4 className="font-display text-3xl lg:text-5xl leading-[1.05]">{c.title}</h4>
+                <h4 className="font-display text-2xl sm:text-3xl lg:text-5xl leading-[1.05]">{c.title}</h4>
                 <p className="mt-4 text-[14px] leading-relaxed text-white/85">{c.body}</p>
               </div>
             </motion.article>
@@ -852,7 +852,7 @@ function Privacy() {
   const spotlightBackground = useMotionTemplate`radial-gradient(1000px circle at ${springX}px ${springY}px, oklch(0.5 0.15 95 / 0.4), transparent 60%)`;
 
   return (
-    <section ref={ref} className="bg-cream dark:bg-[var(--sp-surface)] py-16 lg:py-24">
+    <section ref={ref} className="bg-cream dark:bg-[var(--sp-surface)] py-16 lg:py-24 overflow-hidden">
       <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
         <InView>
           <div
@@ -889,7 +889,7 @@ function Privacy() {
             />
             <div className="relative z-10">
               <div className="mt-6 grid gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:items-start">
-                <h3 className="font-display text-5xl md:text-[64px] text-white leading-[1.02]">
+                <h3 className="font-display text-4xl sm:text-5xl md:text-[64px] text-white leading-[1.02]">
                   Security at the core.
                 </h3>
                 <p className="text-[15px] text-white/55 leading-relaxed max-w-md mt-2">
@@ -1088,7 +1088,7 @@ function FAQ() {
           {/* Left Column: Title & CTA */}
           <div className="relative h-full flex flex-col">
             <div className="sticky top-24">
-              <h3 className="font-display text-5xl md:text-[64px] text-ink dark:text-white leading-[1.05] tracking-tight mb-8">
+              <h3 className="font-display text-4xl sm:text-5xl md:text-[64px] text-ink dark:text-white leading-[1.05] tracking-tight mb-8">
                 Frequently
                 <br />
                 <HoverOrangeSpan>asked questions</HoverOrangeSpan>
@@ -1138,7 +1138,7 @@ function FAQ() {
                   <button
                     onClick={() => setOpen(isOpen ? null : i)}
                     aria-expanded={isOpen}
-                    className="w-full py-5 lg:py-6 text-left flex items-center justify-between gap-6 group"
+                    className="w-full min-h-[44px] py-5 lg:py-6 text-left flex items-center justify-between gap-6 group"
                   >
                     <div
                       className={`text-[16px] font-medium flex-1 pr-4 transition-colors ${isOpen ? "text-ink dark:text-white" : "text-ink/80 dark:text-white/80 group-hover:text-ink dark:group-hover:text-white"}`}
@@ -1204,7 +1204,7 @@ function CTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-6xl md:text-8xl leading-[0.95]"
+            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[0.95]"
           >
             Ready to strengthen
             <br />
@@ -1252,7 +1252,7 @@ function SiteFooter() {
   return (
     <footer className="bg-ink dark:bg-[#080808] text-white/80 px-5 md:px-6 lg:px-8 py-16 lg:py-24">
       <div className="mx-auto max-w-[1152px] grid grid-cols-2 md:grid-cols-4 gap-8 text-xs">
-        <div>
+        <div className="col-span-2 md:col-span-1">
           <a href="#" className="inline-block">
             <img
               src={logoWhite}

@@ -537,7 +537,7 @@ export function Experts() {
           {/* Left Side: Why we are the experts */}
           <div>
             <Reveal>
-              <h2 className="font-display text-5xl md:text-[56px] leading-[1.03] text-ink dark:text-white max-w-[400px]">
+              <h2 className="font-display text-4xl sm:text-5xl md:text-[56px] leading-[1.03] text-ink dark:text-white max-w-[400px]">
                 Why we call ourselves
                 <br />
                 <em className="font-normal italic text-ink/70 dark:text-white/70">the experts</em>
@@ -546,7 +546,7 @@ export function Experts() {
             </Reveal>
 
             <Reveal delay={0.2}>
-              <h4 className="mt-6 font-display text-3xl md:text-4xl lg:text-[48px] leading-[1.05] text-ink dark:text-white">
+              <h4 className="mt-6 font-display text-2xl sm:text-3xl md:text-4xl lg:text-[48px] leading-[1.05] text-ink dark:text-white">
                 Technical excellence.
                 <br />
                 Process discipline.
@@ -613,11 +613,11 @@ export function Experts() {
                     <div className="w-14 h-14 rounded-full bg-[#FF8101]/10 flex items-center justify-center text-ink mb-6">
                       <s.Icon size={24} strokeWidth={1.5} />
                     </div>
-                    <div className="font-display text-4xl lg:text-[46px] text-ink dark:text-white mb-4 tracking-tight">
+                    <div className="font-display text-3xl sm:text-4xl lg:text-[46px] text-ink dark:text-white mb-4 tracking-tight">
                       <Counter to={s.to} decimals={s.decimals ?? 0} />
                     </div>
                     <div className="w-8 h-[2px] bg-[#FF8101] mb-4 transition-all duration-500 group-hover/metric:w-12" />
-                    <div className="whitespace-nowrap text-[12px] lg:text-[13px] text-muted-foreground font-medium leading-relaxed">
+                    <div className="text-[11px] sm:text-[12px] lg:text-[13px] text-muted-foreground font-medium leading-relaxed">
                       {s.label}
                     </div>
                   </div>
@@ -646,9 +646,9 @@ export function ContactForm() {
   const [message, setMessage] = useState("");
 
   return (
-    <section id="contact-form" className="bg-cream dark:bg-[var(--sp-bg)] pb-16 md:pb-24 lg:pb-28">
+    <section id="contact-form" className="bg-cream dark:bg-[var(--sp-bg)] pb-16 pt-16 md:pb-24 lg:pb-28">
       <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
-        <div className="rounded-[36px] border border-ink/5 dark:border-white/10 bg-white/80 dark:bg-[#151515] p-5 md:p-8 lg:p-10 backdrop-blur-md">
+        <div className="rounded-2xl sm:rounded-[28px] md:rounded-[36px] border border-ink/5 dark:border-white/10 bg-white/80 dark:bg-[#151515] p-5 md:p-8 lg:p-10 backdrop-blur-md">
           <div className="grid grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left Column: Info */}
             <div className="col-span-12 lg:col-span-5 flex flex-col justify-between pr-0 lg:pr-10 lg:border-r lg:border-ink/5">
