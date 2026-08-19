@@ -280,7 +280,10 @@ function Nav() {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
-    setIsScrolledPastHero(latest > 550);
+    const isPast = latest > 550;
+    if (isPast !== isScrolledPastHero) {
+      setIsScrolledPastHero(isPast);
+    }
   });
 
   const bg = useTransform(scrollY, [0, 200], ["rgba(255,255,255,0.15)", "rgba(20,20,20,0.55)"]);
@@ -505,7 +508,7 @@ function Hero() {
       <motion.img
         src={heroImg}
         alt=""
-        style={{ y, scale }}
+        style={{ y, scale, willChange: "transform" }}
         className="absolute inset-0 h-full w-full object-cover parallax-img"
         width={1600}
         height={1008}

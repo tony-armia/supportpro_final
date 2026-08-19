@@ -39,50 +39,80 @@ export function CustomCursor() {
   useEffect(() => {
     if (!enabled) return;
 
-    const updateTarget = (event: PointerEvent) => {
+    let activeElement: HTMLElement | null = null;
+
+    const updateBounds = () => {
+      if (!activeElement) {
+        setTargetBounds(null);
+        return;
+      }
+      const rect = activeElement.getBoundingClientRect();
+      const borderRadius = getComputedStyle(activeElement).borderTopLeftRadius;
+      setTargetBounds({
+        width: rect.width + 10,
+        height: rect.height + 10,
+        x: rect.left + rect.width / 2,
+        y: rect.top + rect.height / 2,
+        borderRadius,
+      });
+    };
+
+    const handleMouseOver = (event: MouseEvent) => {
       const eventTarget = event.target as HTMLElement | null;
       if (eventTarget?.closest("#faq")) {
-        setTargetBounds(null);
+        activeElement = null;
+        updateBounds();
         return;
       }
 
       const element = eventTarget?.closest<HTMLElement>(TARGET_SELECTOR);
-      if (!element) {
-        setTargetBounds(null);
-        return;
+      if (element !== activeElement) {
+        activeElement = element || null;
+        updateBounds();
       }
-
-      const rect = element.getBoundingClientRect();
-      const borderRadius = getComputedStyle(element).borderTopLeftRadius;
-      setTargetBounds((previous) => {
-        const next = {
-          width: rect.width + 10,
-          height: rect.height + 10,
-          x: rect.left + rect.width / 2,
-          y: rect.top + rect.height / 2,
-          borderRadius,
-        };
-        return previous?.width === next.width &&
-          previous.height === next.height &&
-          previous.x === next.x &&
-          previous.y === next.y &&
-          previous.borderRadius === next.borderRadius
-          ? previous
-          : next;
-      });
     };
+
+    const handleMouseOut = (event: MouseEvent) => {
+      // If moving to another element outside the target, clear it.
+      // MouseOver handles the new target.
+      const related = event.relatedTarget as HTMLElement | null;
+      if (activeElement && !related?.closest(TARGET_SELECTOR)) {
+        activeElement = null;
+        updateBounds();
+      }
+    };
+
     const movePointer = (event: PointerEvent) => {
       pointerX.set(event.clientX);
       pointerY.set(event.clientY);
-      updateTarget(event);
     };
-    const clearTarget = () => setTargetBounds(null);
+
+    const clearTarget = () => {
+      activeElement = null;
+      setTargetBounds(null);
+    };
+
+    let scrollRaf: number;
+    const handleScroll = () => {
+      if (activeElement) {
+        cancelAnimationFrame(scrollRaf);
+        scrollRaf = requestAnimationFrame(updateBounds);
+      }
+    };
 
     window.addEventListener("pointermove", movePointer, { passive: true });
+    window.addEventListener("mouseover", handleMouseOver, { passive: true });
+    window.addEventListener("mouseout", handleMouseOut, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("blur", clearTarget);
+
     return () => {
       window.removeEventListener("pointermove", movePointer);
+      window.removeEventListener("mouseover", handleMouseOver);
+      window.removeEventListener("mouseout", handleMouseOut);
+      window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("blur", clearTarget);
+      cancelAnimationFrame(scrollRaf);
     };
   }, [enabled, pointerX, pointerY]);
 
@@ -101,13 +131,13 @@ export function CustomCursor() {
     >
       <motion.div
         className="fixed left-0 top-0 border-2 border-[#FF8101]"
-        style={{ x, y, width, height, borderRadius, translateX: "-50%", translateY: "-50%" }}
+        style={{ x, y, width, height, borderRadius, translateX: "-50%", translateY: "-50%", willChange: "transform" }}
         animate={{ width, height, opacity: 0.78 }}
         transition={{ type: "spring", stiffness: 260, damping: 28, mass: 0.35 }}
       />
       <motion.div
         className="fixed left-0 top-0 h-1.5 w-1.5 rounded-full bg-[#FF8101]"
-        style={{ x: dotX, y: dotY, translateX: "-50%", translateY: "-50%" }}
+        style={{ x: dotX, y: dotY, translateX: "-50%", translateY: "-50%", willChange: "transform" }}
         animate={{ opacity: targetBounds ? 0 : 1 }}
         transition={{ duration: 0.12 }}
       />

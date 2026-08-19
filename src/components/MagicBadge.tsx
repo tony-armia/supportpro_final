@@ -30,10 +30,9 @@ const calculateSpotlightValues = (radius: number) => ({
   fadeDistance: radius * 0.75
 });
 
-const updateCardGlowProperties = (card: HTMLElement, mouseX: number, mouseY: number, glow: number, radius: number) => {
-  const rect = card.getBoundingClientRect();
-  const relativeX = ((mouseX - rect.left) / rect.width) * 100;
-  const relativeY = ((mouseY - rect.top) / rect.height) * 100;
+const updateCardGlowProperties = (card: HTMLElement, mouseX: number, mouseY: number, glow: number, radius: number, rectLeft: number, rectTop: number, rectWidth: number, rectHeight: number) => {
+  const relativeX = ((mouseX - rectLeft) / rectWidth) * 100;
+  const relativeY = ((mouseY - rectTop) / rectHeight) * 100;
 
   card.style.setProperty('--glow-x', `${relativeX}%`);
   card.style.setProperty('--glow-y', `${relativeY}%`);
@@ -150,8 +149,18 @@ const ParticleBadge: React.FC<ParticleBadgeProps> = ({
 
     const element = cardRef.current;
 
+    let cachedRect: DOMRect | null = null;
+    let scrollRaf: number;
+
+    const updateRect = () => {
+      if (element) {
+        cachedRect = element.getBoundingClientRect();
+      }
+    };
+
     const handleMouseEnter = () => {
       isHoveredRef.current = true;
+      updateRect();
       animateParticles();
 
       if (enableTilt) {
@@ -167,6 +176,7 @@ const ParticleBadge: React.FC<ParticleBadgeProps> = ({
 
     const handleMouseLeave = () => {
       isHoveredRef.current = false;
+      cachedRect = null;
       clearAllParticles();
 
       if (enableTilt) {
@@ -190,12 +200,12 @@ const ParticleBadge: React.FC<ParticleBadgeProps> = ({
 
     const handleMouseMove = (e: MouseEvent) => {
       if (!enableTilt && !enableMagnetism) return;
+      if (!cachedRect) return;
 
-      const rect = element.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const centerX = rect.width / 2;
-      const centerY = rect.height / 2;
+      const x = e.clientX - cachedRect.left;
+      const y = e.clientY - cachedRect.top;
+      const centerX = cachedRect.width / 2;
+      const centerY = cachedRect.height / 2;
 
       if (enableTilt) {
         const rotateX = ((y - centerY) / centerY) * -10;
@@ -220,6 +230,13 @@ const ParticleBadge: React.FC<ParticleBadgeProps> = ({
           duration: 0.3,
           ease: 'power2.out'
         });
+      }
+    };
+
+    const handleScroll = () => {
+      if (isHoveredRef.current) {
+        cancelAnimationFrame(scrollRaf);
+        scrollRaf = requestAnimationFrame(updateRect);
       }
     };
 
@@ -272,6 +289,7 @@ const ParticleBadge: React.FC<ParticleBadgeProps> = ({
     element.addEventListener('mouseleave', handleMouseLeave);
     element.addEventListener('mousemove', handleMouseMove);
     element.addEventListener('click', handleClick);
+    window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
       isHoveredRef.current = false;
@@ -279,6 +297,8 @@ const ParticleBadge: React.FC<ParticleBadgeProps> = ({
       element.removeEventListener('mouseleave', handleMouseLeave);
       element.removeEventListener('mousemove', handleMouseMove);
       element.removeEventListener('click', handleClick);
+      window.removeEventListener('scroll', handleScroll);
+      cancelAnimationFrame(scrollRaf);
       clearAllParticles();
     };
   }, [animateParticles, clearAllParticles, disableAnimations, enableTilt, enableMagnetism, clickEffect, glowColor]);
@@ -337,39 +357,35 @@ export const GlobalBadgeSpotlight: React.FC<GlobalSpotlightProps> = ({
     let latestMouseX = 0;
     let latestMouseY = 0;
 
+    let cachedBadges: Array<{ el: HTMLElement; centerX: number; centerY: number; width: number; height: number; left: number; top: number }> = [];
+
+    const updateCache = () => {
+      if (!gridRef.current) return;
+      const badges = gridRef.current.querySelectorAll('.magic-badge') as NodeListOf<HTMLElement>;
+      cachedBadges = Array.from(badges).map(badge => {
+        const r = badge.getBoundingClientRect();
+        return {
+          el: badge,
+          centerX: r.left + r.width / 2,
+          centerY: r.top + r.height / 2,
+          width: r.width,
+          height: r.height,
+          left: r.left,
+          top: r.top
+        };
+      });
+    };
+
     const processMouseMove = () => {
       rafId = null;
-      if (!spotlightRef.current || !gridRef.current) return;
-
-      const section = gridRef.current;
-      const rect = section?.getBoundingClientRect();
-      const mouseInside =
-        rect && latestMouseX >= rect.left && latestMouseX <= rect.right && latestMouseY >= rect.top && latestMouseY <= rect.bottom;
-
-      isInsideSection.current = mouseInside || false;
-      const badges = gridRef.current.querySelectorAll('.magic-badge') as NodeListOf<HTMLElement>;
-
-      if (!mouseInside) {
-        gsap.to(spotlightRef.current, {
-          opacity: 0,
-          duration: 0.3,
-          ease: 'power2.out'
-        });
-        badges.forEach(badge => {
-          badge.style.setProperty('--glow-intensity', '0');
-        });
-        return;
-      }
+      if (!spotlightRef.current || !isInsideSection.current) return;
 
       const { proximity, fadeDistance } = calculateSpotlightValues(spotlightRadius);
       let minDistance = Infinity;
 
-      badges.forEach(badge => {
-        const badgeRect = badge.getBoundingClientRect();
-        const centerX = badgeRect.left + badgeRect.width / 2;
-        const centerY = badgeRect.top + badgeRect.height / 2;
+      cachedBadges.forEach(badge => {
         const distance =
-          Math.hypot(latestMouseX - centerX, latestMouseY - centerY) - Math.max(badgeRect.width, badgeRect.height) / 2;
+          Math.hypot(latestMouseX - badge.centerX, latestMouseY - badge.centerY) - Math.max(badge.width, badge.height) / 2;
         const effectiveDistance = Math.max(0, distance);
 
         minDistance = Math.min(minDistance, effectiveDistance);
@@ -381,7 +397,7 @@ export const GlobalBadgeSpotlight: React.FC<GlobalSpotlightProps> = ({
           glowIntensity = (fadeDistance - effectiveDistance) / (fadeDistance - proximity);
         }
 
-        updateCardGlowProperties(badge, latestMouseX, latestMouseY, glowIntensity, spotlightRadius);
+        updateCardGlowProperties(badge.el, latestMouseX, latestMouseY, glowIntensity, spotlightRadius, badge.left, badge.top, badge.width, badge.height);
       });
 
       gsap.set(spotlightRef.current, {
@@ -399,8 +415,14 @@ export const GlobalBadgeSpotlight: React.FC<GlobalSpotlightProps> = ({
       gsap.to(spotlightRef.current, {
         opacity: targetOpacity,
         duration: targetOpacity > 0 ? 0.2 : 0.5,
-        ease: 'power2.out'
+        ease: 'power2.out',
+        overwrite: 'auto'
       });
+    };
+
+    const handleMouseEnter = () => {
+      isInsideSection.current = true;
+      updateCache();
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -413,25 +435,44 @@ export const GlobalBadgeSpotlight: React.FC<GlobalSpotlightProps> = ({
 
     const handleMouseLeave = () => {
       isInsideSection.current = false;
-      gridRef.current?.querySelectorAll('.magic-badge').forEach((badge: Element) => {
-        (badge as HTMLElement).style.setProperty('--glow-intensity', '0');
+      cachedBadges.forEach(badge => {
+        badge.el.style.setProperty('--glow-intensity', '0');
       });
       if (spotlightRef.current) {
         gsap.to(spotlightRef.current, {
           opacity: 0,
           duration: 0.3,
-          ease: 'power2.out'
+          ease: 'power2.out',
+          overwrite: 'auto'
         });
       }
     };
 
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseleave', handleMouseLeave);
+    let scrollRaf: number;
+    const handleScroll = () => {
+      if (isInsideSection.current) {
+        cancelAnimationFrame(scrollRaf);
+        scrollRaf = requestAnimationFrame(updateCache);
+      }
+    };
+
+    const section = gridRef.current;
+    if (section) {
+      section.addEventListener('mouseenter', handleMouseEnter);
+      section.addEventListener('mousemove', handleMouseMove);
+      section.addEventListener('mouseleave', handleMouseLeave);
+      window.addEventListener('scroll', handleScroll, { passive: true });
+    }
 
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseleave', handleMouseLeave);
+      if (section) {
+        section.removeEventListener('mouseenter', handleMouseEnter);
+        section.removeEventListener('mousemove', handleMouseMove);
+        section.removeEventListener('mouseleave', handleMouseLeave);
+      }
+      window.removeEventListener('scroll', handleScroll);
       if (rafId !== null) cancelAnimationFrame(rafId);
+      cancelAnimationFrame(scrollRaf);
       spotlightRef.current?.parentNode?.removeChild(spotlightRef.current);
     };
   }, [gridRef, disableAnimations, enabled, spotlightRadius, glowColor]);

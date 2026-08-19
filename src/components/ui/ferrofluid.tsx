@@ -244,7 +244,7 @@ const Ferrofluid = ({
     if (!container) return;
 
     const renderer = new Renderer({
-      dpr: dpr ?? (typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1),
+      dpr: Math.min(dpr ?? (typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1), 1.5),
       alpha: true,
       antialias: true
     });
@@ -296,10 +296,13 @@ const Ferrofluid = ({
     const mesh = new Mesh(gl, { geometry, program });
     meshRef.current = mesh;
 
+    let canvasRect = canvas.getBoundingClientRect();
+
     const resize = () => {
       const rect = container.getBoundingClientRect();
       renderer.setSize(rect.width, rect.height);
       uniforms.iResolution.value = [gl.drawingBufferWidth, gl.drawingBufferHeight, 1];
+      canvasRect = canvas.getBoundingClientRect();
     };
 
     resize();
@@ -307,7 +310,7 @@ const Ferrofluid = ({
     ro.observe(container);
 
     const onPointerMove = (e: PointerEvent) => {
-      const rect = canvas.getBoundingClientRect();
+      const rect = canvasRect;
       const sc = renderer.dpr || 1;
       const x = (e.clientX - rect.left) * sc;
       const y = (rect.height - (e.clientY - rect.top)) * sc;
@@ -317,7 +320,7 @@ const Ferrofluid = ({
       }
     };
     if (mouseInteraction) {
-      canvas.addEventListener('pointermove', onPointerMove);
+      canvas.addEventListener('pointermove', onPointerMove, { passive: true });
     }
 
     const loop = (t: number) => {
