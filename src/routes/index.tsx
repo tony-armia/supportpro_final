@@ -23,6 +23,24 @@ import {
   BookOpen,
   Sun,
   Moon,
+  CloudCog,
+  Database,
+  Cloud,
+  LayoutGrid,
+  GitMerge,
+  Cpu,
+  Server,
+  UserCheck,
+  UserPlus,
+  Users,
+  Headphones,
+  MessageCircle,
+  Clock,
+  ArrowRightLeft,
+  ShieldAlert,
+  Blocks,
+  Code,
+  Briefcase,
 } from "lucide-react";
 import { ThemeProvider, useTheme } from "@/context/ThemeContext";
 import { HoverOrangeSpan } from "@/components/hover-orange-span";
@@ -176,108 +194,301 @@ function Word({
   );
 }
 
+/* ─────────── Mega-menu nav data ─────────── */
+const navItems = [
+  {
+    label: "Services",
+    sections: [
+      {
+        heading: "Cloud Support",
+        items: [
+          { label: "Cloud Management", desc: "Full-stack cloud operations", icon: CloudCog },
+          { label: "AWS Support", desc: "EC2, RDS, S3 & beyond", icon: Database },
+          { label: "Google Cloud", desc: "GCP infrastructure managed", icon: Cloud },
+          { label: "Azure Support", desc: "Microsoft Azure managed", icon: LayoutGrid },
+          { label: "DevOps Support", desc: "CI/CD & pipeline engineering", icon: GitMerge },
+        ],
+      },
+      {
+        heading: "Server Administration",
+        items: [
+          { label: "Node Management", desc: "Dedicated node monitoring", icon: Cpu },
+          { label: "Dedicated Server", desc: "Bare-metal server support", icon: Server },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Outsourced Support",
+    sections: [
+      {
+        heading: "Dedicated Support",
+        items: [
+          { label: "Dedicated Tech Support", desc: "Your brand, our engineers", icon: UserCheck },
+          { label: "Semi-Dedicated Support", desc: "Flexible shared staffing", icon: UserPlus },
+          { label: "Dedicated Team", desc: "Full team under your banner", icon: Users },
+        ],
+      },
+      {
+        heading: "Client Support",
+        items: [
+          { label: "Helpdesk Support", desc: "Ticket-based 24/7 coverage", icon: Headphones },
+          { label: "Live Chat Support", desc: "Real-time chat agents", icon: MessageCircle },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Products",
+    sections: [
+      {
+        heading: "Services",
+        items: [
+          { label: "Hourly Administration", desc: "On-demand server tasks", icon: Clock },
+          { label: "Server Migration", desc: "Zero-downtime migrations", icon: ArrowRightLeft },
+          { label: "Abuse Handling", desc: "DMCA & spam mitigation", icon: ShieldAlert },
+        ],
+      },
+      {
+        heading: "Products",
+        items: [
+          { label: "Server Manager Addon", desc: "WHMCS marketplace plugin", badge: "Popular", icon: Blocks },
+          { label: "Server Scanner", desc: "Automated vulnerability scanner", icon: ShieldCheck },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Development",
+    sections: [
+      {
+        heading: "Hire Talent",
+        items: [
+          { label: "Hire a Developer", desc: "Vetted full-stack engineers", icon: Code },
+          { label: "Hire a Dev Team", desc: "Complete project squads", icon: Briefcase },
+        ],
+      },
+    ],
+  },
+];
+
+/* ─────────── Nav component ─────────── */
 function Nav() {
   const { scrollY } = useScroll();
   const [isScrolledPastHero, setIsScrolledPastHero] = useState(false);
   const { theme, setTheme } = useTheme();
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolledPastHero(latest > 550);
   });
 
   const bg = useTransform(scrollY, [0, 200], ["rgba(255,255,255,0.15)", "rgba(20,20,20,0.55)"]);
+
   return (
-    <nav className="fixed top-4 left-0 right-0 z-50 mx-auto flex max-w-[1152px] items-center justify-between px-5 md:px-6 lg:px-8">
-      {/* Logo — switches white ↔ black based on theme + scroll */}
-      <motion.a
-        href="#"
-        className="flex items-center gap-2 min-w-0"
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
+    <>
+      {/* ── Main nav ── */}
+      <nav
+        className="fixed top-4 left-0 right-0 z-50 mx-auto flex max-w-[1152px] items-center justify-between px-5 md:px-6 lg:px-8"
+        onMouseLeave={() => setOpenMenu(null)}
       >
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={theme === "light" && isScrolledPastHero ? "black-logo" : "white-logo"}
-            src={theme === "light" && isScrolledPastHero ? logoBlack : logoWhite}
-            alt="SupportPRO Logo"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.2 }}
-            className="h-9 sm:h-12 md:h-14 w-auto object-contain"
-          />
-        </AnimatePresence>
-      </motion.a>
-      <motion.div
-        style={{ backgroundColor: bg }}
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-        className="flex items-center gap-1 rounded-full backdrop-blur-md px-2 py-1.5 text-sm text-white border border-white/10 shrink-0"
-      >
-        <a
-          href="#services"
-          className="cursor-morph px-4 py-1.5 rounded-full hover:bg-white/10 transition hidden sm:block"
+        {/* Logo */}
+        <motion.a
+          href="#"
+          className="flex items-center gap-2 min-w-0"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Services
-        </a>
-        <a
-          href="#faq"
-          className="cursor-morph px-4 py-1.5 rounded-full hover:bg-white/10 transition hidden sm:block"
-        >
-          FAQ
-        </a>
-        <a
-          href="#contact-form"
-          className="cursor-morph px-4 py-1.5 rounded-full bg-[#FF8101] text-white font-medium hover:brightness-110 transition-all duration-200"
-        >
-          Book a Call
-        </a>
-
-        {/* Divider */}
-        <span className="mx-1 h-4 w-px bg-white/20 hidden sm:block" />
-
-        {/* Theme toggle inside pill */}
-        <button
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          aria-label="Toggle dark mode"
-          className="relative flex h-8 w-8 items-center justify-center rounded-full hover:bg-white/15 transition-all duration-200 text-white shrink-0"
-        >
-          <AnimatePresence mode="wait" initial={false}>
-            {theme === "dark" ? (
-              <motion.svg
-                key="sun"
-                initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
-                animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
-                transition={{ duration: 0.25, ease: "easeInOut" }}
-                xmlns="http://www.w3.org/2000/svg"
-                width="15" height="15" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" strokeWidth="2"
-                strokeLinecap="round" strokeLinejoin="round"
-              >
-                <circle cx="12" cy="12" r="4" />
-                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
-              </motion.svg>
-            ) : (
-              <motion.svg
-                key="moon"
-                initial={{ opacity: 0, rotate: 90, scale: 0.5 }}
-                animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                exit={{ opacity: 0, rotate: -90, scale: 0.5 }}
-                transition={{ duration: 0.25, ease: "easeInOut" }}
-                xmlns="http://www.w3.org/2000/svg"
-                width="14" height="14" viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-              </motion.svg>
-            )}
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={theme === "light" && isScrolledPastHero ? "black-logo" : "white-logo"}
+              src={theme === "light" && isScrolledPastHero ? logoBlack : logoWhite}
+              alt="SupportPRO Logo"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className="h-9 sm:h-12 md:h-14 w-auto object-contain"
+            />
           </AnimatePresence>
-        </button>
-      </motion.div>
-    </nav>
+        </motion.a>
+
+        {/* Nav pill */}
+        <motion.div
+          style={{ backgroundColor: bg }}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="relative flex items-center gap-1 rounded-full backdrop-blur-md px-2 py-1.5 text-sm text-white border border-white/10 shrink-0"
+        >
+          {/* Mega-menu triggers — hidden below sm */}
+          {navItems.map((item) => (
+            <div
+              key={item.label}
+              className="hidden sm:block relative"
+              onMouseEnter={() => setOpenMenu(item.label)}
+            >
+              <button className="cursor-morph flex items-center gap-1 px-3.5 py-1.5 rounded-full hover:bg-white/10 transition font-medium">
+                {item.label}
+                <ChevronDown
+                  size={12}
+                  className={`transition-transform duration-200 ${openMenu === item.label ? "rotate-180" : ""}`}
+                />
+              </button>
+
+              {/* Dropdown panel */}
+              <AnimatePresence>
+                {openMenu === item.label && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 6, scale: 0.97 }}
+                    transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+                    className="absolute left-1/2 -translate-x-1/2 top-[calc(100%+10px)] min-w-[480px] bg-white dark:bg-[#141414] border border-ink/8 dark:border-white/10 rounded-2xl shadow-[0_20px_60px_-10px_rgba(0,0,0,0.22)] dark:shadow-[0_20px_60px_-10px_rgba(0,0,0,0.7)] overflow-hidden z-50"
+                    style={{ color: "initial" }}
+                  >
+                    {/* Columns */}
+                    <div className={`grid gap-0 p-1 ${item.sections.length > 1 ? "grid-cols-2" : "grid-cols-1"}`}>
+                      {item.sections.map((section, si) => (
+                        <div
+                          key={section.heading}
+                          className={`p-5 ${si < item.sections.length - 1 && item.sections.length > 1 ? "border-r border-ink/6 dark:border-white/8" : ""}`}
+                        >
+                          <p className="text-[11px] font-semibold text-ink/45 dark:text-white/40 mb-3 tracking-normal">
+                            {section.heading}
+                          </p>
+                          <div className="space-y-0.5">
+                            {section.items.map((it) => (
+                              <a
+                                key={it.label}
+                                href="#"
+                                className="group flex items-start gap-3 px-3 py-2.5 rounded-xl hover:bg-[#FF8101]/6 dark:hover:bg-[#FF8101]/10 transition-all duration-150"
+                              >
+                                <div className="mt-0.5 w-7 h-7 rounded-lg bg-[#FF8101]/10 dark:bg-[#FF8101]/15 flex items-center justify-center shrink-0 group-hover:bg-[#FF8101]/20 transition-colors text-[#FF8101]">
+                                  {it.icon ? <it.icon size={13} strokeWidth={1} /> : <span className="w-1.5 h-1.5 rounded-full bg-[#FF8101]" />}
+                                </div>
+                                <div className="min-w-0">
+                                  <div className="flex items-center gap-2">
+                                    <span className="text-[13px] font-semibold text-ink dark:text-white group-hover:text-[#FF8101] transition-colors leading-snug">
+                                      {it.label}
+                                    </span>
+                                    {"badge" in it && it.badge && (
+                                      <span className="text-[10px] font-medium px-2 py-0.5 rounded-full bg-[#FF8101]/15 text-[#FF8101]">
+                                        {it.badge}
+                                      </span>
+                                    )}
+                                  </div>
+                                  <p className="text-[11px] text-ink/50 dark:text-white/40 leading-snug mt-0.5">
+                                    {it.desc}
+                                  </p>
+                                </div>
+                              </a>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Bottom bar */}
+                    <div className="border-t border-ink/6 dark:border-white/8 px-5 py-3 flex items-center justify-between bg-ink/[0.02] dark:bg-white/[0.02]">
+                      <div className="flex items-center gap-4">
+                        <a href="https://www.supportpro.com/emergency-new.php" target="_blank" rel="noreferrer"
+                          className="text-[12px] text-ink/50 dark:text-white/40 hover:text-[#FF8101] transition-colors flex items-center gap-1.5">
+                          <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                          Emergency support
+                        </a>
+                        <a href="https://www.supportpro.com/freecheckup.php" target="_blank" rel="noreferrer"
+                          className="text-[12px] text-ink/50 dark:text-white/40 hover:text-[#FF8101] transition-colors">
+                          Free checkup
+                        </a>
+                      </div>
+                      <a
+                        href="https://www.supportpro.com/clientlogin.php"
+                        onClick={() => setOpenMenu(null)}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-[12px] font-semibold text-[#FF8101] hover:brightness-110 transition-all flex items-center gap-1"
+                      >
+                        Login <ArrowRight size={11} />
+                      </a>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          ))}
+
+          {/* Divider */}
+          <span className="mx-1 h-4 w-px bg-white/20 hidden sm:block" />
+
+          {/* Sign Up — subtle outlined pill */}
+          <a
+            href="https://www.supportpro.com/signup.php"
+            target="_blank"
+            rel="noreferrer"
+            className="hidden md:block cursor-morph px-4 py-1.5 rounded-full text-white/90 hover:border-[#FF8101] hover:text-[#FF8101] transition-all duration-200 font-medium"
+          >
+            Sign up
+          </a>
+
+          {/* Divider */}
+          <span className="mx-1 h-4 w-px bg-white/20 hidden md:block" />
+
+          {/* Login CTA */}
+          <a
+            href="https://www.supportpro.com/clientlogin.php"
+            target="_blank"
+            rel="noreferrer"
+            className="cursor-morph px-4 py-1.5 rounded-full bg-[#FF8101] text-white font-medium hover:brightness-110 transition-all duration-200"
+          >
+            Login
+          </a>
+
+          {/* Divider */}
+          <span className="mx-1 h-4 w-px bg-white/20 hidden sm:block" />
+
+          {/* Theme toggle */}
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            aria-label="Toggle dark mode"
+            className="relative flex h-8 w-8 items-center justify-center rounded-full hover:bg-white/15 transition-all duration-200 text-white shrink-0"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {theme === "dark" ? (
+                <motion.svg
+                  key="sun"
+                  initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
+                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                  exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
+                  transition={{ duration: 0.25, ease: "easeInOut" }}
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="15" height="15" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" strokeWidth="2"
+                  strokeLinecap="round" strokeLinejoin="round"
+                >
+                  <circle cx="12" cy="12" r="4" />
+                  <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+                </motion.svg>
+              ) : (
+                <motion.svg
+                  key="moon"
+                  initial={{ opacity: 0, rotate: 90, scale: 0.5 }}
+                  animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                  exit={{ opacity: 0, rotate: -90, scale: 0.5 }}
+                  transition={{ duration: 0.25, ease: "easeInOut" }}
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14" height="14" viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                </motion.svg>
+              )}
+            </AnimatePresence>
+          </button>
+        </motion.div>
+      </nav>
+    </>
   );
 }
 
@@ -921,7 +1132,7 @@ function Privacy() {
                 ))}
               </div>
 
-              <div className="mt-10 flex flex-wrap justify-center items-center gap-x-8 gap-y-3 text-[12px] uppercase tracking-[0.18em] text-white/35">
+              <div className="mt-10 flex flex-wrap justify-center items-center gap-x-8 gap-y-3 text-[13px] text-white/50">
                 <span>Signed NDAs</span>
                 <span className="h-3 w-px bg-white/15" />
                 <span>Role-based access</span>
