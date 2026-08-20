@@ -302,7 +302,7 @@ function Nav() {
         {/* Logo */}
         <motion.a
           href="#"
-          className="flex items-center gap-2 min-w-0"
+          className="flex items-center gap-2 min-w-0 px-2.5 py-1 sm:p-0 rounded-full backdrop-blur-md bg-white/80 dark:bg-black/70 sm:bg-transparent sm:dark:bg-transparent border border-ink/10 dark:border-white/10 sm:border-0 shadow-sm sm:shadow-none transition-all"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -316,7 +316,7 @@ function Nav() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.2 }}
-              className="h-9 sm:h-12 md:h-14 w-auto object-contain"
+              className="h-7 sm:h-12 md:h-14 w-auto object-contain"
             />
           </AnimatePresence>
         </motion.a>
@@ -884,8 +884,8 @@ function StickyPhoneSection() {
           </div>
 
           {/* Mobile story (below visual) */}
-          <div className="md:hidden absolute inset-x-0 top-0 h-full px-5 py-10 sm:py-16 flex flex-col justify-center gap-5 sm:gap-8">
-            <div className="relative w-full aspect-[16/10] max-h-[38vh] overflow-hidden rounded-[20px] bg-ink/5 ring-1 ring-ink/10">
+          <div className="md:hidden absolute inset-x-0 top-0 h-full px-5 pt-14 pb-14 flex flex-col justify-start gap-3.5 sm:gap-6">
+            <div className="relative w-full aspect-[16/10] max-h-[35vh] overflow-hidden rounded-[20px] bg-ink/5 ring-1 ring-ink/10 shadow-sm">
               {stickyBlocks.map((s, i) => (
                 <motion.img
                   key={i}
@@ -906,16 +906,16 @@ function StickyPhoneSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -14 }}
                 transition={{ duration: 0.55, ease: EASE }}
-                className="text-center px-2"
+                className="text-center px-1"
               >
                 <h3 className="font-display text-2xl sm:text-3xl leading-[1.08] text-ink dark:text-white">{b.title}</h3>
-                <p className="mt-2.5 text-[13px] sm:text-sm leading-relaxed text-muted-foreground dark:text-white/70">{b.body}</p>
+                <p className="mt-2 text-[13px] sm:text-sm leading-relaxed text-muted-foreground dark:text-white/70">{b.body}</p>
               </motion.div>
             </AnimatePresence>
           </div>
 
           {/* Carousel indicator — centered near bottom of section */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full bg-white/70 dark:bg-black/60 px-3 py-2 backdrop-blur-sm ring-1 ring-ink/10 dark:ring-white/10">
+          <div className="absolute bottom-5 sm:bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 rounded-full bg-white/70 dark:bg-black/60 px-3 py-2 backdrop-blur-sm ring-1 ring-ink/10 dark:ring-white/10">
             {stickyBlocks.map((_, i) => (
               <div
                 key={i}
