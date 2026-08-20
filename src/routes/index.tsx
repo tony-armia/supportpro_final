@@ -318,7 +318,7 @@ function Nav() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.2 }}
-              className="h-10 sm:h-12 md:h-14 w-auto object-contain"
+              className="h-12 sm:h-12 md:h-14 w-auto object-contain"
             />
           </AnimatePresence>
         </motion.a>
@@ -544,7 +544,7 @@ function Nav() {
                   </div>
                 </div>
               ))}
-              
+
               <div className="flex flex-col gap-3 mt-4 pt-6 border-t border-ink/10 dark:border-white/10">
                 <a
                   href="https://www.supportpro.com/clientlogin.php"
