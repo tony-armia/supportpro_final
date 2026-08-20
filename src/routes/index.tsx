@@ -41,6 +41,10 @@ import {
   Blocks,
   Code,
   Briefcase,
+  Star,
+  X,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { ThemeProvider, useTheme } from "@/context/ThemeContext";
 import { HoverOrangeSpan } from "@/components/hover-orange-span";
@@ -504,7 +508,7 @@ function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <section ref={ref} className="relative h-screen min-h-[600px] sm:min-h-[720px] w-full overflow-hidden">
+    <section ref={ref} className="relative h-[100svh] min-h-[720px] sm:min-h-[820px] md:min-h-[880px] lg:min-h-[920px] w-full overflow-hidden">
       <motion.img
         src={heroImg}
         alt=""
@@ -519,7 +523,7 @@ function Hero() {
       <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
       <motion.div
         style={{ y: textY, opacity }}
-        className="relative z-10 mx-auto flex h-full max-w-[1152px] flex-col items-center justify-center pt-16 pb-20 px-5 text-center text-white md:px-6 lg:px-8 lg:pb-24"
+        className="relative z-10 mx-auto flex h-full max-w-[1152px] flex-col items-center justify-center pt-24 pb-20 px-5 text-center text-white md:px-6 lg:px-8 lg:pt-28 lg:pb-24"
       >
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
@@ -827,7 +831,7 @@ function StickyPhoneSection() {
     <section
       ref={sectionRef}
       id="features"
-      className="relative bg-cream dark:bg-[var(--sp-bg)] rounded-t-[32px] sm:rounded-t-[40px] -mt-6 sm:-mt-10 pb-10 sm:pb-16 lg:pb-24"
+      className="relative bg-cream dark:bg-[var(--sp-bg)] rounded-t-[32px] sm:rounded-t-[40px] -mt-3 sm:-mt-5 pb-10 sm:pb-16 lg:pb-24"
     >
       {/* Scroll runway: one viewport per feature */}
       <div style={{ height: `${stickyBlocks.length * 100}vh` }}>
@@ -1135,14 +1139,21 @@ function Privacy() {
                 ))}
               </div>
 
-              <div className="mt-6 sm:mt-10 flex flex-wrap justify-center items-center gap-x-6 sm:gap-x-8 gap-y-2.5 sm:gap-y-3 text-[12px] sm:text-[13px] text-white/50">
-                <span>Signed NDAs</span>
-                <span className="h-3 w-px bg-white/15" />
-                <span>Role-based access</span>
-                <span className="h-3 w-px bg-white/15" />
-                <span>Encrypted channels</span>
-                <span className="h-3 w-px bg-white/15" />
-                <span>24/7 incident response</span>
+              <div className="mt-8 sm:mt-12 flex flex-wrap justify-center items-center gap-2.5 sm:gap-3.5">
+                {[
+                  "Signed NDAs",
+                  "Role-based access",
+                  "Encrypted channels",
+                  "24/7 incident response",
+                ].map((tag) => (
+                  <div
+                    key={tag}
+                    className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-[12px] sm:text-[13px] font-medium text-white/75 backdrop-blur-sm transition-colors hover:border-[#FF8101]/40 hover:text-white"
+                  >
+                    <span className="h-1.5 w-1.5 rounded-full bg-[#FF8101]" />
+                    <span>{tag}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -1226,6 +1237,8 @@ function TestimonialCard({
 
 function Testimonials() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [sliderOpen, setSliderOpen] = useState(false);
+  const [activeSlide, setActiveSlide] = useState(0);
 
   // Scroll progress over the entire sticky section
   const { scrollYProgress } = useScroll({
@@ -1259,19 +1272,19 @@ function Testimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-6 md:mb-10 px-5 md:px-6 lg:px-8 select-none"
+          className="text-center mb-5 md:mb-8 px-5 md:px-6 lg:px-8 select-none"
         >
           <h3 className="font-display text-4xl md:text-5xl text-ink dark:text-white">
             Trusted by <HoverOrangeSpan>teams worldwide.</HoverOrangeSpan>
           </h3>
-          <p className="mt-4 text-sm text-muted-foreground dark:text-white/60 max-w-md mx-auto">
+          <p className="mt-3 text-sm text-muted-foreground dark:text-white/60 max-w-md mx-auto">
             Hosting providers, MSPs, and enterprises rely on SupportPRO to keep their infrastructure
             and customers running.
           </p>
         </motion.div>
 
         {/* Fan deck */}
-        <div className="relative flex items-end justify-center w-full" style={{ height: 420 }}>
+        <div className="relative flex items-end justify-center w-full" style={{ height: 390 }}>
           {cards.map((t, i) => (
             <TestimonialCard
               key={i}
@@ -1285,12 +1298,120 @@ function Testimonials() {
           ))}
         </div>
 
+        {/* View all stories button */}
+        <div className="mt-5 z-20">
+          <button
+            onClick={() => setSliderOpen(true)}
+            className="cursor-morph inline-flex items-center gap-2 rounded-full border border-ink/15 dark:border-white/15 bg-white/75 dark:bg-black/60 px-4 py-2 text-[12px] sm:text-[13px] font-medium text-ink dark:text-white backdrop-blur-md hover:border-[#FF8101] hover:text-[#FF8101] dark:hover:border-[#FF8101] dark:hover:text-[#FF8101] transition-all shadow-sm"
+          >
+            <span>Browse all {testimonials.length} reviews</span>
+            <ArrowRight size={13} />
+          </button>
+        </div>
+
         {/* Scroll hint */}
         <motion.p
           style={{ opacity: hintOpacity }}
-          className="absolute bottom-10 text-[12px] text-ink/40 tracking-wide"
+          className="absolute bottom-6 text-[12px] text-ink/40 tracking-wide pointer-events-none"
         ></motion.p>
       </div>
+
+      {/* Interactive All Testimonials Modal Slider */}
+      <AnimatePresence>
+        {sliderOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 bg-black/75 backdrop-blur-md"
+            onClick={() => setSliderOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative w-full max-w-2xl rounded-3xl bg-white dark:bg-[#161616] border border-ink/10 dark:border-white/15 p-6 sm:p-8 md:p-10 shadow-2xl overflow-hidden"
+            >
+              {/* Close Button */}
+              <button
+                onClick={() => setSliderOpen(false)}
+                className="absolute top-5 right-5 h-9 w-9 rounded-full bg-ink/5 dark:bg-white/10 text-ink/70 dark:text-white/70 hover:text-ink dark:hover:text-white flex items-center justify-center transition-colors"
+                aria-label="Close"
+              >
+                <X size={18} />
+              </button>
+
+              {/* Modal Header */}
+              <div className="flex items-center gap-2 mb-6">
+                <div className="flex gap-1 text-[#FF8101]">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={15} fill="currentColor" strokeWidth={0} />
+                  ))}
+                </div>
+                <span className="text-[12px] font-semibold text-muted-foreground uppercase tracking-wider ml-2">
+                  Client Story {activeSlide + 1} of {testimonials.length}
+                </span>
+              </div>
+
+              {/* Testimonial Active Slide */}
+              <div className="min-h-[160px] sm:min-h-[140px] flex flex-col justify-between">
+                <p className="text-[15px] sm:text-[17px] leading-relaxed text-ink/90 dark:text-white/90 font-medium">
+                  &ldquo;{testimonials[activeSlide].quote}&rdquo;
+                </p>
+
+                <div className="flex items-center gap-3.5 mt-6 pt-4 border-t border-ink/5 dark:border-white/10">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FF8101]/10 text-[#FF8101] text-sm font-bold shrink-0">
+                    {testimonials[activeSlide].name.charAt(0)}
+                  </div>
+                  <div>
+                    <h5 className="text-[14px] font-bold text-ink dark:text-white">
+                      {testimonials[activeSlide].name}
+                    </h5>
+                    <p className="text-[12px] text-muted-foreground">SupportPRO Verified Client</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Slider Controls */}
+              <div className="flex items-center justify-between mt-8 pt-4 border-t border-ink/5 dark:border-white/10">
+                <div className="flex gap-1.5">
+                  {testimonials.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setActiveSlide(idx)}
+                      className={`h-2 rounded-full transition-all ${activeSlide === idx ? "w-6 bg-[#FF8101]" : "w-2 bg-ink/20 dark:bg-white/20"}`}
+                      aria-label={`Slide ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() =>
+                      setActiveSlide((prev) => (prev > 0 ? prev - 1 : testimonials.length - 1))
+                    }
+                    className="h-9 w-9 rounded-full border border-ink/10 dark:border-white/15 bg-ink/5 dark:bg-white/5 flex items-center justify-center text-ink dark:text-white hover:border-[#FF8101] hover:text-[#FF8101] transition-colors"
+                    aria-label="Previous review"
+                  >
+                    <ChevronLeft size={16} />
+                  </button>
+                  <button
+                    onClick={() =>
+                      setActiveSlide((prev) => (prev < testimonials.length - 1 ? prev + 1 : 0))
+                    }
+                    className="h-9 w-9 rounded-full border border-ink/10 dark:border-white/15 bg-ink/5 dark:bg-white/5 flex items-center justify-center text-ink dark:text-white hover:border-[#FF8101] hover:text-[#FF8101] transition-colors"
+                    aria-label="Next review"
+                  >
+                    <ChevronRight size={16} />
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

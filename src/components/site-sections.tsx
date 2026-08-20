@@ -108,12 +108,12 @@ export function Credentials() {
   const gridRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="bg-cream dark:bg-[var(--sp-surface)] py-8 sm:py-14 lg:py-20 relative overflow-hidden">
+    <section className="bg-cream dark:bg-[var(--sp-surface)] pt-8 pb-3 sm:pt-12 sm:pb-4 lg:pt-14 lg:pb-6 relative overflow-hidden">
       <GlobalBadgeSpotlight gridRef={gridRef} />
       <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8 relative z-10" ref={gridRef}>
         {/* Location tag */}
         <Reveal>
-          <div className="flex items-center justify-center gap-2 mb-6 sm:mb-10">
+          <div className="flex items-center justify-center gap-2 mb-4 sm:mb-6">
             {/* <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="shrink-0" style={{ color: "oklch(0.65 0.16 50)" }}>
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/>
               <circle cx="12" cy="9" r="2.5" fill="white"/>
@@ -128,7 +128,7 @@ export function Credentials() {
 
         {/* Credential badges */}
         <Reveal delay={0.1}>
-          <div className="flex overflow-hidden relative -mx-6 px-6 md:mx-0 md:px-0 pb-4 pt-1">
+          <div className="flex overflow-hidden relative -mx-6 px-6 md:mx-0 md:px-0 pb-1 pt-1">
             <div className="flex w-max animate-marquee flex-nowrap items-center gap-4">
               {[...credentials, ...credentials, ...credentials].map((c, i) => (
                 <ParticleBadge
@@ -534,7 +534,7 @@ export function ContactForm() {
                       <h4 className="text-[14px] font-semibold text-ink dark:text-white leading-tight">
                         Headquarters
                       </h4>
-                      <p className="text-[13px] text-muted-foreground dark:text-white/60 mt-0.5 truncate">
+                      <p className="text-[13px] text-muted-foreground dark:text-white/60 mt-0.5 break-words">
                         Chicago, IL, United States
                       </p>
                     </div>
@@ -548,7 +548,7 @@ export function ContactForm() {
                       <h4 className="text-[14px] font-semibold text-ink dark:text-white leading-tight">
                         Delivery centres
                       </h4>
-                      <p className="text-[13px] text-muted-foreground dark:text-white/60 mt-0.5 truncate">
+                      <p className="text-[13px] text-muted-foreground dark:text-white/60 mt-0.5 break-words">
                         3 ODCs in South India
                       </p>
                     </div>
@@ -562,7 +562,7 @@ export function ContactForm() {
                       <h4 className="text-[14px] font-semibold text-ink dark:text-white leading-tight">
                         Support desk
                       </h4>
-                      <p className="text-[13px] text-muted-foreground dark:text-white/60 mt-0.5 truncate">
+                      <p className="text-[13px] text-muted-foreground dark:text-white/60 mt-0.5 break-words">
                         Available 24/7/365
                       </p>
                     </div>
