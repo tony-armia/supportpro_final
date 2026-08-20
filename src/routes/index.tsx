@@ -43,6 +43,7 @@ import {
   Briefcase,
   Star,
   X,
+  Menu,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
@@ -282,6 +283,7 @@ function Nav() {
   const [isScrolledPastHero, setIsScrolledPastHero] = useState(false);
   const { theme, setTheme } = useTheme();
   const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const isPast = latest > 550;
@@ -493,8 +495,78 @@ function Nav() {
               )}
             </AnimatePresence>
           </button>
+          {/* Mobile menu toggle */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle mobile menu"
+            className="sm:hidden relative flex h-8 w-8 items-center justify-center rounded-full hover:bg-white/15 transition-all duration-200 text-white shrink-0"
+          >
+            {mobileMenuOpen ? <X size={16} /> : <Menu size={16} />}
+          </button>
         </motion.div>
       </nav>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-40 bg-cream/95 dark:bg-[#111]/95 backdrop-blur-xl sm:hidden pt-24 px-6 pb-6 overflow-y-auto"
+          >
+            <div className="flex flex-col gap-6">
+              {navItems.map((item) => (
+                <div key={item.label} className="flex flex-col gap-3">
+                  <div className="text-[16px] font-display font-medium text-ink dark:text-white border-b border-ink/10 dark:border-white/10 pb-2">
+                    {item.label}
+                  </div>
+                  <div className="flex flex-col gap-2 pl-2">
+                    {item.sections.map((sec) => (
+                      <div key={sec.heading} className="flex flex-col gap-1.5 mt-1">
+                        <div className="text-[12px] font-semibold text-ink/50 dark:text-white/40 tracking-normal mb-1">
+                          {sec.heading}
+                        </div>
+                        {sec.items.map((it) => (
+                          <a
+                            key={it.label}
+                            href="#"
+                            className="text-[14px] text-ink/80 dark:text-white/80 py-1.5 flex items-center gap-2"
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            <it.icon size={14} className="text-[#FF8101]" />
+                            {it.label}
+                          </a>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+              
+              <div className="flex flex-col gap-3 mt-4 pt-6 border-t border-ink/10 dark:border-white/10">
+                <a
+                  href="https://www.supportpro.com/clientlogin.php"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-full py-3 rounded-full bg-[#FF8101] text-white text-center font-medium"
+                >
+                  Login
+                </a>
+                <a
+                  href="https://www.supportpro.com/signup.php"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-full py-3 rounded-full border border-ink/20 dark:border-white/20 text-ink dark:text-white text-center font-medium"
+                >
+                  Sign up
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

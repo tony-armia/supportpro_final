@@ -444,7 +444,7 @@ export function Experts() {
           <div className="relative mt-2 sm:mt-0">
             {/* Dot Pattern Background */}
             <div
-              className="absolute -right-8 lg:-right-16 top-10 w-32 lg:w-48 h-[80%] opacity-[0.35] pointer-events-none"
+              className="absolute -right-8 lg:-right-16 top-10 w-32 lg:w-48 h-[80%] opacity-20 pointer-events-none"
               style={{
                 backgroundImage: `radial-gradient(#FF8101 1px, transparent 1px)`,
                 backgroundSize: `14px 14px`,
