@@ -507,12 +507,12 @@ export function ContactForm() {
   const [message, setMessage] = useState("");
 
   return (
-    <section id="contact-form" className="bg-cream dark:bg-[var(--sp-bg)] pb-16 pt-16 md:pb-24 lg:pb-28 overflow-hidden">
-      <div className="mx-auto max-w-[1152px] px-4 sm:px-6 lg:px-8">
-        <div className="rounded-2xl sm:rounded-[28px] md:rounded-[36px] border border-ink/5 dark:border-white/10 bg-white/80 dark:bg-[#151515] p-5 sm:p-7 md:p-8 lg:p-10 backdrop-blur-md overflow-hidden">
-          <div className="grid grid-cols-12 gap-8 lg:gap-12 items-start">
+    <section id="contact-form" className="bg-cream dark:bg-[var(--sp-bg)] pb-16 pt-16 md:pb-24 lg:pb-28 overflow-hidden w-full max-w-full">
+      <div className="mx-auto w-full max-w-[1152px] px-4 sm:px-6 lg:px-8">
+        <div className="rounded-2xl sm:rounded-[28px] md:rounded-[36px] border border-ink/5 dark:border-white/10 bg-white/80 dark:bg-[#151515] p-5 sm:p-7 md:p-8 lg:p-10 backdrop-blur-md overflow-hidden w-full max-w-full">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-start w-full max-w-full">
             {/* Left Column: Info */}
-            <div className="col-span-12 lg:col-span-5 flex flex-col justify-between pr-0 lg:pr-10 lg:border-r lg:border-ink/5 dark:lg:border-white/10 min-w-0">
+            <div className="col-span-1 md:col-span-12 lg:col-span-5 flex flex-col justify-between pr-0 lg:pr-10 lg:border-r lg:border-ink/5 dark:lg:border-white/10 min-w-0 w-full max-w-full">
               <Reveal className="w-full min-w-0">
                 <h2 className="font-display text-3xl sm:text-4xl md:text-[44px] leading-[1.05] text-ink dark:text-white mb-4 break-words min-w-0">
                   Drop us a <br />
@@ -572,7 +572,7 @@ export function ContactForm() {
             </div>
 
             {/* Right Column: Form */}
-            <div className="col-span-12 lg:col-span-7 min-w-0 w-full">
+            <div className="col-span-1 md:col-span-12 lg:col-span-7 min-w-0 w-full max-w-full">
               <Reveal delay={0.1} className="w-full min-w-0">
                 <form
                   onSubmit={(e) => {

@@ -978,7 +978,7 @@ function SliderSection() {
   const x = useTransform(smoothProgress, [0, 1], ["calc(0% + 0vw)", "calc(-100% + 100vw)"]);
 
   return (
-    <section ref={targetRef} className="relative h-[300vh] bg-cream dark:bg-[var(--sp-surface)] pb-10 sm:pb-16 lg:pb-24">
+    <section ref={targetRef} className="relative h-[300vh] bg-cream dark:bg-[var(--sp-surface)] pb-10 sm:pb-16 lg:pb-24 overflow-x-clip">
       <div className="sticky top-0 h-screen flex flex-col pt-10 sm:pt-16 lg:pt-24 slider-track">
         <div className="mx-auto w-full max-w-[1152px] px-5 md:px-6 lg:px-8 mb-6 sm:mb-10 lg:mb-16">
           <InView>
@@ -1261,7 +1261,7 @@ function Testimonials() {
     <section
       id="testimonials"
       ref={containerRef}
-      className="relative bg-cream dark:bg-[var(--sp-bg)]"
+      className="relative bg-cream dark:bg-[var(--sp-bg)] overflow-x-clip"
       style={{ height: "140vh" }}
     >
       {/* Sticky viewport */}
