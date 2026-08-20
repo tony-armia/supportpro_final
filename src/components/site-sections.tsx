@@ -507,25 +507,25 @@ export function ContactForm() {
   const [message, setMessage] = useState("");
 
   return (
-    <section id="contact-form" className="bg-cream dark:bg-[var(--sp-bg)] pt-14 pb-16 sm:pt-20 sm:pb-24 lg:pt-24 lg:pb-28 overflow-hidden">
+    <section id="contact-form" className="bg-cream dark:bg-[var(--sp-bg)] pb-16 pt-16 md:pb-24 lg:pb-28 overflow-hidden">
       <div className="mx-auto max-w-[1152px] px-4 sm:px-6 lg:px-8">
-        <div className="rounded-2xl sm:rounded-[28px] md:rounded-[36px] border border-ink/10 dark:border-white/10 bg-white dark:bg-[#151515] p-5 sm:p-7 md:p-8 lg:p-10 shadow-sm backdrop-blur-md overflow-hidden">
+        <div className="rounded-2xl sm:rounded-[28px] md:rounded-[36px] border border-ink/5 dark:border-white/10 bg-white/80 dark:bg-[#151515] p-5 sm:p-7 md:p-8 lg:p-10 backdrop-blur-md overflow-hidden">
           <div className="grid grid-cols-12 gap-8 lg:gap-12 items-start">
             {/* Left Column: Info */}
-            <div className="col-span-12 lg:col-span-5 flex flex-col justify-between pr-0 lg:pr-10 lg:border-r lg:border-ink/10 dark:lg:border-white/10 min-w-0">
-              <Reveal className="w-full">
-                <h2 className="font-display text-3xl sm:text-4xl md:text-[44px] leading-[1.05] text-ink dark:text-white mb-4">
+            <div className="col-span-12 lg:col-span-5 flex flex-col justify-between pr-0 lg:pr-10 lg:border-r lg:border-ink/5 dark:lg:border-white/10 min-w-0">
+              <Reveal className="w-full min-w-0">
+                <h2 className="font-display text-3xl sm:text-4xl md:text-[44px] leading-[1.05] text-ink dark:text-white mb-4 break-words min-w-0">
                   Drop us a <br />
                   <span className="italic font-serif">message</span>
                   <span className="text-[#FF8101]">.</span>
                 </h2>
                 <div className="w-10 h-[2.5px] bg-[#FF8101] my-4 sm:my-6" />
-                <p className="text-[13px] sm:text-[14px] leading-relaxed text-muted-foreground dark:text-white/60 max-w-lg lg:max-w-sm mb-6 sm:mb-8">
+                <p className="text-[13px] leading-relaxed text-muted-foreground dark:text-white/60 max-w-lg lg:max-w-sm mb-6 sm:mb-8 min-w-0 break-words">
                   Tell us about your infrastructure and support requirements. A senior engineer will
                   get back to you with a scoped proposal, SLA options, and pricing.
                 </p>
 
-                <div className="space-y-5 sm:space-y-6 pt-6 border-t border-ink/10 dark:border-white/10">
+                <div className="space-y-5 sm:space-y-6 pt-6 border-t border-ink/5 dark:border-white/10 min-w-0">
                   <div className="flex items-center gap-4">
                     <div className="w-10 h-10 rounded-full bg-[#FF8101]/10 text-[#FF8101] flex items-center justify-center shrink-0">
                       <MapPin size={18} strokeWidth={1.5} />
@@ -573,7 +573,7 @@ export function ContactForm() {
 
             {/* Right Column: Form */}
             <div className="col-span-12 lg:col-span-7 min-w-0 w-full">
-              <Reveal delay={0.1} className="w-full">
+              <Reveal delay={0.1} className="w-full min-w-0">
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
@@ -585,19 +585,19 @@ export function ContactForm() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 lg:gap-6">
                     <div className="relative min-w-0">
                       <User
-                        className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/40 dark:text-white/40 transition-colors group-focus-within:text-[#FF8101]"
+                        className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30 dark:text-white/30 transition-colors group-focus-within:text-[#FF8101]"
                         size={16}
                         strokeWidth={1.5}
                       />
                       <input
                         required
                         placeholder="Full name"
-                        className="w-full rounded-xl sm:rounded-2xl border border-ink/15 dark:border-white/15 bg-[#F7F7F6] dark:bg-black/30 pl-11 pr-4 py-3 text-[13px] sm:text-[14px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/40 dark:placeholder:text-white/40 focus:border-[#FF8101] focus:bg-white dark:focus:bg-black/50 focus:ring-2 focus:ring-[#FF8101]/10 box-border"
+                        className="w-full rounded-2xl border border-ink/10 dark:border-white/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF8101]/10 box-border"
                       />
                     </div>
                     <div className="relative min-w-0">
                       <Mail
-                        className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/40 dark:text-white/40 transition-colors group-focus-within:text-[#FF8101]"
+                        className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30 dark:text-white/30 transition-colors group-focus-within:text-[#FF8101]"
                         size={16}
                         strokeWidth={1.5}
                       />
@@ -605,7 +605,7 @@ export function ContactForm() {
                         required
                         type="email"
                         placeholder="Work email"
-                        className="w-full rounded-xl sm:rounded-2xl border border-ink/15 dark:border-white/15 bg-[#F7F7F6] dark:bg-black/30 pl-11 pr-4 py-3 text-[13px] sm:text-[14px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/40 dark:placeholder:text-white/40 focus:border-[#FF8101] focus:bg-white dark:focus:bg-black/50 focus:ring-2 focus:ring-[#FF8101]/10 box-border"
+                        className="w-full rounded-2xl border border-ink/10 dark:border-white/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF8101]/10 box-border"
                       />
                     </div>
                   </div>
@@ -614,17 +614,17 @@ export function ContactForm() {
                     <Building2
                       size={16}
                       strokeWidth={1.5}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/40 dark:text-white/40 transition-colors group-focus-within:text-[#FF8101]"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30 dark:text-white/30 transition-colors group-focus-within:text-[#FF8101]"
                     />
                     <input
                       placeholder="Company"
-                      className="w-full rounded-xl sm:rounded-2xl border border-ink/15 dark:border-white/15 bg-[#F7F7F6] dark:bg-black/30 pl-11 pr-4 py-3 text-[13px] sm:text-[14px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/40 dark:placeholder:text-white/40 focus:border-[#FF8101] focus:bg-white dark:focus:bg-black/50 focus:ring-2 focus:ring-[#FF8101]/10 box-border"
+                      className="w-full rounded-2xl border border-ink/10 dark:border-white/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF8101]/10 box-border"
                     />
                   </div>
 
                   <div className="relative min-w-0 flex-1">
                     <MessageSquare
-                      className="absolute left-4 top-4 text-ink/40 dark:text-white/40 transition-colors group-focus-within:text-[#FF8101]"
+                      className="absolute left-4 top-4 text-ink/30 dark:text-white/30 transition-colors group-focus-within:text-[#FF8101]"
                       size={16}
                       strokeWidth={1.5}
                     />
@@ -635,27 +635,27 @@ export function ContactForm() {
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="What do you need support with?"
-                      className="w-full resize-none rounded-xl sm:rounded-2xl border border-ink/15 dark:border-white/15 bg-[#F7F7F6] dark:bg-black/30 pl-11 pr-4 pt-3 pb-8 text-[13px] sm:text-[14px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/40 dark:placeholder:text-white/40 focus:border-[#FF8101] focus:bg-white dark:focus:bg-black/50 focus:ring-2 focus:ring-[#FF8101]/10 box-border"
+                      className="w-full resize-none rounded-2xl border border-ink/10 dark:border-white/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 pt-3 pb-8 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF8101]/10 box-border"
                     />
-                    <span className="absolute right-4 bottom-3 text-[11px] text-ink/40 dark:text-white/40 font-mono select-none">
+                    <span className="absolute right-4 bottom-3 text-[11px] text-ink/30 dark:text-white/30 font-mono select-none">
                       {message.length} / 500
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-2 text-[12px] sm:text-[13px] text-muted-foreground dark:text-white/60 pt-1 pb-1">
-                    <ShieldCheck size={16} className="text-[#FF8101] shrink-0" />
-                    <span>Your information is secure and will never be shared.</span>
+                  <div className="flex items-start sm:items-center gap-2 text-[12px] sm:text-[13px] text-muted-foreground dark:text-white/60 pt-1 pb-1">
+                    <ShieldCheck size={16} className="text-[#FF8101] shrink-0 mt-0.5 sm:mt-0" />
+                    <span className="min-w-0 break-words">Your information is secure and will never be shared.</span>
                   </div>
 
                   <button
                     type="submit"
-                    className="cursor-morph w-full rounded-full bg-[#FF8101] text-white py-3.5 px-6 text-[14px] font-medium transition-all hover:bg-[#FF8101]/90 flex items-center justify-center gap-2 focus:ring-2 focus:ring-[#FF8101]/50 shadow-sm"
+                    className="cursor-morph w-full rounded-full bg-[#FF8101] text-white py-3.5 px-6 text-[14px] font-medium transition-all hover:bg-[#FF8101]/90 flex items-center justify-center gap-2 focus:ring-2 focus:ring-[#FF8101]/50 min-w-0"
                   >
                     {sent ? "Message received" : "Send message"}
                     <ArrowRight size={18} />
                   </button>
 
-                  <p className="text-center text-[12px] text-muted-foreground/70 dark:text-white/50 pt-1">
+                  <p className="text-center text-[12px] text-muted-foreground/70 dark:text-white/50 pt-1 min-w-0 break-words">
                     We typically respond within a few hours.
                   </p>
                 </form>
