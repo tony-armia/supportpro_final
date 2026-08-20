@@ -653,7 +653,7 @@ function ServiceRow({
           });
         }
       }}
-      className="group relative border-t border-ink/10 dark:border-white/10 py-8 lg:py-12 cursor-default overflow-hidden"
+      className="group relative border-t border-ink/10 dark:border-white/10 py-5 sm:py-8 lg:py-12 cursor-default overflow-hidden"
     >
       {/* Spotlight follow */}
       <motion.div
@@ -710,9 +710,9 @@ function ServiceRow({
 
 function Services() {
   return (
-    <section id="services" className="bg-cream dark:bg-[var(--sp-surface)] py-16 lg:py-24">
+    <section id="services" className="bg-cream dark:bg-[var(--sp-surface)] py-10 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
-        <div className="grid grid-cols-12 gap-6 md:gap-10 mb-12 md:mb-16">
+        <div className="grid grid-cols-12 gap-4 sm:gap-6 md:gap-10 mb-8 sm:mb-12 md:mb-16">
           <div className="col-span-12 md:col-span-8">
             <InView>
               <h3 className="font-display text-3xl sm:text-4xl md:text-6xl text-ink leading-[1] tracking-tight">
@@ -827,7 +827,7 @@ function StickyPhoneSection() {
     <section
       ref={sectionRef}
       id="features"
-      className="relative bg-cream dark:bg-[var(--sp-bg)] rounded-t-[40px] -mt-10 pb-16 lg:pb-24"
+      className="relative bg-cream dark:bg-[var(--sp-bg)] rounded-t-[32px] sm:rounded-t-[40px] -mt-6 sm:-mt-10 pb-10 sm:pb-16 lg:pb-24"
     >
       {/* Scroll runway: one viewport per feature */}
       <div style={{ height: `${stickyBlocks.length * 100}vh` }}>
@@ -880,8 +880,8 @@ function StickyPhoneSection() {
           </div>
 
           {/* Mobile story (below visual) */}
-          <div className="md:hidden absolute inset-x-0 top-0 h-full px-6 py-16 flex flex-col justify-center gap-8">
-            <div className="relative w-full aspect-[4/3] overflow-hidden rounded-[24px] bg-ink/5 ring-1 ring-ink/10">
+          <div className="md:hidden absolute inset-x-0 top-0 h-full px-5 py-10 sm:py-16 flex flex-col justify-center gap-5 sm:gap-8">
+            <div className="relative w-full aspect-[16/10] max-h-[38vh] overflow-hidden rounded-[20px] bg-ink/5 ring-1 ring-ink/10">
               {stickyBlocks.map((s, i) => (
                 <motion.img
                   key={i}
@@ -902,10 +902,10 @@ function StickyPhoneSection() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -14 }}
                 transition={{ duration: 0.55, ease: EASE }}
-                className="text-center"
+                className="text-center px-2"
               >
-                <h3 className="font-display text-3xl leading-[1.08] text-ink dark:text-white">{b.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground dark:text-white/70">{b.body}</p>
+                <h3 className="font-display text-2xl sm:text-3xl leading-[1.08] text-ink dark:text-white">{b.title}</h3>
+                <p className="mt-2.5 text-[13px] sm:text-sm leading-relaxed text-muted-foreground dark:text-white/70">{b.body}</p>
               </motion.div>
             </AnimatePresence>
           </div>
@@ -974,9 +974,9 @@ function SliderSection() {
   const x = useTransform(smoothProgress, [0, 1], ["calc(0% + 0vw)", "calc(-100% + 100vw)"]);
 
   return (
-    <section ref={targetRef} className="relative h-[300vh] bg-cream dark:bg-[var(--sp-surface)] pb-16 lg:pb-24">
-      <div className="sticky top-0 h-screen flex flex-col pt-16 lg:pt-24 slider-track">
-        <div className="mx-auto w-full max-w-[1152px] px-5 md:px-6 lg:px-8 mb-12 lg:mb-16">
+    <section ref={targetRef} className="relative h-[300vh] bg-cream dark:bg-[var(--sp-surface)] pb-10 sm:pb-16 lg:pb-24">
+      <div className="sticky top-0 h-screen flex flex-col pt-10 sm:pt-16 lg:pt-24 slider-track">
+        <div className="mx-auto w-full max-w-[1152px] px-5 md:px-6 lg:px-8 mb-6 sm:mb-10 lg:mb-16">
           <InView>
             <h3 className="font-display text-4xl sm:text-5xl md:text-6xl text-ink dark:text-white max-w-2xl leading-[1.05]">
               Built for the moments that matter.
@@ -1066,12 +1066,12 @@ function Privacy() {
   const spotlightBackground = useMotionTemplate`radial-gradient(1000px circle at ${springX}px ${springY}px, oklch(0.5 0.15 95 / 0.4), transparent 60%)`;
 
   return (
-    <section ref={ref} className="bg-cream dark:bg-[var(--sp-surface)] py-16 lg:py-24 overflow-hidden">
+    <section ref={ref} className="bg-cream dark:bg-[var(--sp-surface)] py-10 sm:py-16 lg:py-24 overflow-hidden">
       <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
         <InView>
           <div
             onMouseMove={handleMouseMove}
-            className="group/card relative overflow-hidden rounded-[32px] bg-gradient-to-br from-[#0a0a0a] via-[#141410] to-[#1a1a18] p-8 lg:p-16"
+            className="group/card relative overflow-hidden rounded-[24px] sm:rounded-[32px] bg-gradient-to-br from-[#0a0a0a] via-[#141410] to-[#1a1a18] p-5 sm:p-8 lg:p-16"
           >
             {/* Mouse Spotlight */}
             <motion.div
@@ -1113,7 +1113,7 @@ function Privacy() {
                 </p>
               </div>
 
-              <div className="mt-14 grid gap-px overflow-hidden rounded-2xl bg-white/[8%] sm:grid-cols-2 lg:grid-cols-4">
+              <div className="mt-8 sm:mt-14 grid gap-px overflow-hidden rounded-2xl bg-white/[8%] sm:grid-cols-2 lg:grid-cols-4">
                 {securityPillars.map((p, i) => (
                   <motion.div
                     key={p.title}
@@ -1121,7 +1121,7 @@ function Privacy() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.4 }}
                     transition={{ duration: 0.6, delay: 0.08 * i, ease: [0.22, 1, 0.36, 1] }}
-                    className="group relative bg-[#0e0e0c] p-6 transition-colors duration-500 hover:bg-[#15150f]"
+                    className="group relative bg-[#0e0e0c] p-4 sm:p-6 transition-colors duration-500 hover:bg-[#15150f]"
                   >
                     <span className="absolute left-0 top-0 h-px w-0 bg-gradient-to-r from-[oklch(0.82_0.16_95)] to-transparent transition-all duration-700 group-hover:w-full" />
                     <p.icon
@@ -1129,13 +1129,13 @@ function Privacy() {
                       strokeWidth={1.5}
                       className="text-[oklch(0.82_0.16_95)]/80 transition-transform duration-500 group-hover:-translate-y-0.5"
                     />
-                    <h4 className="mt-5 text-[15px] text-white">{p.title}</h4>
-                    <p className="mt-2 text-[13px] leading-relaxed text-white/45">{p.body}</p>
+                    <h4 className="mt-3 sm:mt-5 text-[14px] sm:text-[15px] text-white">{p.title}</h4>
+                    <p className="mt-1.5 sm:mt-2 text-[12.5px] sm:text-[13px] leading-relaxed text-white/45">{p.body}</p>
                   </motion.div>
                 ))}
               </div>
 
-              <div className="mt-10 flex flex-wrap justify-center items-center gap-x-8 gap-y-3 text-[13px] text-white/50">
+              <div className="mt-6 sm:mt-10 flex flex-wrap justify-center items-center gap-x-6 sm:gap-x-8 gap-y-2.5 sm:gap-y-3 text-[12px] sm:text-[13px] text-white/50">
                 <span>Signed NDAs</span>
                 <span className="h-3 w-px bg-white/15" />
                 <span>Role-based access</span>
@@ -1194,26 +1194,28 @@ function TestimonialCard({
   return (
     <motion.div
       style={{ rotate, x, y, scale, opacity, zIndex, willChange: "transform" }}
-      className="absolute w-[200px] md:w-[260px] h-[300px] md:h-[340px] origin-bottom bg-[#f2ede8] dark:bg-[#151515] rounded-2xl p-6 pt-8 pb-10 flex flex-col gap-6 select-none border border-ink/5 dark:border-white/10"
+      className="absolute w-[200px] md:w-[260px] h-[350px] md:h-[370px] origin-bottom bg-[#f2ede8] dark:bg-[#151515] rounded-2xl p-4 sm:p-5 pt-5 sm:pt-6 pb-4 sm:pb-5 flex flex-col justify-between select-none border border-ink/5 dark:border-white/10 shadow-sm"
     >
       {/* Quote text */}
-      <p className="text-[13px] leading-relaxed text-ink/80 dark:text-white/80 font-medium">&ldquo;{quote}&rdquo;</p>
+      <p className="text-[12px] md:text-[13px] leading-relaxed text-ink/80 dark:text-white/80 font-medium">
+        &ldquo;{quote}&rdquo;
+      </p>
       {/* Name */}
-      <div className="mt-auto">
-        <div className="flex items-center gap-3">
+      <div className="mt-auto pt-3 border-t border-ink/5 dark:border-white/10">
+        <div className="flex items-center gap-2.5 sm:gap-3">
           {image ? (
             <img
               src={image}
               alt={name}
-              className="flex h-8 w-8 items-center justify-center rounded-full object-cover"
+              className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full object-cover shrink-0"
             />
           ) : (
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-ink/5 dark:bg-white/10 text-[11px] font-medium text-ink/60 dark:text-white/60">
+            <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-ink/5 dark:bg-white/10 text-[11px] font-medium text-ink/60 dark:text-white/60 shrink-0">
               {name.charAt(0)}
             </div>
           )}
-          <div>
-            <p className="text-[11px] font-semibold text-ink dark:text-white leading-tight">{name}</p>
+          <div className="min-w-0">
+            <p className="text-[11px] font-semibold text-ink dark:text-white leading-tight truncate">{name}</p>
             <p className="text-[10px] text-ink/50 dark:text-white/50 mt-0.5">SupportPRO Client</p>
           </div>
         </div>
@@ -1257,7 +1259,7 @@ function Testimonials() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-8 md:mb-12 px-5 md:px-6 lg:px-8 select-none"
+          className="text-center mb-6 md:mb-10 px-5 md:px-6 lg:px-8 select-none"
         >
           <h3 className="font-display text-4xl md:text-5xl text-ink dark:text-white">
             Trusted by <HoverOrangeSpan>teams worldwide.</HoverOrangeSpan>
@@ -1269,7 +1271,7 @@ function Testimonials() {
         </motion.div>
 
         {/* Fan deck */}
-        <div className="relative flex items-end justify-center" style={{ height: 420 }}>
+        <div className="relative flex items-end justify-center w-full" style={{ height: 420 }}>
           {cards.map((t, i) => (
             <TestimonialCard
               key={i}
@@ -1296,28 +1298,28 @@ function Testimonials() {
 function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
   return (
-    <section id="faq" className="bg-cream dark:bg-[var(--sp-surface)] py-16 lg:py-24">
+    <section id="faq" className="bg-cream dark:bg-[var(--sp-surface)] py-10 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-8 lg:gap-16 items-start">
           {/* Left Column: Title & CTA */}
           <div className="relative h-full flex flex-col">
             <div className="sticky top-24">
-              <h3 className="font-display text-4xl sm:text-5xl md:text-[64px] text-ink dark:text-white leading-[1.05] tracking-tight mb-8">
+              <h3 className="font-display text-3xl sm:text-5xl md:text-[64px] text-ink dark:text-white leading-[1.05] tracking-tight mb-4 sm:mb-8">
                 Frequently
                 <br />
                 <HoverOrangeSpan>asked questions</HoverOrangeSpan>
                 <span className="text-[#FF8101]">.</span>
               </h3>
 
-              <div className="w-10 h-[2px] bg-[#FF8101] mb-8" />
+              <div className="w-10 h-[2px] bg-[#FF8101] mb-4 sm:mb-8" />
 
-              <p className="text-[15px] text-muted-foreground dark:text-white/60 leading-relaxed mb-12 max-w-[320px]">
+              <p className="text-[14px] sm:text-[15px] text-muted-foreground dark:text-white/60 leading-relaxed mb-6 sm:mb-12 max-w-[320px]">
                 Get quick answers to the most common questions about our support services,
                 processes, and infrastructure.
               </p>
 
               {/* Documentation link */}
-              <div className="w-full max-w-[420px] rounded-md border border-ink/15 dark:border-white/15 px-6 py-8">
+              <div className="w-full max-w-[420px] rounded-md border border-ink/15 dark:border-white/15 p-5 sm:px-6 sm:py-8">
                 <div className="flex items-start gap-6">
                   <div className="w-14 h-14 rounded-full bg-[#FF8101]/10 flex items-center justify-center text-[#FF8101] shrink-0">
                     <BookOpen size={25} strokeWidth={1.5} />
@@ -1401,7 +1403,7 @@ function CTA() {
   const scale = useTransform(scrollYProgress, [0, 1], [1.15, 1]);
   return (
     <section ref={ref} className="relative overflow-hidden">
-      <div className="relative h-[85vh] min-h-[620px] overflow-hidden">
+      <div className="relative min-h-[460px] sm:min-h-[560px] md:min-h-[620px] h-[70vh] sm:h-[80vh] md:h-[85vh] overflow-hidden">
         <motion.img
           src={ctaImg}
           alt=""
@@ -1412,13 +1414,13 @@ function CTA() {
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/80" />
-        <div className="relative z-10 mx-auto flex h-full max-w-[1152px] flex-col items-center justify-center px-5 md:px-6 lg:px-8 text-center text-white">
+        <div className="relative z-10 mx-auto flex h-full max-w-[1152px] flex-col items-center justify-center px-5 md:px-6 lg:px-8 text-center text-white py-12 sm:py-16">
           <motion.h2
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[0.95]"
+            className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl leading-[0.95]"
           >
             Ready to strengthen
             <br />
@@ -1429,7 +1431,7 @@ function CTA() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-6 text-white/80 text-sm md:text-base max-w-xl"
+            className="mt-4 sm:mt-6 text-white/80 text-xs sm:text-sm md:text-base max-w-xl"
           >
             Partner with certified engineers delivering enterprise-grade infrastructure management,
             cloud operations, DevOps, technical support, and proactive monitoring — 24 hours a day,
@@ -1440,18 +1442,18 @@ function CTA() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="mt-8 flex flex-wrap items-center justify-center gap-3"
+            className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-3"
             id="contact"
           >
             <a
               href="#contact-form"
-              className="cursor-morph rounded-full bg-[#FF8101] text-white px-6 py-3 text-sm font-medium hover:brightness-110 transition-all duration-200"
+              className="cursor-morph rounded-full bg-[#FF8101] text-white px-5 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-medium hover:brightness-110 transition-all duration-200"
             >
               Book a Consultation
             </a>
             <a
               href="#contact-form"
-              className="cursor-morph rounded-full border border-white/30 dark:border-white/25 backdrop-blur-md bg-white/10 dark:bg-white/[8%] text-white px-6 py-3 text-sm font-medium hover:bg-white/20 dark:hover:bg-white/[14%] dark:hover:border-white/40 transition-all duration-200"
+              className="cursor-morph rounded-full border border-white/30 dark:border-white/25 backdrop-blur-md bg-white/10 dark:bg-white/[8%] text-white px-5 sm:px-6 py-2.5 sm:py-3 text-xs sm:text-sm font-medium hover:bg-white/20 dark:hover:bg-white/[14%] dark:hover:border-white/40 transition-all duration-200"
             >
               Contact Our Team
             </a>
@@ -1464,7 +1466,7 @@ function CTA() {
 
 function SiteFooter() {
   return (
-    <footer className="bg-ink dark:bg-[#080808] text-white/80 px-5 md:px-6 lg:px-8 py-16 lg:py-24">
+    <footer className="bg-ink dark:bg-[#080808] text-white/80 px-5 md:px-6 lg:px-8 py-10 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-[1152px] grid grid-cols-2 md:grid-cols-4 gap-8 text-xs">
         <div className="col-span-2 md:col-span-1">
           <a href="#" className="inline-block">

@@ -108,12 +108,12 @@ export function Credentials() {
   const gridRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="bg-cream dark:bg-[var(--sp-surface)] py-16 lg:py-24 relative overflow-hidden">
+    <section className="bg-cream dark:bg-[var(--sp-surface)] py-8 sm:py-14 lg:py-20 relative overflow-hidden">
       <GlobalBadgeSpotlight gridRef={gridRef} />
       <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8 relative z-10" ref={gridRef}>
         {/* Location tag */}
         <Reveal>
-          <div className="flex items-center justify-center gap-2 mb-12">
+          <div className="flex items-center justify-center gap-2 mb-6 sm:mb-10">
             {/* <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="shrink-0" style={{ color: "oklch(0.65 0.16 50)" }}>
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="currentColor"/>
               <circle cx="12" cy="9" r="2.5" fill="white"/>
@@ -172,14 +172,14 @@ const pillars = [
 
 export function Pillars() {
   return (
-    <section className="bg-cream dark:bg-[var(--sp-bg)] py-16 lg:py-24 overflow-hidden">
+    <section className="bg-cream dark:bg-[var(--sp-bg)] py-10 sm:py-16 lg:py-24 overflow-hidden">
       <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
         {/* Top split: heading left + large image right */}
-        <div className="grid grid-cols-12 gap-6 md:gap-8 lg:gap-10 items-stretch mb-12 md:mb-16">
+        <div className="grid grid-cols-12 gap-6 md:gap-8 lg:gap-10 items-stretch mb-8 md:mb-16">
           {/* Left: eyebrow + heading + description */}
           <div className="col-span-12 md:col-span-5 flex flex-col justify-center">
             <Reveal>
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-3 mb-3 sm:mb-4">
                 <span className="block h-px w-8" style={{ background: "oklch(0.65 0.16 50)" }} />
                 <span
                   className="text-[11px] font-medium"
@@ -194,7 +194,7 @@ export function Pillars() {
               </h2>
             </Reveal>
             <Reveal delay={0.15}>
-              <p className="mt-5 text-[14px] leading-relaxed text-muted-foreground dark:text-[rgba(245,245,242,0.6)] max-w-sm">
+              <p className="mt-3 sm:mt-5 text-[14px] leading-relaxed text-muted-foreground dark:text-[rgba(245,245,242,0.6)] max-w-sm">
                 We provide 24/7 transparent technical support for web hosting companies, data
                 centres, server management companies, and MSPs — quietly, under your brand, at
                 enterprise standards.
@@ -205,7 +205,7 @@ export function Pillars() {
           {/* Right: large image */}
           <div className="col-span-12 md:col-span-7">
             <Reveal delay={0.1} className="h-full">
-              <div className="relative h-[340px] md:h-[420px] overflow-hidden rounded-[28px] bg-ink/5 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.22)]">
+              <div className="relative h-[240px] sm:h-[340px] md:h-[420px] overflow-hidden rounded-[24px] sm:rounded-[28px] bg-ink/5 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.22)]">
                 <img
                   src={pillarsHeroImg}
                   alt="Engineers collaborating at monitoring stations in a modern operations centre"
@@ -330,14 +330,14 @@ export function Platforms() {
   const gridRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section className="bg-cream dark:bg-[var(--sp-bg)] pb-16 lg:pb-24 overflow-hidden relative">
+    <section className="bg-cream dark:bg-[var(--sp-bg)] pb-10 sm:pb-16 lg:pb-24 overflow-hidden relative">
       <GlobalBadgeSpotlight gridRef={gridRef} spotlightRadius={400} />
-      <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8 text-center mb-12 relative z-10">
+      <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8 text-center mb-6 sm:mb-10 relative z-10">
         <Reveal>
           <h2 className="font-display text-3xl md:text-[44px] text-ink dark:text-[var(--sp-text-primary)]">
             Supported <HoverOrangeSpan>platforms.</HoverOrangeSpan>
           </h2>
-          <p className="mx-auto mt-5 max-w-[420px] text-[14px] leading-relaxed text-muted-foreground/80 dark:text-[rgba(167,167,163,0.80)]">
+          <p className="mx-auto mt-3 sm:mt-5 max-w-[420px] text-[14px] leading-relaxed text-muted-foreground/80 dark:text-[rgba(167,167,163,0.80)]">
             Covering every major technology platform to bring you excellent outsourced support.
           </p>
         </Reveal>
@@ -392,13 +392,13 @@ const stats = [
 
 export function Experts() {
   return (
-    <section className="bg-cream dark:bg-[var(--sp-surface)] py-16 lg:py-24">
+    <section className="bg-cream dark:bg-[var(--sp-surface)] py-10 sm:py-16 lg:py-24">
       <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
+        <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-16">
           {/* Left Side: Why we are the experts */}
           <div>
             <Reveal>
-              <h2 className="font-display text-4xl sm:text-5xl md:text-[56px] leading-[1.03] text-ink dark:text-white max-w-[400px]">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-[56px] leading-[1.03] text-ink dark:text-white max-w-[400px]">
                 Why we call ourselves
                 <br />
                 <em className="font-normal italic text-ink/70 dark:text-white/70">the experts</em>
@@ -407,18 +407,18 @@ export function Experts() {
             </Reveal>
 
             <Reveal delay={0.2}>
-              <h4 className="mt-6 font-display text-2xl sm:text-3xl md:text-4xl lg:text-[48px] leading-[1.05] text-ink dark:text-white">
+              <h4 className="mt-4 sm:mt-6 font-display text-xl sm:text-2xl md:text-4xl lg:text-[48px] leading-[1.05] text-ink dark:text-white">
                 Technical excellence.
                 <br />
                 Process discipline.
               </h4>
-              <p className="mt-4 text-[14px] leading-relaxed text-muted-foreground max-w-[420px]">
+              <p className="mt-3 sm:mt-4 text-[14px] leading-relaxed text-muted-foreground max-w-[420px]">
                 Since our inception 23 years ago we have been learning and pioneering in outsourced
                 technical support. We measure the metrics and key process indicators behind every
                 engagement, and evaluate ourselves constantly so the service stays consistent time
                 after time. Every ticket is treated with the utmost importance.
               </p>
-              <p className="mt-4 text-[14px] leading-relaxed text-muted-foreground max-w-[420px]">
+              <p className="mt-3 sm:mt-4 text-[14px] leading-relaxed text-muted-foreground max-w-[420px]">
                 We have developed a stringent quality assurance process on par with any industry
                 standard. We love solving problems, and that is what drives our engineers day and
                 night. Our commitment to quality and process has earned us ISO 9001:2015
@@ -426,13 +426,13 @@ export function Experts() {
               </p>
 
               {/* ISO Badge */}
-              <div className="mt-8 flex items-center gap-4">
-                <div className="w-14 h-14 rounded-full border border-[#FF8101]/30 bg-[#FF8101]/5 flex items-center justify-center text-[#FF8101]">
-                  <Award size={24} strokeWidth={1.5} />
+              <div className="mt-6 sm:mt-8 flex items-center gap-4">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border border-[#FF8101]/30 bg-[#FF8101]/5 flex items-center justify-center text-[#FF8101] shrink-0">
+                  <Award size={22} strokeWidth={1.5} />
                 </div>
                 <div>
                   <div className="text-[13px] font-bold text-ink dark:text-white">ISO 9001:2015 Certified</div>
-                  <div className="text-[13px] text-muted-foreground dark:text-white/60 mt-0.5">
+                  <div className="text-[12px] sm:text-[13px] text-muted-foreground dark:text-white/60 mt-0.5">
                     Quality processes. Measurable results.
                   </div>
                 </div>
@@ -441,7 +441,7 @@ export function Experts() {
           </div>
 
           {/* Right Side: Our Numbers */}
-          <div className="relative">
+          <div className="relative mt-2 sm:mt-0">
             {/* Dot Pattern Background */}
             <div
               className="absolute -right-8 lg:-right-16 top-10 w-32 lg:w-48 h-[80%] opacity-[0.35] pointer-events-none"
@@ -452,10 +452,10 @@ export function Experts() {
             />
 
             <Reveal delay={0.2} className="relative z-10">
-              <div className="text-[12px] font-semibold text-[#FF8101] mb-2 tracking-normal">
+              <div className="text-[12px] font-semibold text-[#FF8101] mb-1.5 sm:mb-2 tracking-normal">
                 Our numbers
               </div>
-              <div className="text-[14px] text-muted-foreground mb-8">
+              <div className="text-[13px] sm:text-[14px] text-muted-foreground mb-4 sm:mb-8">
                 Measured from January 2015 to today.
               </div>
 
@@ -507,34 +507,34 @@ export function ContactForm() {
   const [message, setMessage] = useState("");
 
   return (
-    <section id="contact-form" className="bg-cream dark:bg-[var(--sp-bg)] pb-16 pt-16 md:pb-24 lg:pb-28">
-      <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
-        <div className="rounded-2xl sm:rounded-[28px] md:rounded-[36px] border border-ink/5 dark:border-white/10 bg-white/80 dark:bg-[#151515] p-5 md:p-8 lg:p-10 backdrop-blur-md">
-          <div className="grid grid-cols-12 gap-8 lg:gap-12 items-center">
+    <section id="contact-form" className="bg-cream dark:bg-[var(--sp-bg)] pb-16 pt-16 md:pb-24 lg:pb-28 overflow-hidden">
+      <div className="mx-auto max-w-[1152px] px-4 sm:px-6 lg:px-8">
+        <div className="rounded-2xl sm:rounded-[28px] md:rounded-[36px] border border-ink/5 dark:border-white/10 bg-white/80 dark:bg-[#151515] p-5 sm:p-7 md:p-8 lg:p-10 backdrop-blur-md overflow-hidden">
+          <div className="grid grid-cols-12 gap-8 lg:gap-12 items-start">
             {/* Left Column: Info */}
-            <div className="col-span-12 lg:col-span-5 flex flex-col justify-between pr-0 lg:pr-10 lg:border-r lg:border-ink/5">
-              <Reveal>
-                <h2 className="font-display text-3xl md:text-[44px] leading-[1.05] text-ink dark:text-white mb-4">
+            <div className="col-span-12 lg:col-span-5 flex flex-col justify-between pr-0 lg:pr-10 lg:border-r lg:border-ink/5 dark:lg:border-white/10 min-w-0">
+              <Reveal className="w-full">
+                <h2 className="font-display text-3xl sm:text-4xl md:text-[44px] leading-[1.05] text-ink dark:text-white mb-4">
                   Drop us a <br />
                   <span className="italic font-serif">message</span>
                   <span className="text-[#FF8101]">.</span>
                 </h2>
-                <div className="w-10 h-[2.5px] bg-[#FF8101] my-6" />
-                <p className="text-[13px] leading-relaxed text-muted-foreground max-w-sm mb-8">
+                <div className="w-10 h-[2.5px] bg-[#FF8101] my-4 sm:my-6" />
+                <p className="text-[13px] leading-relaxed text-muted-foreground dark:text-white/60 max-w-lg lg:max-w-sm mb-6 sm:mb-8">
                   Tell us about your infrastructure and support requirements. A senior engineer will
                   get back to you with a scoped proposal, SLA options, and pricing.
                 </p>
 
-                <div className="space-y-6 pt-6 border-t border-ink/5">
+                <div className="space-y-5 sm:space-y-6 pt-6 border-t border-ink/5 dark:border-white/10">
                   <div className="flex items-center gap-4">
                     <div className="w-10 h-10 rounded-full bg-[#FF8101]/10 text-[#FF8101] flex items-center justify-center shrink-0">
                       <MapPin size={18} strokeWidth={1.5} />
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <h4 className="text-[14px] font-semibold text-ink dark:text-white leading-tight">
                         Headquarters
                       </h4>
-                      <p className="text-[13px] text-muted-foreground mt-0.5">
+                      <p className="text-[13px] text-muted-foreground dark:text-white/60 mt-0.5 truncate">
                         Chicago, IL, United States
                       </p>
                     </div>
@@ -544,11 +544,11 @@ export function ContactForm() {
                     <div className="w-10 h-10 rounded-full bg-[#FF8101]/10 text-[#FF8101] flex items-center justify-center shrink-0">
                       <Building2 size={18} strokeWidth={1.5} />
                     </div>
-                    <div>
-                      <h4 className="text-[14px] font-semibold text-ink leading-tight">
+                    <div className="min-w-0">
+                      <h4 className="text-[14px] font-semibold text-ink dark:text-white leading-tight">
                         Delivery centres
                       </h4>
-                      <p className="text-[13px] text-muted-foreground mt-0.5">
+                      <p className="text-[13px] text-muted-foreground dark:text-white/60 mt-0.5 truncate">
                         3 ODCs in South India
                       </p>
                     </div>
@@ -558,11 +558,13 @@ export function ContactForm() {
                     <div className="w-10 h-10 rounded-full bg-[#FF8101]/10 text-[#FF8101] flex items-center justify-center shrink-0">
                       <Clock size={18} strokeWidth={1.5} />
                     </div>
-                    <div>
-                      <h4 className="text-[14px] font-semibold text-ink leading-tight">
+                    <div className="min-w-0">
+                      <h4 className="text-[14px] font-semibold text-ink dark:text-white leading-tight">
                         Support desk
                       </h4>
-                      <p className="text-[13px] text-muted-foreground mt-0.5">Available 24/7/365</p>
+                      <p className="text-[13px] text-muted-foreground dark:text-white/60 mt-0.5 truncate">
+                        Available 24/7/365
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -570,18 +572,18 @@ export function ContactForm() {
             </div>
 
             {/* Right Column: Form */}
-            <div className="col-span-12 lg:col-span-7">
-              <Reveal delay={0.1}>
+            <div className="col-span-12 lg:col-span-7 min-w-0 w-full">
+              <Reveal delay={0.1} className="w-full">
                 <form
                   onSubmit={(e) => {
                     e.preventDefault();
                     setSent(true);
                   }}
-                  className="flex flex-col gap-5 lg:gap-6"
+                  className="flex flex-col gap-4 sm:gap-5 lg:gap-6 w-full min-w-0"
                 >
                   {/* Two inputs row */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
-                    <div className="relative">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 lg:gap-6">
+                    <div className="relative min-w-0">
                       <User
                         className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30 dark:text-white/30 transition-colors group-focus-within:text-[#FF8101]"
                         size={16}
@@ -590,12 +592,12 @@ export function ContactForm() {
                       <input
                         required
                         placeholder="Full name"
-                        className="w-full rounded-2xl border border-ink/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF8101]/10"
+                        className="w-full rounded-2xl border border-ink/10 dark:border-white/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF8101]/10 box-border"
                       />
                     </div>
-                    <div className="relative">
+                    <div className="relative min-w-0">
                       <Mail
-                        className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30 transition-colors group-focus-within:text-[#FF8101]"
+                        className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30 dark:text-white/30 transition-colors group-focus-within:text-[#FF8101]"
                         size={16}
                         strokeWidth={1.5}
                       />
@@ -603,26 +605,26 @@ export function ContactForm() {
                         required
                         type="email"
                         placeholder="Work email"
-                        className="w-full rounded-2xl border border-ink/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF8101]/10"
+                        className="w-full rounded-2xl border border-ink/10 dark:border-white/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF8101]/10 box-border"
                       />
                     </div>
                   </div>
 
-                  <div className="relative">
+                  <div className="relative min-w-0">
                     <Building2
                       size={16}
                       strokeWidth={1.5}
-                      className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30 transition-colors group-focus-within:text-[#FF8101]"
+                      className="absolute left-4 top-1/2 -translate-y-1/2 text-ink/30 dark:text-white/30 transition-colors group-focus-within:text-[#FF8101]"
                     />
                     <input
                       placeholder="Company"
-                      className="w-full rounded-2xl border border-ink/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF8101]/10"
+                      className="w-full rounded-2xl border border-ink/10 dark:border-white/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF8101]/10 box-border"
                     />
                   </div>
 
-                  <div className="relative flex-1">
+                  <div className="relative min-w-0 flex-1">
                     <MessageSquare
-                      className="absolute left-4 top-4 text-ink/30 transition-colors group-focus-within:text-[#FF8101]"
+                      className="absolute left-4 top-4 text-ink/30 dark:text-white/30 transition-colors group-focus-within:text-[#FF8101]"
                       size={16}
                       strokeWidth={1.5}
                     />
@@ -633,14 +635,14 @@ export function ContactForm() {
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="What do you need support with?"
-                      className="w-full resize-none rounded-2xl border border-ink/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 pt-3 pb-8 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF8101]/10"
+                      className="w-full resize-none rounded-2xl border border-ink/10 dark:border-white/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 pt-3 pb-8 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF8101]/10 box-border"
                     />
                     <span className="absolute right-4 bottom-3 text-[11px] text-ink/30 dark:text-white/30 font-mono select-none">
                       {message.length} / 500
                     </span>
                   </div>
 
-                  <div className="flex items-center gap-2 text-[13px] text-muted-foreground pt-1 pb-1">
+                  <div className="flex items-center gap-2 text-[12px] sm:text-[13px] text-muted-foreground dark:text-white/60 pt-1 pb-1">
                     <ShieldCheck size={16} className="text-[#FF8101] shrink-0" />
                     <span>Your information is secure and will never be shared.</span>
                   </div>
@@ -653,7 +655,7 @@ export function ContactForm() {
                     <ArrowRight size={18} />
                   </button>
 
-                  <p className="text-center text-[12px] text-muted-foreground/70 pt-1">
+                  <p className="text-center text-[12px] text-muted-foreground/70 dark:text-white/50 pt-1">
                     We typically respond within a few hours.
                   </p>
                 </form>
