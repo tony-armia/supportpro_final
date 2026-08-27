@@ -1,3 +1,5 @@
+'use client';
+
 import { createContext, useContext, useEffect, useState } from "react";
 
 type Theme = "light" | "dark";
@@ -5,25 +7,30 @@ type Theme = "light" | "dark";
 interface ThemeContextType {
   theme: Theme;
   setTheme: React.Dispatch<React.SetStateAction<Theme>>;
+  mounted: boolean;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  // Initialize from localStorage or default to 'light'
-  const [theme, setTheme] = useState<Theme>(() => {
-    // Only run on client
-    if (typeof window !== "undefined") {
-      const stored = localStorage.getItem("theme");
-      if (stored === "light" || stored === "dark") {
-        return stored;
-      }
-    }
-    return "light"; // Default to light
-  });
+  // Default to dark on SSR and initial mount for consistency
+  const [theme, setTheme] = useState<Theme>("dark");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Update data-theme on <html> when theme changes
+    setMounted(true);
+    try {
+      const stored = localStorage.getItem("theme") as Theme | null;
+      if (stored === "light" || stored === "dark") {
+        setTheme(stored);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
     const root = document.documentElement;
     if (theme === "dark") {
       root.setAttribute("data-theme", "dark");
@@ -32,12 +39,15 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       root.removeAttribute("data-theme");
       root.classList.remove("dark");
     }
-    // Persist to localStorage
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+    try {
+      localStorage.setItem("theme", theme);
+    } catch (e) {
+      console.error(e);
+    }
+  }, [theme, mounted]);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, setTheme, mounted }}>
       {children}
     </ThemeContext.Provider>
   );

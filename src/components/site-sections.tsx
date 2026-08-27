@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { motion, useInView } from "motion/react";
 import ParticleBadge, { GlobalBadgeSpotlight } from "./MagicBadge";
@@ -38,6 +40,13 @@ import iso9001Logo from "@/assets/logos 2/image 90.png";
 import iso27001Logo from "@/assets/logos 2/image 91.png";
 import aicpaSocLogo from "@/assets/logos 2/image 92.png";
 
+const getImageSrc = (img: any): string => {
+  if (!img) return "";
+  if (typeof img === "string") return img;
+  if (typeof img === "object" && "src" in img) return img.src;
+  return String(img);
+};
+
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 function Reveal({
@@ -56,7 +65,7 @@ function Reveal({
       ref={ref}
       className={className}
       initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
+      animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
       transition={{ duration: 0.8, delay, ease: EASE }}
     >
       {children}
@@ -64,43 +73,43 @@ function Reveal({
   );
 }
 
-/* ---------- Credentials / accreditations ---------- */
+/* ---------- Credentials / Compliance badges ---------- */
 
 const credentials = [
   {
     name: "AWS Certified",
     color: "#FF9900",
-    icon: <img src={awsCertLogo} alt="AWS Certified" className="w-[40px] h-auto object-contain shrink-0 rounded-[100px]" />,
+    icon: <img src={getImageSrc(awsCertLogo)} alt="AWS Certified" className="w-[40px] h-auto object-contain shrink-0 rounded-[100px]" />,
   },
   {
     name: "Red Hat Certified",
     color: "#EE0000",
-    icon: <img src={redHatCertLogo} alt="Red Hat Certified" className="w-[40px] h-auto object-contain shrink-0 rounded-[100px]" />,
+    icon: <img src={getImageSrc(redHatCertLogo)} alt="Red Hat Certified" className="w-[40px] h-auto object-contain shrink-0 rounded-[100px]" />,
   },
   {
     name: "cPanel Partner",
     color: "#F26522",
-    icon: <img src={cPanelPartnerLogo} alt="cPanel Partner" className="w-[40px] h-auto object-contain shrink-0 rounded-[100px]" />,
+    icon: <img src={getImageSrc(cPanelPartnerLogo)} alt="cPanel Partner" className="w-[40px] h-auto object-contain shrink-0 rounded-[100px]" />,
   },
   {
     name: "Microsoft Certified",
     color: "#737373",
-    icon: <img src={msftCertLogo} alt="Microsoft Certified" className="w-[40px] h-auto object-contain shrink-0 rounded-[100px]" />,
+    icon: <img src={getImageSrc(msftCertLogo)} alt="Microsoft Certified" className="w-[40px] h-auto object-contain shrink-0 rounded-[100px]" />,
   },
   {
     name: "ISO 9001:2015",
     color: "#1D4ED8",
-    icon: <img src={iso9001Logo} alt="ISO 9001:2015" className="w-[40px] h-auto object-contain shrink-0 rounded-[100px]" />,
+    icon: <img src={getImageSrc(iso9001Logo)} alt="ISO 9001:2015" className="w-[40px] h-auto object-contain shrink-0 rounded-[100px]" />,
   },
   {
     name: "ISO 27001",
     color: "#1D4ED8",
-    icon: <img src={iso27001Logo} alt="ISO 27001" className="w-[40px] h-auto object-contain shrink-0 rounded-[100px]" />,
+    icon: <img src={getImageSrc(iso27001Logo)} alt="ISO 27001" className="w-[40px] h-auto object-contain shrink-0 rounded-[100px]" />,
   },
   {
     name: "AICPA SOC",
     color: "#1E293B",
-    icon: <img src={aicpaSocLogo} alt="AICPA SOC" className="w-[40px] h-auto object-contain shrink-0 rounded-[100px]" />,
+    icon: <img src={getImageSrc(aicpaSocLogo)} alt="AICPA SOC" className="w-[40px] h-auto object-contain shrink-0 rounded-[100px]" />,
   },
 ];
 
@@ -207,7 +216,7 @@ export function Pillars() {
             <Reveal delay={0.1} className="h-full">
               <div className="relative h-[240px] sm:h-[340px] md:h-[420px] overflow-hidden rounded-[24px] sm:rounded-[28px] bg-ink/5 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.22)]">
                 <img
-                  src={pillarsHeroImg}
+                  src={getImageSrc(pillarsHeroImg)}
                   alt="Engineers collaborating at monitoring stations in a modern operations centre"
                   className="absolute inset-0 w-full h-full object-cover"
                   loading="lazy"
@@ -300,7 +309,7 @@ const MarqueeRow = ({
             {/* Logo */}
             <div className="mb-6 flex h-[72px] w-[156px] items-center justify-center transition-transform duration-400 group-hover:-translate-y-1.5 dark:opacity-80">
               <img
-                src={p.logo}
+                src={getImageSrc(p.logo)}
                 alt=""
                 className="max-h-full max-w-full object-contain"
                 loading="lazy"

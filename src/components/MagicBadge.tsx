@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useRef, useEffect, useCallback } from 'react';
 import { gsap } from 'gsap';
 import './MagicBadge.css';
