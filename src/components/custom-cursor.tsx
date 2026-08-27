@@ -128,7 +128,7 @@ export function CustomCursor() {
 
   return (
     <div
-      className="pointer-events-none fixed inset-0 z-[9999] hidden select-none md:block"
+      className="pointer-events-none fixed inset-0 z-[999999] hidden select-none md:block"
       aria-hidden="true"
     >
       <motion.div

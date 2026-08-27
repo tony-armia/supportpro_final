@@ -435,8 +435,14 @@
   .z-\[99\] {
     z-index: 99;
   }
+  .z-\[100\] {
+    z-index: 100;
+  }
   .z-\[9999\] {
     z-index: 9999;
+  }
+  .z-\[999999\] {
+    z-index: 999999;
   }
   .col-span-1 {
     grid-column: span 1 / span 1;
@@ -958,6 +964,9 @@
   }
   .max-w-\[440px\] {
     max-width: 440px;
+  }
+  .max-w-\[460px\] {
+    max-width: 460px;
   }
   .max-w-\[620px\] {
     max-width: 620px;

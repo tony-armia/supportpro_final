@@ -21,16 +21,18 @@ import {
 } from "lucide-react";
 import { HoverOrangeSpan } from "@/components/hover-orange-span";
 import pillarsHeroImg from "@/assets/NOC and DevOps engineered for scale..png";
-import awsLogo from "@/assets/logos/image 67.png";
-import googleCloudLogo from "@/assets/logos/image 68.png";
+import awsLogo from "@/assets/logos/amazon web.png";
+import googleCloudLogo from "@/assets/logos/googlecloud.png";
 import azureLogo from "@/assets/logos/image 69.png";
 import digitalOceanLogo from "@/assets/logos/image 70.png";
-import redHatLogo from "@/assets/logos/image 71.png";
+import redHatLogo from "@/assets/logos/redhat.png";
 import windowsServerLogo from "@/assets/logos/image 72.png";
 import openStackLogo from "@/assets/logos/image 73.png";
 import vmwareLogo from "@/assets/logos/image 74.png";
 import cPanelLogo from "@/assets/logos/image 75.png";
-import pleskLogo from "@/assets/logos/image 76.png";
+import pleskLogo from "@/assets/logos/plesk.png";
+import directAdminLogo from "@/assets/logos/image 77.png";
+import openVzLogo from "@/assets/logos/openvz.png";
 
 import awsCertLogo from "@/assets/logos 2/image 86.png";
 import redHatCertLogo from "@/assets/logos 2/image 87.png";
@@ -280,6 +282,8 @@ const platformCards = [
   { name: "VMware", logo: vmwareLogo },
   { name: "cPanel", logo: cPanelLogo },
   { name: "Plesk", logo: pleskLogo },
+  { name: "DirectAdmin", logo: directAdminLogo },
+  { name: "OpenVZ", logo: openVzLogo },
 ];
 
 const MarqueeRow = ({
@@ -334,8 +338,8 @@ const MarqueeRow = ({
 };
 
 export function Platforms() {
-  const row1 = platformCards.slice(0, 5);
-  const row2 = platformCards.slice(5, 10);
+  const row1 = platformCards.slice(0, 6);
+  const row2 = platformCards.slice(6, 12);
   const gridRef = useRef<HTMLDivElement>(null);
 
   return (
@@ -407,21 +411,19 @@ export function Experts() {
           {/* Left Side: Why we are the experts */}
           <div>
             <Reveal>
-              <h2 className="font-display text-3xl sm:text-4xl md:text-[56px] leading-[1.03] text-ink dark:text-white max-w-[400px]">
-                Why we call ourselves
+              <div className="text-[12px] font-semibold text-[#FF8101] mb-1.5 sm:mb-2 tracking-normal">
+                Why we call ourselves the experts
+              </div>
+              <h2 className="font-display text-3xl sm:text-4xl md:text-[56px] leading-[1.03] text-ink dark:text-white max-w-[460px]">
+                Technical excellence<span className="text-[#FF8101]">.</span>
                 <br />
-                <em className="font-normal italic text-ink/70 dark:text-white/70">the experts</em>
+                <em className="font-normal italic text-ink/70 dark:text-white/70">Process discipline</em>
                 <span className="text-[#FF8101]">.</span>
               </h2>
             </Reveal>
 
             <Reveal delay={0.2}>
-              <h4 className="mt-4 sm:mt-6 font-display text-xl sm:text-2xl md:text-4xl lg:text-[48px] leading-[1.05] text-ink dark:text-white">
-                Technical excellence.
-                <br />
-                Process discipline.
-              </h4>
-              <p className="mt-3 sm:mt-4 text-[14px] leading-relaxed text-muted-foreground max-w-[420px]">
+              <p className="mt-4 sm:mt-6 text-[14px] leading-relaxed text-muted-foreground max-w-[440px]">
                 Since our inception 23 years ago we have been learning and pioneering in outsourced
                 technical support. We measure the metrics and key process indicators behind every
                 engagement, and evaluate ourselves constantly so the service stays consistent time
