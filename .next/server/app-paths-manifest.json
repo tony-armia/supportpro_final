@@ -1,7 +1,0 @@
-{
-  "/page": "app/page.js",
-  "/cloudmanagement/page": "app/cloudmanagement/page.js",
-  "/aws-management/page": "app/aws-management/page.js",
-  "/scanner/page": "app/scanner/page.js",
-  "/nodemanagement/page": "app/nodemanagement/page.js"
-}
