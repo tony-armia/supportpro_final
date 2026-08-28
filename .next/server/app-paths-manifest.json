@@ -1,3 +1,4 @@
 {
+  "/cloudmanagement/page": "app/cloudmanagement/page.js",
   "/page": "app/page.js"
 }
