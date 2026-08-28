@@ -13,7 +13,12 @@ export const metadata: Metadata = {
       'SupportPRO delivers 24/7 technical support, cloud and server management, NOC, DevOps, and white-label MSP services trusted by hosting providers and enterprises worldwide.',
     type: 'website',
     images: [
-      'https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/704fde88-466f-437b-86cf-e2255908e490/id-preview-1be384dc--a3aefcab-e1ff-437e-a423-742808328430.lovable.app-1783498620527.png',
+      {
+        url: '/hero.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'SupportPRO Managed IT & Technical Support',
+      },
     ],
   },
   twitter: {
@@ -21,9 +26,7 @@ export const metadata: Metadata = {
     title: 'SupportPRO — Managed IT & 24/7 Technical Support',
     description:
       'SupportPRO delivers 24/7 technical support, cloud and server management, NOC, DevOps, and white-label MSP services trusted by hosting providers and enterprises worldwide.',
-    images: [
-      'https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/704fde88-466f-437b-86cf-e2255908e490/id-preview-1be384dc--a3aefcab-e1ff-437e-a423-742808328430.lovable.app-1783498620527.png',
-    ],
+    images: ['/hero.jpg'],
   },
 };
 
@@ -37,6 +40,7 @@ export default function RootLayout({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

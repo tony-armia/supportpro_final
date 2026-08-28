@@ -263,6 +263,7 @@ export default function ScannerPage() {
                         <div className="inline-flex rounded-2xl border border-ink/10 dark:border-white/10 bg-cream/50 dark:bg-black/30 p-1">
                           <button
                             type="button"
+                            suppressHydrationWarning
                             onClick={() => {
                               setScanType('domain');
                               setDomainError('');
@@ -279,6 +280,7 @@ export default function ScannerPage() {
                           </button>
                           <button
                             type="button"
+                            suppressHydrationWarning
                             onClick={() => {
                               setScanType('ip');
                               setDomainError('');
@@ -315,6 +317,7 @@ export default function ScannerPage() {
                               type="text"
                               name="domainame"
                               id="domainame"
+                              suppressHydrationWarning
                               value={domainName}
                               onChange={(e) => {
                                 setDomainName(e.target.value);
@@ -353,6 +356,7 @@ export default function ScannerPage() {
                                 type="text"
                                 name="ip"
                                 id="ip"
+                                suppressHydrationWarning
                                 value={ipAddress}
                                 onChange={(e) => {
                                   setIpAddress(e.target.value);
@@ -389,6 +393,7 @@ export default function ScannerPage() {
                                   type="text"
                                   name="username"
                                   id="username"
+                                  suppressHydrationWarning
                                   value={username}
                                   onChange={(e) => setUsername(e.target.value)}
                                   placeholder="Username"
@@ -410,6 +415,7 @@ export default function ScannerPage() {
                                   type="password"
                                   name="password"
                                   id="password"
+                                  suppressHydrationWarning
                                   value={password}
                                   onChange={(e) => setPassword(e.target.value)}
                                   placeholder="Password"
@@ -431,6 +437,7 @@ export default function ScannerPage() {
                                   type="text"
                                   name="sshport"
                                   id="sshport"
+                                  suppressHydrationWarning
                                   value={sshPort}
                                   onChange={(e) => setSSHPort(e.target.value)}
                                   placeholder="SSH Port"
@@ -452,6 +459,7 @@ export default function ScannerPage() {
                                   type="email"
                                   name="useremail"
                                   id="useremail"
+                                  suppressHydrationWarning
                                   value={userEmail}
                                   onChange={(e) => setUserEmail(e.target.value)}
                                   placeholder="Email Address"
@@ -468,6 +476,7 @@ export default function ScannerPage() {
                                 type="checkbox"
                                 name="wheeluser"
                                 id="wheeluser"
+                                suppressHydrationWarning
                                 checked={wheelUser}
                                 onChange={(e) => setWheelUser(e.target.checked)}
                                 className="w-4 h-4 rounded accent-[#FF8101] cursor-pointer"
@@ -482,6 +491,7 @@ export default function ScannerPage() {
                       <div className="pt-2 flex justify-end">
                         <button
                           type="submit"
+                          suppressHydrationWarning
                           className="cursor-morph inline-flex items-center gap-2 rounded-full bg-[#FF8101] text-white px-8 py-3.5 text-sm font-semibold hover:bg-[#FF8101]/90 transition-colors"
                         >
                           <span>Start Scan</span>
@@ -692,7 +702,7 @@ export default function ScannerPage() {
           </div>
         </div>
       </section>
-
+  
       {/* ─── SECTION 2: Contact Us ─────────────────────────────────────────────── */}
       <section id="contact" className="py-16 sm:py-20 lg:py-28 bg-white dark:bg-[var(--sp-surface)] border-b border-ink/10 dark:border-white/10">
         <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
@@ -781,6 +791,7 @@ export default function ScannerPage() {
                         />
                         <input
                           required
+                          suppressHydrationWarning
                           placeholder="Full name"
                           className="w-full rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40"
                         />
@@ -793,6 +804,7 @@ export default function ScannerPage() {
                         <input
                           required
                           type="email"
+                          suppressHydrationWarning
                           placeholder="Work email"
                           className="w-full rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40"
                         />
@@ -806,6 +818,7 @@ export default function ScannerPage() {
                       />
                       <input
                         placeholder="Company"
+                        suppressHydrationWarning
                         className="w-full rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40"
                       />
                     </div>
@@ -819,6 +832,7 @@ export default function ScannerPage() {
                         required
                         rows={4}
                         maxLength={500}
+                        suppressHydrationWarning
                         value={contactMessage}
                         onChange={(e) => setContactMessage(e.target.value)}
                         placeholder="Message"
@@ -836,6 +850,7 @@ export default function ScannerPage() {
 
                     <button
                       type="submit"
+                      suppressHydrationWarning
                       className="cursor-morph w-full rounded-full bg-[#FF8101] text-white py-3.5 px-6 text-[14px] font-semibold transition-all hover:bg-[#FF8101]/90 flex items-center justify-center gap-2"
                     >
                       {contactSent ? 'Request Received' : 'Request For Quote'}
@@ -860,29 +875,31 @@ export default function ScannerPage() {
             </h2>
           </Reveal>
 
-          <div ref={industryGridRef} className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+          <div ref={industryGridRef} className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             {industryItems.map((ind, i) => {
               const IndIcon = ind.icon;
               return (
-                <Reveal key={ind.name} delay={0.04 * i}>
+                <Reveal key={ind.name} delay={0.04 * i} className="h-full">
                   <ParticleBadge
                     enableStars={true}
                     clickEffect={true}
                     particleCount={4}
                     enableTilt={false}
-                    className="rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-[#151515] p-5 sm:p-6 flex items-center justify-between hover:border-[#FF8101]/40 transition-all cursor-pointer"
+                    className="h-full rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-[#151515] p-5 sm:p-6 flex items-center justify-between gap-4 hover:border-[#FF8101]/40 transition-all cursor-pointer group shadow-sm hover:shadow-md"
                   >
-                    <div className="flex items-center gap-3.5">
-                      <div className="w-9 h-9 rounded-xl bg-[#FF8101]/10 text-[#FF8101] flex items-center justify-center shrink-0">
-                        <IndIcon size={16} />
+                    <div className="flex items-center gap-4 min-w-0 flex-1">
+                      <div className="w-11 h-11 rounded-xl bg-[#FF8101]/10 text-[#FF8101] flex items-center justify-center shrink-0 group-hover:bg-[#FF8101] group-hover:text-white transition-colors duration-200">
+                        <IndIcon size={19} />
                       </div>
-                      <span className="text-[15px] font-semibold text-ink dark:text-white">
+                      <span className="text-[15px] sm:text-[16px] font-semibold text-ink dark:text-white group-hover:text-[#FF8101] transition-colors leading-snug">
                         {ind.name}
                       </span>
                     </div>
-                    <span className="text-[11px] font-mono text-muted-foreground dark:text-white/40">
-                      0{i + 1}
-                    </span>
+                    <div className="shrink-0 pl-3">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full text-xs font-mono font-bold text-[#FF8101] bg-[#FF8101]/10 border border-[#FF8101]/25">
+                        0{i + 1}
+                      </span>
+                    </div>
                   </ParticleBadge>
                 </Reveal>
               );

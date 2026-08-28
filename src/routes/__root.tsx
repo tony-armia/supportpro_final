@@ -38,9 +38,6 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -86,8 +83,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "SupportPRO — Managed IT & 24/7 Technical Support" },
       { name: "twitter:description", content: "SupportPRO delivers 24/7 technical support, cloud and server management, NOC, DevOps, and white-label MSP services trusted by hosting providers and enterprises worldwide." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/704fde88-466f-437b-86cf-e2255908e490/id-preview-1be384dc--a3aefcab-e1ff-437e-a423-742808328430.lovable.app-1783498620527.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/704fde88-466f-437b-86cf-e2255908e490/id-preview-1be384dc--a3aefcab-e1ff-437e-a423-742808328430.lovable.app-1783498620527.png" },
+      { property: "og:image", content: "/hero.jpg" },
+      { name: "twitter:image", content: "/hero.jpg" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

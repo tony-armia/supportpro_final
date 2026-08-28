@@ -165,15 +165,13 @@ export default function AWSManagementPage() {
         <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 items-center">
             {/* Visual Image Column */}
-            <div className="lg:col-span-5 order-2 lg:order-1">
-              <Reveal delay={0.1}>
-                <div className="relative rounded-3xl border border-ink/10 dark:border-white/15 bg-cream/40 dark:bg-[#151515] p-8 sm:p-12 flex items-center justify-center min-h-[260px] sm:min-h-[300px]">
-                  <img
-                    src={getImageSrc(imgAwsManagementIcon)}
-                    alt="AWS Management Services"
-                    className="w-full max-w-[240px] sm:max-w-[280px] h-auto object-contain"
-                  />
-                </div>
+            <div className="lg:col-span-5 order-2 lg:order-1 flex items-center justify-center">
+              <Reveal delay={0.1} className="w-full flex justify-center">
+                <img
+                  src={getImageSrc(imgAwsManagementIcon)}
+                  alt="AWS Management Services"
+                  className="w-full max-w-[340px] sm:max-w-[380px] h-auto object-contain transition-transform duration-300 hover:scale-[1.02]"
+                />
               </Reveal>
             </div>
 
@@ -201,37 +199,49 @@ export default function AWSManagementPage() {
         <GlobalBadgeSpotlight gridRef={awsGridRef} spotlightRadius={400} />
         <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8 relative z-10">
           <Reveal>
-            <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08] text-ink dark:text-white max-w-[820px] tracking-tight mb-10 sm:mb-14">
-              Our AWS Support Service extends to
-              <span className="text-[#FF8101]">:</span>
-            </h2>
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10 sm:mb-14">
+              <div>
+                <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08] text-ink dark:text-white max-w-[820px] tracking-tight">
+                  Our AWS Support Service extends to
+                  <span className="text-[#FF8101]">:</span>
+                </h2>
+              </div>
+              <span className="text-xs font-mono text-muted-foreground dark:text-white/40 shrink-0">
+                12 Comprehensive Service Pillars
+              </span>
+            </div>
           </Reveal>
 
-          {/* 12 Items 2-Column Editorial Grid */}
-          <div ref={awsGridRef} className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+          {/* 12 Items — 4-col grid */}
+          <div ref={awsGridRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
             {awsExtendsItems.map((item, idx) => {
               const IconComp = item.icon;
               return (
-                <Reveal key={item.num} delay={0.025 * idx} className="h-full">
+                <Reveal key={item.num} delay={0.02 * idx} className="h-full">
                   <ParticleBadge
                     enableStars={true}
                     clickEffect={true}
                     particleCount={4}
                     enableTilt={false}
-                    className="h-full rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-[#151515] p-5 sm:p-6 flex items-start gap-4 hover:border-[#FF8101]/40 transition-colors group cursor-pointer"
+                    className="relative w-full h-full min-h-[220px] sm:min-h-[240px] rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-[#151515] p-6 flex flex-col justify-between hover:border-[#FF8101]/40 transition-all duration-300 shadow-sm hover:shadow-lg group cursor-pointer !items-stretch !justify-between"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-[#FF8101]/10 text-[#FF8101] flex items-center justify-center shrink-0 group-hover:bg-[#FF8101] group-hover:text-white transition-colors">
-                      <IconComp size={18} />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between gap-2 mb-1">
-                        <span className="text-[11px] font-mono font-bold text-muted-foreground dark:text-white/40">
+                    <div className="w-full h-full flex flex-col justify-between">
+                      {/* Top Row: Icon at Left End & Number at Right End */}
+                      <div className="w-full flex items-center justify-between">
+                        <div className="w-12 h-12 rounded-2xl bg-[#FF8101]/10 text-[#FF8101] flex items-center justify-center shrink-0 border border-[#FF8101]/15 group-hover:bg-[#FF8101] group-hover:text-white transition-all duration-300 shadow-sm">
+                          <IconComp size={24} strokeWidth={1} />
+                        </div>
+                        <span className="text-sm font-mono font-bold text-ink/40 dark:text-white/40 group-hover:text-[#FF8101] transition-colors select-none">
                           {item.num}
                         </span>
                       </div>
-                      <h3 className="text-[14px] sm:text-[15px] font-semibold text-ink dark:text-white leading-snug">
-                        {item.title}
-                      </h3>
+
+                      {/* Bottom: Text */}
+                      <div className="w-full mt-auto pt-6">
+                        <h3 className="text-[15px] sm:text-[16px] font-semibold text-ink dark:text-white leading-snug tracking-tight group-hover:text-[#FF8101] transition-colors">
+                          {item.title}
+                        </h3>
+                      </div>
                     </div>
                   </ParticleBadge>
                 </Reveal>
@@ -245,16 +255,21 @@ export default function AWSManagementPage() {
       <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-[var(--sp-surface)] border-b border-ink/10 dark:border-white/10">
         <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
           <Reveal>
-            <div className="rounded-3xl border border-ink/10 dark:border-white/10 bg-cream/50 dark:bg-[#141414] p-8 sm:p-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-ink dark:text-white tracking-tight">
-                Are You Looking For A Custom Plan?
-              </h2>
+            <div className="rounded-3xl border-2 border-[#FF8101]/40 bg-gradient-to-br from-[#FF8101]/10 via-[#FF8101]/[0.03] to-transparent dark:from-[#FF8101]/15 dark:via-[#141414] dark:to-[#101010] p-6 sm:p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden shadow-lg shadow-[#FF8101]/5">
+              <div className="space-y-1.5 z-10 max-w-xl">
+                <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-ink dark:text-white tracking-tight">
+                  Looking For A Custom Plan?
+                </h2>
+                <p className="text-xs sm:text-sm text-muted-foreground dark:text-white/70 leading-relaxed">
+                  Tailored SLAs, dedicated AWS DevOps engineers, multi-account governance, and custom instance pricing suited to your cloud architecture.
+                </p>
+              </div>
               <a
                 href="#contact"
-                className="cursor-morph shrink-0 inline-flex items-center gap-2 rounded-full bg-[#FF8101] text-white px-7 py-3.5 text-sm font-semibold hover:bg-[#FF8101]/90 transition-colors"
+                className="cursor-morph z-10 shrink-0 inline-flex items-center gap-2 rounded-full bg-[#FF8101] text-white px-7 py-3.5 text-sm font-semibold hover:bg-[#FF8101]/90 shadow-md shadow-[#FF8101]/20 transition-all hover:gap-3"
               >
                 <span>Request For Quote</span>
-                <ArrowRight size={16} />
+                <ArrowRight size={15} />
               </a>
             </div>
           </Reveal>
@@ -349,6 +364,7 @@ export default function AWSManagementPage() {
                         />
                         <input
                           required
+                          suppressHydrationWarning
                           placeholder="Full name"
                           className="w-full rounded-2xl border border-ink/10 dark:border-white/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40"
                         />
@@ -361,6 +377,7 @@ export default function AWSManagementPage() {
                         <input
                           required
                           type="email"
+                          suppressHydrationWarning
                           placeholder="Work email"
                           className="w-full rounded-2xl border border-ink/10 dark:border-white/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40"
                         />
@@ -374,6 +391,7 @@ export default function AWSManagementPage() {
                       />
                       <input
                         placeholder="Company"
+                        suppressHydrationWarning
                         className="w-full rounded-2xl border border-ink/10 dark:border-white/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40"
                       />
                     </div>
@@ -387,6 +405,7 @@ export default function AWSManagementPage() {
                         required
                         rows={4}
                         maxLength={500}
+                        suppressHydrationWarning
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         placeholder="Message"
@@ -404,6 +423,7 @@ export default function AWSManagementPage() {
 
                     <button
                       type="submit"
+                      suppressHydrationWarning
                       className="cursor-morph w-full rounded-full bg-[#FF8101] text-white py-3.5 px-6 text-[14px] font-semibold transition-all hover:bg-[#FF8101]/90 flex items-center justify-center gap-2"
                     >
                       {formSent ? 'Request Received' : 'Request For Quote'}
@@ -428,29 +448,31 @@ export default function AWSManagementPage() {
             </h2>
           </Reveal>
 
-          <div ref={industryGridRef} className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+          <div ref={industryGridRef} className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             {industryItems.map((ind, i) => {
               const IndIcon = ind.icon;
               return (
-                <Reveal key={ind.name} delay={0.04 * i}>
+                <Reveal key={ind.name} delay={0.04 * i} className="h-full">
                   <ParticleBadge
                     enableStars={true}
                     clickEffect={true}
                     particleCount={4}
                     enableTilt={false}
-                    className="rounded-2xl border border-ink/10 dark:border-white/10 bg-cream/40 dark:bg-[#151515] p-5 sm:p-6 flex items-center justify-between hover:border-[#FF8101]/40 transition-all cursor-pointer"
+                    className="h-full rounded-2xl border border-ink/10 dark:border-white/10 bg-cream/40 dark:bg-[#151515] p-5 sm:p-6 flex items-center justify-between gap-4 hover:border-[#FF8101]/40 transition-all cursor-pointer group shadow-sm hover:shadow-md"
                   >
-                    <div className="flex items-center gap-3.5">
-                      <div className="w-9 h-9 rounded-xl bg-[#FF8101]/10 text-[#FF8101] flex items-center justify-center shrink-0">
-                        <IndIcon size={16} />
+                    <div className="flex items-center gap-4 min-w-0 flex-1">
+                      <div className="w-11 h-11 rounded-xl bg-[#FF8101]/10 text-[#FF8101] flex items-center justify-center shrink-0 group-hover:bg-[#FF8101] group-hover:text-white transition-colors duration-200">
+                        <IndIcon size={20} strokeWidth={1} />
                       </div>
-                      <span className="text-[15px] font-semibold text-ink dark:text-white">
+                      <span className="text-[15px] sm:text-[16px] font-semibold text-ink dark:text-white group-hover:text-[#FF8101] transition-colors leading-snug">
                         {ind.name}
                       </span>
                     </div>
-                    <span className="text-[11px] font-mono text-muted-foreground dark:text-white/40">
-                      0{i + 1}
-                    </span>
+                    <div className="shrink-0 pl-3">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full text-xs font-mono font-bold text-[#FF8101] bg-[#FF8101]/10 border border-[#FF8101]/25">
+                        0{i + 1}
+                      </span>
+                    </div>
                   </ParticleBadge>
                 </Reveal>
               );

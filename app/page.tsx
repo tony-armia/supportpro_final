@@ -976,6 +976,7 @@ function Testimonials() {
 
         <div className="mt-5 z-20">
           <button
+            suppressHydrationWarning
             onClick={() => setSliderOpen(true)}
             className="cursor-morph inline-flex items-center gap-2 rounded-full border border-ink/15 dark:border-white/15 bg-white/75 dark:bg-black/60 px-4 py-2 text-[12px] sm:text-[13px] font-medium text-ink dark:text-white backdrop-blur-md hover:border-[#FF8101] hover:text-[#FF8101] dark:hover:border-[#FF8101] dark:hover:text-[#FF8101] transition-all shadow-sm"
           >
@@ -1008,6 +1009,7 @@ function Testimonials() {
               className="relative w-full max-w-2xl rounded-3xl bg-white dark:bg-[#161616] border border-ink/10 dark:border-white/15 p-6 sm:p-8 md:p-10 shadow-2xl overflow-hidden"
             >
               <button
+                suppressHydrationWarning
                 onClick={() => setSliderOpen(false)}
                 className="absolute top-5 right-5 h-9 w-9 rounded-full bg-ink/5 dark:bg-white/10 text-ink/70 dark:text-white/70 hover:text-ink dark:hover:text-white flex items-center justify-center transition-colors"
                 aria-label="Close"
@@ -1048,6 +1050,7 @@ function Testimonials() {
                 <div className="flex gap-1.5">
                   {testimonials.map((_, idx) => (
                     <button
+                      suppressHydrationWarning
                       key={idx}
                       onClick={() => setActiveSlide(idx)}
                       className={`h-2 rounded-full transition-all ${activeSlide === idx ? "w-6 bg-[#FF8101]" : "w-2 bg-ink/20 dark:bg-white/20"}`}
@@ -1058,6 +1061,7 @@ function Testimonials() {
 
                 <div className="flex items-center gap-2">
                   <button
+                    suppressHydrationWarning
                     onClick={() =>
                       setActiveSlide((prev) => (prev > 0 ? prev - 1 : testimonials.length - 1))
                     }
@@ -1067,6 +1071,7 @@ function Testimonials() {
                     <ChevronLeft size={16} />
                   </button>
                   <button
+                    suppressHydrationWarning
                     onClick={() =>
                       setActiveSlide((prev) => (prev < testimonials.length - 1 ? prev + 1 : 0))
                     }
@@ -1120,7 +1125,7 @@ function FAQ() {
                       Can&apos;t find the answers you&apos;re looking for? Our documentation has everything
                       you need.
                     </p>
-                    <button className="text-[15px] font-bold text-[#FF8101] flex items-center gap-3 hover:gap-4 transition-all mt-6">
+                    <button suppressHydrationWarning className="text-[15px] font-bold text-[#FF8101] flex items-center gap-3 hover:gap-4 transition-all mt-6">
                       View Documentation
                       <ArrowRight size={17} strokeWidth={1.75} />
                     </button>
@@ -1139,6 +1144,7 @@ function FAQ() {
                   className={`relative overflow-hidden border-b border-ink/15 dark:border-white/15 last:border-b-0 transition-colors duration-300 ${isOpen ? "bg-[#FF8101]/[0.035]" : "hover:bg-ink/[3%] dark:hover:bg-white/[3%]"}`}
                 >
                   <button
+                    suppressHydrationWarning
                     onClick={() => setOpen(isOpen ? null : i)}
                     aria-expanded={isOpen}
                     className="w-full min-h-[44px] py-5 lg:py-6 text-left flex items-center justify-between gap-6 group"
@@ -1257,6 +1263,7 @@ function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   return (
     <button
+      suppressHydrationWarning
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       className="fixed bottom-6 right-6 z-[99] flex h-12 w-12 items-center justify-center opacity-0 rounded-full bg-white text-ink shadow-[0_2px_10px_rgba(0,0,0,0.1)] transition-transform hover:scale-110 dark:bg-[#FF8101] dark:text-white"
     >

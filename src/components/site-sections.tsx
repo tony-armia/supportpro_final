@@ -602,6 +602,7 @@ export function ContactForm() {
                       />
                       <input
                         required
+                        suppressHydrationWarning
                         placeholder="Full name"
                         className="w-full rounded-2xl border border-ink/10 dark:border-white/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF8101]/10 box-border"
                       />
@@ -615,6 +616,7 @@ export function ContactForm() {
                       <input
                         required
                         type="email"
+                        suppressHydrationWarning
                         placeholder="Work email"
                         className="w-full rounded-2xl border border-ink/10 dark:border-white/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF8101]/10 box-border"
                       />
@@ -629,6 +631,7 @@ export function ContactForm() {
                     />
                     <input
                       placeholder="Company"
+                      suppressHydrationWarning
                       className="w-full rounded-2xl border border-ink/10 dark:border-white/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40 focus:ring-2 focus:ring-[#FF8101]/10 box-border"
                     />
                   </div>
@@ -643,6 +646,7 @@ export function ContactForm() {
                       required
                       rows={5}
                       maxLength={500}
+                      suppressHydrationWarning
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="What do you need support with?"
@@ -660,6 +664,7 @@ export function ContactForm() {
 
                   <button
                     type="submit"
+                    suppressHydrationWarning
                     className="cursor-morph w-full rounded-full bg-[#FF8101] text-white py-3.5 px-6 text-[14px] font-medium transition-all hover:bg-[#FF8101]/90 flex items-center justify-center gap-2 focus:ring-2 focus:ring-[#FF8101]/50 min-w-0"
                   >
                     {sent ? "Message received" : "Send message"}

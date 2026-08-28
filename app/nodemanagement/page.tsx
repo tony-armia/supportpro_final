@@ -33,6 +33,7 @@ import { Nav } from '@/components/nav';
 import { SiteFooter } from '@/components/footer';
 import ParticleBadge, { GlobalBadgeSpotlight } from '@/components/MagicBadge';
 import imgNodeVirtualization from '@/assets/node-server-virtualization.jpg';
+import imgNodeManagementIcon from '@/assets/illustration/nodemanagementicon.png';
 
 const getImageSrc = (img: any): string => {
   if (!img) return '';
@@ -166,19 +167,27 @@ export default function NodeManagementPage() {
       {/* ─── SECTION 2: Node Management Services ─────────────────────────────────── */}
       <section id="services" className="py-16 sm:py-20 lg:py-28 bg-white dark:bg-[var(--sp-surface)] border-b border-ink/10 dark:border-white/10">
         <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
-            {/* Left: Section Heading */}
-            <div className="lg:col-span-5">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 items-center">
+            {/* Visual Illustration Column */}
+            <div className="lg:col-span-5 order-2 lg:order-1 flex items-center justify-center">
+              <Reveal delay={0.1} className="w-full flex justify-center">
+                <img
+                  src={getImageSrc(imgNodeManagementIcon)}
+                  alt="Node Management Services"
+                  className="w-full max-w-[340px] sm:max-w-[380px] h-auto object-contain transition-transform duration-300 hover:scale-[1.02]"
+                />
+              </Reveal>
+            </div>
+
+            {/* Content Column */}
+            <div className="lg:col-span-7 order-1 lg:order-2 space-y-6">
               <Reveal>
                 <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08] text-ink dark:text-white tracking-tight">
                   Node Management Services
                   <span className="text-[#FF8101]">.</span>
                 </h2>
               </Reveal>
-            </div>
 
-            {/* Right: Content Paragraph */}
-            <div className="lg:col-span-7">
               <Reveal delay={0.1}>
                 <p className="text-[14px] sm:text-[15px] md:text-[16px] leading-relaxed text-muted-foreground dark:text-white/70">
                   Our Node Management plan offers support for configuring hypervisors, OS-level virtualization, Control Panel installation, VPS management, Backup management, VPS migrations, etc. We have a team of experts who are highly skilled in providing support for VMware, Hyper-V, KVM, OpenVZ, Parallels, and Virtuozzo with guaranteed response and resolution time.
@@ -193,30 +202,35 @@ export default function NodeManagementPage() {
       <section className="py-16 sm:py-20 lg:py-28 bg-cream dark:bg-[var(--sp-bg)] border-b border-ink/10 dark:border-white/10 relative">
         <GlobalBadgeSpotlight gridRef={featureGridRef} spotlightRadius={400} />
         <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8 relative z-10">
-          <div ref={featureGridRef} className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+          <div ref={featureGridRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             {featureItems.map((item, idx) => {
               const IconComp = item.icon;
               return (
-                <Reveal key={item.num} delay={0.05 * idx} className="h-full">
+                <Reveal key={item.num} delay={0.03 * idx} className="h-full">
                   <ParticleBadge
                     enableStars={true}
                     clickEffect={true}
                     particleCount={4}
                     enableTilt={false}
-                    className="h-full rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-[#151515] p-6 sm:p-7 flex items-start gap-4 hover:border-[#FF8101]/40 transition-colors group cursor-pointer"
+                    className="relative w-full h-full min-h-[220px] sm:min-h-[240px] rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-[#151515] p-6 flex flex-col justify-between hover:border-[#FF8101]/40 transition-all duration-300 shadow-sm hover:shadow-lg group cursor-pointer !items-stretch !justify-between"
                   >
-                    <div className="w-10 h-10 rounded-xl bg-[#FF8101]/10 text-[#FF8101] flex items-center justify-center shrink-0 group-hover:bg-[#FF8101] group-hover:text-white transition-colors">
-                      <IconComp size={18} />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between gap-2 mb-1.5">
-                        <span className="text-[11px] font-mono font-bold text-muted-foreground dark:text-white/40">
+                    <div className="w-full h-full flex flex-col justify-between">
+                      {/* Top Row: Icon at Left End & Number at Right End */}
+                      <div className="w-full flex items-center justify-between">
+                        <div className="w-12 h-12 rounded-2xl bg-[#FF8101]/10 text-[#FF8101] flex items-center justify-center shrink-0 border border-[#FF8101]/15 group-hover:bg-[#FF8101] group-hover:text-white transition-all duration-300 shadow-sm">
+                          <IconComp size={24} strokeWidth={1} />
+                        </div>
+                        <span className="text-sm font-mono font-bold text-ink/40 dark:text-white/40 group-hover:text-[#FF8101] transition-colors select-none">
                           {item.num}
                         </span>
                       </div>
-                      <h3 className="text-[15px] sm:text-[16px] font-semibold text-ink dark:text-white leading-snug">
-                        {item.title}
-                      </h3>
+
+                      {/* Bottom: Text */}
+                      <div className="w-full mt-auto pt-6">
+                        <h3 className="text-[15px] sm:text-[16px] font-semibold text-ink dark:text-white leading-snug tracking-tight group-hover:text-[#FF8101] transition-colors">
+                          {item.title}
+                        </h3>
+                      </div>
                     </div>
                   </ParticleBadge>
                 </Reveal>
@@ -230,9 +244,15 @@ export default function NodeManagementPage() {
       <section id="plans" className="py-16 sm:py-20 lg:py-28 bg-white dark:bg-[var(--sp-surface)] border-b border-ink/10 dark:border-white/10">
         <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
           <Reveal>
-            <h2 className="text-sm sm:text-base font-semibold tracking-wider uppercase text-ink/80 dark:text-white/80 mb-6">
-              AVAILABLE PLANS
-            </h2>
+            <div className="flex items-center justify-between gap-4 mb-6">
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl leading-tight text-ink dark:text-white tracking-tight">
+                Available Plans
+                <span className="text-[#FF8101]">.</span>
+              </h2>
+              <span className="text-xs font-mono text-muted-foreground dark:text-white/40">
+                Transparent Pricing
+              </span>
+            </div>
           </Reveal>
 
           <Reveal delay={0.1}>
@@ -243,6 +263,7 @@ export default function NodeManagementPage() {
                 <div className="flex items-start gap-3.5">
                   <button
                     type="button"
+                    suppressHydrationWarning
                     onClick={() => setPlanSelected(!planSelected)}
                     className={`mt-0.5 w-5 h-5 rounded flex items-center justify-center border transition-colors ${
                       planSelected
@@ -270,6 +291,7 @@ export default function NodeManagementPage() {
                     <div className="inline-flex items-center rounded-full border border-ink/15 dark:border-white/20 bg-white dark:bg-black/30 p-1">
                       <button
                         type="button"
+                        suppressHydrationWarning
                         onClick={() => setPackCount((prev) => Math.max(1, prev - 1))}
                         disabled={packCount <= 1}
                         aria-label="Decrease quantity"
@@ -282,6 +304,7 @@ export default function NodeManagementPage() {
                       </span>
                       <button
                         type="button"
+                        suppressHydrationWarning
                         onClick={() => setPackCount((prev) => Math.min(99, prev + 1))}
                         aria-label="Increase quantity"
                         className="w-7 h-7 rounded-full flex items-center justify-center text-ink/70 dark:text-white/70 hover:bg-ink/5 dark:hover:bg-white/10 transition-colors"
@@ -327,16 +350,21 @@ export default function NodeManagementPage() {
       <section className="py-16 sm:py-20 lg:py-24 bg-cream dark:bg-[var(--sp-bg)] border-b border-ink/10 dark:border-white/10">
         <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
           <Reveal>
-            <div className="rounded-3xl border border-ink/10 dark:border-white/10 bg-white dark:bg-[#141414] p-8 sm:p-12 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-ink dark:text-white tracking-tight">
-                Are You Looking For A Custom Plan?
-              </h2>
+            <div className="rounded-3xl border-2 border-[#FF8101]/40 bg-gradient-to-br from-[#FF8101]/10 via-[#FF8101]/[0.03] to-transparent dark:from-[#FF8101]/15 dark:via-[#141414] dark:to-[#101010] p-6 sm:p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden shadow-lg shadow-[#FF8101]/5">
+              <div className="space-y-1.5 z-10 max-w-xl">
+                <h2 className="font-display text-2xl sm:text-3xl md:text-4xl text-ink dark:text-white tracking-tight">
+                  Looking For A Custom Plan?
+                </h2>
+                <p className="text-xs sm:text-sm text-muted-foreground dark:text-white/70 leading-relaxed">
+                  Tailored virtualization topologies, dedicated Hypervisor engineering, multi-cluster management, and custom container volume pricing.
+                </p>
+              </div>
               <a
                 href="#contact"
-                className="cursor-morph shrink-0 inline-flex items-center gap-2 rounded-full bg-[#FF8101] text-white px-7 py-3.5 text-sm font-semibold hover:bg-[#FF8101]/90 transition-colors"
+                className="cursor-morph z-10 shrink-0 inline-flex items-center gap-2 rounded-full bg-[#FF8101] text-white px-7 py-3.5 text-sm font-semibold hover:bg-[#FF8101]/90 shadow-md shadow-[#FF8101]/20 transition-all hover:gap-3"
               >
                 <span>Request For Quote</span>
-                <ArrowRight size={16} />
+                <ArrowRight size={15} />
               </a>
             </div>
           </Reveal>
@@ -357,7 +385,7 @@ export default function NodeManagementPage() {
 
                 <div className="space-y-6 sm:space-y-8">
                   {/* Sales and Support Block */}
-                  <div className="rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-[#151515] p-6">
+                  <div className="rounded-2xl border border-ink/10 dark:border-white/10 bg-cream/40 dark:bg-[#151515] p-6">
                     <h3 className="text-[16px] font-bold text-ink dark:text-white mb-4 flex items-center gap-2">
                       <Phone size={17} className="text-[#FF8101]" />
                       Sales and Support
@@ -391,7 +419,7 @@ export default function NodeManagementPage() {
                   </div>
 
                   {/* Postal Address Block */}
-                  <div className="rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-[#151515] p-6">
+                  <div className="rounded-2xl border border-ink/10 dark:border-white/10 bg-cream/40 dark:bg-[#151515] p-6">
                     <h3 className="text-[16px] font-bold text-ink dark:text-white mb-3 flex items-center gap-2">
                       <MapPin size={17} className="text-[#FF8101]" />
                       Postal Address
@@ -409,7 +437,7 @@ export default function NodeManagementPage() {
             {/* Right Column: Contact Quote Form */}
             <div className="lg:col-span-7">
               <Reveal delay={0.1}>
-                <div className="rounded-3xl border border-ink/10 dark:border-white/10 bg-white dark:bg-[#151515] p-6 sm:p-8 md:p-10">
+                <div className="rounded-3xl border border-ink/10 dark:border-white/10 bg-cream/40 dark:bg-[#151515] p-6 sm:p-8 md:p-10">
                   <div className="mb-6">
                     <h3 className="text-xl sm:text-2xl font-bold text-ink dark:text-white">
                       Request For Quote
@@ -431,8 +459,9 @@ export default function NodeManagementPage() {
                         />
                         <input
                           required
+                          suppressHydrationWarning
                           placeholder="Full name"
-                          className="w-full rounded-2xl border border-ink/10 dark:border-white/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40"
+                          className="w-full rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40"
                         />
                       </div>
                       <div className="relative">
@@ -443,8 +472,9 @@ export default function NodeManagementPage() {
                         <input
                           required
                           type="email"
+                          suppressHydrationWarning
                           placeholder="Work email"
-                          className="w-full rounded-2xl border border-ink/10 dark:border-white/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40"
+                          className="w-full rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40"
                         />
                       </div>
                     </div>
@@ -456,7 +486,8 @@ export default function NodeManagementPage() {
                       />
                       <input
                         placeholder="Company"
-                        className="w-full rounded-2xl border border-ink/10 dark:border-white/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40"
+                        suppressHydrationWarning
+                        className="w-full rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40"
                       />
                     </div>
 
@@ -469,10 +500,11 @@ export default function NodeManagementPage() {
                         required
                         rows={4}
                         maxLength={500}
+                        suppressHydrationWarning
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         placeholder="Message"
-                        className="w-full resize-none rounded-2xl border border-ink/10 dark:border-white/10 bg-[#FAFAFA] dark:bg-black/20 pl-11 pr-4 pt-3 pb-8 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40"
+                        className="w-full resize-none rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-black/20 pl-11 pr-4 pt-3 pb-8 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40"
                       />
                       <span className="absolute right-4 bottom-3 text-[11px] text-ink/30 dark:text-white/30 font-mono select-none">
                         {message.length} / 500
@@ -486,6 +518,7 @@ export default function NodeManagementPage() {
 
                     <button
                       type="submit"
+                      suppressHydrationWarning
                       className="cursor-morph w-full rounded-full bg-[#FF8101] text-white py-3.5 px-6 text-[14px] font-semibold transition-all hover:bg-[#FF8101]/90 flex items-center justify-center gap-2"
                     >
                       {formSent ? 'Request Received' : 'Request For Quote'}
@@ -500,7 +533,7 @@ export default function NodeManagementPage() {
       </section>
 
       {/* ─── SECTION 8: Industry Solutions ─────────────────────────────────────── */}
-      <section className="py-16 sm:py-20 lg:py-28 bg-white dark:bg-[var(--sp-surface)] relative">
+      <section className="py-16 sm:py-20 lg:py-28 bg-cream dark:bg-[var(--sp-bg)] relative border-b border-ink/10 dark:border-white/10">
         <GlobalBadgeSpotlight gridRef={industryGridRef} spotlightRadius={400} />
         <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8 relative z-10">
           <Reveal>
@@ -510,29 +543,31 @@ export default function NodeManagementPage() {
             </h2>
           </Reveal>
 
-          <div ref={industryGridRef} className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+          <div ref={industryGridRef} className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             {industryItems.map((ind, i) => {
               const IndIcon = ind.icon;
               return (
-                <Reveal key={ind.name} delay={0.04 * i}>
+                <Reveal key={ind.name} delay={0.04 * i} className="h-full">
                   <ParticleBadge
                     enableStars={true}
                     clickEffect={true}
                     particleCount={4}
                     enableTilt={false}
-                    className="rounded-2xl border border-ink/10 dark:border-white/10 bg-cream/40 dark:bg-[#151515] p-5 sm:p-6 flex items-center justify-between hover:border-[#FF8101]/40 transition-all cursor-pointer"
+                    className="h-full rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-[#151515] p-5 sm:p-6 flex items-center justify-between gap-4 hover:border-[#FF8101]/40 transition-all cursor-pointer group shadow-sm hover:shadow-md"
                   >
-                    <div className="flex items-center gap-3.5">
-                      <div className="w-9 h-9 rounded-xl bg-[#FF8101]/10 text-[#FF8101] flex items-center justify-center shrink-0">
-                        <IndIcon size={16} />
+                    <div className="flex items-center gap-4 min-w-0 flex-1">
+                      <div className="w-11 h-11 rounded-xl bg-[#FF8101]/10 text-[#FF8101] flex items-center justify-center shrink-0 group-hover:bg-[#FF8101] group-hover:text-white transition-colors duration-200">
+                        <IndIcon size={19} />
                       </div>
-                      <span className="text-[15px] font-semibold text-ink dark:text-white">
+                      <span className="text-[15px] sm:text-[16px] font-semibold text-ink dark:text-white group-hover:text-[#FF8101] transition-colors leading-snug">
                         {ind.name}
                       </span>
                     </div>
-                    <span className="text-[11px] font-mono text-muted-foreground dark:text-white/40">
-                      0{i + 1}
-                    </span>
+                    <div className="shrink-0 pl-3">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full text-xs font-mono font-bold text-[#FF8101] bg-[#FF8101]/10 border border-[#FF8101]/25">
+                        0{i + 1}
+                      </span>
+                    </div>
                   </ParticleBadge>
                 </Reveal>
               );

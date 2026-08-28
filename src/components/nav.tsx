@@ -2,6 +2,7 @@
 
 import { useState, type ReactNode } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import {
   motion,
   AnimatePresence,
@@ -128,15 +129,22 @@ export function Nav() {
   const { theme, setTheme, mounted } = useTheme();
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
-    const isPast = latest > 200;
+    const isPast = latest > 500;
     if (isPast !== isScrolledPastHero) {
       setIsScrolledPastHero(isPast);
     }
   });
 
-  const bg = useTransform(scrollY, [0, 200], ['rgba(255,255,255,0.15)', 'rgba(20,20,20,0.55)']);
+  const bg = useTransform(scrollY, [0, 200], ['rgba(18,18,18,0.85)', 'rgba(18,18,18,0.95)']);
+
+  // On the homepage, the Hero is dark, so logo must be white at the top.
+  // When scrolled past the hero on light mode (or on inner light pages), show black logo.
+  const isLogoBlack = mounted && theme === 'light' && (!isHomePage || isScrolledPastHero);
+  const currentLogo = isLogoBlack ? logoBlack : logoWhite;
 
   return (
     <>
@@ -152,18 +160,12 @@ export function Nav() {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <Link href="/" className="flex items-center gap-2 min-w-0">
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={mounted && theme === 'light' && isScrolledPastHero ? 'black-logo' : 'white-logo'}
-                src={getImageSrc(mounted && theme === 'light' && isScrolledPastHero ? logoBlack : logoWhite)}
-                alt="SupportPRO Logo"
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.2 }}
-                className="h-12 sm:h-12 md:h-14 w-auto object-contain"
-              />
-            </AnimatePresence>
+            <img
+              src={getImageSrc(currentLogo)}
+              alt="SupportPRO Logo"
+              suppressHydrationWarning
+              className="h-12 sm:h-12 md:h-14 w-auto object-contain transition-opacity duration-200"
+            />
           </Link>
         </motion.div>
 
@@ -322,6 +324,7 @@ export function Nav() {
           <button
             onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
             aria-label="Toggle dark mode"
+            suppressHydrationWarning
             className="relative flex h-8 w-8 items-center justify-center rounded-full hover:bg-white/15 transition-all duration-200 text-white shrink-0"
           >
             {mounted ? (

@@ -24,11 +24,14 @@ import {
   Check,
   Plus,
   Minus,
+  ShoppingBag,
+  Terminal,
+  Wifi,
 } from 'lucide-react';
 import { Nav } from '@/components/nav';
 import { SiteFooter } from '@/components/footer';
 import ParticleBadge, { GlobalBadgeSpotlight } from '@/components/MagicBadge';
-import imgCloudServer from '@/assets/Cloud and server management, mastered..png';
+import cloudMgmtIllustration from '@/assets/illustration/cloudmanagementicon.png';
 
 const getImageSrc = (img: any): string => {
   if (!img) return '';
@@ -80,12 +83,12 @@ export default function CloudManagementPage() {
   ];
 
   const industryItems = [
-    'Web Hosting Services',
-    'Service Providers',
-    'E-Commerce Companies',
-    'Software Vendors',
-    'Web Developers',
-    'ISPs',
+    { title: 'Web Hosting Services', icon: Globe, count: '01' },
+    { title: 'Service Providers', icon: Cloud, count: '02' },
+    { title: 'E-Commerce Companies', icon: ShoppingBag, count: '03' },
+    { title: 'Software Vendors', icon: Cpu, count: '04' },
+    { title: 'Web Developers', icon: Terminal, count: '05' },
+    { title: 'ISPs', icon: Wifi, count: '06' },
   ];
 
   return (
@@ -163,15 +166,13 @@ export default function CloudManagementPage() {
             </div>
 
             {/* Image Visual Column */}
-            <div className="lg:col-span-6">
-              <Reveal delay={0.2}>
-                <div className="relative rounded-3xl overflow-hidden border border-ink/10 dark:border-white/15 bg-ink/[0.02] dark:bg-white/[0.02] p-2 sm:p-3">
-                  <img
-                    src={getImageSrc(imgCloudServer)}
-                    alt="Cloud Management Services"
-                    className="w-full h-auto object-cover rounded-2xl border border-ink/5 dark:border-white/10"
-                  />
-                </div>
+            <div className="lg:col-span-6 flex justify-center items-center">
+              <Reveal delay={0.2} className="w-full flex justify-center">
+                <img
+                  src={getImageSrc(cloudMgmtIllustration)}
+                  alt="Cloud Management Services Illustration"
+                  className="w-full max-w-[480px] h-auto object-contain transition-transform duration-300 hover:scale-[1.02]"
+                />
               </Reveal>
             </div>
           </div>
@@ -235,9 +236,15 @@ export default function CloudManagementPage() {
       <section id="plans" className="py-16 sm:py-20 lg:py-28 bg-white dark:bg-[var(--sp-surface)] border-b border-ink/10 dark:border-white/10">
         <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
           <Reveal>
-            <h2 className="text-sm sm:text-base font-semibold tracking-wider uppercase text-ink/80 dark:text-white/80 mb-6">
-              AVAILABLE PLANS
-            </h2>
+            <div className="flex items-center justify-between gap-4 mb-6">
+              <h2 className="font-display text-2xl sm:text-3xl md:text-4xl leading-tight text-ink dark:text-white tracking-tight">
+                Available Plans
+                <span className="text-[#FF8101]">.</span>
+              </h2>
+              <span className="text-xs font-mono text-muted-foreground dark:text-white/40">
+                Transparent Pricing
+              </span>
+            </div>
           </Reveal>
 
           <Reveal delay={0.1}>
@@ -248,6 +255,7 @@ export default function CloudManagementPage() {
                 <div className="flex items-start gap-3.5">
                   <button
                     type="button"
+                    suppressHydrationWarning
                     onClick={() => setPlanSelected(!planSelected)}
                     className={`mt-0.5 w-5 h-5 rounded flex items-center justify-center border transition-colors ${
                       planSelected
@@ -275,6 +283,7 @@ export default function CloudManagementPage() {
                     <div className="inline-flex items-center rounded-full border border-ink/15 dark:border-white/20 bg-white dark:bg-black/30 p-1">
                       <button
                         type="button"
+                        suppressHydrationWarning
                         onClick={() => setPackCount((prev) => Math.max(1, prev - 1))}
                         disabled={packCount <= 1}
                         aria-label="Decrease quantity"
@@ -287,6 +296,7 @@ export default function CloudManagementPage() {
                       </span>
                       <button
                         type="button"
+                        suppressHydrationWarning
                         onClick={() => setPackCount((prev) => Math.min(99, prev + 1))}
                         aria-label="Increase quantity"
                         className="w-7 h-7 rounded-full flex items-center justify-center text-ink/70 dark:text-white/70 hover:bg-ink/5 dark:hover:bg-white/10 transition-colors"
@@ -326,20 +336,23 @@ export default function CloudManagementPage() {
             </div>
           </Reveal>
 
-          {/* Custom Plan Inquiry */}
+          {/* Custom Plan Inquiry - Highlighted RFQ */}
           <Reveal delay={0.2}>
-            <div className="mt-6 rounded-2xl border border-ink/10 dark:border-white/10 bg-cream/20 dark:bg-[#121212] p-6 sm:p-7 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div>
-                <h3 className="text-base sm:text-lg font-semibold text-ink dark:text-white">
-                  Are You Looking For A Custom Plan?
+            <div className="mt-8 rounded-3xl border-2 border-[#FF8101]/40 bg-gradient-to-br from-[#FF8101]/10 via-[#FF8101]/[0.03] to-transparent dark:from-[#FF8101]/15 dark:via-[#141414] dark:to-[#101010] p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden shadow-lg shadow-[#FF8101]/5">
+              <div className="space-y-1.5 z-10 max-w-xl">
+                <h3 className="text-lg sm:text-xl font-bold text-ink dark:text-white">
+                  Looking For A Custom Plan?
                 </h3>
+                <p className="text-xs sm:text-sm text-muted-foreground dark:text-white/70 leading-relaxed">
+                  Tailored SLAs, dedicated systems engineering, and custom instance pricing suited to your multi-cloud architecture.
+                </p>
               </div>
               <a
                 href="#contact"
-                className="cursor-morph shrink-0 inline-flex items-center gap-2 rounded-full border border-ink/20 dark:border-white/20 bg-white dark:bg-transparent px-6 py-2 text-xs sm:text-sm font-medium text-ink dark:text-white hover:border-[#FF8101] hover:text-[#FF8101] dark:hover:border-[#FF8101] dark:hover:text-[#FF8101] transition-colors"
+                className="cursor-morph z-10 shrink-0 inline-flex items-center gap-2 rounded-full bg-[#FF8101] text-white px-7 py-3.5 text-sm font-semibold hover:bg-[#FF8101]/90 shadow-md shadow-[#FF8101]/20 transition-all hover:gap-3"
               >
                 <span>Request For Quote</span>
-                <ArrowRight size={14} />
+                <ArrowRight size={15} />
               </a>
             </div>
           </Reveal>
@@ -357,27 +370,29 @@ export default function CloudManagementPage() {
             </h2>
           </Reveal>
 
-          <div ref={industryGridRef} className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+          <div ref={industryGridRef} className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             {industryItems.map((ind, i) => (
-              <Reveal key={ind} delay={0.04 * i}>
+              <Reveal key={ind.title} delay={0.04 * i} className="h-full">
                 <ParticleBadge
                   enableStars={true}
                   clickEffect={true}
                   particleCount={4}
                   enableTilt={false}
-                  className="rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-[#151515] p-5 sm:p-6 flex items-center justify-between hover:border-[#FF8101]/40 transition-all cursor-pointer"
+                  className="h-full rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-[#151515] p-5 sm:p-6 flex items-center justify-between gap-4 hover:border-[#FF8101]/40 transition-all cursor-pointer group shadow-sm hover:shadow-md"
                 >
-                  <div className="flex items-center gap-3.5">
-                    <div className="w-9 h-9 rounded-xl bg-[#FF8101]/10 text-[#FF8101] flex items-center justify-center shrink-0">
-                      <Server size={16} />
+                  <div className="flex items-center gap-4 min-w-0 flex-1">
+                    <div className="w-11 h-11 rounded-xl bg-[#FF8101]/10 text-[#FF8101] flex items-center justify-center shrink-0 group-hover:bg-[#FF8101] group-hover:text-white transition-colors duration-200">
+                      <ind.icon size={19} />
                     </div>
-                    <span className="text-[15px] font-semibold text-ink dark:text-white">
-                      {ind}
+                    <span className="text-[15px] sm:text-[16px] font-semibold text-ink dark:text-white group-hover:text-[#FF8101] transition-colors leading-snug">
+                      {ind.title}
                     </span>
                   </div>
-                  <span className="text-[11px] font-mono text-muted-foreground dark:text-white/40">
-                    0{i + 1}
-                  </span>
+                  <div className="shrink-0 pl-3">
+                    <span className="inline-flex items-center justify-center w-8 h-8 rounded-full text-xs font-mono font-bold text-[#FF8101] bg-[#FF8101]/10 border border-[#FF8101]/25">
+                      {ind.count}
+                    </span>
+                  </div>
                 </ParticleBadge>
               </Reveal>
             ))}
@@ -473,6 +488,7 @@ export default function CloudManagementPage() {
                         />
                         <input
                           required
+                          suppressHydrationWarning
                           placeholder="Full name"
                           className="w-full rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40"
                         />
@@ -485,6 +501,7 @@ export default function CloudManagementPage() {
                         <input
                           required
                           type="email"
+                          suppressHydrationWarning
                           placeholder="Work email"
                           className="w-full rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40"
                         />
@@ -498,6 +515,7 @@ export default function CloudManagementPage() {
                       />
                       <input
                         placeholder="Company"
+                        suppressHydrationWarning
                         className="w-full rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-black/20 pl-11 pr-4 py-3 text-[13px] text-ink dark:text-white outline-none transition-all placeholder:text-ink/35 dark:placeholder:text-white/30 focus:border-[#FF8101]/50 focus:bg-white dark:focus:bg-black/40"
                       />
                     </div>
@@ -511,6 +529,7 @@ export default function CloudManagementPage() {
                         required
                         rows={4}
                         maxLength={500}
+                        suppressHydrationWarning
                         value={message}
                         onChange={(e) => setMessage(e.target.value)}
                         placeholder="Message"
@@ -528,6 +547,7 @@ export default function CloudManagementPage() {
 
                     <button
                       type="submit"
+                      suppressHydrationWarning
                       className="cursor-morph w-full rounded-full bg-[#FF8101] text-white py-3.5 px-6 text-[14px] font-semibold transition-all hover:bg-[#FF8101]/90 flex items-center justify-center gap-2"
                     >
                       {formSent ? 'Request Received' : 'Request For Quote'}
