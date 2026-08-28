@@ -53,7 +53,7 @@ export const navItems = [
         heading: 'Cloud Support',
         items: [
           { label: 'Cloud Management', desc: 'Full-stack cloud operations', icon: CloudCog, href: '/cloudmanagement' },
-          { label: 'AWS Support', desc: 'EC2, RDS, S3 & beyond', icon: Database, href: 'https://www.supportpro.com/aws-support.php' },
+          { label: 'AWS Support', desc: 'EC2, RDS, S3 & beyond', icon: Database, href: '/aws-management' },
           { label: 'Google Cloud', desc: 'GCP infrastructure managed', icon: Cloud, href: 'https://www.supportpro.com/google-cloud.php' },
           { label: 'Azure Support', desc: 'Microsoft Azure managed', icon: LayoutGrid, href: 'https://www.supportpro.com/azure-support.php' },
           { label: 'DevOps Support', desc: 'CI/CD & pipeline engineering', icon: GitMerge, href: 'https://www.supportpro.com/devops.php' },

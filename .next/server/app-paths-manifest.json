@@ -1,4 +1,5 @@
 {
   "/cloudmanagement/page": "app/cloudmanagement/page.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/aws-management/page": "app/aws-management/page.js"
 }
