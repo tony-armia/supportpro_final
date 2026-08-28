@@ -19,6 +19,7 @@
     "/cloudmanagement/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
+      "static/css/app/cloudmanagement/page.css",
       "static/chunks/app/cloudmanagement/page.js"
     ],
     "/page": [
@@ -30,7 +31,20 @@
     "/aws-management/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
+      "static/css/app/aws-management/page.css",
       "static/chunks/app/aws-management/page.js"
+    ],
+    "/nodemanagement/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/nodemanagement/page.css",
+      "static/chunks/app/nodemanagement/page.js"
+    ],
+    "/scanner/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/scanner/page.css",
+      "static/chunks/app/scanner/page.js"
     ]
   }
 }

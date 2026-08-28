@@ -27,6 +27,7 @@ import {
 } from 'lucide-react';
 import { Nav } from '@/components/nav';
 import { SiteFooter } from '@/components/footer';
+import ParticleBadge, { GlobalBadgeSpotlight } from '@/components/MagicBadge';
 import imgCloudServer from '@/assets/Cloud and server management, mastered..png';
 
 const getImageSrc = (img: any): string => {
@@ -65,6 +66,8 @@ export default function CloudManagementPage() {
   const [message, setMessage] = useState('');
   const [packCount, setPackCount] = useState(1);
   const [planSelected, setPlanSelected] = useState(true);
+  const solutionGridRef = useRef<HTMLDivElement>(null);
+  const industryGridRef = useRef<HTMLDivElement>(null);
 
   const solutionItems = [
     { num: '01', title: 'Secured infrastructure setup', icon: Lock },
@@ -176,8 +179,9 @@ export default function CloudManagementPage() {
       </section>
 
       {/* ─── Complete Cloud Management Solution ─────────────────────────────────── */}
-      <section className="py-16 sm:py-20 lg:py-28 bg-cream dark:bg-[var(--sp-bg)] border-b border-ink/10 dark:border-white/10">
-        <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
+      <section className="py-16 sm:py-20 lg:py-28 bg-cream dark:bg-[var(--sp-bg)] border-b border-ink/10 dark:border-white/10 relative">
+        <GlobalBadgeSpotlight gridRef={solutionGridRef} spotlightRadius={400} />
+        <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8 relative z-10">
           <Reveal>
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08] text-ink dark:text-white max-w-[820px] tracking-tight">
               SupportPRO provides a complete cloud management solution with
@@ -186,10 +190,16 @@ export default function CloudManagementPage() {
           </Reveal>
 
           {/* 7 Items Editorial Grid */}
-          <div className="mt-10 sm:mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div ref={solutionGridRef} className="mt-10 sm:mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {solutionItems.map((item, idx) => (
               <Reveal key={item.num} delay={0.05 * idx} className="h-full">
-                <div className="h-full rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-[#151515] p-6 sm:p-7 flex flex-col justify-between hover:border-[#FF8101]/40 transition-colors">
+                <ParticleBadge
+                  enableStars={true}
+                  clickEffect={true}
+                  particleCount={5}
+                  enableTilt={false}
+                  className="h-full rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-[#151515] p-6 sm:p-7 flex flex-col justify-between hover:border-[#FF8101]/40 transition-colors"
+                >
                   <div className="flex items-start gap-4">
                     <span className="text-[13px] font-mono font-bold text-[#FF8101] bg-[#FF8101]/10 px-2.5 py-1 rounded-full shrink-0">
                       {item.num}
@@ -198,7 +208,7 @@ export default function CloudManagementPage() {
                       {item.title}
                     </h3>
                   </div>
-                </div>
+                </ParticleBadge>
               </Reveal>
             ))}
 
@@ -337,8 +347,9 @@ export default function CloudManagementPage() {
       </section>
 
       {/* ─── Industry Solutions Section ────────────────────────────────────────── */}
-      <section className="py-16 sm:py-20 lg:py-28 bg-cream dark:bg-[var(--sp-bg)] border-b border-ink/10 dark:border-white/10">
-        <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
+      <section className="py-16 sm:py-20 lg:py-28 bg-cream dark:bg-[var(--sp-bg)] border-b border-ink/10 dark:border-white/10 relative">
+        <GlobalBadgeSpotlight gridRef={industryGridRef} spotlightRadius={400} />
+        <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8 relative z-10">
           <Reveal>
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08] text-ink dark:text-white tracking-tight">
               Industry Solutions
@@ -346,10 +357,16 @@ export default function CloudManagementPage() {
             </h2>
           </Reveal>
 
-          <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+          <div ref={industryGridRef} className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {industryItems.map((ind, i) => (
               <Reveal key={ind} delay={0.04 * i}>
-                <div className="rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-[#151515] p-5 sm:p-6 flex items-center justify-between hover:border-[#FF8101]/40 transition-all">
+                <ParticleBadge
+                  enableStars={true}
+                  clickEffect={true}
+                  particleCount={4}
+                  enableTilt={false}
+                  className="rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-[#151515] p-5 sm:p-6 flex items-center justify-between hover:border-[#FF8101]/40 transition-all cursor-pointer"
+                >
                   <div className="flex items-center gap-3.5">
                     <div className="w-9 h-9 rounded-xl bg-[#FF8101]/10 text-[#FF8101] flex items-center justify-center shrink-0">
                       <Server size={16} />
@@ -361,7 +378,7 @@ export default function CloudManagementPage() {
                   <span className="text-[11px] font-mono text-muted-foreground dark:text-white/40">
                     0{i + 1}
                   </span>
-                </div>
+                </ParticleBadge>
               </Reveal>
             ))}
           </div>

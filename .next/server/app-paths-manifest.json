@@ -1,5 +1,7 @@
 {
   "/cloudmanagement/page": "app/cloudmanagement/page.js",
   "/page": "app/page.js",
-  "/aws-management/page": "app/aws-management/page.js"
+  "/aws-management/page": "app/aws-management/page.js",
+  "/nodemanagement/page": "app/nodemanagement/page.js",
+  "/scanner/page": "app/scanner/page.js"
 }

@@ -62,7 +62,7 @@ export const navItems = [
       {
         heading: 'Server Administration',
         items: [
-          { label: 'Node Management', desc: 'Dedicated node monitoring', icon: Cpu, href: 'https://www.supportpro.com/node-management.php' },
+          { label: 'Node Management', desc: 'Dedicated node monitoring', icon: Cpu, href: '/nodemanagement' },
           { label: 'Dedicated Server', desc: 'Bare-metal server support', icon: Server, href: 'https://www.supportpro.com/dedicated-server-management.php' },
         ],
       },
@@ -103,7 +103,7 @@ export const navItems = [
         heading: 'Products',
         items: [
           { label: 'Server Manager Addon', desc: 'WHMCS marketplace plugin', badge: 'Popular', icon: Blocks, href: 'https://www.supportpro.com/server-manager-addon.php' },
-          { label: 'Server Scanner', desc: 'Automated vulnerability scanner', icon: ShieldCheck, href: 'https://www.supportpro.com/server-scanner.php' },
+          { label: 'Server Scanner', desc: 'Automated vulnerability scanner', icon: ShieldCheck, href: '/scanner' },
         ],
       },
     ],

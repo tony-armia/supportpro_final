@@ -53,10 +53,15 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function useTheme() {
+export function useTheme(): ThemeContextType {
   const context = useContext(ThemeContext);
   if (context === undefined) {
-    throw new Error("useTheme must be used within a ThemeProvider");
+    // Return a safe default fallback to prevent crashes during SSR / hydration
+    return {
+      theme: "dark",
+      setTheme: () => {},
+      mounted: false,
+    };
   }
   return context;
 }

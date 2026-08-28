@@ -37,6 +37,7 @@ import {
 } from 'lucide-react';
 import { Nav } from '@/components/nav';
 import { SiteFooter } from '@/components/footer';
+import ParticleBadge, { GlobalBadgeSpotlight } from '@/components/MagicBadge';
 import imgAwsInfrastructure from '@/assets/aws-cloud-infrastructure.jpg';
 import imgAwsManagementIcon from '@/assets/illustration/awsmanagementicon.png';
 
@@ -74,6 +75,8 @@ function Reveal({
 export default function AWSManagementPage() {
   const [formSent, setFormSent] = useState(false);
   const [message, setMessage] = useState('');
+  const awsGridRef = useRef<HTMLDivElement>(null);
+  const industryGridRef = useRef<HTMLDivElement>(null);
 
   const awsExtendsItems = [
     { num: '01', title: 'Secured infrastructure setup', icon: Lock },
@@ -194,8 +197,9 @@ export default function AWSManagementPage() {
       </section>
 
       {/* ─── SECTION 3: Our AWS Support Service extends to ─────────────────────── */}
-      <section className="py-16 sm:py-20 lg:py-28 bg-cream dark:bg-[var(--sp-bg)] border-b border-ink/10 dark:border-white/10">
-        <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
+      <section className="py-16 sm:py-20 lg:py-28 bg-cream dark:bg-[var(--sp-bg)] border-b border-ink/10 dark:border-white/10 relative">
+        <GlobalBadgeSpotlight gridRef={awsGridRef} spotlightRadius={400} />
+        <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8 relative z-10">
           <Reveal>
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08] text-ink dark:text-white max-w-[820px] tracking-tight mb-10 sm:mb-14">
               Our AWS Support Service extends to
@@ -204,12 +208,18 @@ export default function AWSManagementPage() {
           </Reveal>
 
           {/* 12 Items 2-Column Editorial Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+          <div ref={awsGridRef} className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
             {awsExtendsItems.map((item, idx) => {
               const IconComp = item.icon;
               return (
                 <Reveal key={item.num} delay={0.025 * idx} className="h-full">
-                  <div className="h-full rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-[#151515] p-5 sm:p-6 flex items-start gap-4 hover:border-[#FF8101]/40 transition-colors group">
+                  <ParticleBadge
+                    enableStars={true}
+                    clickEffect={true}
+                    particleCount={4}
+                    enableTilt={false}
+                    className="h-full rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-[#151515] p-5 sm:p-6 flex items-start gap-4 hover:border-[#FF8101]/40 transition-colors group cursor-pointer"
+                  >
                     <div className="w-10 h-10 rounded-xl bg-[#FF8101]/10 text-[#FF8101] flex items-center justify-center shrink-0 group-hover:bg-[#FF8101] group-hover:text-white transition-colors">
                       <IconComp size={18} />
                     </div>
@@ -223,7 +233,7 @@ export default function AWSManagementPage() {
                         {item.title}
                       </h3>
                     </div>
-                  </div>
+                  </ParticleBadge>
                 </Reveal>
               );
             })}
@@ -408,8 +418,9 @@ export default function AWSManagementPage() {
       </section>
 
       {/* ─── SECTION 6: Industry Solutions ─────────────────────────────────────── */}
-      <section className="py-16 sm:py-20 lg:py-28 bg-white dark:bg-[var(--sp-surface)]">
-        <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
+      <section className="py-16 sm:py-20 lg:py-28 bg-white dark:bg-[var(--sp-surface)] relative">
+        <GlobalBadgeSpotlight gridRef={industryGridRef} spotlightRadius={400} />
+        <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8 relative z-10">
           <Reveal>
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08] text-ink dark:text-white tracking-tight">
               Industry Solutions
@@ -417,12 +428,18 @@ export default function AWSManagementPage() {
             </h2>
           </Reveal>
 
-          <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+          <div ref={industryGridRef} className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {industryItems.map((ind, i) => {
               const IndIcon = ind.icon;
               return (
                 <Reveal key={ind.name} delay={0.04 * i}>
-                  <div className="rounded-2xl border border-ink/10 dark:border-white/10 bg-cream/40 dark:bg-[#151515] p-5 sm:p-6 flex items-center justify-between hover:border-[#FF8101]/40 transition-all">
+                  <ParticleBadge
+                    enableStars={true}
+                    clickEffect={true}
+                    particleCount={4}
+                    enableTilt={false}
+                    className="rounded-2xl border border-ink/10 dark:border-white/10 bg-cream/40 dark:bg-[#151515] p-5 sm:p-6 flex items-center justify-between hover:border-[#FF8101]/40 transition-all cursor-pointer"
+                  >
                     <div className="flex items-center gap-3.5">
                       <div className="w-9 h-9 rounded-xl bg-[#FF8101]/10 text-[#FF8101] flex items-center justify-center shrink-0">
                         <IndIcon size={16} />
@@ -434,7 +451,7 @@ export default function AWSManagementPage() {
                     <span className="text-[11px] font-mono text-muted-foreground dark:text-white/40">
                       0{i + 1}
                     </span>
-                  </div>
+                  </ParticleBadge>
                 </Reveal>
               );
             })}
