@@ -186,36 +186,64 @@ export default function HireADeveloperPage() {
             </div>
           </Reveal>
 
-          {/* 11 Items — Structured 2-column editorial grid */}
-          <div ref={capabilityGridRef} className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
-            {developmentRequests.map((item, idx) => (
-              <Reveal key={item.num} delay={0.02 * idx} className="h-full">
-                <ParticleBadge
-                  enableStars={true}
-                  clickEffect={true}
-                  particleCount={4}
-                  enableTilt={false}
-                  className="h-full rounded-2xl border border-ink/10 dark:border-white/10 bg-cream/40 dark:bg-[#151515] p-5 sm:p-6 flex items-start gap-4 sm:gap-5 hover:border-[#FF8101]/40 transition-all duration-300 group cursor-pointer shadow-sm hover:shadow-md"
-                >
-                  <div className="shrink-0 mt-0.5">
-                    <span className="inline-flex items-center justify-center w-8 h-8 rounded-full text-xs font-mono font-bold text-[#FF8101] bg-[#FF8101]/10 border border-[#FF8101]/25 group-hover:bg-[#FF8101] group-hover:text-white transition-colors">
-                      {item.num}
-                    </span>
-                  </div>
-                  <div className="flex-1 min-w-0 space-y-1.5">
-                    <h3 className="text-[14px] sm:text-[15px] font-semibold text-ink dark:text-white group-hover:text-[#FF8101] transition-colors leading-snug">
-                      {item.title}
-                    </h3>
-                    {item.detail && (
-                      <p className="text-xs sm:text-[13px] text-muted-foreground dark:text-white/60 leading-relaxed font-mono">
-                        {item.detail}
-                      </p>
-                    )}
-                  </div>
-                </ParticleBadge>
-              </Reveal>
-            ))}
-          </div>
+          {/* Unified Single Container for the 11 points */}
+          <Reveal delay={0.1}>
+            <div className="rounded-2xl sm:rounded-3xl border border-ink/10 dark:border-white/10 bg-cream/30 dark:bg-[#141414] overflow-hidden">
+              <div className="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-ink/10 dark:divide-white/10">
+                {/* Left Column (01 - 06) */}
+                <div className="divide-y divide-ink/10 dark:divide-white/10">
+                  {developmentRequests.slice(0, 6).map((item) => (
+                    <div
+                      key={item.num}
+                      className="flex items-start gap-4 p-5 sm:p-6 transition-colors hover:bg-[#FF8101]/[0.03] dark:hover:bg-white/[0.02] group"
+                    >
+                      <div className="shrink-0 mt-0.5">
+                        <span className="inline-flex items-center justify-center w-7 h-7 rounded-full text-xs font-mono font-bold text-[#FF8101] bg-[#FF8101]/10 border border-[#FF8101]/25 group-hover:bg-[#FF8101] group-hover:text-white transition-colors">
+                          {item.num}
+                        </span>
+                      </div>
+                      <div className="flex-1 min-w-0 space-y-1">
+                        <h3 className="text-[14px] sm:text-[15px] font-semibold text-ink dark:text-white group-hover:text-[#FF8101] transition-colors leading-snug">
+                          {item.title}
+                        </h3>
+                        {item.detail && (
+                          <p className="text-xs sm:text-[13px] text-muted-foreground dark:text-white/60 leading-relaxed font-mono">
+                            {item.detail}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Right Column (07 - 11) */}
+                <div className="divide-y divide-ink/10 dark:divide-white/10">
+                  {developmentRequests.slice(6, 11).map((item) => (
+                    <div
+                      key={item.num}
+                      className="flex items-start gap-4 p-5 sm:p-6 transition-colors hover:bg-[#FF8101]/[0.03] dark:hover:bg-white/[0.02] group"
+                    >
+                      <div className="shrink-0 mt-0.5">
+                        <span className="inline-flex items-center justify-center w-7 h-7 rounded-full text-xs font-mono font-bold text-[#FF8101] bg-[#FF8101]/10 border border-[#FF8101]/25 group-hover:bg-[#FF8101] group-hover:text-white transition-colors">
+                          {item.num}
+                        </span>
+                      </div>
+                      <div className="flex-1 min-w-0 space-y-1">
+                        <h3 className="text-[14px] sm:text-[15px] font-semibold text-ink dark:text-white group-hover:text-[#FF8101] transition-colors leading-snug">
+                          {item.title}
+                        </h3>
+                        {item.detail && (
+                          <p className="text-xs sm:text-[13px] text-muted-foreground dark:text-white/60 leading-relaxed font-mono">
+                            {item.detail}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
