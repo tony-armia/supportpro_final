@@ -48,9 +48,9 @@ export function SiteFooter() {
               </a>
             </div>
             <div>
-              <a href="/#faq" className="hover:text-[#FF8101] transition-colors">
+              <Link href="/#faq" className="hover:text-[#FF8101] transition-colors">
                 FAQ
-              </a>
+              </Link>
             </div>
             <div>
               <a href="https://www.supportpro.com/partners.php" target="_blank" rel="noreferrer" className="hover:text-[#FF8101] transition-colors">
