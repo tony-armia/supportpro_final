@@ -275,15 +275,13 @@ export function Nav() {
                           Free checkup
                         </a>
                       </div>
-                      <a
-                        href="https://www.supportpro.com/clientlogin.php"
+                      <Link
+                        href="/clientlogin"
                         onClick={() => setOpenMenu(null)}
-                        target="_blank"
-                        rel="noreferrer"
                         className="text-[12px] font-semibold text-[#FF8101] hover:brightness-110 transition-all flex items-center gap-1"
                       >
                         Login <ArrowRight size={11} />
-                      </a>
+                      </Link>
                     </div>
                   </motion.div>
                 )}
@@ -295,27 +293,23 @@ export function Nav() {
           <span className="mx-1 h-4 w-px bg-white/20 hidden sm:block" />
 
           {/* Sign Up — subtle outlined pill */}
-          <a
-            href="https://www.supportpro.com/signup.php"
-            target="_blank"
-            rel="noreferrer"
+          <Link
+            href="/signup"
             className="hidden md:block cursor-morph px-4 py-1.5 rounded-full text-white/90 hover:border-[#FF8101] hover:text-[#FF8101] transition-all duration-200 font-medium"
           >
             Sign up
-          </a>
+          </Link>
 
           {/* Divider */}
           <span className="mx-1 h-4 w-px bg-white/20 hidden md:block" />
 
           {/* Login CTA */}
-          <a
-            href="https://www.supportpro.com/clientlogin.php"
-            target="_blank"
-            rel="noreferrer"
+          <Link
+            href="/clientlogin"
             className="cursor-morph px-4 py-1.5 rounded-full bg-[#FF8101] text-white font-medium hover:brightness-110 transition-all duration-200"
           >
             Login
-          </a>
+          </Link>
 
           {/* Divider */}
           <span className="mx-1 h-4 w-px bg-white/20 hidden sm:block" />
@@ -443,22 +437,20 @@ export function Nav() {
               ))}
 
               <div className="flex flex-col gap-3 mt-4 pt-6 border-t border-ink/10 dark:border-white/10">
-                <a
-                  href="https://www.supportpro.com/clientlogin.php"
-                  target="_blank"
-                  rel="noreferrer"
+                <Link
+                  href="/clientlogin"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="w-full py-3 rounded-full bg-[#FF8101] text-white text-center font-medium"
                 >
                   Login
-                </a>
-                <a
-                  href="https://www.supportpro.com/signup.php"
-                  target="_blank"
-                  rel="noreferrer"
+                </Link>
+                <Link
+                  href="/signup"
+                  onClick={() => setMobileMenuOpen(false)}
                   className="w-full py-3 rounded-full border border-ink/20 dark:border-white/20 text-ink dark:text-white text-center font-medium"
                 >
                   Sign up
-                </a>
+                </Link>
               </div>
             </div>
           </motion.div>
