@@ -115,7 +115,7 @@ export const navItems = [
       {
         heading: 'Hire Talent',
         items: [
-          { label: 'Hire a Developer', desc: 'Vetted full-stack engineers', icon: Code, href: 'https://www.supportpro.com/hire-developer.php' },
+          { label: 'Hire a Developer', desc: 'Vetted full-stack engineers', icon: Code, href: '/hireadeveloper' },
           { label: 'Hire a Dev Team', desc: 'Complete project squads', icon: Briefcase, href: 'https://www.supportpro.com/hire-dev-team.php' },
         ],
       },
