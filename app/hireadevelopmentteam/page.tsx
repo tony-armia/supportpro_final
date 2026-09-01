@@ -15,7 +15,6 @@ import {
   Plus,
   Minus,
   Check,
-  ChevronDown,
 } from 'lucide-react';
 import { Nav } from '@/components/nav';
 import { SiteFooter } from '@/components/footer';
@@ -56,7 +55,6 @@ function Reveal({
 export default function HireADevelopmentTeamPage() {
   const [hoursCount, setHoursCount] = useState(1);
   const [selectedPlan, setSelectedPlan] = useState<number>(1);
-  const [faqOpen, setFaqOpen] = useState(true);
 
   const capabilityGridRef = useRef<HTMLDivElement>(null);
   const industryGridRef = useRef<HTMLDivElement>(null);
@@ -451,52 +449,8 @@ export default function HireADevelopmentTeamPage() {
         </div>
       </section>
 
-      {/* ─── SECTION 5: FAQ ───────────────────────────────────────────────────── */}
-      <section id="faq" className="py-16 sm:py-20 lg:py-28 bg-cream dark:bg-[var(--sp-bg)] border-b border-ink/10 dark:border-white/10">
-        <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
-          <Reveal>
-            <div className="flex items-center justify-between gap-4 mb-8 sm:mb-12">
-              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08] text-ink dark:text-white tracking-tight">
-                FAQ
-                <span className="text-[#FF8101]">.</span>
-              </h2>
-              <span className="text-xs font-mono text-muted-foreground dark:text-white/40">
-                Common Questions
-              </span>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <div className="max-w-[920px]">
-              <div className="rounded-2xl border border-ink/10 dark:border-white/10 bg-white dark:bg-[#141414] overflow-hidden">
-                <button
-                  type="button"
-                  onClick={() => setFaqOpen(!faqOpen)}
-                  className="w-full p-6 sm:p-8 text-left flex items-start justify-between gap-4 transition-colors hover:bg-black/[0.01] dark:hover:bg-white/[0.01]"
-                >
-                  <span className="text-[16px] sm:text-[17px] font-semibold text-ink dark:text-white leading-snug">
-                    How is &quot;Guaranteed assistance for 3.5 hours in a shift&quot; is achieved in Semi Dedicated Staff plan?
-                  </span>
-                  <span className={`shrink-0 w-8 h-8 rounded-full border border-ink/10 dark:border-white/10 flex items-center justify-center text-ink/70 dark:text-white/70 transition-transform duration-300 ${faqOpen ? 'rotate-180 text-[#FF8101] border-[#FF8101]/30' : ''}`}>
-                    <ChevronDown size={16} />
-                  </span>
-                </button>
-
-                {faqOpen && (
-                  <div className="px-6 sm:px-8 pb-6 sm:pb-8 pt-0 border-t border-ink/5 dark:border-white/5">
-                    <p className="pt-4 text-[14px] sm:text-[15px] leading-relaxed text-muted-foreground dark:text-white/70">
-                      In Semi Dedicated Staff plan a tech is assigned for 2 clients. Hence the tech will spent almost half of his shift time i.e. at least 3.5 hours completely dedicated to one client. The same tech may spent more time if the other client has no issues in queue.
-                    </p>
-                  </div>
-                )}
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ─── SECTION 6: Contact Us ────────────────────────────────────────────── */}
-      <section id="contact" className="py-16 sm:py-20 lg:py-28 bg-white dark:bg-[var(--sp-surface)] border-b border-ink/10 dark:border-white/10">
+      {/* ─── SECTION 5: Contact Us ────────────────────────────────────────────── */}
+      <section id="contact" className="py-16 sm:py-20 lg:py-28 bg-cream dark:bg-[var(--sp-bg)] border-b border-ink/10 dark:border-white/10">
         <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
           <Reveal>
             <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08] text-ink dark:text-white tracking-tight mb-10 sm:mb-14">
@@ -558,8 +512,8 @@ export default function HireADevelopmentTeamPage() {
         </div>
       </section>
 
-      {/* ─── SECTION 7: Industry Solutions ─────────────────────────────────────── */}
-      <section className="py-16 sm:py-20 lg:py-28 bg-cream dark:bg-[var(--sp-bg)] relative">
+      {/* ─── SECTION 6: Industry Solutions ─────────────────────────────────────── */}
+      <section className="py-16 sm:py-20 lg:py-28 bg-white dark:bg-[var(--sp-surface)] relative">
         <GlobalBadgeSpotlight gridRef={industryGridRef} spotlightRadius={400} />
         <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8 relative z-10">
           <Reveal>

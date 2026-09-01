@@ -32,7 +32,7 @@ import {
 import { Nav } from '@/components/nav';
 import { SiteFooter } from '@/components/footer';
 import ParticleBadge, { GlobalBadgeSpotlight } from '@/components/MagicBadge';
-import imgNodeVirtualization from '@/assets/node-server-virtualization.jpg';
+import imgNodeVirtualization from '@/assets/node-server-virtualization.png';
 import imgNodeManagementIcon from '@/assets/illustration/nodemanagementicon.png';
 
 const getImageSrc = (img: any): string => {
@@ -149,15 +149,13 @@ export default function NodeManagementPage() {
             </div>
 
             {/* Right Visual Image */}
-            <div className="lg:col-span-5">
-              <Reveal delay={0.2}>
-                <div className="relative rounded-3xl overflow-hidden border border-ink/10 dark:border-white/15 bg-white/40 dark:bg-white/[0.02] p-2.5 sm:p-3">
-                  <img
-                    src={getImageSrc(imgNodeVirtualization)}
-                    alt="Node Management Virtualization"
-                    className="w-full h-auto object-cover rounded-2xl border border-ink/5 dark:border-white/10 aspect-[4/3]"
-                  />
-                </div>
+            <div className="lg:col-span-5 flex items-center justify-center">
+              <Reveal delay={0.2} className="w-full flex justify-center">
+                <img
+                  src={getImageSrc(imgNodeVirtualization)}
+                  alt="Node Management Virtualization"
+                  className="w-full max-w-[480px] h-auto object-contain transition-transform duration-300 hover:scale-[1.02]"
+                />
               </Reveal>
             </div>
           </div>
