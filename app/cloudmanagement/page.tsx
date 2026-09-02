@@ -32,6 +32,7 @@ import { Nav } from '@/components/nav';
 import { SiteFooter } from '@/components/footer';
 import ParticleBadge, { GlobalBadgeSpotlight } from '@/components/MagicBadge';
 import cloudMgmtIllustration from '@/assets/illustration/cloudmanagementicon.png';
+import imgCloudServices from '@/assets/illustration/cloudmanagementicon1.png';
 
 const getImageSrc = (img: any): string => {
   if (!img) return '';
@@ -98,38 +99,54 @@ export default function CloudManagementPage() {
       {/* ─── Hero Section ──────────────────────────────────────────────────────── */}
       <section className="relative pt-32 sm:pt-40 lg:pt-48 pb-16 sm:pb-24 lg:pb-28 overflow-hidden border-b border-ink/10 dark:border-white/10">
         <div className="relative mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
-          <Reveal>
-            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-[72px] leading-[1.04] text-ink dark:text-white tracking-tight max-w-[850px]">
-              Cloud Management
-              <span className="text-[#FF8101]">.</span>
-            </h1>
-          </Reveal>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 items-center">
+            {/* Left Content */}
+            <div className="lg:col-span-7 space-y-6">
+              <Reveal>
+                <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-[72px] leading-[1.04] text-ink dark:text-white tracking-tight">
+                  Cloud Management
+                  <span className="text-[#FF8101]">.</span>
+                </h1>
+              </Reveal>
 
-          <Reveal delay={0.1}>
-            <p className="mt-5 sm:mt-6 text-[15px] sm:text-[16px] md:text-[17px] leading-relaxed text-ink/75 dark:text-white/70 max-w-[760px] font-normal">
-              SupportPRO Cloud Management Services help define, deploy, and leverage simplified, automated cloud
-              management systems across multiple platforms and providers. We help our customers build cloud operations
-              frameworks that provide for the management of public, private, and hybrid cloud environments.
-            </p>
-          </Reveal>
+              <Reveal delay={0.1}>
+                <p className="text-[15px] sm:text-[16px] md:text-[17px] leading-relaxed text-ink/75 dark:text-white/70 max-w-[640px] font-normal">
+                  SupportPRO Cloud Management Services help define, deploy, and leverage simplified, automated cloud
+                  management systems across multiple platforms and providers. We help our customers build cloud operations
+                  frameworks that provide for the management of public, private, and hybrid cloud environments.
+                </p>
+              </Reveal>
 
-          <Reveal delay={0.2}>
-            <div className="mt-8 sm:mt-10 flex flex-wrap items-center gap-4">
-              <a
-                href="#plans"
-                className="cursor-morph inline-flex items-center gap-2 rounded-full bg-[#FF8101] text-white px-6 sm:px-7 py-3 text-sm font-medium hover:bg-[#FF8101]/90 transition-colors"
-              >
-                <span>Available Plans</span>
-                <ArrowRight size={15} />
-              </a>
-              <a
-                href="#contact"
-                className="cursor-morph inline-flex items-center gap-2 rounded-full border border-ink/15 dark:border-white/15 bg-white/50 dark:bg-white/5 px-6 sm:px-7 py-3 text-sm font-medium text-ink dark:text-white hover:border-[#FF8101] hover:text-[#FF8101] dark:hover:border-[#FF8101] dark:hover:text-[#FF8101] transition-colors"
-              >
-                <span>Contact Us</span>
-              </a>
+              <Reveal delay={0.2}>
+                <div className="pt-2 flex flex-wrap items-center gap-4">
+                  <a
+                    href="#plans"
+                    className="cursor-morph inline-flex items-center gap-2 rounded-full bg-[#FF8101] text-white px-6 sm:px-7 py-3 text-sm font-medium hover:bg-[#FF8101]/90 transition-colors"
+                  >
+                    <span>Available Plans</span>
+                    <ArrowRight size={15} />
+                  </a>
+                  <a
+                    href="#contact"
+                    className="cursor-morph inline-flex items-center gap-2 rounded-full border border-ink/15 dark:border-white/15 bg-white/50 dark:bg-white/5 px-6 sm:px-7 py-3 text-sm font-medium text-ink dark:text-white hover:border-[#FF8101] hover:text-[#FF8101] dark:hover:border-[#FF8101] dark:hover:text-[#FF8101] transition-colors"
+                  >
+                    <span>Contact Us</span>
+                  </a>
+                </div>
+              </Reveal>
             </div>
-          </Reveal>
+
+            {/* Right Visual Image */}
+            <div className="lg:col-span-5 flex items-center justify-center">
+              <Reveal delay={0.2} className="w-full flex justify-center">
+                <img
+                  src={getImageSrc(cloudMgmtIllustration)}
+                  alt="Cloud Management Services Illustration"
+                  className="w-full max-w-[480px] h-auto object-contain transition-transform duration-300 hover:scale-[1.02]"
+                />
+              </Reveal>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -137,8 +154,19 @@ export default function CloudManagementPage() {
       <section id="services" className="py-16 sm:py-20 lg:py-28 bg-white dark:bg-[var(--sp-surface)] border-b border-ink/10 dark:border-white/10">
         <div className="mx-auto max-w-[1152px] px-5 md:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 lg:gap-16 items-center">
-            {/* Content Column */}
-            <div className="lg:col-span-6 space-y-5">
+            {/* Visual Image Column (Left) */}
+            <div className="lg:col-span-5 order-2 lg:order-1 flex items-center justify-center">
+              <Reveal delay={0.1} className="w-full flex justify-center">
+                <img
+                  src={getImageSrc(imgCloudServices)}
+                  alt="Cloud Management Services"
+                  className="w-full max-w-[340px] sm:max-w-[380px] h-auto object-contain transition-transform duration-300 hover:scale-[1.02]"
+                />
+              </Reveal>
+            </div>
+
+            {/* Content Column (Right) */}
+            <div className="lg:col-span-7 order-1 lg:order-2 space-y-6">
               <Reveal>
                 <h2 className="font-display text-3xl sm:text-4xl md:text-5xl leading-[1.08] text-ink dark:text-white tracking-tight">
                   Cloud Management Services
@@ -147,7 +175,7 @@ export default function CloudManagementPage() {
               </Reveal>
 
               <Reveal delay={0.1}>
-                <p className="text-[14px] sm:text-[15px] leading-relaxed text-muted-foreground dark:text-white/70">
+                <p className="text-[14px] sm:text-[15px] md:text-[16px] leading-relaxed text-muted-foreground dark:text-white/70">
                   Cloud Management Services is essential to protect cloud services from its vulnerabilities. We monitor
                   and maintain the cloud services to ensure high uptime, security and speed. In case of any unscheduled
                   downtime, the services are restored within no time as we provide 24X7 support by employing the best-
@@ -156,23 +184,12 @@ export default function CloudManagementPage() {
               </Reveal>
 
               <Reveal delay={0.2}>
-                <p className="text-[14px] sm:text-[15px] leading-relaxed text-muted-foreground dark:text-white/70">
+                <p className="text-[14px] sm:text-[15px] md:text-[16px] leading-relaxed text-muted-foreground dark:text-white/70">
                   We also make sure that the cloud servers are updated with important security patches and take care of
                   optimizing your servers for the best possible performance. You will get the optimized, secure and
                   proactively monitored services for server management, which deliver differentiated and incremental
                   value to your business.
                 </p>
-              </Reveal>
-            </div>
-
-            {/* Image Visual Column */}
-            <div className="lg:col-span-6 flex justify-center items-center">
-              <Reveal delay={0.2} className="w-full flex justify-center">
-                <img
-                  src={getImageSrc(cloudMgmtIllustration)}
-                  alt="Cloud Management Services Illustration"
-                  className="w-full max-w-[480px] h-auto object-contain transition-transform duration-300 hover:scale-[1.02]"
-                />
               </Reveal>
             </div>
           </div>
