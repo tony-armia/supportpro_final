@@ -396,10 +396,10 @@ function Counter({ to, decimals = 0 }: { to: number; decimals?: number }) {
   );
 }
 
-const stats = [
+const stats: { to: number; decimals?: number; label: string; Icon: any }[] = [
   { to: 965422, label: "Helpdesk tickets handled", Icon: Calendar },
   { to: 456343, label: "Live chats attended", Icon: Headset },
-  { to: 5.1, decimals: 1, label: "Average resolution hours", Icon: Clock },
+  { to: 1, label: "Average resolution hours", Icon: Clock },
   { to: 15, label: "Average response minutes", Icon: Zap },
 ];
 
