@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/hero.jpg',
+        url: '/hero.png',
         width: 1200,
         height: 630,
         alt: 'SupportPRO Managed IT & Technical Support',
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: 'SupportPRO — Managed IT & 24/7 Technical Support',
     description:
       'SupportPRO delivers 24/7 technical support, cloud and server management, NOC, DevOps, and white-label MSP services trusted by hosting providers and enterprises worldwide.',
-    images: ['/hero.jpg'],
+    images: ['/hero.png'],
   },
 };
 

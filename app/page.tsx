@@ -47,7 +47,8 @@ import { Nav } from "@/components/nav";
 import { SiteFooter } from "@/components/footer";
 import { useTheme } from "@/context/ThemeContext";
 import { HoverOrangeSpan } from "@/components/hover-orange-span";
-import heroImg from "@/assets/hero.jpg";
+import { YearsOfExcellenceBadge } from "@/components/years-of-excellence-badge";
+import heroImg from "@/assets/hero.png";
 import talkImg from "@/assets/talk.jpg";
 import ctaImg from "@/assets/cta.jpg";
 import sliderEngineer from "@/assets/slider-engineer.jpg";
@@ -212,7 +213,7 @@ function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <section ref={ref} className="relative h-[100svh] min-h-[720px] sm:min-h-[820px] md:min-h-[880px] lg:min-h-[920px] w-full overflow-hidden">
+    <section ref={ref} className="relative h-[100svh] min-h-[600px] w-full overflow-hidden">
       <motion.img
         src={getImageSrc(heroImg)}
         alt=""
@@ -223,17 +224,20 @@ function Hero() {
         fetchPriority="high"
         decoding="sync"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/25 to-black/80" />
-      <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+      {/* Dark overlay layers for enhanced contrast and depth */}
+      <div className="absolute inset-0 bg-black/15" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/45 to-black/90" />
+      <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
       <motion.div
         style={{ y: textY, opacity }}
-        className="relative z-10 mx-auto flex h-full max-w-[1152px] flex-col items-center justify-center pt-24 pb-20 px-5 text-center text-white md:px-6 lg:px-8 lg:pt-28 lg:pb-24"
+        className="relative z-10 mx-auto flex h-full max-w-[1152px] flex-col items-center justify-center pt-14 pb-8 sm:pt-16 sm:pb-10 px-5 text-center text-white md:px-6 lg:px-8"
       >
+        <YearsOfExcellenceBadge className="mb-4 sm:mb-5" />
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-[80px] leading-[0.95] max-w-4xl drop-shadow-[0_2px_20px_rgba(0,0,0,0.35)] break-words"
+          className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-[72px] leading-[0.98] max-w-4xl drop-shadow-[0_2px_20px_rgba(0,0,0,0.35)] break-words"
         >
           Enterprise infrastructure
           <br />
@@ -243,27 +247,26 @@ function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mt-6 max-w-xl text-[14px] md:text-[15px] font-light text-white/90 dark:text-white/75 leading-relaxed"
+          className="mt-4 sm:mt-5 max-w-xl text-[15px] md:text-[16px] font-normal text-white/95 dark:text-white/90 leading-relaxed"
         >
-          SupportPRO delivers 24/7 managed infrastructure, cloud operations, server administration,
-          DevOps, and white-label technical support for hosting providers, SaaS companies, MSPs, and
-          enterprises.
+          Specialising in <strong className="font-semibold text-white">DevOps &amp; web hosting support</strong>.
+          We deliver 24/7 managed infrastructure, cloud operations, and white-label support — keeping your systems secure, fast, and always online.
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-6 flex flex-wrap items-center justify-center gap-3"
+          className="mt-5 sm:mt-6 flex flex-wrap items-center justify-center gap-3.5"
         >
           <a
             href="#contact-form"
-            className="cursor-morph rounded-full bg-[#FF8101] text-white px-5 py-2.5 text-[13px] font-medium hover:brightness-110 transition-all duration-200"
+            className="cursor-morph rounded-full bg-[#FF8101] text-white px-6 py-3 text-sm font-medium hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF8101] focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-all duration-200"
           >
             Book a Consultation
           </a>
           <a
             href="#services"
-            className="cursor-morph rounded-full border border-white/30 dark:border-white/25 backdrop-blur-md bg-white/10 dark:bg-white/[8%] text-white px-5 py-2.5 text-[13px] font-medium hover:bg-white/20 dark:hover:bg-white/[14%] dark:hover:border-white/40 transition-all duration-200"
+            className="cursor-morph rounded-full border border-white/30 dark:border-white/25 backdrop-blur-md bg-white/10 dark:bg-white/[8%] text-white px-6 py-3 text-sm font-medium hover:bg-white/20 dark:hover:bg-white/[14%] dark:hover:border-white/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-all duration-200"
           >
             Explore Services
           </a>
@@ -272,9 +275,9 @@ function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.9 }}
-          className="mt-6 text-xs md:text-sm text-white/60 max-w-lg"
+          className="mt-4 sm:mt-5 text-sm text-white/80 max-w-lg"
         >
-          Trusted by hosts, MSPs, and enterprise teams across every major cloud.
+          Trusted by hosting companies and businesses worldwide, with 23+ years of technical support experience.
         </motion.p>
       </motion.div>
     </section>
@@ -456,32 +459,32 @@ function Services() {
 
 const stickyBlocks = [
   {
-    title: "24/7 customer support — always on.",
-    body: "Our engineers are at your service 24 hours a day, seven days a week, 365 days a year. We listen to every server problem, address every query, and stay with it until you are completely satisfied.",
-    img: img247Support,
-    alt: "Support engineer monitoring live tickets and analytics dashboards in a bright modern office",
-    caption: "Live incident response",
-  },
-  {
-    title: "Transparent technical support.",
-    body: "White-labelled support means your clients never know somebody outside your company handles their queries. As far as they are concerned, every response comes from your organisation. Our techs become your techs.",
-    img: imgWhiteLabel,
-    alt: "Two professionals collaborating on a laptop with analytics monitors in the background",
-    caption: "Helpdesk under your brand",
-  },
-  {
-    title: "Proactive server management.",
-    body: "We look after the most fragile part of your operation — your infrastructure. Rather than waiting for something to break, we take preventive measures to keep environments secure, patched, and stable.",
-    img: imgCloudServer,
-    alt: "Engineer with tablet managing server racks in a modern data centre facility",
-    caption: "Managed infrastructure",
-  },
-  {
     title: "NOC and DevOps engineered for scale.",
-    body: "Continuous monitoring, automation, and incident response designed to keep complex infrastructure stable, secure, and ready to grow.",
+    body: "Continuous infrastructure monitoring, automated CI/CD pipelines, container orchestration, and 24/7 incident response built to keep complex hosting environments and cloud workloads stable, secure, and ready to grow.",
     img: imgNocDevops,
     alt: "Engineers at multi-monitor NOC workstations with cloud architecture and DevOps dashboards",
-    caption: "24/7 NOC monitoring",
+    caption: "24/7 NOC & DevOps",
+  },
+  {
+    title: "Proactive hosting and server management.",
+    body: "Enterprise server administration tailored for web hosts, SaaS, and MSPs. From bare-metal and cloud clusters to cPanel, Plesk, Linux, and Windows — maintained with continuous security hardening, kernel patches, and zero-downtime updates.",
+    img: imgCloudServer,
+    alt: "Engineer with tablet managing server racks in a modern data centre facility",
+    caption: "Managed hosting infrastructure",
+  },
+  {
+    title: "24/7 hosting support — always on.",
+    body: "Round-the-clock technical support for web hosting companies and cloud platforms. Our certified engineers listen to every server alert, troubleshoot customer tickets, and stay on duty 24/7/365 until incidents are fully resolved.",
+    img: img247Support,
+    alt: "Support engineer monitoring live tickets and analytics dashboards in a bright modern office",
+    caption: "Live hosting incident response",
+  },
+  {
+    title: "Transparent white-label hosting support.",
+    body: "White-labelled Tier 1 to Tier 3 support where your hosting clients never know an external team handles their queries. Every response is delivered under your brand, ticketing system, and voice. Our engineers become your team.",
+    img: imgWhiteLabel,
+    alt: "Two professionals collaborating on a laptop with analytics monitors in the background",
+    caption: "White-label for hosting providers",
   },
 ] as const;
 
@@ -621,7 +624,7 @@ function StickyPhoneSection() {
             {stickyBlocks.map((_, i) => (
               <div
                 key={i}
-                className={`h-1 rounded-full transition-all duration-500 ${active === i ? "w-7 bg-ink" : "w-1.5 bg-ink/25"}`}
+                className={`h-1 rounded-full transition-all duration-500 ${active === i ? "w-7 bg-ink dark:bg-white" : "w-1.5 bg-ink/25 dark:bg-white/30"}`}
               />
             ))}
           </div>

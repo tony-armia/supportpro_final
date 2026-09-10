@@ -83,8 +83,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "SupportPRO — Managed IT & 24/7 Technical Support" },
       { name: "twitter:description", content: "SupportPRO delivers 24/7 technical support, cloud and server management, NOC, DevOps, and white-label MSP services trusted by hosting providers and enterprises worldwide." },
-      { property: "og:image", content: "/hero.jpg" },
-      { name: "twitter:image", content: "/hero.jpg" },
+      { property: "og:image", content: "/hero.png" },
+      { name: "twitter:image", content: "/hero.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
