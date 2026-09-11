@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, type ReactNode } from "react";
+import { useState, useRef, useEffect, type ReactNode } from "react";
 import {
   motion,
   useScroll,
@@ -206,26 +206,62 @@ function Word({
 
 function Hero() {
   const ref = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isLoopDipping, setIsLoopDipping] = useState(false);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
   const textY = useTransform(scrollYProgress, [0, 1], [0, -80]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.defaultMuted = true;
+    video.muted = true;
+    video.play().catch(() => {});
+
+    const handleTimeUpdate = () => {
+      const { currentTime, duration } = video;
+      if (!duration) return;
+      const dipLeadTime = 0.6;
+      if (currentTime >= duration - dipLeadTime) {
+        setIsLoopDipping(true);
+      } else if (currentTime >= 0.25 && currentTime < duration - dipLeadTime) {
+        setIsLoopDipping(false);
+      }
+    };
+
+    video.addEventListener("timeupdate", handleTimeUpdate);
+    return () => {
+      video.removeEventListener("timeupdate", handleTimeUpdate);
+    };
+  }, []);
+
   return (
     <section ref={ref} className="relative h-[100svh] min-h-[600px] w-full overflow-hidden">
-      <motion.img
-        src={getImageSrc(heroImg)}
-        alt=""
+      <motion.video
+        ref={videoRef}
+        src="/herovideo.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
         style={{ y, scale, willChange: "transform" }}
         className="absolute inset-0 h-full w-full object-cover parallax-img"
-        width={1600}
-        height={1008}
-        fetchPriority="high"
-        decoding="sync"
+      >
+        <source src="/herovideo.mp4" type="video/mp4" />
+      </motion.video>
+      {/* Cinematic Dip-to-Dark transition masking the video loop point */}
+      <div
+        className={`absolute inset-0 bg-black pointer-events-none transition-opacity duration-500 ease-in-out ${
+          isLoopDipping ? "opacity-100" : "opacity-0"
+        }`}
       />
       {/* Dark overlay layers for enhanced contrast and depth */}
-      <div className="absolute inset-0 bg-black/15" />
+      <div className="absolute inset-0 bg-black/60" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/45 to-black/90" />
       <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/85 via-black/40 to-transparent" />
       <motion.div
