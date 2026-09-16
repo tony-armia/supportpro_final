@@ -113,8 +113,8 @@ export function HeroWrapper({ initialHero }: { initialHero?: number }) {
         {currentHero === 4 && <HeroSection4 />}
       </div>
 
-      {/* Very compact floating dropdown selection at bottom right */}
-      <div ref={dropdownRef} className="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-40">
+      {/* Very compact floating dropdown selection at bottom left */}
+      <div ref={dropdownRef} className="fixed bottom-4 left-4 sm:bottom-5 sm:left-5 z-40">
         <div className="relative">
           {/* Dropdown Menu (Pops upward) */}
           <AnimatePresence>
@@ -124,7 +124,7 @@ export function HeroWrapper({ initialHero }: { initialHero?: number }) {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 6, scale: 0.95 }}
                 transition={{ duration: 0.15 }}
-                className="absolute bottom-[calc(100%+8px)] right-0 w-48 rounded-2xl bg-[#141820]/95 backdrop-blur-xl border border-white/15 p-1.5 shadow-2xl shadow-black/80 overflow-hidden text-white"
+                className="absolute bottom-[calc(100%+8px)] left-0 w-48 rounded-2xl bg-[#141820]/95 backdrop-blur-xl border border-white/15 p-1.5 shadow-2xl shadow-black/80 overflow-hidden text-white"
               >
                 <div className="px-2.5 py-1 text-[10px] uppercase font-mono tracking-wider text-white/40 border-b border-white/10 mb-1">
                   Hero Variant

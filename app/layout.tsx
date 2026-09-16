@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Providers } from './providers';
 import { CustomCursor } from '@/components/custom-cursor';
+import { Chatbot } from '@/components/chatbot';
 
 export const metadata: Metadata = {
   title: 'SupportPRO — Managed IT & 24/7 Technical Support',
@@ -59,6 +60,7 @@ export default function RootLayout({
         <Providers>
           <CustomCursor />
           {children}
+          <Chatbot />
         </Providers>
       </body>
     </html>
