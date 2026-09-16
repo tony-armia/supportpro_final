@@ -34,6 +34,11 @@ import {
   ArrowRight,
   Menu,
   X,
+  Sparkles,
+  Terminal,
+  Layers,
+  Sliders,
+  Award,
 } from 'lucide-react';
 import { useTheme } from '@/context/ThemeContext';
 import logoWhite from '@/assets/SupportPRO-logo (1) 1.svg';
@@ -117,6 +122,15 @@ export const navItems = [
         items: [
           { label: 'Hire a Developer', desc: 'Vetted full-stack engineers', icon: Code, href: '/hireadeveloper' },
           { label: 'Hire a Dev Team', desc: 'Complete project squads', icon: Briefcase, href: '/hireadevelopmentteam' },
+        ],
+      },
+      {
+        heading: 'Hero Section Variations',
+        items: [
+          { label: 'Hero Section 1', desc: 'Cinematic video ambient & 23+ yrs badge', badge: 'Default', icon: Sparkles, href: '/?hero=1' },
+          { label: 'Hero Section 2', desc: 'Location details & bottom-left exp badge', badge: 'Updated', icon: Award, href: '/?hero=2' },
+          { label: 'Hero Section 3', desc: 'Holographic 3D cloud & solution switcher', badge: 'CloudOps', icon: Layers, href: '/?hero=3' },
+          { label: 'Hero Section 4', desc: 'Executive split with coverage estimator', badge: 'Interactive', icon: Sliders, href: '/?hero=4' },
         ],
       },
     ],
@@ -225,7 +239,15 @@ export function Nav() {
                                 <LinkComponent
                                   key={it.label}
                                   {...(linkProps as any)}
-                                  onClick={() => setOpenMenu(null)}
+                                  onClick={() => {
+                                    setOpenMenu(null);
+                                    if (it.href?.includes('hero=')) {
+                                      const heroNum = it.href.split('hero=')[1];
+                                      if (typeof window !== 'undefined') {
+                                        window.dispatchEvent(new CustomEvent('supportpro:switch-hero', { detail: heroNum }));
+                                      }
+                                    }
+                                  }}
                                   className="group flex items-start gap-3 px-3 py-2.5 rounded-xl hover:bg-[#FF8101]/6 dark:hover:bg-[#FF8101]/10 transition-all duration-150"
                                 >
                                   <div className="mt-0.5 w-7 h-7 rounded-lg bg-[#FF8101]/10 dark:bg-[#FF8101]/15 flex items-center justify-center shrink-0 group-hover:bg-[#FF8101]/20 transition-colors text-[#FF8101]">
@@ -423,7 +445,15 @@ export function Nav() {
                               key={it.label}
                               {...(linkProps as any)}
                               className="text-[14px] text-ink/80 dark:text-white/80 py-1.5 flex items-center gap-2"
-                              onClick={() => setMobileMenuOpen(false)}
+                              onClick={() => {
+                                setMobileMenuOpen(false);
+                                if (it.href?.includes('hero=')) {
+                                  const heroNum = it.href.split('hero=')[1];
+                                  if (typeof window !== 'undefined') {
+                                    window.dispatchEvent(new CustomEvent('supportpro:switch-hero', { detail: heroNum }));
+                                  }
+                                }
+                              }}
                             >
                               <it.icon size={14} className="text-[#FF8101]" />
                               {it.label}
