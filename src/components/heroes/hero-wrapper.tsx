@@ -26,9 +26,9 @@ export const HERO_VARIANTS = [
   },
   {
     id: 3,
-    title: 'Hero 3: Cloud Architecture',
+    title: 'Hero 3: Platform Offerings Slider',
     shortLabel: 'Hero 3',
-    tagline: 'Interactive 3-pillar solution switcher',
+    tagline: 'Smooth interactive slider with DevOps, Support & Hosting',
     icon: Layers,
   },
   {

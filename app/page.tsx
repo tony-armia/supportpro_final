@@ -216,25 +216,26 @@ function Hero() {
 
 function ConditionalCredentials() {
   const searchParams = useSearchParams();
-  const [hero, setHero] = useState<number>(() => {
-    if (typeof window !== 'undefined') {
-      const sp = new URLSearchParams(window.location.search).get('hero');
-      if (sp) return Number(sp);
-    }
-    return 1;
-  });
+  const fromUrl = searchParams.get('hero');
+  const initialHero = fromUrl && [1, 2, 3, 4].includes(Number(fromUrl)) ? Number(fromUrl) : 1;
+
+  const [hero, setHero] = useState<number>(initialHero);
 
   useEffect(() => {
-    const fromUrl = searchParams.get('hero');
-    if (fromUrl) {
+    if (fromUrl && [1, 2, 3, 4].includes(Number(fromUrl))) {
       setHero(Number(fromUrl));
     }
+  }, [fromUrl]);
+
+  useEffect(() => {
     const handleSwitch = (e: any) => {
-      if (e.detail) setHero(Number(e.detail));
+      if (e.detail && [1, 2, 3, 4].includes(Number(e.detail))) {
+        setHero(Number(e.detail));
+      }
     };
     window.addEventListener('supportpro:switch-hero', handleSwitch);
     return () => window.removeEventListener('supportpro:switch-hero', handleSwitch);
-  }, [searchParams]);
+  }, []);
 
   // When Hero 2 is active, certificates and location are already placed inside Hero 2,
   // so do not repeat the separate Credentials section below it!

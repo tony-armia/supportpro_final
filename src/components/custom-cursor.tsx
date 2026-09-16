@@ -61,13 +61,19 @@ export function CustomCursor() {
 
     const handleMouseOver = (event: MouseEvent) => {
       const eventTarget = event.target as HTMLElement | null;
-      if (eventTarget?.closest("#faq")) {
+      if (eventTarget?.closest("#faq, .no-cursor-morph, [data-no-cursor-morph], .hero-nav-arrow")) {
         activeElement = null;
         updateBounds();
         return;
       }
 
       const element = eventTarget?.closest<HTMLElement>(TARGET_SELECTOR);
+      if (element?.closest(".no-cursor-morph, [data-no-cursor-morph], .hero-nav-arrow")) {
+        activeElement = null;
+        updateBounds();
+        return;
+      }
+
       if (element !== activeElement) {
         activeElement = element || null;
         updateBounds();

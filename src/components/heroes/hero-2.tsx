@@ -132,15 +132,16 @@ export function HeroSection2() {
           support that <HoverOrangeSpan>never sleeps.</HoverOrangeSpan>
         </motion.h1>
 
-        {/* Subtitle with increased width */}
+        {/* Combined subtitle: service proposition + trust signal */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="mt-4 sm:mt-5 max-w-3xl text-[15px] sm:text-[16px] md:text-[17px] font-normal text-white/95 dark:text-white/90 leading-relaxed"
+          className="mt-4 sm:mt-5 max-w-2xl text-[15px] sm:text-[16px] font-normal text-white/85 leading-relaxed"
         >
-          Specialising in <strong className="font-semibold text-white">DevOps &amp; web hosting support</strong>.
-          We deliver 24/7 managed infrastructure, cloud operations, and white-label support — keeping your systems secure, fast, and always online.
+          24/7 managed infrastructure, cloud operations, and white-label support — trusted worldwide since 2003, headquartered in{' '}
+          <span className="text-white/95 font-medium">Chicago</span>{' '}with delivery centres in{' '}
+          <span className="text-white/95 font-medium">South India</span>.
         </motion.p>
 
         {/* Action Buttons */}
@@ -163,18 +164,6 @@ export function HeroSection2() {
             Explore Services
           </a>
         </motion.div>
-
-        {/* Trusted & Company Info with increased width */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.7 }}
-          className="mt-4 sm:mt-5 text-sm text-white/80 max-w-2xl leading-relaxed"
-        >
-          Trusted by hosting companies and businesses worldwide. In business since 2003, headquartered in{' '}
-          <span className="text-white font-medium">Chicago, IL</span>, with three offshore delivery centres in{' '}
-          <span className="text-white font-medium">South India</span>.
-        </motion.p>
       </motion.div>
 
       {/* Bottom Strip: 23 Years Experience Container (Left) + Scrolling Certifications Marquee (Right) */}

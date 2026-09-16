@@ -129,7 +129,7 @@ export const navItems = [
         items: [
           { label: 'Hero Section 1', desc: 'Cinematic video ambient & 23+ yrs badge', badge: 'Default', icon: Sparkles, href: '/?hero=1' },
           { label: 'Hero Section 2', desc: 'Location details & bottom-left exp badge', badge: 'Updated', icon: Award, href: '/?hero=2' },
-          { label: 'Hero Section 3', desc: 'Holographic 3D cloud & solution switcher', badge: 'CloudOps', icon: Layers, href: '/?hero=3' },
+          { label: 'Hero Section 3', desc: 'Interactive slider with DevOps, Support & Hosting', badge: 'Slider', icon: Layers, href: '/?hero=3' },
           { label: 'Hero Section 4', desc: 'Executive split with coverage estimator', badge: 'Interactive', icon: Sliders, href: '/?hero=4' },
         ],
       },
